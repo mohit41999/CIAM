@@ -2,18 +2,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
 import 'package:patient/Screens/Signup.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/sign_in_controller.dart';
+import 'package:patient/firebase/notification_handling.dart';
 
 import 'package:patient/widgets/bottombar.dart';
 
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/enter_field.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -25,6 +28,14 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   SignInController _controller = SignInController();
   bool password = true;
+
+  @override
+  void initState() {
+    // setupFirebase(context);
+    // FirebaseNotificationHandling().setupFirebase(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

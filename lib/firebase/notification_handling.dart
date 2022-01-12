@@ -19,27 +19,29 @@ class FirebaseNotificationHandling {
     return Response;
   }
 
-  late FirebaseMessaging _firebaseMessaging;
-
   void setupFirebase(BuildContext context) {
-    _firebaseMessaging = FirebaseMessaging.instance;
-    _firebaseMessaging.getInitialMessage().then((value) {
-      // String channel_name = value!.notification!.title.toString();
-      // Push(context, VideoCall(channelName: 'testing'));
-    });
-    notificationhandler(context);
-  }
-
-  void notificationhandler(BuildContext context) {
-    //
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     FirebaseMessaging.onMessage.listen((event) {
-      // String channel_name = event.notification!.title.toString();
-      Push(context, VideoCall(channelName: 'testing'));
+      String? channel_name = event.notification!.title.toString();
+      print('onMessage');
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              VideoCallPage(channelName: event.data['chanel_name'])));
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      // String channel_name = event.notification!.title.toString();
-      Push(context, DoctorProfile(fromhome: false));
+      // String? channel_name = event.notification!.title.toString();
+
+      print('onMessageOpenedApp');
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) =>
+              VideoCallPage(channelName: event.data['chanel_name'])));
+      // Navigator.of(context).push(
+      //     context,
+      //     );
+      // Push(context, );
     });
+
+    // notificationhandler(context);
   }
 }

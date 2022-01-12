@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../NavigationController.dart';
 
 class PersonalSettingController {
-  late PickedFile image;
+  XFile? mediaFile = null;
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -22,6 +22,7 @@ class PersonalSettingController {
   TextEditingController emergencycontact = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController DOB = TextEditingController();
+  late String profileImage;
 
   Future<void> submit(BuildContext context) async {
     var loader = ProgressView(context);
@@ -29,8 +30,7 @@ class PersonalSettingController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? user_id = prefs.getString('user_id');
     print(user_id);
-    var response =
-        await PostData(PARAM_URL: 'update_patient_details.php', params: {
+    Map<String, String> bodyParam = {
       'token': Token,
       'user_id': user_id.toString(),
       'first_name': firstname.text,
@@ -45,32 +45,23 @@ class PersonalSettingController {
       'weight': weight.text,
       'emergency_contact': emergencycontact.text,
       'address': address.text,
-    });
-    print('-=========>>>>>' + response.toString());
+    };
+
+    var response = (mediaFile == null)
+        ? await PostData(
+            PARAM_URL: 'update_patient_details.php', params: bodyParam)
+        : await PostDataWithImage(
+            PARAM_URL: 'update_patient_details.php',
+            params: bodyParam,
+            imagePath: mediaFile!.path,
+            imageparamName: 'image');
+
     loader.dismiss();
     if (response['status']) {
       success(context, response);
     } else {
       failure(context, response);
     }
-  }
-
-  void initialize(BuildContext context) {
-    getdata(context).then((Profile) {
-      firstname.text = Profile.data.firstName;
-      lastname.text = Profile.data.lastName;
-      email.text = Profile.data.email;
-      contactno.text = Profile.data.mobileNumber;
-      gender.text = Profile.data.gender;
-      DOB.text = Profile.data.dob.toString();
-      bloodGroup.text = Profile.data.bloodGroup;
-      maritalStatus.text = Profile.data.maritalStatus;
-      height.text = Profile.data.height;
-      weight.text = Profile.data.weight;
-      emergencycontact.text = Profile.data.emergencyContact;
-      address.text = Profile.data.address;
-      age.text = Profile.data.age;
-    });
   }
 
   Future<GetPatientProfile> getdata(BuildContext context) async {

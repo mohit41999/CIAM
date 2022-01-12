@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/local_auth_api.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/firebase/notification_handling.dart';
 
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'DoctorScreens/doctor_profile.dart';
 import 'general_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class BiometricAuthenticate extends StatefulWidget {
   const BiometricAuthenticate({Key? key}) : super(key: key);
@@ -19,6 +22,14 @@ class BiometricAuthenticate extends StatefulWidget {
 }
 
 class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
+  @override
+  void initState() {
+    // FirebaseNotificationHandling().setupFirebase(context);
+    // setupFirebase(context);
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

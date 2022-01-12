@@ -5,10 +5,10 @@ import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LifestyleSettingController {
-  var SmokingList = ['Yes', 'No'];
-  var AlcoholList = ['Yes', 'No'];
-  var WorkOutLevelList = ['Low', 'Medium', 'High'];
-  var SportsInvolvementList = ['Low', 'Medium', 'High'];
+  var SmokingList = ['YES', 'NO'];
+  var AlcoholList = ['YES', 'NO'];
+  var WorkOutLevelList = ['LOW', 'MEDIUM', 'HIGH'];
+  var SportsInvolvementList = ['LOW', 'MEDIUM', 'HIGH'];
 
   late String SmokingdropdownValue;
   late String AlcoholdropdownValue;
@@ -44,11 +44,12 @@ class LifestyleSettingController {
 
   Future initialize(BuildContext context) async {
     await getdata(context).then((Profile) {
-      SmokingdropdownValue = Profile.data.smoking.toString();
-      AlcoholdropdownValue = Profile.data.alchol.toString();
-      WorkOutLeveldropdownValue = Profile.data.workoutLevel.toString();
+      SmokingdropdownValue = Profile.data.smoking.toString().toUpperCase();
+      AlcoholdropdownValue = Profile.data.alchol.toString().toUpperCase();
+      WorkOutLeveldropdownValue =
+          Profile.data.workoutLevel.toString().toUpperCase();
       SportsInvolvementdropdownValue =
-          Profile.data.sportsInvolvement.toString();
+          Profile.data.sportsInvolvement.toString().toUpperCase();
     });
   }
 

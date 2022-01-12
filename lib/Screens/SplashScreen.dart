@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Screens/general_screen.dart';
 import 'package:patient/firebase/fcm.dart';
@@ -9,6 +10,7 @@ import 'package:patient/firebase/notification_handling.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'biometric_authenticate.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -38,9 +40,8 @@ class _SplashScreenState extends State<SplashScreen> {
   FireBaseSetup fireBaseSetup = FireBaseSetup();
   @override
   void initState() {
-    FirebaseNotificationHandling().setupFirebase(context);
-    fireBaseSetup.storefcmToken();
     navigate();
+    fireBaseSetup.storefcmToken();
 
     super.initState();
   }
