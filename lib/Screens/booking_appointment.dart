@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -120,7 +121,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                               ),
                               doctorProfileRow(
                                 title: 'Booking for',
-                                value: 'offline/video appointment',
+                                value: confirmData.data.Booking_For,
                               ),
                               doctorProfileRow(
                                 title: 'Status of Booking',
@@ -264,11 +265,12 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                               ),
                               doctorProfileRow(
                                 title: 'Total Amount',
-                                value: '\$${confirmData.data.totalAmount}',
+                                value: '\₹${confirmData.data.totalAmount}',
                               ),
                               doctorProfileRow(
                                 title: 'Admin Fees',
-                                value: '\$10',
+                                value:
+                                    '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -310,7 +312,8 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           bgcolor: appblueColor,
                                           textColor: Colors.white,
                                           onPressed: () {
-                                            _con.confirmBookingRequest(context, widget.booking_id);
+                                            _con.confirmBookingRequest(
+                                                context, widget.booking_id);
                                           },
                                           width: 153,
                                           height: 30,
@@ -329,7 +332,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     child: Text(
-                                      'Upload Document',
+                                      'Uploaded Document',
                                       style: GoogleFonts.montserrat(
                                           fontSize: 12,
                                           color: Color(0xff161616)
@@ -343,25 +346,33 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width /
-                                        1.65,
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 10.0),
-                                          child: Text(
-                                            'Document',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: apptealColor,
-                                                fontWeight: FontWeight.bold),
+                                  GestureDetector(
+                                    onTap: () {
+                                      downloadFile(
+                                          confirmData.data.download_report,
+                                          'pdf',
+                                          'downloads');
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.65,
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 10.0),
+                                            child: Text(
+                                              'Document',
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 12,
+                                                  color: apptealColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
-                                        Image.asset(
-                                            'assets/pngs/Icon feather-download.png')
-                                      ],
+                                          Image.asset(
+                                              'assets/pngs/Icon feather-download.png')
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],

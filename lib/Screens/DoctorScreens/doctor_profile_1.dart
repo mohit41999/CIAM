@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/controller/DoctorProdileController/doctor_profile_one_controller.dart';
@@ -104,8 +105,8 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         height: 260,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    AssetImage('assets/pngs/Rectangle 69.png'),
+                                image: NetworkImage(doctordetails
+                                    .data.doctorDetails.profile_image),
                                 fit: BoxFit.cover)),
                       ),
                       Container(
@@ -167,10 +168,9 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                     doctordetails.data.doctorDetails.experience,
                               ),
                               doctorProfileRow(
-                                title: 'About Me',
-                                value:
-                                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et.',
-                              ),
+                                  title: 'About Me',
+                                  value: doctordetails
+                                      .data.doctorDetails.about_me),
                             ],
                           ),
                         ),
@@ -234,13 +234,14 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       width: MediaQuery.of(context).size.width /
                                           1.65,
                                       child: ListView.builder(
-                                          itemCount: 5,
+                                          itemCount: doctordetails
+                                              .data.clinicImages.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             return Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                      horizontal: 5.0),
+                                                      horizontal: 10.0),
                                               child: Container(
                                                 height: 80,
                                                 width: 80,
@@ -248,8 +249,11 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                                   borderRadius:
                                                       BorderRadius.circular(5),
                                                   image: DecorationImage(
-                                                      image: AssetImage(
-                                                        'assets/pngs/doctorprofile.png',
+                                                      image: NetworkImage(
+                                                        doctordetails
+                                                            .data
+                                                            .clinicImages[index]
+                                                            .clinicImages,
                                                       ),
                                                       fit: BoxFit.cover),
                                                 ),
@@ -270,8 +274,8 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               ),
                               doctorProfileRow(
                                 title: 'Offline Consultancy Fees',
-                                value: doctordetails
-                                    .data.clinicDetails.oflineConsultancyFees,
+                                value:
+                                    "\₹ ${doctordetails.data.clinicDetails.oflineConsultancyFees}",
                               ),
                               doctorProfileRow(
                                 title: 'Doctor’s availability status',
@@ -439,7 +443,8 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       width: MediaQuery.of(context).size.width /
                                           1.65,
                                       child: ListView.builder(
-                                          itemCount: 5,
+                                          itemCount:
+                                              slot_time.data.timeSlot.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
                                             return Padding(
@@ -461,26 +466,61 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      Text(
-                                                        '9:00-9:30\nAM',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                      ),
+                                                      (index ==
+                                                              slot_time
+                                                                      .data
+                                                                      .timeSlot
+                                                                      .length -
+                                                                  1)
+                                                          ? Text(slot_time
+                                                              .data
+                                                              .timeSlot[index]
+                                                              .slotTime
+                                                              .toString()
+                                                              .substring(0, 5))
+                                                          : Text(
+                                                              slot_time
+                                                                      .data
+                                                                      .timeSlot[
+                                                                          index]
+                                                                      .slotTime
+                                                                      .toString()
+                                                                      .substring(
+                                                                          0,
+                                                                          5) +
+                                                                  '-' +
+                                                                  slot_time
+                                                                      .data
+                                                                      .timeSlot[
+                                                                          index +
+                                                                              1]
+                                                                      .slotTime
+                                                                      .toString()
+                                                                      .substring(
+                                                                          0, 5),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: GoogleFonts.montserrat(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
                                                       Divider(
                                                         height: 5,
                                                         thickness: 1,
                                                         color: Color(0xff161616)
                                                             .withOpacity(0.2),
                                                       ),
-                                                      Text('\$59',
+                                                      Text(
+                                                          "\₹ " +
+                                                              doctordetails
+                                                                  .data
+                                                                  .clinicDetails
+                                                                  .oflineConsultancyFees,
                                                           style: GoogleFonts
                                                               .montserrat(
                                                                   color:
@@ -555,33 +595,6 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                         borderColor: appblueColor,
                                       ),
                                     ),
-                                    // Expanded(
-                                    //   child: GestureDetector(
-                                    //     onTap: () {
-                                    //       _selectDate(context).then((value) {
-                                    //         setState(() {
-                                    //           initializeSlots();
-                                    //         });
-                                    //       });
-                                    //     },
-                                    //     child: Center(
-                                    //       child: Text(
-                                    //         'Select Date',
-                                    //         style: GoogleFonts.montserrat(
-                                    //             color: appblueColor,
-                                    //             fontWeight: FontWeight.bold,
-                                    //             fontSize: 15),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // IconButton(
-                                    //     onPressed: () {},
-                                    //     icon: Icon(
-                                    //       Icons.arrow_forward_ios,
-                                    //       size: 18,
-                                    //       color: apptealColor,
-                                    //     )),
                                   ],
                                 ),
                               ),
@@ -638,7 +651,9 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 textSize: 14,
                                 bgcolor: Color(0xff161616).withOpacity(0.3),
                                 textColor: Color(0xff161616),
-                                onPressed: () {},
+                                onPressed: () {
+                                  pickFile();
+                                },
                                 borderRadius: 0,
                               )
                             ],
@@ -654,10 +669,14 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                             borderRadius: 8,
                             onPressed: () {
                               _con.add_booking_request(
-                                  context,
-                                  widget.doc_id,
-                                  '${date.year}-${date.month}-${date.day}',
-                                  selectedTime);
+                                context,
+                                widget.doc_id,
+                                '${date.year}-${date.month}-${date.day}',
+                                selectedTime,
+                                _controller.text,
+                                doctordetails
+                                    .data.clinicDetails.oflineConsultancyFees,
+                              );
                             }),
                       ),
                     ],
@@ -699,6 +718,21 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
         ],
       ),
     );
+  }
+
+  Future pickFile() async {
+    // FilePickerResult? result = await FilePicker.platform.pickFiles();
+    //
+    // if (result != null) {
+    //   _con.file = File(result.files.single.path!);
+    // } else {
+    //   // User canceled the picker
+    // }
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    setState(() {
+      _con.file = result.files.first;
+    }); // if user don't pick any thing then do nothing just return.
   }
 
   Column Slots(

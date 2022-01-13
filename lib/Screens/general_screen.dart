@@ -8,7 +8,7 @@ import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/bottombar.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'DoctorScreens/doctor_profile.dart';
 import 'LabProfile.dart';
 import 'MedicineProfile.dart';
@@ -129,7 +129,11 @@ class _GeneralScreenState extends State<GeneralScreen> {
                   //isExtended: true,
                   backgroundColor: Colors.transparent,
                   onPressed: () {
-                    Push(context, SearchScreen());
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
+                    // Push(context, SearchScreen());
                   },
                   child: Icon(
                     Icons.search,

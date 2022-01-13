@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Screens/filter_screen.dart';
+import 'package:patient/Screens/search_screen.dart';
 
 import 'package:patient/Utils/colorsandstyles.dart';
 
@@ -81,7 +82,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Push(context, SearchScreen());
+                    },
                     child: Container(
                       height: 40,
                       width: double.infinity,

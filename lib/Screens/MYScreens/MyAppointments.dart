@@ -26,12 +26,14 @@ class MyAppointments extends StatefulWidget {
 class _MyAppointmentsState extends State<MyAppointments> {
   late MyAppointmentsModel details;
   bool loading = true;
+  Iterable<MyAppointmentsModelData> Details = [];
 
   MyAppointmentController _con = MyAppointmentController();
   Future initialize() async {
     await _con.getMyAppointments().then((value) {
       setState(() {
         details = value;
+        Details = value.data.reversed;
         loading = false;
       });
     });
@@ -74,7 +76,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                 Expanded(
                   child: ListView.builder(
                       shrinkWrap: true,
-                      itemCount: details.data.length,
+                      itemCount: Details.length,
                       itemBuilder: (context, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -106,8 +108,9 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                  image: AssetImage(
-                                                    'assets/pngs/Ellipse 651.png',
+                                                  image: NetworkImage(
+                                                    Details.elementAt(index)
+                                                        .profile,
                                                   ),
                                                   fit: BoxFit.cover)),
                                         ),
@@ -129,17 +132,20 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                                 children: [
                                                   titleColumn(
                                                     title: 'Booking Id',
-                                                    value: details
-                                                        .data[index].booingId,
+                                                    value:
+                                                        Details.elementAt(index)
+                                                            .booingId,
                                                   ),
                                                   titleColumn(
-                                                    value: details
-                                                        .data[index].doctorName,
+                                                    value:
+                                                        Details.elementAt(index)
+                                                            .doctorName,
                                                     title: 'Doctor Name',
                                                   ),
                                                   titleColumn(
-                                                    value: details
-                                                        .data[index].location,
+                                                    value:
+                                                        Details.elementAt(index)
+                                                            .location,
                                                     title: 'Location',
                                                   ),
                                                 ],
@@ -153,8 +159,8 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                                           .spaceEvenly,
                                                   children: [
                                                     Text(
-                                                      details
-                                                          .data[index].status,
+                                                      Details.elementAt(index)
+                                                          .status,
                                                       style: GoogleFonts.lato(
                                                           color:
                                                               Color(0xffD68100),
@@ -163,7 +169,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                                               FontWeight.bold),
                                                     ),
                                                     Text(
-                                                      '\$${details.data[index].fees}',
+                                                      '\₹${Details.elementAt(index).fees}',
                                                       style:
                                                           GoogleFonts.poppins(
                                                               color: Color(
@@ -202,8 +208,8 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                       Push(
                                           context,
                                           ViewBookingDetails(
-                                            booking_id:
-                                                details.data[index].booingId,
+                                            booking_id: Details.elementAt(index)
+                                                .booingId,
                                           ));
                                     },
                                     child: Text(

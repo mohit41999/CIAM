@@ -20,13 +20,14 @@ class MyAppointmentsModel {
 
   bool status;
   String message;
-  List<Datum> data;
+  List<MyAppointmentsModelData> data;
 
   factory MyAppointmentsModel.fromJson(Map<String, dynamic> json) =>
       MyAppointmentsModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<MyAppointmentsModelData>.from(
+            json["data"].map((x) => MyAppointmentsModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +37,8 @@ class MyAppointmentsModel {
       };
 }
 
-class Datum {
-  Datum({
+class MyAppointmentsModelData {
+  MyAppointmentsModelData({
     required this.booingId,
     required this.doctorName,
     required this.location,
@@ -49,13 +50,14 @@ class Datum {
 
   String booingId;
   String doctorName;
-  String location;
+  dynamic location;
   String status;
   String profile;
   String bookingDate;
   String fees;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory MyAppointmentsModelData.fromJson(Map<String, dynamic> json) =>
+      MyAppointmentsModelData(
         booingId: json["booing id"],
         doctorName: json["Doctor Name"],
         location: json["Location"],

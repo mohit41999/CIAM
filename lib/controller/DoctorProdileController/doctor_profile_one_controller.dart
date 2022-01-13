@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
@@ -6,6 +8,7 @@ import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../NavigationController.dart';
 
@@ -13,6 +16,7 @@ class DoctorProfileOneController {
   late Map<String, dynamic> doctordetails;
   late Map<String, dynamic> slot_time;
   bool loading = true;
+  PlatformFile? file = null;
 
   Future<DoctorProfileOneModel> getDoctorDetails(
       BuildContext context, String doctor_id) async {
@@ -43,19 +47,46 @@ class DoctorProfileOneController {
     return SlotTime.fromJson(slot_time);
   }
 
-  Future add_booking_request(BuildContext context, String doctor_id,
-      String date, String slot_time) async {
+  Future add_booking_request(
+    BuildContext context,
+    String doctor_id,
+    String date,
+    String slot_time,
+    String comments,
+    String fees,
+  ) async {
     var loader = await ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response =
-        await PostData(PARAM_URL: 'add_booking_appointment.php', params: {
-      'token': Token,
-      'patient_id': prefs.getString('user_id'),
-      'doctor_id': doctor_id,
-      'booking_date': date,
-      'slot_time': slot_time,
-    });
+    Map<String, String> bodyParams = (comments.toString() == '')
+        ? {
+            'token': Token,
+            'patient_id': prefs.getString('user_id')!,
+            'doctor_id': doctor_id,
+            'booking_date': date,
+            'slot_time': slot_time,
+            'booking_type': 'online',
+            'fees': fees
+          }
+        : {
+            'token': Token,
+            'patient_id': prefs.getString('user_id')!,
+            'doctor_id': doctor_id,
+            'booking_date': date,
+            'slot_time': slot_time,
+            'booking_type': 'online',
+            'comments': comments,
+            'fees': fees
+          };
+    //print(file!.path.toString() + 'qqqq');
+    var response = (file == null)
+        ? await PostData(
+            PARAM_URL: 'add_booking_appointment.php', params: bodyParams)
+        : await PostDataWithImage(
+            PARAM_URL: 'add_booking_appointment.php',
+            params: bodyParams,
+            imagePath: file!.path.toString(),
+            imageparamName: 'reportfile');
     loader.dismiss();
     if (response['status']) {
       PushReplacement(
@@ -66,7 +97,7 @@ class DoctorProfileOneController {
           ));
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(response['message'])));
+          .showSnackBar(SnackBar(content: Text(response['message'] + 'llll')));
     }
 
     return response;

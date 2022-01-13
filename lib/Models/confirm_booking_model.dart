@@ -48,7 +48,9 @@ class Data {
     required this.clinicLocation,
     required this.totalAmount,
     required this.amountStatus,
+    required this.Booking_For,
     required this.bookingDate,
+    required this.download_report,
   });
 
   String bookingId;
@@ -60,8 +62,10 @@ class Data {
   String bookedServiceTime;
   String clinicLocation;
   String totalAmount;
+  String Booking_For;
   String amountStatus;
   String bookingDate;
+  String download_report;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
@@ -75,6 +79,8 @@ class Data {
         clinicLocation: json["Clinic Location"],
         totalAmount: json["Total Amount"],
         amountStatus: json["Amount Status"],
+        Booking_For: json["Booking For"],
+        download_report: json["download_report"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -89,5 +95,7 @@ class Data {
         "Clinic Location": clinicLocation,
         "Total Amount": totalAmount,
         "Amount Status": amountStatus,
+        "Booking For": Booking_For,
+        "download_report": download_report,
       };
 }

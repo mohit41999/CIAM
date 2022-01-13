@@ -40,20 +40,26 @@ class DoctorProfileOneModelData {
   DoctorProfileOneModelData({
     required this.doctorDetails,
     required this.clinicDetails,
+    required this.clinicImages,
   });
 
   DoctorDetails doctorDetails;
   ClinicDetails clinicDetails;
+  List<ClinicImage> clinicImages;
 
   factory DoctorProfileOneModelData.fromJson(Map<String, dynamic> json) =>
       DoctorProfileOneModelData(
         doctorDetails: DoctorDetails.fromJson(json["Doctor Details"]),
         clinicDetails: ClinicDetails.fromJson(json["Clinic Details"]),
+        clinicImages: List<ClinicImage>.from(
+            json["Clinic_images"].map((x) => ClinicImage.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "Doctor Details": doctorDetails.toJson(),
         "Clinic Details": clinicDetails.toJson(),
+        "Clinic_images":
+            List<dynamic>.from(clinicImages.map((x) => x.toJson())),
       };
 }
 
@@ -93,6 +99,22 @@ class ClinicDetails {
       };
 }
 
+class ClinicImage {
+  ClinicImage({
+    required this.clinicImages,
+  });
+
+  String clinicImages;
+
+  factory ClinicImage.fromJson(Map<String, dynamic> json) => ClinicImage(
+        clinicImages: json["clinic_images"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "clinic_images": clinicImages,
+      };
+}
+
 class DoctorDetails {
   DoctorDetails({
     required this.doctorName,
@@ -100,6 +122,8 @@ class DoctorDetails {
     required this.specialist,
     required this.languageSpoken,
     required this.experience,
+    required this.about_me,
+    required this.profile_image,
   });
 
   String doctorName;
@@ -107,6 +131,8 @@ class DoctorDetails {
   String specialist;
   String languageSpoken;
   String experience;
+  String about_me;
+  String profile_image;
 
   factory DoctorDetails.fromJson(Map<String, dynamic> json) => DoctorDetails(
         doctorName: json["doctor_name"],
@@ -114,6 +140,8 @@ class DoctorDetails {
         specialist: json["specialist"],
         languageSpoken: json["language_spoken"],
         experience: json["experience"],
+        about_me: json["about_me"],
+        profile_image: json["profile_image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -122,5 +150,7 @@ class DoctorDetails {
         "specialist": specialist,
         "language_spoken": languageSpoken,
         "experience": experience,
+        "about_me": about_me,
+        "profile_image": profile_image,
       };
 }

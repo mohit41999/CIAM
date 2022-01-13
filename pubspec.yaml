@@ -58,6 +58,8 @@ dev_dependencies:
   agora_rtc_engine: ^4.0.7
   permission_handler: ^8.3.0
   agora_uikit: ^0.0.4
+  file_picker: ^4.3.1
+  flutter_downloader: ^1.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

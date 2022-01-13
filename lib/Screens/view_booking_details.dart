@@ -157,7 +157,7 @@ class _ViewBookingDetailsState extends State<ViewBookingDetails> {
                         children: [
                           DetailsTile(
                               title: 'Total Amount',
-                              value: details!.data.totalAmount),
+                              value: "\₹${details!.data.totalAmount}"),
                           DetailsTile(
                               title: 'Amount Status',
                               value: details!.data.amountStatus),
