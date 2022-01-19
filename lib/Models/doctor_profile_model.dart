@@ -45,6 +45,7 @@ class Datum {
     required this.experience,
     required this.location,
     required this.profileImage,
+    required this.available,
   });
 
   String userId;
@@ -52,6 +53,7 @@ class Datum {
   String lastName;
   dynamic specialist;
   String experience;
+  String available;
   String location;
   String profileImage;
 
@@ -63,6 +65,7 @@ class Datum {
         experience: json["experience"],
         location: json["location"],
         profileImage: json["profile_image"],
+        available: json["available"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -73,5 +76,6 @@ class Datum {
         "experience": experience,
         "location": location,
         "profile_image": profileImage,
+        "available": available,
       };
 }

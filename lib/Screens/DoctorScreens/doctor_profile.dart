@@ -134,7 +134,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                             //   ? Container()
                             //   :
                             Padding(
-                          padding: (index + 1 == 10)
+                          padding: (index + 1 == _doctordata.data.length)
                               ? EdgeInsets.only(
                                   left: 10, right: 10, bottom: 50, top: 10)
                               : const EdgeInsets.all(5.0),
@@ -207,7 +207,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                                   ),
                                                   Expanded(
                                                     child: rowTextIcon(
-                                                      text: '95%',
+                                                      text: '',
                                                       asset:
                                                           'assets/pngs/Icon awesome-thumbs-up.png',
                                                     ),
@@ -222,14 +222,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                                   Expanded(
                                                     flex: 2,
                                                     child: rowTextIcon(
-                                                      text: 'Available Today',
+                                                      text: Docs.available,
                                                       asset:
                                                           'assets/pngs/Path 2062.png',
                                                     ),
                                                   ),
                                                   Expanded(
                                                     child: rowTextIcon(
-                                                      text: '125',
+                                                      text: '',
                                                       asset:
                                                           'assets/pngs/Icon awesome-star.png',
                                                     ),

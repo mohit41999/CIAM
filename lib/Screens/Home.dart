@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/home_controller.dart';
@@ -10,6 +11,56 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+final List<String> imgList = [
+  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
+  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
+  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
+  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+];
+final List<Map<dynamic, dynamic>> hometile = [
+  {
+    'label': 'Doctor Consultaion',
+    'Screen': DoctorProfile(
+      fromhome: true,
+    ),
+    'profile': 'Rectangle 69.png'
+  },
+  {
+    'label': 'Health care & Other product',
+    'Screen': 'null',
+    // 'Screen': ProductPage(),
+    'profile': 'Rectangle 69.png'
+  },
+  {
+    'label': 'Home Care Servicies',
+    'Screen': 'null',
+    // 'Screen': PatientHomePage4(),
+    'profile': 'Rectangle 69.png'
+  },
+  {
+    'label': 'Stress buster zone',
+    'Screen': 'null',
+    'profile': 'Rectangle 69.png'
+  },
+  {
+    'label': 'Lab Tests',
+    'Screen': 'null',
+    // 'Screen': LabProfile(),
+    'profile': 'Rectangle 69.png'
+  },
+  {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
+  {
+    'label': 'Medicine',
+    'Screen': 'null',
+    // 'Screen': MedicineProfile(),
+    'profile': 'Rectangle 69.png'
+  },
+  {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
+];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,51 +72,118 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   HomeController _con = HomeController();
   late HomeDoctorSpecialityModel specialities;
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
 
-  List<Map<dynamic, dynamic>> hometile = [
-    {
-      'label': 'Doctor Consultaion',
-      'Screen': DoctorProfile(
-        fromhome: true,
-      ),
-      'profile': 'Rectangle 69.png'
-    },
-    {
-      'label': 'Health care & Other product',
-      'Screen': 'null',
-      // 'Screen': ProductPage(),
-      'profile': 'Rectangle 69.png'
-    },
-    {
-      'label': 'Home Care Servicies',
-      'Screen': 'null',
-      // 'Screen': PatientHomePage4(),
-      'profile': 'Rectangle 69.png'
-    },
-    {
-      'label': 'Stress buster zone',
-      'Screen': 'null',
-      'profile': 'Rectangle 69.png'
-    },
-    {
-      'label': 'Lab Tests',
-      'Screen': 'null',
-      // 'Screen': LabProfile(),
-      'profile': 'Rectangle 69.png'
-    },
-    {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
-    {
-      'label': 'Medicine',
-      'Screen': 'null',
-      // 'Screen': MedicineProfile(),
-      'profile': 'Rectangle 69.png'
-    },
-    {
-      'label': 'Knowledge Forum',
-      'Screen': 'null',
-      'profile': 'Rectangle 69.png'
-    },
-  ];
+  final List<Widget> widgetSliders = hometile
+      .map((item) => Container(
+          color: Colors.white,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffF6F6F6),
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 10,
+                  offset: const Offset(2, 5),
+                ),
+              ],
+            ),
+            // height: 100,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 160,
+                          child: Text(
+                            item['label'],
+                            style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                color: appblueColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Container(
+                          width: 160,
+                          child: Text(
+                            'India\'s largest home health care company',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 12,
+                              color: Color(0xff161616),
+                            ),
+                          ),
+                        ),
+                        commonBtn(
+                          s: 'Consult Now',
+                          bgcolor: appblueColor,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            // Push(context, DoctorProfile(fromhome: true,));
+                          },
+                          width: 120,
+                          height: 30,
+                          textSize: 12,
+                          borderRadius: 5,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                    child: Image.asset(
+                  'assets/pngs/${item['profile']}',
+                  fit: BoxFit.fill,
+                ))
+              ],
+            ),
+          )
+          // Container(
+          //   margin: EdgeInsets.all(5.0),
+          //   child: ClipRRect(
+          //       borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          //       child: Stack(
+          //         children: <Widget>[
+          //           Image.asset('assets/pngs/${item['profile']}',
+          //               fit: BoxFit.cover, width: 1000.0),
+          //           Positioned(
+          //             bottom: 0.0,
+          //             left: 0.0,
+          //             right: 0.0,
+          //             child: Container(
+          //               decoration: BoxDecoration(
+          //                 gradient: LinearGradient(
+          //                   colors: [
+          //                     Color.fromARGB(200, 0, 0, 0),
+          //                     Color.fromARGB(0, 0, 0, 0)
+          //                   ],
+          //                   begin: Alignment.bottomCenter,
+          //                   end: Alignment.topCenter,
+          //                 ),
+          //               ),
+          //               padding: EdgeInsets.symmetric(
+          //                   vertical: 10.0, horizontal: 20.0),
+          //               child: Text(
+          //                 'No. ${hometile.indexOf(item)} image',
+          //                 style: TextStyle(
+          //                   color: Colors.white,
+          //                   fontSize: 20.0,
+          //                   fontWeight: FontWeight.bold,
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         ],
+          //       )),
+          // ),
+          ))
+      .toList();
   TextEditingController _search = TextEditingController();
 
   void initialize() {
@@ -152,73 +270,49 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               height: 200,
-              color: Colors.white,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20.0),
+              width: double.infinity,
+              child: Column(children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    child: CarouselSlider(
+                      items: widgetSliders,
+                      carouselController: _controller,
+                      options: CarouselOptions(
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          aspectRatio: 2.5,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          }),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: hometile.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => _controller.animateToPage(entry.key),
                       child: Container(
+                        width: 8.0,
+                        height: 8.0,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 4.0),
                         decoration: BoxDecoration(
-                          color: Color(0xffF6F6F6),
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              blurRadius: 10,
-                              offset: const Offset(2, 5),
-                            ),
-                          ],
-                        ),
-                        // height: 100,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Heal At Home',
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 20,
-                                        color: appblueColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    width: 160,
-                                    child: Text(
-                                      'India\'s largest home health care company',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        color: Color(0xff161616),
-                                      ),
-                                    ),
-                                  ),
-                                  commonBtn(
-                                    s: 'Consult Now',
-                                    bgcolor: appblueColor,
-                                    textColor: Colors.white,
-                                    onPressed: () {
-                                      // Push(context, DoctorProfile1());
-                                    },
-                                    width: 120,
-                                    height: 30,
-                                    textSize: 12,
-                                    borderRadius: 5,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Image.asset('assets/pngs/nursedoctor.png')
-                          ],
-                        ),
+                            shape: BoxShape.circle,
+                            color:
+                                (Theme.of(context).brightness == Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black)
+                                    .withOpacity(
+                                        _current == entry.key ? 0.9 : 0.4)),
                       ),
                     );
-                  }),
+                  }).toList(),
+                ),
+              ]),
             ),
             SizedBox(
               height: 20,

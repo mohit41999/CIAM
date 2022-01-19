@@ -33,9 +33,11 @@ class FirebaseNotificationHandling {
       // String? channel_name = event.notification!.title.toString();
 
       print('onMessageOpenedApp');
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              VideoCallPage(channelName: event.data['chanel_name'])));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  VideoCallPage(channelName: event.data['chanel_name'])));
       // Navigator.of(context).push(
       //     context,
       //     );

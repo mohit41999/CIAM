@@ -24,7 +24,8 @@ class GeneralScreen extends StatefulWidget {
 class _GeneralScreenState extends State<GeneralScreen> {
   @override
   void initState() {
-    // TODO: implement initState
+    FirebaseNotificationHandling().setupFirebase(context);
+    //     // TODO: implement initState
     super.initState();
   }
 

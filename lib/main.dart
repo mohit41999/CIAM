@@ -23,19 +23,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    FirebaseNotificationHandling().setupFirebase(context);
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   FirebaseNotificationHandling().setupFirebase(context);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Color(0xffEFEFEF)),
-      home: SplashScreen(),
+      home: MainScreen(),
     );
+  }
+}
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
+
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  void initState() {
+    // TODO: implement initState
+    // FirebaseNotificationHandling().setupFirebase(context);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen();
   }
 }
