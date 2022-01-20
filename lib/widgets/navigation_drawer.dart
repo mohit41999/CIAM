@@ -9,12 +9,14 @@ import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Screens/MYScreens/MyReviewRating.dart';
 import 'package:patient/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart';
 import 'package:patient/Screens/ProfileSettings/profile_setting.dart';
+import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Screens/account_settings.dart';
 import 'package:patient/Utils/drawerList.dart';
 import 'package:patient/controller/NavigationController.dart';
 
 import '../Utils/colorsandstyles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'commonAppBarLeading.dart';
 
@@ -28,6 +30,37 @@ class commonDrawer extends StatefulWidget {
 }
 
 class _commonDrawerState extends State<commonDrawer> {
+  Future<void> _ackAlert(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout!'),
+          content: const Text('Are you sure want to logout'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                preferences.clear();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                    (route) => false);
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -61,8 +94,9 @@ class _commonDrawerState extends State<commonDrawer> {
                                   fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
-                              (drawerList[index]['Screen'].toString() == 'null')
-                                  ? {print('blablabla')}
+                              (drawerList[index]['label'].toString() ==
+                                      'Logout')
+                                  ? _ackAlert(context)
                                   : Push(context, drawerList[index]['Screen']);
                             },
                           ),

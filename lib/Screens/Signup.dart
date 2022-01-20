@@ -6,6 +6,7 @@ import 'package:patient/Utils/colorsandstyles.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/sign_up_controller.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/enter_field.dart';
@@ -29,10 +30,15 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
         title: commonAppBarTitle(),
+        leading: commonAppBarLeading(
+            iconData: Icons.arrow_back_ios_new,
+            onPressed: () {
+              Pop(context);
+            }),
+        centerTitle: true,
+        backgroundColor: appAppBarColor,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Padding(

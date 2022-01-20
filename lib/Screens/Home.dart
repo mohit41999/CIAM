@@ -23,7 +23,7 @@ final List<String> imgList = [
 ];
 final List<Map<dynamic, dynamic>> hometile = [
   {
-    'label': 'Doctor Consultaion',
+    'label': 'Doctor Consultation',
     'Screen': DoctorProfile(
       fromhome: true,
     ),
@@ -33,24 +33,24 @@ final List<Map<dynamic, dynamic>> hometile = [
     'label': 'Health care & Other product',
     'Screen': 'null',
     // 'Screen': ProductPage(),
-    'profile': 'Rectangle 69.png'
+    'profile': 'Rectangle -7.png'
   },
   {
     'label': 'Home Care Servicies',
     'Screen': 'null',
     // 'Screen': PatientHomePage4(),
-    'profile': 'Rectangle 69.png'
+    'profile': 'Rectangle -1.png'
   },
   {
     'label': 'Stress buster zone',
     'Screen': 'null',
-    'profile': 'Rectangle 69.png'
+    'profile': 'Rectangle -6.png'
   },
   {
     'label': 'Lab Tests',
     'Screen': 'null',
     // 'Screen': LabProfile(),
-    'profile': 'Rectangle 69.png'
+    'profile': 'Rectangle -2.png'
   },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
   {
@@ -59,7 +59,7 @@ final List<Map<dynamic, dynamic>> hometile = [
     // 'Screen': MedicineProfile(),
     'profile': 'Rectangle 69.png'
   },
-  {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
+  {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle -4.png'},
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
-  final List<Widget> widgetSliders = hometile
+  List<Widget> widgetSliders(BuildContext context) => hometile
       .map((item) => Container(
           color: Colors.white,
           child: Container(
@@ -92,97 +92,59 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             // height: 100,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 160,
-                          child: Text(
-                            item['label'],
-                            style: GoogleFonts.montserrat(
-                                fontSize: 16,
-                                color: appblueColor,
-                                fontWeight: FontWeight.bold),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 160,
+                        child: Text(
+                          item['label'],
+                          style: GoogleFonts.montserrat(
+                              fontSize: 16,
+                              color: appblueColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        width: 160,
+                        child: Text(
+                          'India\'s largest home health care company',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 12,
+                            color: Color(0xff161616),
                           ),
                         ),
-                        Container(
-                          width: 160,
-                          child: Text(
-                            'India\'s largest home health care company',
-                            style: GoogleFonts.montserrat(
-                              fontSize: 12,
-                              color: Color(0xff161616),
-                            ),
-                          ),
-                        ),
-                        commonBtn(
-                          s: 'Consult Now',
-                          bgcolor: appblueColor,
-                          textColor: Colors.white,
-                          onPressed: () {
-                            // Push(context, DoctorProfile(fromhome: true,));
-                          },
-                          width: 120,
-                          height: 30,
-                          textSize: 12,
-                          borderRadius: 5,
-                        ),
-                      ],
-                    ),
+                      ),
+                      commonBtn(
+                        s: 'Consult Now',
+                        bgcolor: appblueColor,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Push(context, item['Screen']);
+                        },
+                        width: 120,
+                        height: 30,
+                        textSize: 12,
+                        borderRadius: 5,
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                    child: Image.asset(
-                  'assets/pngs/${item['profile']}',
-                  fit: BoxFit.fill,
-                ))
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/pngs/${item['profile']}',
+                    fit: BoxFit.fill,
+                  ),
+                )
               ],
             ),
-          )
-          // Container(
-          //   margin: EdgeInsets.all(5.0),
-          //   child: ClipRRect(
-          //       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          //       child: Stack(
-          //         children: <Widget>[
-          //           Image.asset('assets/pngs/${item['profile']}',
-          //               fit: BoxFit.cover, width: 1000.0),
-          //           Positioned(
-          //             bottom: 0.0,
-          //             left: 0.0,
-          //             right: 0.0,
-          //             child: Container(
-          //               decoration: BoxDecoration(
-          //                 gradient: LinearGradient(
-          //                   colors: [
-          //                     Color.fromARGB(200, 0, 0, 0),
-          //                     Color.fromARGB(0, 0, 0, 0)
-          //                   ],
-          //                   begin: Alignment.bottomCenter,
-          //                   end: Alignment.topCenter,
-          //                 ),
-          //               ),
-          //               padding: EdgeInsets.symmetric(
-          //                   vertical: 10.0, horizontal: 20.0),
-          //               child: Text(
-          //                 'No. ${hometile.indexOf(item)} image',
-          //                 style: TextStyle(
-          //                   color: Colors.white,
-          //                   fontSize: 20.0,
-          //                   fontWeight: FontWeight.bold,
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       )),
-          // ),
-          ))
+          )))
       .toList();
   TextEditingController _search = TextEditingController();
 
@@ -276,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     color: Colors.white,
                     child: CarouselSlider(
-                      items: widgetSliders,
+                      items: widgetSliders(context),
                       carouselController: _controller,
                       options: CarouselOptions(
                           autoPlay: true,
