@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/doc_review_model.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
@@ -29,6 +31,17 @@ class DoctorProfileOneController {
       doctordetails = value;
     });
     return DoctorProfileOneModel.fromJson(doctordetails);
+  }
+
+  Future<DocReviewModel> getRatingsandReview(
+      BuildContext context, String doctor_id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var response = await PostData(PARAM_URL: 'get_doctor_review.php', params: {
+      'token': Token,
+      'user_id': prefs.getString('user_id'),
+      'doctor_id': doctor_id
+    });
+    return DocReviewModel.fromJson(response);
   }
 
   Future<SlotTime> getSlotTime(

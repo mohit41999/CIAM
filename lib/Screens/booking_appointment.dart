@@ -65,8 +65,8 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                         height: 260,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    AssetImage('assets/pngs/Rectangle 69.png'),
+                                image: NetworkImage(
+                                    confirmData.data.DoctorProfile),
                                 fit: BoxFit.cover)),
                       ),
                       Container(
@@ -88,7 +88,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                         height: 12,
                       ),
                       Container(
-                        height: 272,
+                        height: 180,
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -108,25 +108,25 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                 thickness: 1,
                               ),
                               doctorProfileRow(
-                                title: 'Confirmation',
+                                title: 'Booking ID',
                                 value: confirmData.data.bookingId,
-                              ),
-                              doctorProfileRow(
-                                title: 'Specialty',
-                                value: confirmData.data.specialty,
                               ),
                               doctorProfileRow(
                                 title: 'Doctor Name',
                                 value: confirmData.data.doctorName,
                               ),
                               doctorProfileRow(
-                                title: 'Booking for',
-                                value: confirmData.data.Booking_For,
+                                title: 'Specialty',
+                                value: confirmData.data.specialty,
                               ),
-                              doctorProfileRow(
-                                title: 'Status of Booking',
-                                value: confirmData.data.bookingStatus,
-                              ),
+                              // doctorProfileRow(
+                              //   title: 'Booking for',
+                              //   value: confirmData.data.Booking_For,
+                              // ),
+                              // doctorProfileRow(
+                              //   title: 'Status of Booking',
+                              //   value: confirmData.data.bookingStatus,
+                              // ),
                             ],
                           ),
                         ),
@@ -159,8 +159,8 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                 value: confirmData.data.patientName,
                               ),
                               doctorProfileRow(
-                                title: 'Location',
-                                value: confirmData.data.patientLocation,
+                                title: 'Age',
+                                value: confirmData.data.patientAge,
                               ),
                             ],
                           ),
@@ -170,7 +170,11 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                         height: 12,
                       ),
                       Container(
-                        height: 549,
+                        height: (confirmData.data.amountStatus.toString() ==
+                                'Confirm')
+                            ? 549
+                            : 300,
+                        width: double.infinity,
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -196,7 +200,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     child: Text(
-                                      'Booked Service time',
+                                      'Booking Date and Time',
                                       style: GoogleFonts.montserrat(
                                           fontSize: 12,
                                           color: Color(0xff161616)
@@ -227,7 +231,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                               children: <TextSpan>[
                                                 TextSpan(
                                                   text:
-                                                      '   ${confirmData.data.bookedServiceTime.substring(0, 5)} am',
+                                                      '   ${confirmData.data.bookingDate.substring(8, 10)}/ ${confirmData.data.bookingDate.substring(5, 7)}/ ${confirmData.data.bookingDate.substring(0, 4)}    \n   ${confirmData.data.bookedServiceTime.substring(0, 5)} ',
                                                   style: GoogleFonts.montserrat(
                                                       color: apptealColor,
                                                       fontSize: 12,
@@ -259,186 +263,244 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                   )
                                 ],
                               ),
-                              doctorProfileRow(
-                                title: 'Clinic Address',
-                                value: confirmData.data.clinicLocation,
-                              ),
+                              // doctorProfileRow(
+                              //   title: 'Clinic Address',
+                              //   value: confirmData.data.clinicLocation,
+                              // ),
                               doctorProfileRow(
                                 title: 'Total Amount',
                                 value: '\₹${confirmData.data.totalAmount}',
                               ),
-                              doctorProfileRow(
-                                title: 'Admin Fees',
-                                value:
-                                    '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    child: Text(
-                                      'Amount Status',
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Color(0xff161616)
-                                              .withOpacity(0.6)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text('-'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width /
-                                        1.65,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          confirmData.data.amountStatus,
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 12,
-                                              color: Color(0xff161616),
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        commonBtn(
-                                          s: 'Pay Now',
-                                          bgcolor: appblueColor,
-                                          textColor: Colors.white,
-                                          onPressed: () {
-                                            _con.confirmBookingRequest(
-                                                context, widget.booking_id);
-                                          },
-                                          width: 153,
-                                          height: 30,
-                                          textSize: 12,
-                                          borderRadius: 0,
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    child: Text(
-                                      'Uploaded Document',
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Color(0xff161616)
-                                              .withOpacity(0.6)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text('-'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      downloadFile(
-                                          confirmData.data.download_report,
-                                          'pdf',
-                                          'downloads');
-                                    },
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.65,
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10.0),
-                                            child: Text(
-                                              'Document',
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: 12,
-                                                  color: apptealColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Image.asset(
-                                              'assets/pngs/Icon feather-download.png')
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    child: Text(
-                                      'Download Report File',
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Color(0xff161616)
-                                              .withOpacity(0.6)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text('-'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width /
-                                        1.65,
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 10.0),
-                                          child: Text(
-                                            'Report',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: apptealColor,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Image.asset(
-                                            'assets/pngs/Icon feather-download.png')
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+                              // doctorProfileRow(
+                              //   title: 'Admin Fees',
+                              //   value:
+                              //       '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
+                              // ),
                               commonBtn(
-                                s: 'Chat',
-                                bgcolor: Colors.white,
-                                textColor: apptealColor,
-                                onPressed: () {},
-                                height: 45,
-                                borderRadius: 8,
-                                borderColor: apptealColor,
-                                borderWidth: 2,
-                              ),
-                              commonBtn(
-                                s: 'Start Video',
+                                s: 'Pay Now',
                                 bgcolor: appblueColor,
                                 textColor: Colors.white,
-                                onPressed: () {},
-                                height: 45,
-                                borderRadius: 8,
-                              )
+                                onPressed: () {
+                                  _con
+                                      .confirmBookingRequest(
+                                          context, widget.booking_id)
+                                      .then((value) {
+                                    _con
+                                        .getconfirmBooking(context,
+                                            widget.doctor_id, widget.booking_id)
+                                        .then((value) {
+                                      setState(() {
+                                        confirmData = value;
+                                      });
+                                    });
+                                  });
+                                },
+                                // width: 153,
+                                // height: 30,
+                                textSize: 12,
+                                borderRadius: 0,
+                              ),
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Container(
+                              //       width:
+                              //           MediaQuery.of(context).size.width / 5,
+                              //       child: Text(
+                              //         'Amount Status',
+                              //         style: GoogleFonts.montserrat(
+                              //             fontSize: 12,
+                              //             color: Color(0xff161616)
+                              //                 .withOpacity(0.6)),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 15,
+                              //     ),
+                              //     Text('-'),
+                              //     SizedBox(
+                              //       width: 10,
+                              //     ),
+                              //     Container(
+                              //       width: MediaQuery.of(context).size.width /
+                              //           1.65,
+                              //       child: Row(
+                              //         mainAxisAlignment:
+                              //             MainAxisAlignment.spaceBetween,
+                              //         children: [
+                              //           Text(
+                              //             confirmData.data.amountStatus,
+                              //             style: GoogleFonts.montserrat(
+                              //                 fontSize: 12,
+                              //                 color: Color(0xff161616),
+                              //                 fontWeight: FontWeight.bold),
+                              //           ),
+                              //           commonBtn(
+                              //             s: 'Pay Now',
+                              //             bgcolor: appblueColor,
+                              //             textColor: Colors.white,
+                              //             onPressed: () {
+                              //               _con.confirmBookingRequest(
+                              //                   context, widget.booking_id);
+                              //             },
+                              //             width: 153,
+                              //             height: 30,
+                              //             textSize: 12,
+                              //             borderRadius: 0,
+                              //           )
+                              //         ],
+                              //       ),
+                              //     )
+                              //   ],
+                              // ),
+                              (confirmData.data.amountStatus.toString() ==
+                                      'Confirm')
+                                  ? Container(
+                                      height: 200,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Text(
+                                                  'Uploaded Document',
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize: 12,
+                                                      color: Color(0xff161616)
+                                                          .withOpacity(0.6)),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              Text('-'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  downloadFile(
+                                                      confirmData
+                                                          .data.download_report,
+                                                      'pdf',
+                                                      'downloads');
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.65,
+                                                  child: Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 10.0),
+                                                        child: Text(
+                                                          'Document',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  fontSize: 12,
+                                                                  color:
+                                                                      apptealColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                        ),
+                                                      ),
+                                                      Image.asset(
+                                                          'assets/pngs/Icon feather-download.png')
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                child: Text(
+                                                  'Download Report File',
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize: 12,
+                                                      color: Color(0xff161616)
+                                                          .withOpacity(0.6)),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              Text('-'),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.65,
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 10.0),
+                                                      child: Text(
+                                                        'Report',
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                                fontSize: 12,
+                                                                color:
+                                                                    apptealColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                      ),
+                                                    ),
+                                                    Image.asset(
+                                                        'assets/pngs/Icon feather-download.png')
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          commonBtn(
+                                            s: 'Chat',
+                                            bgcolor: Colors.white,
+                                            textColor: apptealColor,
+                                            onPressed: () {},
+                                            height: 45,
+                                            borderRadius: 8,
+                                            borderColor: apptealColor,
+                                            borderWidth: 2,
+                                          ),
+                                          commonBtn(
+                                            s: 'Start Video',
+                                            bgcolor: appblueColor,
+                                            textColor: Colors.white,
+                                            onPressed: () {},
+                                            height: 45,
+                                            borderRadius: 8,
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : SizedBox(),
                             ],
                           ),
                         ),

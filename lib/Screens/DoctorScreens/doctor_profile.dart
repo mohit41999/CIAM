@@ -266,7 +266,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                           ));
                                     },
                                     child: Text(
-                                      'Book An Appointment',
+                                      'View Details',
                                       style: GoogleFonts.montserrat(
                                           fontSize: 12,
                                           color: Colors.white,

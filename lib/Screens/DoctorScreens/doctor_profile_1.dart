@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
+import 'package:patient/Models/doc_review_model.dart';
+import 'package:intl/intl.dart';
 import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
@@ -15,6 +16,7 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/enter_field.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DoctorProfile1 extends StatefulWidget {
   final String doc_id;
@@ -27,8 +29,19 @@ class DoctorProfile1 extends StatefulWidget {
 class _DoctorProfile1State extends State<DoctorProfile1> {
   DoctorProfileOneController _con = DoctorProfileOneController();
   late DoctorProfileOneModel doctordetails;
+  TextStyle selectedDayStyle(int index) => TextStyle(
+      color: (_selectedday == index) ? Colors.black : Colors.grey,
+      fontWeight:
+          (_selectedday == index) ? FontWeight.bold : FontWeight.normal);
+
+  TextStyle selectedSlotsStyle(int index) => TextStyle(
+      color: (_selectedday == index) ? Colors.amber : Colors.grey,
+      fontWeight:
+          (_selectedday == index) ? FontWeight.bold : FontWeight.normal);
+  late DocReviewModel reviews;
   late SlotTime slot_time;
   int _selectedindex = -1;
+  int _selectedday = 0;
   String selectedTime = '';
   DateTime date = DateTime.now();
 
@@ -61,14 +74,20 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
       });
   }
 
-  Future initializeSlots() async {
+  Future initialize() async {
+    print(date.toString() + '------------------------');
     _con
         .getSlotTime(
             context, widget.doc_id, '${date.year}-${date.month}-${date.day}')
         .then((value) {
+      slot_time = value;
       setState(() {
-        slot_time = value;
-        _con.loading = false;
+        _con.getRatingsandReview(context, widget.doc_id).then((value) {
+          setState(() {
+            reviews = value;
+            _con.loading = false;
+          });
+        });
       });
     });
   }
@@ -79,7 +98,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
     _con.getDoctorDetails(context, widget.doc_id).then((value) {
       setState(() {
         doctordetails = value;
-        initializeSlots();
+        initialize();
       });
     });
     // print(slot_time.toString());
@@ -292,7 +311,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                       ),
                       Container(
                           color: Colors.white,
-                          height: 329,
+                          height: (reviews.data.length == 0) ? 110 : 290,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 15),
@@ -314,78 +333,153 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                   color: textColor.withOpacity(0.4),
                                   thickness: 1,
                                 ),
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: 5,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0, horizontal: 8),
-                                        child: Card(
-                                          elevation: 10,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              ListTile(
-                                                leading: CircleAvatar(
-                                                  radius: 30,
-                                                ),
-                                                title: Text('Username'),
-                                                subtitle: Row(
+                                (reviews.data.length == 0)
+                                    ? Center(child: Text('No reviews yet'))
+                                    : Expanded(
+                                        child: ListView.builder(
+                                          itemCount: reviews.data.length,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0,
+                                                      horizontal: 8),
+                                              child: Container(
+                                                width: 300,
+                                                height: 100,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          offset: Offset(2, 2),
+                                                          color: Colors.grey
+                                                              .withOpacity(0.6),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 2)
+                                                    ]),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Icon(Icons.star,
-                                                        size: 14,
-                                                        color: apptealColor),
-                                                    Icon(
-                                                      Icons.star,
-                                                      size: 14,
-                                                      color: apptealColor,
+                                                    ListTile(
+                                                      leading: CircleAvatar(
+                                                        radius: 30,
+                                                        backgroundImage:
+                                                            NetworkImage(reviews
+                                                                .data[index]
+                                                                .userDetails
+                                                                .patientImage),
+                                                      ),
+                                                      title: Text(reviews
+                                                          .data[index]
+                                                          .userDetails
+                                                          .patientName),
+                                                      subtitle:
+                                                          RatingBarIndicator(
+                                                        rating: double.parse(
+                                                            reviews.data[index]
+                                                                .rating),
+                                                        itemBuilder:
+                                                            (context, index) =>
+                                                                Icon(
+                                                          Icons.star,
+                                                          color: apptealColor,
+                                                        ),
+                                                        itemCount: 5,
+                                                        itemSize: 20.0,
+                                                        unratedColor: Colors
+                                                            .grey
+                                                            .withOpacity(0.5),
+                                                        direction:
+                                                            Axis.horizontal,
+                                                      ),
+                                                      //     RatingBar.builder(
+                                                      //   maxRating: 5,
+                                                      //   itemSize: 20,
+                                                      //   minRating: 1,
+                                                      //   unratedColor:
+                                                      //       apptealColor,
+                                                      //   direction:
+                                                      //       Axis.horizontal,
+                                                      //   allowHalfRating: true,
+                                                      //   itemCount: int.parse(
+                                                      //       reviews.data[index]
+                                                      //           .rating),
+                                                      //   itemBuilder:
+                                                      //       (context, _) =>
+                                                      //           Icon(
+                                                      //     Icons.star,
+                                                      //     color: apptealColor,
+                                                      //   ),
+                                                      //   onRatingUpdate:
+                                                      //       (rating) {
+                                                      //     print(rating);
+                                                      //   },
+                                                      // ),
+                                                      // Row(
+                                                      //   children: [
+                                                      //     Icon(Icons.star,
+                                                      //         size: 14,
+                                                      //         color:
+                                                      //             apptealColor),
+                                                      //     Icon(
+                                                      //       Icons.star,
+                                                      //       size: 14,
+                                                      //       color: apptealColor,
+                                                      //     ),
+                                                      //     Icon(Icons.star,
+                                                      //         size: 14,
+                                                      //         color:
+                                                      //             apptealColor),
+                                                      //     Icon(Icons.star,
+                                                      //         size: 14,
+                                                      //         color:
+                                                      //             apptealColor),
+                                                      //     Icon(Icons.star,
+                                                      //         size: 14,
+                                                      //         color:
+                                                      //             apptealColor),
+                                                      //   ],
+                                                      // ),
+                                                      trailing: Text(
+                                                        reviews
+                                                            .data[index].date,
+                                                        style: GoogleFonts.lato(
+                                                            color: apptealColor,
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
                                                     ),
-                                                    Icon(Icons.star,
-                                                        size: 14,
-                                                        color: apptealColor),
-                                                    Icon(Icons.star,
-                                                        size: 14,
-                                                        color: apptealColor),
-                                                    Icon(Icons.star,
-                                                        size: 14,
-                                                        color: apptealColor),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15.0),
+                                                      child: Text(
+                                                        reviews.data[index]
+                                                            .message,
+                                                        style: GoogleFonts.lato(
+                                                            fontSize: 12),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
                                                   ],
                                                 ),
-                                                trailing: Text(
-                                                  '27/09/2021',
-                                                  style: GoogleFonts.lato(
-                                                      color: apptealColor,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
                                               ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 15.0),
-                                                child: Text(
-                                                  'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.',
-                                                  style: GoogleFonts.lato(
-                                                      fontSize: 12),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                      ),
                               ],
                             ),
                           )),
@@ -393,7 +487,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         height: 12,
                       ),
                       Container(
-                        height: 755,
+                        height: 400,
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -402,7 +496,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Schedule Video Consultancy Appointment',
+                                'Doctor’s Availability',
                                 style: GoogleFonts.montserrat(
                                     fontSize: 18,
                                     color: textColor,
@@ -412,191 +506,266 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 color: textColor.withOpacity(0.4),
                                 thickness: 1,
                               ),
-                              doctorProfileRow(
-                                title: 'Doctor\'s Availability Status',
-                                value: 'Available',
-                                yellow: true,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
-                                    child: Text(
-                                      'Price per slot',
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Color(0xff161616)
-                                              .withOpacity(0.6)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text('-'),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                      height: 70,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.65,
-                                      child: ListView.builder(
-                                          itemCount:
-                                              slot_time.data.timeSlot.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5.0),
-                                              child: Container(
-                                                width: 92,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0xffF6F6F6),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      (index ==
-                                                              slot_time
-                                                                      .data
-                                                                      .timeSlot
-                                                                      .length -
-                                                                  1)
-                                                          ? Text(slot_time
-                                                              .data
-                                                              .timeSlot[index]
-                                                              .slotTime
-                                                              .toString()
-                                                              .substring(0, 5))
-                                                          : Text(
-                                                              slot_time
-                                                                      .data
-                                                                      .timeSlot[
-                                                                          index]
-                                                                      .slotTime
-                                                                      .toString()
-                                                                      .substring(
-                                                                          0,
-                                                                          5) +
-                                                                  '-' +
-                                                                  slot_time
-                                                                      .data
-                                                                      .timeSlot[
-                                                                          index +
-                                                                              1]
-                                                                      .slotTime
-                                                                      .toString()
-                                                                      .substring(
-                                                                          0, 5),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: GoogleFonts.montserrat(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                      Divider(
-                                                        height: 5,
-                                                        thickness: 1,
-                                                        color: Color(0xff161616)
-                                                            .withOpacity(0.2),
-                                                      ),
-                                                      Text(
-                                                          "\₹ " +
-                                                              doctordetails
-                                                                  .data
-                                                                  .clinicDetails
-                                                                  .oflineConsultancyFees,
-                                                          style: GoogleFonts
-                                                              .montserrat(
-                                                                  color:
-                                                                      apptealColor,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold))
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          }))
-                                ],
-                              ),
+                              // Divider(
+                              //   color: textColor.withOpacity(0.4),
+                              //   thickness: 1,
+                              // ),
+                              // doctorProfileRow(
+                              //   title: 'Doctor\'s Availability Status',
+                              //   value: 'Available',
+                              //   yellow: true,
+                              // ),
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Container(
+                              //       width:
+                              //           MediaQuery.of(context).size.width / 5,
+                              //       child: Text(
+                              //         'Price per slot',
+                              //         style: GoogleFonts.montserrat(
+                              //             fontSize: 12,
+                              //             color: Color(0xff161616)
+                              //                 .withOpacity(0.6)),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 15,
+                              //     ),
+                              //     Text('-'),
+                              //     SizedBox(
+                              //       width: 10,
+                              //     ),
+                              //     Container(
+                              //         height: 70,
+                              //         width: MediaQuery.of(context).size.width /
+                              //             1.65,
+                              //         child: ListView.builder(
+                              //             itemCount:
+                              //                 slot_time.data.timeSlot.length,
+                              //             scrollDirection: Axis.horizontal,
+                              //             itemBuilder: (context, index) {
+                              //               return Padding(
+                              //                 padding:
+                              //                     const EdgeInsets.symmetric(
+                              //                         horizontal: 5.0),
+                              //                 child: Container(
+                              //                   width: 92,
+                              //                   decoration: BoxDecoration(
+                              //                     color: Color(0xffF6F6F6),
+                              //                     borderRadius:
+                              //                         BorderRadius.circular(5),
+                              //                   ),
+                              //                   child: Padding(
+                              //                     padding:
+                              //                         const EdgeInsets.all(5.0),
+                              //                     child: Column(
+                              //                       mainAxisAlignment:
+                              //                           MainAxisAlignment
+                              //                               .spaceEvenly,
+                              //                       children: [
+                              //                         (index ==
+                              //                                 slot_time
+                              //                                         .data
+                              //                                         .timeSlot
+                              //                                         .length -
+                              //                                     1)
+                              //                             ? Text(slot_time
+                              //                                 .data
+                              //                                 .timeSlot[index]
+                              //                                 .slotTime
+                              //                                 .toString()
+                              //                                 .substring(0, 5))
+                              //                             : Text(
+                              //                                 slot_time
+                              //                                         .data
+                              //                                         .timeSlot[
+                              //                                             index]
+                              //                                         .slotTime
+                              //                                         .toString()
+                              //                                         .substring(
+                              //                                             0,
+                              //                                             5) +
+                              //                                     '-' +
+                              //                                     slot_time
+                              //                                         .data
+                              //                                         .timeSlot[
+                              //                                             index +
+                              //                                                 1]
+                              //                                         .slotTime
+                              //                                         .toString()
+                              //                                         .substring(
+                              //                                             0, 5),
+                              //                                 textAlign:
+                              //                                     TextAlign
+                              //                                         .center,
+                              //                                 style: GoogleFonts.montserrat(
+                              //                                     color: Colors
+                              //                                         .black,
+                              //                                     fontSize: 12,
+                              //                                     fontWeight:
+                              //                                         FontWeight
+                              //                                             .bold),
+                              //                               ),
+                              //                         Divider(
+                              //                           height: 5,
+                              //                           thickness: 1,
+                              //                           color: Color(0xff161616)
+                              //                               .withOpacity(0.2),
+                              //                         ),
+                              //                         Text(
+                              //                             "\₹ " +
+                              //                                 doctordetails
+                              //                                     .data
+                              //                                     .clinicDetails
+                              //                                     .oflineConsultancyFees,
+                              //                             style: GoogleFonts
+                              //                                 .montserrat(
+                              //                                     color:
+                              //                                         apptealColor,
+                              //                                     fontSize: 14,
+                              //                                     fontWeight:
+                              //                                         FontWeight
+                              //                                             .bold))
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               );
+                              //             }))
+                              //   ],
+                              // ),
                               Container(
                                 height: 44,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // IconButton(
-                                    //     onPressed: () {},
-                                    //     icon: Icon(
-                                    //       Icons.arrow_back_ios_new,
-                                    //       size: 18,
-                                    //       color: apptealColor,
-                                    //     )),
+                                    Icon(Icons.arrow_back_ios_new),
                                     Expanded(
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "${date.day}-${date.month}-${date.year.toString().substring(2, 4)}",
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              '${slot_time.data.timeSlot.length} Slots',
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: commonBtn(
-                                        height: 50,
-                                        borderWidth: 2,
-                                        textSize: 12,
-                                        s: 'Select Date',
-                                        bgcolor: Colors.white,
-                                        textColor: appblueColor,
-                                        onPressed: () {
-                                          _selectDate(context).then((value) {
-                                            setState(() {
-                                              initializeSlots();
-                                            });
-                                          });
-                                        },
-                                        borderRadius: 10,
-                                        borderColor: appblueColor,
-                                      ),
-                                    ),
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: 7,
+                                            itemBuilder: (context, index) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  _selectedday = index;
+                                                  setState(() {
+                                                    date = DateTime(
+                                                        DateTime.now().year,
+                                                        DateTime.now().month,
+                                                        DateTime.now().day +
+                                                            index);
+                                                    initialize();
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      vertical: 4.0,
+                                                      horizontal: 8.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      (index == 0)
+                                                          ? Text(
+                                                              'Today',
+                                                              style:
+                                                                  selectedDayStyle(
+                                                                      index),
+                                                            )
+                                                          : (index == 1)
+                                                              ? Text(
+                                                                  'Tomorrow',
+                                                                  style:
+                                                                      selectedDayStyle(
+                                                                          index),
+                                                                )
+                                                              : Text(
+                                                                  DateFormat('EEEE').format(DateTime(
+                                                                      DateTime.now()
+                                                                          .year,
+                                                                      DateTime.now()
+                                                                          .month,
+                                                                      DateTime.now()
+                                                                              .day +
+                                                                          index)),
+                                                                  style:
+                                                                      selectedDayStyle(
+                                                                          index),
+                                                                ),
+                                                      Text(
+                                                        'Slots',
+                                                        style:
+                                                            selectedSlotsStyle(
+                                                                index),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            })),
+                                    Icon(Icons.arrow_forward_ios)
                                   ],
                                 ),
+                                // Row(
+                                //   mainAxisAlignment:
+                                //       MainAxisAlignment.spaceBetween,
+                                //   crossAxisAlignment: CrossAxisAlignment.start,
+                                //   children: [
+                                //     // IconButton(
+                                //     //     onPressed: () {},
+                                //     //     icon: Icon(
+                                //     //       Icons.arrow_back_ios_new,
+                                //     //       size: 18,
+                                //     //       color: apptealColor,
+                                //     //     )),
+                                //     Expanded(
+                                //       child: Center(
+                                //         child: Column(
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.center,
+                                //           children: [
+                                //             Text(
+                                //               "${date.day}-${date.month}-${date.year.toString().substring(2, 4)}",
+                                //               style: GoogleFonts.montserrat(
+                                //                   fontSize: 14,
+                                //                   fontWeight: FontWeight.bold),
+                                //             ),
+                                //             SizedBox(
+                                //               height: 10,
+                                //             ),
+                                //             Text(
+                                //               '${slot_time.data.timeSlot.length} Slots',
+                                //               style: GoogleFonts.montserrat(
+                                //                   fontSize: 12,
+                                //                   fontWeight: FontWeight.bold),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //     ),
+                                //     Expanded(
+                                //       child: commonBtn(
+                                //         height: 50,
+                                //         borderWidth: 2,
+                                //         textSize: 12,
+                                //         s: 'Select Date',
+                                //         bgcolor: Colors.white,
+                                //         textColor: appblueColor,
+                                //         onPressed: () {
+                                //           _selectDate(context).then((value) {
+                                //             setState(() {
+                                //               initialize();
+                                //             });
+                                //           });
+                                //         },
+                                //         borderRadius: 10,
+                                //         borderColor: appblueColor,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                               ),
                               Divider(
                                 color: textColor.withOpacity(0.4),
@@ -607,19 +776,39 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Slots(
-                                      text: 'Morning',
-                                      startTime: 0,
-                                      endTime: 12,
-                                      time: ' am'),
+                                  (date.day == DateTime.now().day &&
+                                          date.month == DateTime.now().month &&
+                                          date.year == DateTime.now().year)
+                                      ? (DateTime.now().hour > 12)
+                                          ? SizedBox()
+                                          : Slots(
+                                              text: 'Morning',
+                                              startTime: 0,
+                                              endTime: 12,
+                                              time: ' am')
+                                      : Slots(
+                                          text: 'Morning',
+                                          startTime: 0,
+                                          endTime: 12,
+                                          time: ' am'),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Slots(
-                                      text: 'Afternoon',
-                                      startTime: 12,
-                                      endTime: 17,
-                                      time: ' pm'),
+                                  (date.day == DateTime.now().day &&
+                                          date.month == DateTime.now().month &&
+                                          date.year == DateTime.now().year)
+                                      ? (DateTime.now().hour >= 17)
+                                          ? SizedBox()
+                                          : Slots(
+                                              text: 'Afternoon',
+                                              startTime: 12,
+                                              endTime: 17,
+                                              time: ' pm')
+                                      : Slots(
+                                          text: 'Afternoon',
+                                          startTime: 12,
+                                          endTime: 17,
+                                          time: ' pm'),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -630,32 +819,32 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       time: ' pm'),
                                 ],
                               ),
-                              Text(
-                                'Enter Comments',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              EnterField(
-                                'Enter Comments',
-                                'Enter Comments',
-                                _controller,
-                              ),
-                              Text(
-                                'Upload Report File',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                              ),
-                              commonBtn(
-                                s: 'Choose report',
-                                height: 40,
-                                textSize: 14,
-                                bgcolor: Color(0xff161616).withOpacity(0.3),
-                                textColor: Color(0xff161616),
-                                onPressed: () {
-                                  pickFile();
-                                },
-                                borderRadius: 0,
-                              )
+                              // Text(
+                              //   'Enter Comments',
+                              //   style: GoogleFonts.montserrat(
+                              //       fontSize: 14, fontWeight: FontWeight.bold),
+                              // ),
+                              // EnterField(
+                              //   'Enter Comments',
+                              //   'Enter Comments',
+                              //   _controller,
+                              // ),
+                              // Text(
+                              //   'Upload Report File',
+                              //   style: GoogleFonts.montserrat(
+                              //       fontSize: 14, fontWeight: FontWeight.bold),
+                              // ),
+                              // commonBtn(
+                              //   s: 'Choose report',
+                              //   height: 40,
+                              //   textSize: 14,
+                              //   bgcolor: Color(0xff161616).withOpacity(0.3),
+                              //   textColor: Color(0xff161616),
+                              //   onPressed: () {
+                              //     pickFile();
+                              //   },
+                              //   borderRadius: 0,
+                              // )
                             ],
                           ),
                         ),
@@ -663,7 +852,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: commonBtn(
-                            s: 'Book an Appointment',
+                            s: 'Proceed',
                             bgcolor: appblueColor,
                             textColor: Colors.white,
                             borderRadius: 8,
@@ -751,11 +940,11 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
               style: GoogleFonts.montserrat(
                   fontSize: 14, fontWeight: FontWeight.bold),
             ),
-            // Icon(
-            //   Icons.arrow_forward_ios,
-            //   color: apptealColor,
-            //   size: 20,
-            // ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.black,
+              size: 20,
+            ),
           ],
         ),
         SizedBox(
@@ -774,47 +963,117 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
               return (am == 0)
                   ? Container()
                   : (am >= startTime && am < endTime)
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: commonBtn(
-                            s: slot_time.data.timeSlot[index].slotTime
-                                    .substring(0, 5)
-                                    .toString() +
-                                time,
-                            bgcolor: slot_time.data.timeSlot[index].status ==
-                                    'availiable'
-                                ? (_selectedindex == index)
-                                    ? apptealColor
-                                    : Colors.white
-                                : Colors.white,
-                            textColor: slot_time.data.timeSlot[index].status ==
-                                    'availiable'
-                                ? (_selectedindex == index)
-                                    ? Colors.white
-                                    : apptealColor
-                                : Colors.grey,
-                            onPressed: () {
-                              setState(() {
-                                _selectedindex = index;
-                                selectedTime = slot_time
-                                            .data.timeSlot[index].status ==
-                                        'availiable'
-                                    ? slot_time.data.timeSlot[index].slotTime
-                                    : '';
-                                print(selectedTime + '${_selectedindex}');
-                              });
-                            },
-                            textSize: 12,
-                            width: 100,
-                            borderRadius: 0,
-                            borderWidth: 1,
-                            borderColor:
-                                slot_time.data.timeSlot[index].status ==
-                                        'availiable'
-                                    ? apptealColor
-                                    : Colors.grey,
-                          ),
-                        )
+                      ? (date.day == DateTime.now().day &&
+                              date.month == DateTime.now().month &&
+                              date.year == DateTime.now().year)
+                          ? (DateTime.now().hour >
+                                  int.parse(slot_time
+                                      .data.timeSlot[index].slotTime
+                                      .substring(0, 2)))
+                              ? SizedBox()
+                              : (DateTime.now().hour <=
+                                          int.parse(slot_time
+                                              .data.timeSlot[index].slotTime
+                                              .substring(0, 2)) &&
+                                      DateTime.now().minute <
+                                          int.parse(slot_time
+                                              .data.timeSlot[index].slotTime
+                                              .substring(3, 5)))
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: commonBtn(
+                                        s: slot_time
+                                                .data.timeSlot[index].slotTime
+                                                .substring(0, 5)
+                                                .toString() +
+                                            time,
+                                        bgcolor: slot_time.data.timeSlot[index]
+                                                    .status ==
+                                                'availiable'
+                                            ? (_selectedindex == index)
+                                                ? apptealColor
+                                                : Colors.white
+                                            : Colors.white,
+                                        textColor: slot_time.data
+                                                    .timeSlot[index].status ==
+                                                'availiable'
+                                            ? (_selectedindex == index)
+                                                ? Colors.white
+                                                : apptealColor
+                                            : Colors.grey,
+                                        onPressed: () {
+                                          setState(() {
+                                            _selectedindex = index;
+                                            selectedTime = slot_time
+                                                        .data
+                                                        .timeSlot[index]
+                                                        .status ==
+                                                    'availiable'
+                                                ? slot_time.data.timeSlot[index]
+                                                    .slotTime
+                                                : '';
+                                            print(selectedTime +
+                                                '${_selectedindex}');
+                                          });
+                                        },
+                                        textSize: 12,
+                                        width: 90,
+                                        borderRadius: 0,
+                                        borderWidth: 1,
+                                        borderColor: slot_time.data
+                                                    .timeSlot[index].status ==
+                                                'availiable'
+                                            ? apptealColor
+                                            : Colors.grey,
+                                      ),
+                                    )
+                                  : SizedBox()
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: commonBtn(
+                                s: slot_time.data.timeSlot[index].slotTime
+                                        .substring(0, 5)
+                                        .toString() +
+                                    time,
+                                bgcolor:
+                                    slot_time.data.timeSlot[index].status ==
+                                            'availiable'
+                                        ? (_selectedindex == index)
+                                            ? apptealColor
+                                            : Colors.white
+                                        : Colors.white,
+                                textColor:
+                                    slot_time.data.timeSlot[index].status ==
+                                            'availiable'
+                                        ? (_selectedindex == index)
+                                            ? Colors.white
+                                            : apptealColor
+                                        : Colors.grey,
+                                onPressed: () {
+                                  setState(() {
+                                    _selectedindex = index;
+                                    selectedTime =
+                                        slot_time.data.timeSlot[index].status ==
+                                                'availiable'
+                                            ? slot_time
+                                                .data.timeSlot[index].slotTime
+                                            : '';
+                                    print(selectedTime + '${_selectedindex}');
+                                  });
+                                },
+                                textSize: 12,
+                                width: 90,
+                                borderRadius: 0,
+                                borderWidth: 1,
+                                borderColor:
+                                    slot_time.data.timeSlot[index].status ==
+                                            'availiable'
+                                        ? apptealColor
+                                        : Colors.grey,
+                              ),
+                            )
                       : Container();
             },
             itemCount: slot_time.data.timeSlot.length,

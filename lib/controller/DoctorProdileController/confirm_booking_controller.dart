@@ -35,7 +35,7 @@ class ConfirmBookingController {
     });
     loader.dismiss();
     if (response['status']) {
-      success(context, response);
+      // success(context, response);
     } else {
       failure(context, response);
     }

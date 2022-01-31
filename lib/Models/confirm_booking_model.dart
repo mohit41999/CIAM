@@ -43,11 +43,13 @@ class Data {
     required this.doctorName,
     required this.bookingStatus,
     required this.patientName,
+    required this.DoctorProfile,
     required this.patientLocation,
     required this.bookedServiceTime,
     required this.clinicLocation,
     required this.totalAmount,
     required this.amountStatus,
+    required this.patientAge,
     required this.Booking_For,
     required this.bookingDate,
     required this.download_report,
@@ -57,9 +59,11 @@ class Data {
   String specialty;
   String doctorName;
   String bookingStatus;
+  String DoctorProfile;
   String patientName;
   String patientLocation;
   String bookedServiceTime;
+  String patientAge;
   String clinicLocation;
   String totalAmount;
   String Booking_For;
@@ -70,8 +74,10 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
         specialty: json["Specialty"],
+        DoctorProfile: json["Doctor Profile"],
         doctorName: json["Doctor Name"],
         bookingStatus: json["Booking Status"],
+        patientAge: json["patient Age"],
         bookingDate: json["Booking Date"],
         patientName: json["Patient Name"],
         patientLocation: json["patient Location"],
@@ -89,8 +95,10 @@ class Data {
         "Doctor Name": doctorName,
         "Booking Status": bookingStatus,
         "Booking Date": bookingDate,
+        "patient Age": patientAge,
         "Patient Name": patientName,
         "patient Location": patientLocation,
+        "Doctor Profile": DoctorProfile,
         "Booked Service Time": bookedServiceTime,
         "Clinic Location": clinicLocation,
         "Total Amount": totalAmount,
