@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/ProfileSettings/personal_tab.dart';
+import 'package:patient/Screens/ProfileSettings/relative_tab.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -20,7 +21,7 @@ class _ProfileSettingState extends State<ProfileSetting>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -75,6 +76,9 @@ class _ProfileSettingState extends State<ProfileSetting>
                   Tab(
                     text: 'Lifestyle',
                   ),
+                  Tab(
+                    text: 'Relative',
+                  ),
                 ],
               ),
             ),
@@ -91,7 +95,8 @@ class _ProfileSettingState extends State<ProfileSetting>
                   // first tab bar view widget
                   Personal(),
                   Medical(),
-                  Lifestyle()
+                  Lifestyle(),
+                  Relative(),
                   // second tab bar view widget
                 ],
               ),

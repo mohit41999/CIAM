@@ -64,6 +64,10 @@ class TitleEnterField extends StatelessWidget {
                   readOnly: readonly,
                   keyboardType: textInputType,
                   controller: controller,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
                   decoration: InputDecoration(
                     enabled: true,
                     enabledBorder: OutlineInputBorder(

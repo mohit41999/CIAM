@@ -8,6 +8,7 @@ import 'package:patient/widgets/common_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Personal extends StatefulWidget {
   const Personal({Key? key}) : super(key: key);
@@ -41,6 +42,36 @@ class _PersonalState extends State<Personal> {
     });
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(
+        DateTime.now().year - 100,
+      ),
+      lastDate: DateTime(
+        DateTime.now().year + 100,
+      ),
+      builder: (context, child) => Theme(
+          data: ThemeData().copyWith(
+            dialogBackgroundColor: appblueColor,
+            colorScheme: ColorScheme.dark(
+                primary: Colors.white,
+                surface: appblueColor,
+                onSurface: Colors.white,
+                onPrimary: appblueColor),
+          ),
+          child: child!),
+    );
+    if (pickedDate != null)
+      setState(() {
+        // date = pickedDate;
+        _con.DOB.text = pickedDate.toString();
+        //
+        print(pickedDate);
+      });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -54,107 +85,178 @@ class _PersonalState extends State<Personal> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: [
-            TitleEnterField('Firstname', 'Firstname', _con.firstname),
-            TitleEnterField('Lastname', 'Lastname', _con.lastname),
-            TitleEnterField('Email id', 'Email id', _con.email),
-            TitleEnterField('Contact Number', 'Contact Number', _con.contactno),
-            TitleEnterField('Age', 'Age', _con.age),
-            TitleEnterField('Gender', 'Gender', _con.gender),
-            TitleEnterField('DOB', 'DOB', _con.DOB),
-            TitleEnterField('Blood Group', 'Blood Group', _con.bloodGroup),
-            TitleEnterField(
-                'Marital status', 'Marital status', _con.maritalStatus),
-            TitleEnterField('Height', 'Height', _con.height),
-            TitleEnterField('Weight', 'Weight', _con.weight),
-            TitleEnterField('Emergency contact', 'Emergency contact',
-                _con.emergencycontact),
-            TitleEnterField(
-              'Address',
-              'Address',
-              _con.address,
-              maxLines: 10,
-            ),
-            Padding(
+      body: (loading)
+          ? Center(child: CircularProgressIndicator())
+          : Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 130,
-                child: Row(
-                  children: [
-                    (loading)
-                        ? Center(child: CircularProgressIndicator())
-                        : Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: (_con.mediaFile != null)
-                                          ? FileImage(
-                                              File(_con.mediaFile!.path))
-                                          : NetworkImage(_con.profileImage)
-                                              as ImageProvider,
-
-                                      // (_con.mediaFile==null)? NetworkImage(_con.profileImage):,
-                                      fit: BoxFit.cover)),
+              child: ListView(
+                children: [
+                  TitleEnterField('Firstname', 'Firstname', _con.firstname),
+                  TitleEnterField('Lastname', 'Lastname', _con.lastname),
+                  TitleEnterField('Email id', 'Email id', _con.email),
+                  TitleEnterField(
+                      'Contact Number', 'Contact Number', _con.contactno),
+                  TitleEnterField('Age', 'Age', _con.age),
+                  TitleEnterField('Gender', 'Gender', _con.gender),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'DOB',
+                      style: TextStyle(
+                          fontSize: 14, color: Colors.black.withOpacity(0.6)),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 2.0),
+                      child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          height: 60,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 20.0),
+                            child: Text(
+                              _con.DOB.text.substring(0, 10),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
                             ),
                           ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: commonBtn(
+                  //     height: 50,
+                  //     borderWidth: 2,
+                  //     textSize: 12,
+                  //     s: _con.DOB.text.substring(0, 10),
+                  //     bgcolor: Colors.white,
+                  //     textColor: Colors.black.withOpacity(0.6),
+                  //     onPressed: () {
+                  //       _selectDate(context).then((value) {
+                  //         setState(() {});
+                  //       });
+                  //     },
+                  //     borderRadius: 10,
+                  //   ),
+                  // ),
+                  // GestureDetector(
+                  //     onTap: () {
+                  //       _selectDate(context);
+                  //     },
+                  //     child: TitleEnterField(
+                  //       'DOB',
+                  //       'DOB',
+                  //       _con.DOB,
+                  //       readonly: true,
+                  //     )),
+                  TitleEnterField(
+                      'Blood Group', 'Blood Group', _con.bloodGroup),
+                  TitleEnterField(
+                      'Marital status', 'Marital status', _con.maritalStatus),
+                  TitleEnterField('Height', 'Height', _con.height),
+                  TitleEnterField('Weight', 'Weight', _con.weight),
+                  TitleEnterField('Emergency contact', 'Emergency contact',
+                      _con.emergencycontact),
+                  TitleEnterField(
+                    'Address',
+                    'Address',
+                    _con.address,
+                    maxLines: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 130,
+                      child: Row(
                         children: [
-                          Text(
-                            'Update Profile',
-                            style: GoogleFonts.montserrat(
-                                color: Color(0xff161616).withOpacity(0.6),
-                                fontSize: 15),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: commonBtn(
-                              s: 'Choose new photo',
-                              bgcolor: Color(0xffB2B1B1),
-                              textColor: Colors.black,
-                              onPressed: () {
-                                setState(() {
-                                  _showPicker(context);
-                                });
-                              },
-                              width: 187,
-                              height: 30,
-                              borderRadius: 4,
-                              textSize: 12,
+                          (loading)
+                              ? Center(child: CircularProgressIndicator())
+                              : Expanded(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: (_con.mediaFile != null)
+                                                ? FileImage(
+                                                    File(_con.mediaFile!.path))
+                                                : NetworkImage(
+                                                        _con.profileImage)
+                                                    as ImageProvider,
+
+                                            // (_con.mediaFile==null)? NetworkImage(_con.profileImage):,
+                                            fit: BoxFit.cover)),
+                                  ),
+                                ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  'Update Profile',
+                                  style: GoogleFonts.montserrat(
+                                      color: Color(0xff161616).withOpacity(0.6),
+                                      fontSize: 15),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: commonBtn(
+                                    s: 'Choose new photo',
+                                    bgcolor: Color(0xffB2B1B1),
+                                    textColor: Colors.black,
+                                    onPressed: () {
+                                      setState(() {
+                                        _showPicker(context);
+                                      });
+                                    },
+                                    width: 187,
+                                    height: 30,
+                                    borderRadius: 4,
+                                    textSize: 12,
+                                  ),
+                                )
+                              ],
                             ),
                           )
                         ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: commonBtn(
+                      s: 'Submit',
+                      bgcolor: appblueColor,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          _con.submit(context);
+                        });
+                      },
+                      borderRadius: 8,
+                      textSize: 20,
+                    ),
+                  )
+                ],
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: commonBtn(
-                s: 'Submit',
-                bgcolor: appblueColor,
-                textColor: Colors.white,
-                onPressed: () {
-                  setState(() {
-                    _con.submit(context);
-                  });
-                },
-                borderRadius: 8,
-                textSize: 20,
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 

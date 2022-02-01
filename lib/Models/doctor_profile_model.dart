@@ -42,6 +42,7 @@ class Datum {
     required this.firstName,
     required this.lastName,
     required this.specialist,
+    required this.specialist_id,
     required this.experience,
     required this.location,
     required this.profileImage,
@@ -50,6 +51,7 @@ class Datum {
 
   String userId;
   String firstName;
+  String specialist_id;
   String lastName;
   dynamic specialist;
   String experience;
@@ -62,6 +64,7 @@ class Datum {
         firstName: json["first_name"],
         lastName: json["last_name"],
         specialist: json["specialist"],
+        specialist_id: json["specialist_id"],
         experience: json["experience"],
         location: json["location"],
         profileImage: json["profile_image"],
@@ -73,6 +76,7 @@ class Datum {
         "first_name": firstName,
         "last_name": lastName,
         "specialist": specialist,
+        "specialist_id": specialist_id,
         "experience": experience,
         "location": location,
         "profile_image": profileImage,

@@ -78,8 +78,8 @@ class DoctorProfileOneController {
             'doctor_id': doctor_id,
             'booking_date': date,
             'slot_time': slot_time,
-            'booking_type': 'online',
-            'fees': fees
+            'fees': fees,
+            'booking_for': fees
           }
         : {
             'token': Token,
@@ -87,8 +87,7 @@ class DoctorProfileOneController {
             'doctor_id': doctor_id,
             'booking_date': date,
             'slot_time': slot_time,
-            'booking_type': 'online',
-            'comments': comments,
+            'booking_for': fees,
             'fees': fees
           };
     //print(file!.path.toString() + 'qqqq');

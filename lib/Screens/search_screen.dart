@@ -98,11 +98,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     // errorBorder: InputBorder.none,
                     // disabledBorder: InputBorder.none,
                     filled: true,
-                    labelText: 'Search',
+                    labelText: 'Search Doctors',
 
                     labelStyle: GoogleFonts.montserrat(
                         fontSize: 14, color: Colors.black.withOpacity(0.6)),
-                    hintText: 'Search',
+                    hintText: 'Search Doctors',
                     hintStyle: GoogleFonts.montserrat(
                         fontSize: 14, color: Colors.black.withOpacity(0.6)),
                     fillColor: Colors.white,

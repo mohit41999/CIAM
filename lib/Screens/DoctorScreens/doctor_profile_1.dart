@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:patient/Models/doc_review_model.dart';
 import 'package:intl/intl.dart';
 import 'package:patient/Models/doctor_profile_one_model.dart';
+import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/controller/DoctorProdileController/doctor_profile_one_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/enter_field.dart';
@@ -44,6 +46,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
   int _selectedday = 0;
   String selectedTime = '';
   DateTime date = DateTime.now();
+  late RelativeModel relativeData;
 
   Color textColor = Color(0xff161616);
   TextEditingController _controller = TextEditingController();
@@ -83,9 +86,14 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
       slot_time = value;
       setState(() {
         _con.getRatingsandReview(context, widget.doc_id).then((value) {
+          reviews = value;
           setState(() {
-            reviews = value;
-            _con.loading = false;
+            RelativeSettingController().getrelativedata(context).then((value) {
+              setState(() {
+                relativeData = value;
+                _con.loading = false;
+              });
+            });
           });
         });
       });
@@ -849,6 +857,68 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      // Container(
+                      //   height: 150,
+                      //   color: Colors.white,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      //     child: Column(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Text(
+                      //           'Booking For',
+                      //           style: GoogleFonts.montserrat(
+                      //               fontSize: 18,
+                      //               color: textColor,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //         Divider(
+                      //           color: textColor.withOpacity(0.4),
+                      //           thickness: 1,
+                      //         ),
+                      //         // DropdownButton(
+                      //         //   style: TextStyle(
+                      //         //       fontWeight: FontWeight.bold,
+                      //         //       color: Colors.black),
+                      //         //   underline: Container(),
+                      //         //   dropdownColor: Colors.white,
+                      //         //
+                      //         //   isExpanded: true,
+                      //         //
+                      //         //   // Initial Value
+                      //         //   hint: Text(
+                      //         //     'Gender',
+                      //         //     style: TextStyle(
+                      //         //         color: Colors.black,
+                      //         //         fontWeight: FontWeight.bold),
+                      //         //   ),
+                      //         //   // Down Arrow Icon
+                      //         //   icon: const Icon(Icons.keyboard_arrow_down),
+                      //         //
+                      //         //   // Array list of items
+                      //         //   items: <RelativeModelData>relativeData.data
+                      //         //       .map((RelativeModelData? items) {
+                      //         //     return DropdownMenuItem(
+                      //         //       value: items.,
+                      //         //       child: Text(items['type']),
+                      //         //     );
+                      //         //   }).toList(),
+                      //         //   // After selecting the desired option,it will
+                      //         //   // change button value to selected value
+                      //         //   onChanged: (newValue) {
+                      //         //     setState(() {
+                      //         //       print(newValue);
+                      //         //     });
+                      //         //   },
+                      //         // ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: commonBtn(
@@ -971,15 +1041,73 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       .data.timeSlot[index].slotTime
                                       .substring(0, 2)))
                               ? SizedBox()
-                              : (DateTime.now().hour <=
+                              : (DateTime.now().hour ==
+                                      int.parse(slot_time
+                                          .data.timeSlot[index].slotTime
+                                          .substring(0, 2)))
+                                  ? ((DateTime.now().minute <
                                           int.parse(slot_time
                                               .data.timeSlot[index].slotTime
-                                              .substring(0, 2)) &&
-                                      DateTime.now().minute <
-                                          int.parse(slot_time
-                                              .data.timeSlot[index].slotTime
-                                              .substring(3, 5)))
-                                  ? Padding(
+                                              .substring(3, 5))))
+                                      ? Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: commonBtn(
+                                            s: slot_time.data.timeSlot[index]
+                                                    .slotTime
+                                                    .substring(0, 5)
+                                                    .toString() +
+                                                time,
+                                            bgcolor: slot_time
+                                                        .data
+                                                        .timeSlot[index]
+                                                        .status ==
+                                                    'availiable'
+                                                ? (_selectedindex == index)
+                                                    ? apptealColor
+                                                    : Colors.white
+                                                : Colors.white,
+                                            textColor: slot_time
+                                                        .data
+                                                        .timeSlot[index]
+                                                        .status ==
+                                                    'availiable'
+                                                ? (_selectedindex == index)
+                                                    ? Colors.white
+                                                    : apptealColor
+                                                : Colors.grey,
+                                            onPressed: () {
+                                              setState(() {
+                                                _selectedindex = index;
+                                                selectedTime = slot_time
+                                                            .data
+                                                            .timeSlot[index]
+                                                            .status ==
+                                                        'availiable'
+                                                    ? slot_time
+                                                        .data
+                                                        .timeSlot[index]
+                                                        .slotTime
+                                                    : '';
+                                                print(selectedTime +
+                                                    '${_selectedindex}');
+                                              });
+                                            },
+                                            textSize: 12,
+                                            width: 90,
+                                            borderRadius: 0,
+                                            borderWidth: 1,
+                                            borderColor: slot_time
+                                                        .data
+                                                        .timeSlot[index]
+                                                        .status ==
+                                                    'availiable'
+                                                ? apptealColor
+                                                : Colors.grey,
+                                          ),
+                                        )
+                                      : SizedBox()
+                                  : Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0),
                                       child: commonBtn(
@@ -1028,7 +1156,6 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                             : Colors.grey,
                                       ),
                                     )
-                                  : SizedBox()
                           : Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),

@@ -3,6 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
+import 'package:patient/Screens/LabProfile.dart';
+import 'package:patient/Screens/MedicineProfile.dart';
+import 'package:patient/Screens/Products.dart';
+import 'package:patient/Screens/patient_home_page_4.dart';
+import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/home_controller.dart';
@@ -31,14 +36,14 @@ final List<Map<dynamic, dynamic>> hometile = [
   },
   {
     'label': 'Health care & Other product',
-    'Screen': 'null',
-    // 'Screen': ProductPage(),
+    // 'Screen': 'null',
+    'Screen': ProductPage(),
     'profile': 'Rectangle -7.png'
   },
   {
     'label': 'Home Care Servicies',
-    'Screen': 'null',
-    // 'Screen': PatientHomePage4(),
+    // 'Screen': 'null',
+    'Screen': PatientHomePage4(),
     'profile': 'Rectangle -1.png'
   },
   {
@@ -48,15 +53,15 @@ final List<Map<dynamic, dynamic>> hometile = [
   },
   {
     'label': 'Lab Tests',
-    'Screen': 'null',
-    // 'Screen': LabProfile(),
+    // 'Screen': 'null',
+    'Screen': LabProfile(),
     'profile': 'Rectangle -2.png'
   },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
   {
     'label': 'Medicine',
-    'Screen': 'null',
-    // 'Screen': MedicineProfile(),
+    // 'Screen': 'null',
+    'Screen': MedicineProfile(),
     'profile': 'Rectangle 69.png'
   },
   {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle -4.png'},
@@ -125,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         bgcolor: appblueColor,
                         textColor: Colors.white,
                         onPressed: () {
-                          Push(context, item['Screen']);
+                          (item['Screen'] == 'null')
+                              ? print('nooooooo')
+                              : Push(context, item['Screen']);
                         },
                         width: 120,
                         height: 30,
@@ -189,7 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Push(context, SearchScreen());
+              },
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Container(
@@ -256,22 +265,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: hometile.asMap().entries.map((entry) {
                     return GestureDetector(
-                      onTap: () => _controller.animateToPage(entry.key),
-                      child: Container(
-                        width: 8.0,
-                        height: 8.0,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 4.0),
-                        decoration: BoxDecoration(
+                        onTap: () => _controller.animateToPage(entry.key),
+                        child: Container(
+                          width: 8.0,
+                          height: 8.0,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color:
-                                (Theme.of(context).brightness == Brightness.dark
-                                        ? Colors.white
-                                        : Colors.black)
-                                    .withOpacity(
-                                        _current == entry.key ? 0.9 : 0.4)),
-                      ),
-                    );
+                            color: _current == entry.key
+                                ? appblueColor.withOpacity(0.9)
+                                : appblueColor.withOpacity(0.4),
+                          ),
+                        ));
                   }).toList(),
                 ),
               ]),
@@ -384,6 +390,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         context,
                                         DoctorProfile(
                                           fromhome: true,
+                                          isSpecial: true,
+                                          speciality_id: specialities
+                                              .data[index].specialistId,
                                         ));
                                   },
                                   child: Column(
