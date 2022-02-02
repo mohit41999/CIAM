@@ -6,6 +6,7 @@ import 'package:patient/Screens/MYScreens/MyLabTest.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/ProductDetails.dart';
 import 'package:patient/Screens/Products.dart';
+import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Screens/view_booking_details.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 
@@ -207,10 +208,18 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                     onPressed: () {
                                       Push(
                                           context,
-                                          ViewBookingDetails(
-                                            booking_id: Details.elementAt(index)
-                                                .booingId,
-                                          ));
+                                          BookingAppointment(
+                                              booking_id:
+                                                  Details.elementAt(index)
+                                                      .booingId,
+                                              doctor_id:
+                                                  Details.elementAt(index)
+                                                      .doctorId)
+                                          // ViewBookingDetails(
+                                          //   booking_id: Details.elementAt(index)
+                                          //       .booingId,
+                                          // )
+                                          );
                                     },
                                     child: Text(
                                       'View Booking Details',

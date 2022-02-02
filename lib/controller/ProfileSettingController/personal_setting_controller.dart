@@ -24,6 +24,12 @@ class PersonalSettingController {
   TextEditingController DOB = TextEditingController();
   late String profileImage;
 
+  List<Map> genderType = [
+    {'type': 'Male', 'value': 'm'},
+    {'type': 'Female', 'value': 'f'}
+  ];
+  var dropDownvalue;
+
   Future<void> submit(BuildContext context) async {
     var loader = ProgressView(context);
     loader.show();

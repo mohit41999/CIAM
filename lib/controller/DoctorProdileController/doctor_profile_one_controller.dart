@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import '../NavigationController.dart';
 class DoctorProfileOneController {
   late Map<String, dynamic> doctordetails;
   late Map<String, dynamic> slot_time;
+  String bookingFor = '0';
   bool loading = true;
   PlatformFile? file = null;
 
@@ -60,48 +62,29 @@ class DoctorProfileOneController {
     return SlotTime.fromJson(slot_time);
   }
 
-  Future add_booking_request(
-    BuildContext context,
-    String doctor_id,
-    String date,
-    String slot_time,
-    String comments,
-    String fees,
-  ) async {
+  Future add_booking_request(BuildContext context,
+      {required String doctor_id,
+      required String date,
+      required String slot_time,
+      required String fees}) async {
     var loader = await ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, String> bodyParams = (comments.toString() == '')
-        ? {
-            'token': Token,
-            'patient_id': prefs.getString('user_id')!,
-            'doctor_id': doctor_id,
-            'booking_date': date,
-            'slot_time': slot_time,
-            'fees': fees,
-            'booking_for': fees
-          }
-        : {
-            'token': Token,
-            'patient_id': prefs.getString('user_id')!,
-            'doctor_id': doctor_id,
-            'booking_date': date,
-            'slot_time': slot_time,
-            'booking_for': fees,
-            'fees': fees
-          };
-    //print(file!.path.toString() + 'qqqq');
-    var response = (file == null)
-        ? await PostData(
-            PARAM_URL: 'add_booking_appointment.php', params: bodyParams)
-        : await PostDataWithImage(
-            PARAM_URL: 'add_booking_appointment.php',
-            params: bodyParams,
-            imagePath: file!.path.toString(),
-            imageparamName: 'reportfile');
+    Map<String, String> bodyParams = {
+      'token': Token,
+      'patient_id': prefs.getString('user_id')!,
+      'doctor_id': doctor_id,
+      'booking_date': date,
+      'slot_time': slot_time,
+      'fees': fees,
+      'booking_for': bookingFor
+    };
+
+    var response = await PostData(
+        PARAM_URL: 'add_booking_appointment.php', params: bodyParams);
     loader.dismiss();
     if (response['status']) {
-      PushReplacement(
+      Push(
           context,
           BookingAppointment(
             booking_id: response['data']['bookingID'],

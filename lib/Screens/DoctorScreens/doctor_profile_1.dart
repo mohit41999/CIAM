@@ -91,6 +91,16 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
             RelativeSettingController().getrelativedata(context).then((value) {
               setState(() {
                 relativeData = value;
+                relativeData.data.insert(
+                    0,
+                    RelativeModelData(
+                        relative_id: '0',
+                        relation: '',
+                        relativeName: 'ME',
+                        bloodGroup: '',
+                        gender: '',
+                        age: '',
+                        maritalStatus: ''));
                 _con.loading = false;
               });
             });
@@ -300,7 +310,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                     .data.clinicDetails.openCloseTime,
                               ),
                               doctorProfileRow(
-                                title: 'Offline Consultancy Fees',
+                                title: 'Online Consultancy Fees',
                                 value:
                                     "\₹ ${doctordetails.data.clinicDetails.oflineConsultancyFees}",
                               ),
@@ -787,7 +797,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                   (date.day == DateTime.now().day &&
                                           date.month == DateTime.now().month &&
                                           date.year == DateTime.now().year)
-                                      ? (DateTime.now().hour > 12)
+                                      ? (DateTime.now().hour >= 12)
                                           ? SizedBox()
                                           : Slots(
                                               text: 'Morning',
@@ -860,65 +870,69 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                       SizedBox(
                         height: 12,
                       ),
-                      // Container(
-                      //   height: 150,
-                      //   color: Colors.white,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      //     child: Column(
-                      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Text(
-                      //           'Booking For',
-                      //           style: GoogleFonts.montserrat(
-                      //               fontSize: 18,
-                      //               color: textColor,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Divider(
-                      //           color: textColor.withOpacity(0.4),
-                      //           thickness: 1,
-                      //         ),
-                      //         // DropdownButton(
-                      //         //   style: TextStyle(
-                      //         //       fontWeight: FontWeight.bold,
-                      //         //       color: Colors.black),
-                      //         //   underline: Container(),
-                      //         //   dropdownColor: Colors.white,
-                      //         //
-                      //         //   isExpanded: true,
-                      //         //
-                      //         //   // Initial Value
-                      //         //   hint: Text(
-                      //         //     'Gender',
-                      //         //     style: TextStyle(
-                      //         //         color: Colors.black,
-                      //         //         fontWeight: FontWeight.bold),
-                      //         //   ),
-                      //         //   // Down Arrow Icon
-                      //         //   icon: const Icon(Icons.keyboard_arrow_down),
-                      //         //
-                      //         //   // Array list of items
-                      //         //   items: <RelativeModelData>relativeData.data
-                      //         //       .map((RelativeModelData? items) {
-                      //         //     return DropdownMenuItem(
-                      //         //       value: items.,
-                      //         //       child: Text(items['type']),
-                      //         //     );
-                      //         //   }).toList(),
-                      //         //   // After selecting the desired option,it will
-                      //         //   // change button value to selected value
-                      //         //   onChanged: (newValue) {
-                      //         //     setState(() {
-                      //         //       print(newValue);
-                      //         //     });
-                      //         //   },
-                      //         // ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
+                      Container(
+                        height: 150,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Booking For',
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 18,
+                                    color: textColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Divider(
+                                color: textColor.withOpacity(0.4),
+                                thickness: 1,
+                              ),
+                              Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: DropdownButton(
+                                      value: _con.bookingFor,
+                                      underline: Container(),
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                      isExpanded: true,
+                                      hint: Text('Me'),
+                                      items: relativeData.data.map((e) {
+                                        return DropdownMenuItem(
+                                            value: e.relative_id,
+                                            child: Text(
+                                                e.relativeName.toUpperCase()));
+                                      }).toList(),
+                                      onChanged: (dynamic v) {
+                                        setState(() {
+                                          print(v);
+                                          _con.bookingFor = v;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: commonBtn(
@@ -929,12 +943,11 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                             onPressed: () {
                               _con.add_booking_request(
                                 context,
-                                widget.doc_id,
-                                '${date.year}-${date.month}-${date.day}',
-                                selectedTime,
-                                _controller.text,
-                                doctordetails
+                                fees: doctordetails
                                     .data.clinicDetails.oflineConsultancyFees,
+                                date: '${date.year}-${date.month}-${date.day}',
+                                doctor_id: widget.doc_id,
+                                slot_time: selectedTime,
                               );
                             }),
                       ),
@@ -942,7 +955,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                   ),
                 ),
           Padding(
-            padding: const EdgeInsets.only(left: 20.0, top: 40),
+            padding: const EdgeInsets.only(left: 8.0, top: 30),
             child: Align(
               alignment: Alignment.topLeft,
               child: GestureDetector(

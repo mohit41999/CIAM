@@ -9,6 +9,7 @@ class ConfirmBookingController {
       BuildContext context, String doctor_id, String booking_id) async {
     // var loader = ProgressView(context);
     // loader.show();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
         PARAM_URL: 'get_confirmation_booking_details.php',

@@ -41,6 +41,7 @@ class MyAppointmentsModelData {
   MyAppointmentsModelData({
     required this.booingId,
     required this.doctorName,
+    required this.doctorId,
     required this.location,
     required this.status,
     required this.profile,
@@ -50,6 +51,7 @@ class MyAppointmentsModelData {
 
   String booingId;
   String doctorName;
+  String doctorId;
   dynamic location;
   String status;
   String profile;
@@ -59,6 +61,7 @@ class MyAppointmentsModelData {
   factory MyAppointmentsModelData.fromJson(Map<String, dynamic> json) =>
       MyAppointmentsModelData(
         booingId: json["booing id"],
+        doctorId: json["Doctor id"],
         doctorName: json["Doctor Name"],
         location: json["Location"],
         status: json["Status"],
@@ -70,6 +73,7 @@ class MyAppointmentsModelData {
   Map<String, dynamic> toJson() => {
         "booing id": booingId,
         "Doctor Name": doctorName,
+        "Doctor id": doctorId,
         "Location": location,
         "Status": status,
         "Profile": profile,

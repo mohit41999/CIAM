@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/SplashScreen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:patient/firebase/notification_handling.dart';
+import 'package:open_file/open_file.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.title}');
@@ -48,8 +52,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
   void initState() {
     // TODO: implement initState
+
     // FirebaseNotificationHandling().setupFirebase(context);
     super.initState();
   }

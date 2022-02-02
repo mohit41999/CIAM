@@ -50,12 +50,17 @@ dev_dependencies:
   carousel_slider: ^4.0.0
   country_code_picker: ^2.0.2
   flutter_rating_bar: any
+  file_utils: any
+  open_file:
   image_picker: ^0.8.4+4
   shared_preferences: ^2.0.9
   flutter_html: ^2.2.0
   local_auth: ^1.1.8
   firebase_messaging: ^11.2.5
+  flutter_local_notifications:
   intl: ^0.17.0
+  dio: ^4.0.4
+  path_provider: ^2.0.8
   agora_rtc_engine: ^4.0.7
   permission_handler: ^8.3.0
   agora_uikit: ^0.0.4

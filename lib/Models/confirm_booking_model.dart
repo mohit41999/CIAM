@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final confirmBooking = confirmBookingFromJson(jsonString);
+//     final confirmBookingModel = confirmBookingModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-ConfirmBookingModel confirmBookingFromJson(String str) =>
+ConfirmBookingModel confirmBookingModelFromJson(String str) =>
     ConfirmBookingModel.fromJson(json.decode(str));
 
-String confirmBookingToJson(ConfirmBookingModel data) =>
+String confirmBookingModelToJson(ConfirmBookingModel data) =>
     json.encode(data.toJson());
 
 class ConfirmBookingModel {
@@ -41,69 +41,77 @@ class Data {
     required this.bookingId,
     required this.specialty,
     required this.doctorName,
+    required this.doctorProfile,
     required this.bookingStatus,
-    required this.patientName,
-    required this.DoctorProfile,
-    required this.patientLocation,
+    required this.patientDetails,
     required this.bookedServiceTime,
+    required this.bookingDate,
     required this.clinicLocation,
     required this.totalAmount,
     required this.amountStatus,
-    required this.patientAge,
-    required this.Booking_For,
-    required this.bookingDate,
-    required this.download_report,
+    required this.patient_document,
   });
 
   String bookingId;
   String specialty;
   String doctorName;
+  String doctorProfile;
   String bookingStatus;
-  String DoctorProfile;
-  String patientName;
-  String patientLocation;
+  PatientDetails patientDetails;
   String bookedServiceTime;
-  String patientAge;
+  String bookingDate;
+  String patient_document;
   String clinicLocation;
   String totalAmount;
-  String Booking_For;
   String amountStatus;
-  String bookingDate;
-  String download_report;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
         specialty: json["Specialty"],
-        DoctorProfile: json["Doctor Profile"],
         doctorName: json["Doctor Name"],
+        doctorProfile: json["Doctor Profile"],
+        patient_document: json["patient_document"],
         bookingStatus: json["Booking Status"],
-        patientAge: json["patient Age"],
-        bookingDate: json["Booking Date"],
-        patientName: json["Patient Name"],
-        patientLocation: json["patient Location"],
+        patientDetails: PatientDetails.fromJson(json["Patient Details"]),
         bookedServiceTime: json["Booked Service Time"],
+        bookingDate: json["Booking Date"],
         clinicLocation: json["Clinic Location"],
         totalAmount: json["Total Amount"],
         amountStatus: json["Amount Status"],
-        Booking_For: json["Booking For"],
-        download_report: json["download_report"],
       );
 
   Map<String, dynamic> toJson() => {
         "Booking Id": bookingId,
         "Specialty": specialty,
         "Doctor Name": doctorName,
+        "Doctor Profile": doctorProfile,
+        "patient_document": patient_document,
         "Booking Status": bookingStatus,
-        "Booking Date": bookingDate,
-        "patient Age": patientAge,
-        "Patient Name": patientName,
-        "patient Location": patientLocation,
-        "Doctor Profile": DoctorProfile,
+        "Patient Details": patientDetails.toJson(),
         "Booked Service Time": bookedServiceTime,
+        "Booking Date": bookingDate,
         "Clinic Location": clinicLocation,
         "Total Amount": totalAmount,
         "Amount Status": amountStatus,
-        "Booking For": Booking_For,
-        "download_report": download_report,
+      };
+}
+
+class PatientDetails {
+  PatientDetails({
+    required this.patientName,
+    required this.patientAge,
+  });
+
+  String patientName;
+  String patientAge;
+
+  factory PatientDetails.fromJson(Map<String, dynamic> json) => PatientDetails(
+        patientName: json["Patient Name"],
+        patientAge: json["Patient Age"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Patient Name": patientName,
+        "Patient Age": patientAge,
       };
 }

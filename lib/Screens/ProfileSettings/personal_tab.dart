@@ -27,7 +27,6 @@ class _PersonalState extends State<Personal> {
         _con.lastname.text = Profile.data.lastName;
         _con.email.text = Profile.data.email;
         _con.contactno.text = Profile.data.mobileNumber;
-        _con.gender.text = Profile.data.gender;
         _con.DOB.text = Profile.data.dob.toString();
         _con.bloodGroup.text = Profile.data.bloodGroup;
         _con.maritalStatus.text = Profile.data.maritalStatus;
@@ -37,6 +36,9 @@ class _PersonalState extends State<Personal> {
         _con.address.text = Profile.data.address;
         _con.age.text = Profile.data.age;
         _con.profileImage = Profile.data.profile;
+        Profile.data.gender == 'Male'
+            ? _con.dropDownvalue = 'm'
+            : _con.dropDownvalue = 'f';
         loading = false;
       });
     });
@@ -96,8 +98,6 @@ class _PersonalState extends State<Personal> {
                   TitleEnterField('Email id', 'Email id', _con.email),
                   TitleEnterField(
                       'Contact Number', 'Contact Number', _con.contactno),
-                  TitleEnterField('Age', 'Age', _con.age),
-                  TitleEnterField('Gender', 'Gender', _con.gender),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -138,6 +138,75 @@ class _PersonalState extends State<Personal> {
                       ),
                     ),
                   ),
+                  TitleEnterField(
+                    'Age',
+                    'Age',
+                    _con.age,
+                    readonly: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 2.0),
+                    child: Align(
+                      child: Text(
+                        'Gender',
+                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8.0),
+                    child: Material(
+                      elevation: 5,
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        height: 50,
+                        padding: EdgeInsets.only(left: 20, right: 20),
+                        width: double.infinity,
+                        child: DropdownButton(
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          underline: Container(),
+                          dropdownColor: Colors.white,
+
+                          isExpanded: true,
+
+                          // Initial Value
+                          hint: Text(
+                            'Gender',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          // Down Arrow Icon
+                          icon: const Icon(Icons.keyboard_arrow_down),
+
+                          // Array list of items
+                          items: _con.genderType.map((Map items) {
+                            return DropdownMenuItem(
+                              value: items['value'],
+                              child: Text(items['type']),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (newValue) {
+                            setState(() {
+                              print(newValue);
+                              _con.dropDownvalue = newValue.toString();
+                              _con.gender.text = _con.dropDownvalue;
+                              print(_con.gender.text);
+                            });
+                          },
+                          value: _con.dropDownvalue,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   // Padding(
                   //   padding: const EdgeInsets.all(8.0),
                   //   child: commonBtn(
