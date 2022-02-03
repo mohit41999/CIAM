@@ -38,6 +38,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+       <activity
+           android:name="com.razorpay.CheckoutActivity"
+           android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+           android:theme="@style/CheckoutTheme"
+           android:exported="true">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+
+               <data
+                   android:host="rzp.io"
+                   android:scheme="io.rzp" />
+           </intent-filter>
+       </activity>
+
+       <receiver android:name="com.razorpay.RzpTokenReceiver"
+           android:exported="true"
+           android:permission="android.permission.INTERNET">
+           <intent-filter>
+               <action android:name="rzp.device_token.share" />
+           </intent-filter>
+       </receiver>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

@@ -42,21 +42,25 @@ class Datum {
     required this.firstName,
     required this.lastName,
     required this.specialist,
-    required this.specialist_id,
+    required this.specialistId,
     required this.experience,
     required this.location,
-    required this.profileImage,
     required this.available,
+    required this.gender,
+    required this.fees,
+    required this.profileImage,
   });
 
   String userId;
   String firstName;
-  String specialist_id;
   String lastName;
-  dynamic specialist;
+  String specialist;
+  String specialistId;
   String experience;
-  String available;
   String location;
+  String available;
+  String gender;
+  String fees;
   String profileImage;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -64,11 +68,13 @@ class Datum {
         firstName: json["first_name"],
         lastName: json["last_name"],
         specialist: json["specialist"],
-        specialist_id: json["specialist_id"],
+        specialistId: json["specialist_id"],
         experience: json["experience"],
         location: json["location"],
-        profileImage: json["profile_image"],
         available: json["available"],
+        gender: json["gender"],
+        fees: json["fees"],
+        profileImage: json["profile_image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,10 +82,12 @@ class Datum {
         "first_name": firstName,
         "last_name": lastName,
         "specialist": specialist,
-        "specialist_id": specialist_id,
+        "specialist_id": specialistId,
         "experience": experience,
         "location": location,
-        "profile_image": profileImage,
         "available": available,
+        "gender": gender,
+        "fees": fees,
+        "profile_image": profileImage,
       };
 }

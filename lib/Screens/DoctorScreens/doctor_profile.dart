@@ -141,7 +141,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                   // (index != 1)
                                   //   ? Container()
                                   //   :
-                                  (_doctordata.data[index].specialist_id ==
+                                  (_doctordata.data[index].specialistId ==
                                           widget.speciality_id)
                                       ? Padding(
                                           padding: (index + 1 ==

@@ -291,15 +291,17 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                   //   title: 'Status of Booking',
                                   //   value: confirmData.data.bookingStatus,
                                   // ),
-                                  commonBtn(
-                                    s: 'Add Review',
-                                    bgcolor: Colors.white,
-                                    textColor: appblueColor,
-                                    onPressed: () {},
-                                    borderWidth: 1,
-                                    borderColor: appblueColor,
-                                    borderRadius: 10,
-                                  ),
+                                  (confirmData.data.amountStatus == 'Confirm')
+                                      ? commonBtn(
+                                          s: 'Add Review',
+                                          bgcolor: Colors.white,
+                                          textColor: appblueColor,
+                                          onPressed: () {},
+                                          borderWidth: 1,
+                                          borderColor: appblueColor,
+                                          borderRadius: 10,
+                                        )
+                                      : SizedBox(),
                                 ],
                               ),
                             ),
@@ -847,8 +849,12 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           bgcolor: appblueColor,
                                           textColor: Colors.white,
                                           onPressed: () {
-                                            Push(context,
-                                                PaymentConfirmationScreen());
+                                            Push(
+                                                context,
+                                                PaymentConfirmationScreen(
+                                                  amount: confirmData
+                                                      .data.totalAmount,
+                                                ));
                                             // _con
                                             //     .confirmBookingRequest(
                                             //         context, widget.booking_id)
