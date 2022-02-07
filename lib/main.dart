@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/SplashScreen.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:patient/firebase/notification_handling.dart';
-import 'package:open_file/open_file.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   print('background message ${message.notification!.title}');
@@ -27,42 +23,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   FirebaseNotificationHandling().setupFirebase(context);
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseNotificationHandling().setupFirebase(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(scaffoldBackgroundColor: Color(0xffEFEFEF)),
-      home: MainScreen(),
+      home: SplashScreen(),
     );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-
-  void initState() {
-    // TODO: implement initState
-
-    // FirebaseNotificationHandling().setupFirebase(context);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen();
   }
 }

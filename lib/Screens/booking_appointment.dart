@@ -1,28 +1,25 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:file_utils/file_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
-import 'package:open_file/open_file.dart';
-import 'package:patient/Screens/booking_appointment.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:intl/intl.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:dio/dio.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:file_utils/file_utils.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingAppointment extends StatefulWidget {
   final String booking_id;
@@ -849,12 +846,24 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           bgcolor: appblueColor,
                                           textColor: Colors.white,
                                           onPressed: () {
-                                            Push(
+                                            Navigator.push(
                                                 context,
-                                                PaymentConfirmationScreen(
-                                                  amount: confirmData
-                                                      .data.totalAmount,
-                                                ));
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PaymentConfirmationScreen(
+                                                          amount: confirmData
+                                                              .data.totalAmount,
+                                                          booking_id:
+                                                              confirmData.data
+                                                                  .bookingId,
+                                                        ))).then((value) {
+                                              setState(() {
+                                                loading = true;
+                                                print(
+                                                    'thissssssssssssssss=======');
+                                                initialize();
+                                              });
+                                            });
                                             // _con
                                             //     .confirmBookingRequest(
                                             //         context, widget.booking_id)

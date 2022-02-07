@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-import 'package:patient/controller/NavigationController.dart';
 
 class FirebaseNotificationHandling {
   Future sendNotification({required String user_id}) async {
@@ -23,7 +21,8 @@ class FirebaseNotificationHandling {
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     FirebaseMessaging.onMessage.listen((event) {
       String? channel_name = event.notification!.title.toString();
-      print('onMessage');
+      print('onMessage ' + event.toString());
+      print(event.data);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>
               VideoCallPage(channelName: event.data['chanel_name'])));

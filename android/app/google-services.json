@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "920660726894-eidjp2h2jnu1vi7q9nsu60a126n5uot0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamdoc.doctor",
+            "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
+          }
+        },
+        {
           "client_id": "920660726894-ul8tmbr9ntbrjpq96q2b4jpv82d3n2ls.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -58,6 +66,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "920660726894-8vh101rhqd5nelceli00maacibpdt6hq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciampt.patient",
+            "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
+          }
+        },
         {
           "client_id": "920660726894-b5nrgoa6cp9e3ngl0o4lmnqgun88ldlt.apps.googleusercontent.com",
           "client_type": 1,
@@ -103,6 +119,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "920660726894-ieue3jfpvkiq298natrmo9kacvovmpg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.in.doctor",
+            "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
+          }
+        },
         {
           "client_id": "920660726894-sknvudtg1jjset8tii5d01gnb22qvlp0.apps.googleusercontent.com",
           "client_type": 1,
@@ -162,6 +186,14 @@
           "android_info": {
             "package_name": "com.in.patient",
             "certificate_hash": "9c67d724755d1deeb89f1a3375d65f6a39ae4d0c"
+          }
+        },
+        {
+          "client_id": "920660726894-pk2rhcfudh6dq6q852c2coedfi36jl1g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.in.patient",
+            "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
           }
         },
         {

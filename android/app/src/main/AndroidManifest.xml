@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ciampt.patient">
+    package="com.ciampt.patient"
+    xmlns:tools="http://schemas.android.com/tools">
    <application
         android:label="patient"
         android:icon="@mipmap/ic_launcher">
@@ -8,6 +9,7 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
+            android:exported="true"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -39,6 +41,7 @@
             </intent-filter>
         </activity>
        <activity
+           tools:replace="android:exported"
            android:name="com.razorpay.CheckoutActivity"
            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
            android:theme="@style/CheckoutTheme"
@@ -54,6 +57,7 @@
 
        <receiver android:name="com.razorpay.RzpTokenReceiver"
            android:exported="true"
+           tools:replace="android:exported"
            android:permission="android.permission.INTERNET">
            <intent-filter>
                <action android:name="rzp.device_token.share" />

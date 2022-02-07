@@ -1,17 +1,20 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentConfirmationScreen extends StatefulWidget {
-  const PaymentConfirmationScreen({Key? key, required this.amount})
+  const PaymentConfirmationScreen(
+      {Key? key, required this.amount, required this.booking_id})
       : super(key: key);
   final String amount;
+  final String booking_id;
 
   @override
   _PaymentConfirmationScreenState createState() =>
@@ -22,6 +25,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   late Razorpay _razorpay;
   String username = 'rzp_test_Wx4Pz8r5BYpqqQ';
   String password = '30RFYcp8Uty6yxx21eBLaX1W';
+  ConfirmBookingController _con = ConfirmBookingController();
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
@@ -29,6 +33,10 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     print('order' + response.orderId.toString());
     print('paymentId' + response.paymentId.toString());
     print('signature' + response.signature.toString());
+
+    _con.confirmBookingRequest(context, widget.booking_id).then((value) {
+      Navigator.pop(context);
+    });
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -49,16 +57,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     super.initState();
   }
 
-  void payment(String amount) async {
-    final client = HttpClient();
-
-    final request =
-        await client.postUrl(Uri.parse('https://api.razorpay.com/v1/orders'));
-    request.headers
-        .set(HttpHeaders.contentTypeHeader, "application/json; charset=UTF-8");
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
-    request.headers.set(HttpHeaders.authorizationHeader, basicAuth);
+  void payment(int amount) async {
+    var authn = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
     Object? orderOptions = {
       "amount": amount,
       "currency": "INR",
@@ -69,25 +69,45 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
         "notes_key_2": "Tea, Earl Grey… decaf."
       }
     };
-    request.add(utf8.encode(json.encode(orderOptions)));
-    final response = await request.close();
-    response.transform(utf8.decoder).listen((contents) {
-      String orderId = contents.split(',')[0].split(":")[1];
-      orderId = orderId.substring(1, orderId.length - 1);
+    var headers = {
+      'content-type': 'application/json',
+      'Authorization': authn,
+    };
+    // final client = HttpClient();
+    var res = await http.post(Uri.parse('https://api.razorpay.com/v1/orders'),
+        headers: headers, body: json.encode(orderOptions));
 
-      Map<String, dynamic> checkoutOptions = {
-        'key': username,
-        'amount': amount,
-        "currency": "INR",
-        'name': '',
-        'description': '',
-        'order_id': orderId, // Generate order_id using Orders API
-        'timeout': 300,
-      };
-      try {
-        _razorpay.open(checkoutOptions);
-      } catch (e) {}
-    });
+    print(jsonDecode(res.body).toString() +
+        '======================================');
+
+    String order_id = jsonDecode(res.body)['id'].toString();
+    // final request =
+    //     await client.postUrl(Uri.parse('https://api.razorpay.com/v1/orders'));
+    // request.headers
+    //     .set(HttpHeaders.contentTypeHeader, "application/json; charset=UTF-8");
+    // String basicAuth =
+    //     'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
+    // request.headers.set(HttpHeaders.authorizationHeader, basicAuth);
+    //
+    // request.add(utf8.encode(json.encode(orderOptions)));
+    // final response = await request.close();
+    // response.transform(utf8.decoder).listen((contents) {
+    //   String orderId = contents;
+    //
+    //
+    // });
+    Map<String, dynamic> checkoutOptions = {
+      'key': username,
+      'amount': amount,
+      "currency": "INR",
+      'name': '',
+      'description': '',
+      'order_id': order_id, // Generate order_id using Orders API
+      'timeout': 3000,
+    };
+    try {
+      _razorpay.open(checkoutOptions);
+    } catch (e) {}
   }
 
   @override
@@ -120,7 +140,10 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                   s: 'Pay Now',
                   bgcolor: appblueColor,
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    payment(int.parse(
+                        widget.amount.toString().replaceAll(".", "")));
+                  },
                   borderRadius: 10,
                 ),
               )
