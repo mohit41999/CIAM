@@ -14,10 +14,13 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
+import 'package:patient/widgets/enter_field.dart';
+import 'package:patient/widgets/title_enter_field.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -681,22 +684,49 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             ],
                                           ),
                                         ),
-                                        commonBtn(
-                                          borderColor: apptealColor,
-                                          borderWidth: 2,
-                                          s: 'Upload Document',
-                                          bgcolor: Colors.white,
-                                          textColor: apptealColor,
-                                          onPressed: () {
-                                            pickFile().then((value) {
-                                              setState(() {
-                                                initialize();
-                                              });
-                                            });
-                                          },
-                                          textSize: 12,
-                                          borderRadius: 10,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            commonBtn(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              borderColor: apptealColor,
+                                              borderWidth: 2,
+                                              s: 'Upload Document',
+                                              bgcolor: Colors.white,
+                                              textColor: apptealColor,
+                                              onPressed: () {
+                                                pickFile().then((value) {
+                                                  setState(() {
+                                                    initialize();
+                                                  });
+                                                });
+                                              },
+                                              textSize: 12,
+                                              borderRadius: 10,
+                                            ),
+                                            commonBtn(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.4,
+                                              borderColor: apptealColor,
+                                              borderWidth: 2,
+                                              s: 'Add Comments',
+                                              bgcolor: Colors.white,
+                                              textColor: apptealColor,
+                                              onPressed: () {
+                                                addcomments();
+                                              },
+                                              textSize: 12,
+                                              borderRadius: 10,
+                                            ),
+                                          ],
                                         ),
+
                                         commonBtn(
                                           s: 'Chat',
                                           bgcolor: Colors.white,
@@ -707,14 +737,33 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           borderColor: apptealColor,
                                           borderWidth: 2,
                                         ),
-                                        commonBtn(
-                                          s: 'Start Video',
-                                          bgcolor: appblueColor,
-                                          textColor: Colors.white,
-                                          onPressed: () {},
-                                          height: 45,
-                                          borderRadius: 8,
-                                        )
+                                        (confirmData.data.bookingDate
+                                                    .toString()
+                                                    .substring(0, 10) ==
+                                                DateTime.now()
+                                                    .toString()
+                                                    .substring(0, 10))
+                                            ? (int.parse(DateTime.now()
+                                                        .toString()
+                                                        .substring(11, 13)) >=
+                                                    int.parse(confirmData
+                                                        .data.bookedServiceTime
+                                                        .substring(0, 2)))
+                                                ? commonBtn(
+                                                    s: confirmData
+                                                            .data.bookingDate
+                                                            .toString()
+                                                            .substring(0, 10) +
+                                                        '\n' +
+                                                        '${confirmData.data.bookedServiceTime.substring(0, 2)}',
+                                                    bgcolor: appblueColor,
+                                                    textColor: Colors.white,
+                                                    onPressed: () {},
+                                                    height: 70,
+                                                    borderRadius: 8,
+                                                  )
+                                                : SizedBox()
+                                            : SizedBox()
                                       ],
                                     ),
                                   ),
@@ -1025,6 +1074,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
 
   Future pickFile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    var loader = ProgressView(context);
 
     // FilePickerResult? result = await FilePicker.platform.pickFiles();
     //
@@ -1035,16 +1085,101 @@ class _BookingAppointmentState extends State<BookingAppointment> {
     // }
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result == null) return;
+    loader.show();
     // if user don't pick any thi
     await PostDataWithImage(
-        PARAM_URL: 'upload_patient_document.php',
-        params: {
-          'token': Token,
-          'user_id': prefs.getString('user_id')!,
-          'booking_id': widget.booking_id,
-          'comments': ''
-        },
-        imagePath: result.files.first.path.toString(),
-        imageparamName: 'documentfile'); // ng then do nothing just return.
+            PARAM_URL: 'upload_patient_document.php',
+            params: {
+              'token': Token,
+              'user_id': prefs.getString('user_id')!,
+              'booking_id': widget.booking_id,
+            },
+            imagePath: result.files.first.path.toString(),
+            imageparamName: 'documentfile')
+        .then((value) {
+      loader.dismiss();
+      value['status']
+          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Document uploaded successfully'),
+              backgroundColor: apptealColor,
+            ))
+          : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Document wan not uploaded, try again later'),
+              backgroundColor: Colors.red,
+            ));
+    }); // ng then do nothing just return.
+  }
+
+  TextEditingController _commments = TextEditingController();
+  Future addcomments() async {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: TitleEnterField(
+                'Comments',
+                'Comments',
+                _commments,
+                maxLines: 30,
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      commonBtn(
+                          width: 100,
+                          height: 40,
+                          textSize: 12,
+                          borderRadius: 5,
+                          s: 'Cancel',
+                          bgcolor: Colors.black,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          }),
+                      commonBtn(
+                          width: 100,
+                          height: 40,
+                          borderRadius: 5,
+                          textSize: 12,
+                          s: 'Submit',
+                          bgcolor: apptealColor,
+                          textColor: Colors.white,
+                          onPressed: () async {
+                            var loader = ProgressView(context);
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            loader.show();
+                            PostData(
+                                PARAM_URL: 'upload_patient_document.php',
+                                params: {
+                                  'token': Token,
+                                  'user_id': prefs.getString('user_id')!,
+                                  'booking_id': widget.booking_id,
+                                  'comments': _commments.text
+                                }).then((value) {
+                              loader.dismiss();
+                              value['status']
+                                  ? ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                      content:
+                                          Text('Comment added successfully'),
+                                      backgroundColor: apptealColor,
+                                    ))
+                                  : ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                      content: Text(
+                                          'Comment wan not added, try again later'),
+                                      backgroundColor: Colors.red,
+                                    ));
+                              Navigator.pop(context);
+                            });
+                          })
+                    ],
+                  ),
+                )
+              ],
+            ));
   }
 }

@@ -34,7 +34,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
     await _con.getMyAppointments().then((value) {
       setState(() {
         details = value;
-        Details = value.data.reversed;
+        Details = value.data;
         loading = false;
       });
     });

@@ -64,10 +64,6 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
       "currency": "INR",
       "receipt": "Receipt no. 1",
       "payment_capture": 1,
-      "notes": {
-        "notes_key_1": "Tea, Earl Grey, Hot",
-        "notes_key_2": "Tea, Earl Grey… decaf."
-      }
     };
     var headers = {
       'content-type': 'application/json',
