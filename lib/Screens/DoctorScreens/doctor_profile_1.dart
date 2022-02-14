@@ -7,6 +7,7 @@ import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
+
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';

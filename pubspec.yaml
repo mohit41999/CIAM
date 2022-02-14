@@ -59,6 +59,7 @@ dev_dependencies:
   local_auth: ^1.1.8
   firebase_messaging: ^11.2.5
   flutter_local_notifications:
+  syncfusion_flutter_pdfviewer: ^19.4.50-beta
   intl: ^0.17.0
   dio: ^4.0.4
   path_provider: ^2.0.8
@@ -67,6 +68,7 @@ dev_dependencies:
   agora_uikit: ^0.0.4
   file_picker: ^4.3.1
   flutter_downloader: ^1.7.1
+  geolocator: ^8.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

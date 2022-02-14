@@ -40,6 +40,7 @@ class Data {
   Data({
     required this.bookingId,
     required this.specialty,
+    required this.doctorid,
     required this.doctorName,
     required this.doctorProfile,
     required this.bookingStatus,
@@ -49,34 +50,39 @@ class Data {
     required this.clinicLocation,
     required this.totalAmount,
     required this.amountStatus,
-    required this.patient_document,
+    required this.Date,
+    // required this.patient_document,
   });
 
   String bookingId;
   String specialty;
   String doctorName;
+  String doctorid;
   String doctorProfile;
   String bookingStatus;
   PatientDetails patientDetails;
   String bookedServiceTime;
   String bookingDate;
-  String patient_document;
+  // String patient_document;
   String clinicLocation;
   String totalAmount;
+  String Date;
   String amountStatus;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
         specialty: json["Specialty"],
         doctorName: json["Doctor Name"],
+        doctorid: json["doctor id"],
         doctorProfile: json["Doctor Profile"],
-        patient_document: json["patient_document"],
+        // patient_document: json["patient_document"],
         bookingStatus: json["Booking Status"],
         patientDetails: PatientDetails.fromJson(json["Patient Details"]),
         bookedServiceTime: json["Booked Service Time"],
         bookingDate: json["Booking Date"],
         clinicLocation: json["Clinic Location"],
         totalAmount: json["Total Amount"],
+        Date: json["Date"],
         amountStatus: json["Amount Status"],
       );
 
@@ -85,13 +91,15 @@ class Data {
         "Specialty": specialty,
         "Doctor Name": doctorName,
         "Doctor Profile": doctorProfile,
-        "patient_document": patient_document,
+        // "patient_document": patient_document,
         "Booking Status": bookingStatus,
         "Patient Details": patientDetails.toJson(),
         "Booked Service Time": bookedServiceTime,
         "Booking Date": bookingDate,
+        "doctor id": doctorid,
         "Clinic Location": clinicLocation,
         "Total Amount": totalAmount,
+        "Date": Date,
         "Amount Status": amountStatus,
       };
 }

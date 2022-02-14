@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -12,11 +13,14 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
+import 'package:patient/Screens/AGORA/video_call.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
+import 'package:patient/Screens/pdf.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/enter_field.dart';
@@ -43,6 +47,10 @@ class _BookingAppointmentState extends State<BookingAppointment> {
   bool loading = true;
   bool downloading = false;
   var progress = "";
+  late DateTime appointmentdate;
+  late int differenceInDays;
+  late Timer timer;
+  late DateTime today = DateTime.now();
   var path = "No Data";
   var platformVersion = "Unknown";
   var _onPressed;
@@ -89,11 +97,11 @@ class _BookingAppointmentState extends State<BookingAppointment> {
       } else {
         dirloc = (await getApplicationDocumentsDirectory()).path;
       }
+      var savepath = dirloc + convertCurrentDateTimeToString() + ".pdf";
 
       try {
         FileUtils.mkdir([dirloc]);
-        var response = await dio.download(
-            pdfUrl, dirloc + convertCurrentDateTimeToString() + ".pdf",
+        var response = await dio.download(pdfUrl, savepath,
             onReceiveProgress: (receivedBytes, totalBytes) {
           print('here 1');
           setState(() {
@@ -105,7 +113,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
           print('here 2');
         });
         result['isSuccess'] = response.statusCode == 200;
-        result['filePath'] = dirloc + convertCurrentDateTimeToString() + ".pdf";
+        result['filePath'] = savepath;
       } catch (e) {
         print('catch catch catch');
         result['error'] = e.toString();
@@ -117,7 +125,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
       setState(() {
         downloading = false;
         progress = "Download Completed.";
-        path = dirloc + convertCurrentDateTimeToString() + ".pdf";
+        path = savepath;
       });
       print(path);
       showDialog(
@@ -126,11 +134,19 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                 title: Text('Download Complete'),
                 actions: [
                   commonBtn(
-                      s: 'OK',
+                      s: 'Close',
                       bgcolor: apptealColor,
                       textColor: Colors.white,
                       onPressed: () {
                         Pop(context);
+                      }),
+                  commonBtn(
+                      s: 'Open',
+                      bgcolor: apptealColor,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Push(context, OpenPdf(url: path));
                       })
                 ],
               ));
@@ -151,9 +167,35 @@ class _BookingAppointmentState extends State<BookingAppointment> {
         .then((value) {
       setState(() {
         confirmData = value;
+        appointmentdate = DateTime(
+            int.parse(confirmData.data.Date.substring(0, 4)),
+            int.parse(confirmData.data.Date.substring(5, 7)),
+            int.parse(confirmData.data.Date.substring(8, 10)),
+            int.parse(confirmData.data.Date.substring(11, 13)),
+            int.parse(confirmData.data.Date.substring(14, 16)),
+            00);
+        differenceInDays = DateTime.now().difference(appointmentdate).inMinutes;
+        timer = Timer.periodic(Duration(seconds: 5), (timer) {
+          if (mounted) {
+            setState(() {
+              print('5 secs');
+              differenceInDays =
+                  DateTime.now().difference(appointmentdate).inMinutes;
+              print(differenceInDays);
+            });
+          }
+        });
+
         loading = false;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    timer.cancel();
   }
 
   void _onSelectNotification(String? json) async {
@@ -161,7 +203,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
 
     if (obj['isSuccess']) {
       print(obj['filePath'] + 'lllll');
-      OpenFile.open(obj['filePath']);
+      OpenFile.open('/sdcard/download/');
     } else {
       showDialog(
         context: context,
@@ -176,6 +218,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
   @override
   void initState() {
     // TODO: implement initState
+
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final iOS = IOSInitializationSettings();
@@ -184,6 +227,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
     flutterLocalNotificationsPlugin.initialize(initSettings,
         onSelectNotification: _onSelectNotification);
     initialize();
+
     super.initState();
   }
 
@@ -529,104 +573,104 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         //     )
                                         //   ],
                                         // ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            downloadFile(confirmData
-                                                .data.patient_document);
-                                          },
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                child: Text(
-                                                  'Uploaded Document',
-                                                  style: GoogleFonts.montserrat(
-                                                      fontSize: 12,
-                                                      color: Color(0xff161616)
-                                                          .withOpacity(0.6)),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 15,
-                                              ),
-                                              Text('-'),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.65,
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10.0),
-                                                      child: Text(
-                                                        'Document',
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                                fontSize: 12,
-                                                                color:
-                                                                    apptealColor,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                      ),
-                                                    ),
-                                                    Image.asset(
-                                                        'assets/pngs/Icon feather-download.png')
-                                                  ],
-                                                ),
-                                              )
-                                              // GestureDetector(
-                                              //   onTap: () {
-                                              //     downloadFile(
-                                              //         confirmData
-                                              //             .data.download_report,
-                                              //         'pdf',
-                                              //         'downloads');
-                                              //   },
-                                              //   child: Container(
-                                              //     width: MediaQuery.of(context)
-                                              //             .size
-                                              //             .width /
-                                              //         1.65,
-                                              //     child: Row(
-                                              //       children: [
-                                              //         Padding(
-                                              //           padding:
-                                              //               const EdgeInsets
-                                              //                       .only(
-                                              //                   right: 10.0),
-                                              //           child: Text(
-                                              //             'Document',
-                                              //             style: GoogleFonts
-                                              //                 .montserrat(
-                                              //                     fontSize: 12,
-                                              //                     color:
-                                              //                         apptealColor,
-                                              //                     fontWeight:
-                                              //                         FontWeight
-                                              //                             .bold),
-                                              //           ),
-                                              //         ),
-                                              //         Image.asset(
-                                              //             'assets/pngs/Icon feather-download.png')
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // )
-                                            ],
-                                          ),
-                                        ),
+                                        // GestureDetector(
+                                        //   onTap: () {
+                                        //     downloadFile(confirmData
+                                        //         .data.patient_document);
+                                        //   },
+                                        //   child: Row(
+                                        //     crossAxisAlignment:
+                                        //         CrossAxisAlignment.start,
+                                        //     children: [
+                                        //       Container(
+                                        //         width: MediaQuery.of(context)
+                                        //                 .size
+                                        //                 .width /
+                                        //             5,
+                                        //         child: Text(
+                                        //           'Uploaded Document',
+                                        //           style: GoogleFonts.montserrat(
+                                        //               fontSize: 12,
+                                        //               color: Color(0xff161616)
+                                        //                   .withOpacity(0.6)),
+                                        //         ),
+                                        //       ),
+                                        //       SizedBox(
+                                        //         width: 15,
+                                        //       ),
+                                        //       Text('-'),
+                                        //       SizedBox(
+                                        //         width: 10,
+                                        //       ),
+                                        //       Container(
+                                        //         width: MediaQuery.of(context)
+                                        //                 .size
+                                        //                 .width /
+                                        //             1.65,
+                                        //         child: Row(
+                                        //           children: [
+                                        //             Padding(
+                                        //               padding:
+                                        //                   const EdgeInsets.only(
+                                        //                       right: 10.0),
+                                        //               child: Text(
+                                        //                 'Document',
+                                        //                 style: GoogleFonts
+                                        //                     .montserrat(
+                                        //                         fontSize: 12,
+                                        //                         color:
+                                        //                             apptealColor,
+                                        //                         fontWeight:
+                                        //                             FontWeight
+                                        //                                 .bold),
+                                        //               ),
+                                        //             ),
+                                        //             Image.asset(
+                                        //                 'assets/pngs/Icon feather-download.png')
+                                        //           ],
+                                        //         ),
+                                        //       )
+                                        //       // GestureDetector(
+                                        //       //   onTap: () {
+                                        //       //     downloadFile(
+                                        //       //         confirmData
+                                        //       //             .data.download_report,
+                                        //       //         'pdf',
+                                        //       //         'downloads');
+                                        //       //   },
+                                        //       //   child: Container(
+                                        //       //     width: MediaQuery.of(context)
+                                        //       //             .size
+                                        //       //             .width /
+                                        //       //         1.65,
+                                        //       //     child: Row(
+                                        //       //       children: [
+                                        //       //         Padding(
+                                        //       //           padding:
+                                        //       //               const EdgeInsets
+                                        //       //                       .only(
+                                        //       //                   right: 10.0),
+                                        //       //           child: Text(
+                                        //       //             'Document',
+                                        //       //             style: GoogleFonts
+                                        //       //                 .montserrat(
+                                        //       //                     fontSize: 12,
+                                        //       //                     color:
+                                        //       //                         apptealColor,
+                                        //       //                     fontWeight:
+                                        //       //                         FontWeight
+                                        //       //                             .bold),
+                                        //       //           ),
+                                        //       //         ),
+                                        //       //         Image.asset(
+                                        //       //             'assets/pngs/Icon feather-download.png')
+                                        //       //       ],
+                                        //       //     ),
+                                        //       //   ),
+                                        //       // )
+                                        //     ],
+                                        //   ),
+                                        // ),
                                         GestureDetector(
                                           onTap: () {},
                                           child: Row(
@@ -684,47 +728,58 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            commonBtn(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              borderColor: apptealColor,
-                                              borderWidth: 2,
-                                              s: 'Upload Document',
-                                              bgcolor: Colors.white,
-                                              textColor: apptealColor,
-                                              onPressed: () {
-                                                pickFile().then((value) {
-                                                  setState(() {
-                                                    initialize();
-                                                  });
-                                                });
-                                              },
-                                              textSize: 12,
-                                              borderRadius: 10,
-                                            ),
-                                            commonBtn(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.4,
-                                              borderColor: apptealColor,
-                                              borderWidth: 2,
-                                              s: 'Add Comments',
-                                              bgcolor: Colors.white,
-                                              textColor: apptealColor,
-                                              onPressed: () {
-                                                addcomments();
-                                              },
-                                              textSize: 12,
-                                              borderRadius: 10,
-                                            ),
-                                          ],
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.spaceBetween,
+                                        //   children: [
+                                        //     // commonBtn(
+                                        //     //   width: MediaQuery.of(context)
+                                        //     //           .size
+                                        //     //           .width *
+                                        //     //       0.4,
+                                        //     //   borderColor: apptealColor,
+                                        //     //   borderWidth: 2,
+                                        //     //   s: 'Upload Document',
+                                        //     //   bgcolor: Colors.white,
+                                        //     //   textColor: apptealColor,
+                                        //     //   onPressed: () {
+                                        //     //     pickFile().then((value) {
+                                        //     //       setState(() {
+                                        //     //         initialize();
+                                        //     //       });
+                                        //     //     });
+                                        //     //   },
+                                        //     //   textSize: 12,
+                                        //     //   borderRadius: 10,
+                                        //     // ),
+                                        //     commonBtn(
+                                        //       width: MediaQuery.of(context)
+                                        //               .size
+                                        //               .width *
+                                        //           0.4,
+                                        //       borderColor: apptealColor,
+                                        //       borderWidth: 2,
+                                        //       s: 'Add Comments',
+                                        //       bgcolor: Colors.white,
+                                        //       textColor: apptealColor,
+                                        //       onPressed: () {
+                                        //         addcomments();
+                                        //       },
+                                        //       textSize: 12,
+                                        //       borderRadius: 10,
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        commonBtn(
+                                          borderColor: apptealColor,
+                                          borderWidth: 2,
+                                          s: 'Add Comments',
+                                          bgcolor: Colors.white,
+                                          textColor: apptealColor,
+                                          onPressed: () {
+                                            addcomments();
+                                          },
+                                          borderRadius: 10,
                                         ),
 
                                         commonBtn(
@@ -737,33 +792,110 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           borderColor: apptealColor,
                                           borderWidth: 2,
                                         ),
-                                        (confirmData.data.bookingDate
+                                        // (DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute + 5,
+                                        //               00,
+                                        //             ) ==
+                                        //             confirmData.data.Date ||
+                                        //         DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute + 4,
+                                        //               00,
+                                        //             ) ==
+                                        //             confirmData.data.Date ||
+                                        //         DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute + 3,
+                                        //               00,
+                                        //             ) ==
+                                        //             confirmData.data.Date ||
+                                        //         DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute + 2,
+                                        //               00,
+                                        //             )
+                                        //                 .toString()
+                                        //                 .substring(0, 19) ==
+                                        //             confirmData.data.Date ||
+                                        //         DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute + 1,
+                                        //               00,
+                                        //             )
+                                        //                 .toString()
+                                        //                 .substring(0, 19) ==
+                                        //             confirmData.data.Date ||
+                                        //         DateTime(
+                                        //               DateTime.now().year,
+                                        //               DateTime.now().month,
+                                        //               DateTime.now().day,
+                                        //               DateTime.now().hour,
+                                        //               DateTime.now().minute,
+                                        //               00,
+                                        //             )
+                                        //                 .toString()
+                                        //                 .substring(0, 19) ==
+                                        //             confirmData.data.Date)
+                                        (DateTime(
+                                                        DateTime.now().year,
+                                                        DateTime.now().month,
+                                                        DateTime.now().day)
                                                     .toString()
                                                     .substring(0, 10) ==
-                                                DateTime.now()
-                                                    .toString()
-                                                    .substring(0, 10))
-                                            ? (int.parse(DateTime.now()
-                                                        .toString()
-                                                        .substring(11, 13)) >=
-                                                    int.parse(confirmData
-                                                        .data.bookedServiceTime
-                                                        .substring(0, 2)))
+                                                confirmData.data.bookingDate)
+                                            ? (differenceInDays >= -5 &&
+                                                    differenceInDays <= 20)
                                                 ? commonBtn(
-                                                    s: confirmData
-                                                            .data.bookingDate
-                                                            .toString()
-                                                            .substring(0, 10) +
-                                                        '\n' +
-                                                        '${confirmData.data.bookedServiceTime.substring(0, 2)}',
+                                                    s: 'Start Video',
                                                     bgcolor: appblueColor,
                                                     textColor: Colors.white,
-                                                    onPressed: () {},
-                                                    height: 70,
+                                                    onPressed: () {
+                                                      FirebaseNotificationHandling()
+                                                          .sendNotification(
+                                                              user_id:
+                                                                  confirmData
+                                                                      .data
+                                                                      .doctorid)
+                                                          .then((value) {
+                                                        if (!value['status']) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(SnackBar(
+                                                                  content: value[
+                                                                      'message']));
+                                                        } else {
+                                                          Push(
+                                                              context,
+                                                              VideoCallPage(
+                                                                channelName: value[
+                                                                        'data'][
+                                                                    'Channel Name'],
+                                                              ));
+                                                        }
+                                                      });
+                                                    },
+                                                    height: 45,
                                                     borderRadius: 8,
                                                   )
                                                 : SizedBox()
                                             : SizedBox()
+                                        // : SizedBox(),
                                       ],
                                     ),
                                   ),
