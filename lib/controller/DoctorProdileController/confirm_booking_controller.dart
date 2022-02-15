@@ -41,4 +41,25 @@ class ConfirmBookingController {
       failure(context, response);
     }
   }
+
+  Future addPaymentTransaction(
+      BuildContext context, String booking_id, String amount) async {
+    var loader = ProgressView(context);
+    loader.show();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var response =
+        await PostData(PARAM_URL: 'add_payment_transaction.php', params: {
+      'token': Token,
+      'user_id': prefs.getString('user_id'),
+      'booking_id': booking_id,
+      'amount': amount,
+      'payment_status': 'success'
+    });
+    loader.dismiss();
+    if (response['status']) {
+      // success(context, response);
+    } else {
+      failure(context, response);
+    }
+  }
 }

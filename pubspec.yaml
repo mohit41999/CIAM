@@ -46,7 +46,7 @@ dev_dependencies:
   # rules and activating additional ones.
   google_fonts: ^2.1.0
   font_awesome_flutter: ^9.1.0
-  persistent_bottom_nav_bar: ^4.0.2
+  geocoding: ^2.0.2
   carousel_slider: ^4.0.0
   country_code_picker: ^2.0.2
   flutter_rating_bar: any

@@ -35,7 +35,11 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     print('signature' + response.signature.toString());
 
     _con.confirmBookingRequest(context, widget.booking_id).then((value) {
-      Navigator.pop(context);
+      _con
+          .addPaymentTransaction(context, widget.booking_id, widget.amount)
+          .then((value) {
+        Navigator.pop(context);
+      });
     });
   }
 

@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Screens/general_screen.dart';
+import 'package:patient/controller/home_controller.dart';
 import 'package:patient/firebase/fcm.dart';
 import 'package:patient/firebase/notification_handling.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 
 import 'biometric_authenticate.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:geolocator/geolocator.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

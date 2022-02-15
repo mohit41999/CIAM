@@ -7,7 +7,6 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/bottombar.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'DoctorScreens/doctor_profile.dart';
 import 'LabProfile.dart';

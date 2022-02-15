@@ -4,7 +4,7 @@ import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 
-class HomeController {
+class AboutConsultationController {
   late Map<String, dynamic> doctorspeciality;
   bool specialitybool = true;
 

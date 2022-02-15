@@ -315,12 +315,12 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 value:
                                     "\₹ ${doctordetails.data.clinicDetails.oflineConsultancyFees}",
                               ),
-                              doctorProfileRow(
-                                title: 'Doctor’s availability status',
-                                value: doctordetails.data.clinicDetails
-                                    .doctorAvailabilityStatus,
-                                yellow: true,
-                              ),
+                              // doctorProfileRow(
+                              //   title: 'Doctor’s availability status',
+                              //   value: doctordetails.data.clinicDetails
+                              //       .doctorAvailabilityStatus,
+                              //   yellow: true,
+                              // ),
                             ],
                           ),
                         ),
@@ -511,9 +511,12 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 'Doctor’s Availability',
                                 style: GoogleFonts.montserrat(
@@ -521,9 +524,15 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                     color: textColor,
                                     fontWeight: FontWeight.bold),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Divider(
                                 color: textColor.withOpacity(0.4),
                                 thickness: 1,
+                              ),
+                              SizedBox(
+                                height: 10,
                               ),
                               // Divider(
                               //   color: textColor.withOpacity(0.4),
@@ -786,9 +795,15 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 //   ],
                                 // ),
                               ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Divider(
                                 color: textColor.withOpacity(0.4),
                                 thickness: 1,
+                              ),
+                              SizedBox(
+                                height: 10,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -837,6 +852,9 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       endTime: 24,
                                       time: ' pm'),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 10,
                               ),
                               // Text(
                               //   'Enter Comments',

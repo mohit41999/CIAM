@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_utils/file_utils.dart';
@@ -23,7 +23,6 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
-import 'package:patient/widgets/enter_field.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,6 +39,7 @@ class BookingAppointment extends StatefulWidget {
 }
 
 class _BookingAppointmentState extends State<BookingAppointment> {
+  double reviewrating = 4;
   Color textColor = Color(0xff161616);
   ConfirmBookingController _con = ConfirmBookingController();
   late ConfirmBookingModel confirmData;
@@ -340,7 +340,88 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           s: 'Add Review',
                                           bgcolor: Colors.white,
                                           textColor: appblueColor,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      title: TitleEnterField(
+                                                        'Review',
+                                                        'Review',
+                                                        reviewController,
+                                                        maxLines: 10,
+                                                      ),
+                                                      content:
+                                                          RatingBar.builder(
+                                                        initialRating:
+                                                            reviewrating,
+                                                        minRating: 1,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                        allowHalfRating: true,
+                                                        itemCount: 5,
+                                                        itemPadding: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    4.0),
+                                                        itemBuilder:
+                                                            (context, _) =>
+                                                                Icon(
+                                                          Icons.star,
+                                                          color: apptealColor,
+                                                        ),
+                                                        onRatingUpdate:
+                                                            (rating) {
+                                                          reviewrating = rating;
+                                                          print(reviewrating);
+                                                        },
+                                                      ),
+                                                      actions: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            commonBtn(
+                                                              height: 40,
+                                                              s: 'Cancel',
+                                                              borderRadius: 5,
+                                                              borderColor:
+                                                                  Colors.red,
+                                                              borderWidth: 1,
+                                                              bgcolor:
+                                                                  Colors.white,
+                                                              textColor:
+                                                                  Colors.red,
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              width: 70,
+                                                              textSize: 12,
+                                                            ),
+                                                            commonBtn(
+                                                              height: 40,
+                                                              borderColor:
+                                                                  appblueColor,
+                                                              borderWidth: 1,
+                                                              borderRadius: 5,
+                                                              s: 'Submit',
+                                                              bgcolor:
+                                                                  Colors.white,
+                                                              textColor:
+                                                                  appblueColor,
+                                                              onPressed: () {
+                                                                add_review();
+                                                              },
+                                                              width: 70,
+                                                              textSize: 12,
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ));
+                                          },
                                           borderWidth: 1,
                                           borderColor: appblueColor,
                                           borderRadius: 10,
@@ -728,48 +809,53 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             ],
                                           ),
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     // commonBtn(
-                                        //     //   width: MediaQuery.of(context)
-                                        //     //           .size
-                                        //     //           .width *
-                                        //     //       0.4,
-                                        //     //   borderColor: apptealColor,
-                                        //     //   borderWidth: 2,
-                                        //     //   s: 'Upload Document',
-                                        //     //   bgcolor: Colors.white,
-                                        //     //   textColor: apptealColor,
-                                        //     //   onPressed: () {
-                                        //     //     pickFile().then((value) {
-                                        //     //       setState(() {
-                                        //     //         initialize();
-                                        //     //       });
-                                        //     //     });
-                                        //     //   },
-                                        //     //   textSize: 12,
-                                        //     //   borderRadius: 10,
-                                        //     // ),
-                                        //     commonBtn(
-                                        //       width: MediaQuery.of(context)
-                                        //               .size
-                                        //               .width *
-                                        //           0.4,
-                                        //       borderColor: apptealColor,
-                                        //       borderWidth: 2,
-                                        //       s: 'Add Comments',
-                                        //       bgcolor: Colors.white,
-                                        //       textColor: apptealColor,
-                                        //       onPressed: () {
-                                        //         addcomments();
-                                        //       },
-                                        //       textSize: 12,
-                                        //       borderRadius: 10,
-                                        //     ),
-                                        //   ],
-                                        // ),
+                                        commonBtn(
+                                          borderColor: apptealColor,
+                                          borderWidth: 2,
+                                          s: 'Add Report',
+                                          bgcolor: Colors.white,
+                                          textColor: apptealColor,
+                                          onPressed: () {
+                                            pickFile();
+                                          },
+                                          textSize: 12,
+                                          borderRadius: 10,
+                                        ),
+                                        (reportList.length == 0)
+                                            ? Container()
+                                            : Column(
+                                                children: [
+                                                  Container(
+                                                    height: 100,
+                                                    child: ListView.builder(
+                                                        itemCount:
+                                                            reportList.length,
+                                                        shrinkWrap: true,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Text(
+                                                              reportList[index]
+                                                                  .path
+                                                                  .toString());
+                                                        }),
+                                                  ),
+                                                  commonBtn(
+                                                      borderColor: appblueColor,
+                                                      borderWidth: 2,
+                                                      borderRadius: 10,
+                                                      s: 'Upload',
+                                                      bgcolor: Colors.white,
+                                                      textColor: appblueColor,
+                                                      onPressed: () {
+                                                        submitmultiple()
+                                                            .then((value) {
+                                                          setState(() {
+                                                            reportList = [];
+                                                          });
+                                                        });
+                                                      })
+                                                ],
+                                              ),
                                         commonBtn(
                                           borderColor: apptealColor,
                                           borderWidth: 2,
@@ -984,24 +1070,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                           )
                                                         ]),
                                                   ),
-                                                  // RichText(
-                                                  //   text: TextSpan(
-                                                  //       text: 'End Time',
-                                                  //       style: GoogleFonts.montserrat(
-                                                  //           fontSize: 12,
-                                                  //           color: Color(0xff161616),
-                                                  //           fontWeight: FontWeight.bold),
-                                                  //       children: <TextSpan>[
-                                                  //         TextSpan(
-                                                  //           text: '     29 Sep. 12:00 AM',
-                                                  //           style: GoogleFonts.montserrat(
-                                                  //               color: apptealColor,
-                                                  //               fontSize: 12,
-                                                  //               fontWeight:
-                                                  //                   FontWeight.bold),
-                                                  //         )
-                                                  //       ]),
-                                                  // ),
                                                 ],
                                               ),
                                             )
@@ -1204,19 +1272,15 @@ class _BookingAppointmentState extends State<BookingAppointment> {
     );
   }
 
-  Future pickFile() async {
+  Future submitmultiple() async {
+    for (int i = 0; i < reportList.length; i++) {
+      uploadMultiple(i);
+    }
+  }
+
+  Future uploadMultiple(int i) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var loader = ProgressView(context);
-
-    // FilePickerResult? result = await FilePicker.platform.pickFiles();
-    //
-    // if (result != null) {
-    //   _con.file = File(result.files.single.path!);
-    // } else {
-    //   // User canceled the picker
-    // }
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-    if (result == null) return;
     loader.show();
     // if user don't pick any thi
     await PostDataWithImage(
@@ -1226,8 +1290,8 @@ class _BookingAppointmentState extends State<BookingAppointment> {
               'user_id': prefs.getString('user_id')!,
               'booking_id': widget.booking_id,
             },
-            imagePath: result.files.first.path.toString(),
-            imageparamName: 'documentfile')
+            imagePath: reportList[i].path.toString(),
+            imageparamName: 'reportfile')
         .then((value) {
       loader.dismiss();
       value['status']
@@ -1239,10 +1303,54 @@ class _BookingAppointmentState extends State<BookingAppointment> {
               content: Text('Document wan not uploaded, try again later'),
               backgroundColor: Colors.red,
             ));
-    }); // ng then do nothing just return.
+    });
+  }
+
+  List<File> reportList = [];
+  Future pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: [
+          'pdf',
+        ]);
+    if (result == null) {
+      return;
+    } else {
+      setState(() {
+        reportList = result.paths.map((path) => File(path!)).toList();
+      });
+    }
+    // ng then do nothing just return.
   }
 
   TextEditingController _commments = TextEditingController();
+  TextEditingController reviewController = TextEditingController();
+  Future add_review() async {
+    if (reviewController.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Enter Review Text')));
+    } else {
+      var loader = ProgressView(context);
+      loader.show();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      PostData(PARAM_URL: 'add_review.php', params: {
+        'token': Token,
+        'user_id': prefs.getString('user_id'),
+        'doctor_id': confirmData.data.doctorid,
+        'message': reviewController.text,
+        'rating': reviewrating.toString()
+      }).then((value) {
+        reviewController.clear();
+        loader.dismiss();
+        value['status']
+            ? success(context, value)
+            : ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(value['message'])));
+      });
+    }
+  }
+
   Future addcomments() async {
     return showDialog(
         context: context,

@@ -6,6 +6,7 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/LabProfile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
+import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -18,6 +19,8 @@ import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -30,9 +33,7 @@ final List<String> imgList = [
 final List<Map<dynamic, dynamic>> hometile = [
   {
     'label': 'Doctor Consultation',
-    'Screen': DoctorProfile(
-      fromhome: true,
-    ),
+    'Screen': AboutConsultation(),
     'profile': 'Rectangle 69.png'
   },
   {
@@ -79,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
   HomeController _con = HomeController();
   late HomeDoctorSpecialityModel specialities;
   int _current = 0;
+  late Position position;
   final CarouselController _controller = CarouselController();
 
   List<Widget> widgetSliders(BuildContext context) => hometile
@@ -155,8 +157,28 @@ class _HomeScreenState extends State<HomeScreen> {
           )))
       .toList();
   TextEditingController _search = TextEditingController();
+  List<Placemark> address = [];
+  Future getcity() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      );
+      print(placemarks);
+      setState(() {
+        address = placemarks;
+      });
+    } catch (err) {}
+  }
 
   void initialize() {
+    _con.determinePosition().then((value) {
+      setState(() {
+        position = value;
+        getcity();
+        print(position);
+      });
+    });
     _con.getDoctorSpecilities(context).then((value) {
       setState(() {
         specialities = value;
@@ -180,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
           centerTitle: true,
           title: commonAppBarTitle(),
-          backgroundColor: appAppBarColor,
+          backgroundColor: Colors.white,
           elevation: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
@@ -196,6 +218,27 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: commonBtn(
+                    height: 46,
+                    textSize: 12,
+                    s: (address.length == 0)
+                        ? ''
+                        : address[0].administrativeArea! +
+                            ' ' +
+                            address[0].subAdministrativeArea!,
+                    bgcolor: Colors.white,
+                    borderRadius: 5,
+                    borderColor: appblueColor,
+                    borderWidth: 2,
+                    textColor: apptealColor,
+                    onPressed: () {}),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 Push(context, SearchScreen());
@@ -300,14 +343,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
-                          childAspectRatio: 1.3 / 1,
+                          childAspectRatio: 1.45 / 1,
                           // crossAxisSpacing: 10,
                           // mainAxisSpacing: 10,
                           crossAxisCount: 2),
                       itemCount: hometile.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
                           child: GestureDetector(
                             onTap: () {
                               (hometile[index]['Screen'].toString() == 'null')
