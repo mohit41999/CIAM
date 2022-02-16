@@ -240,8 +240,12 @@ class _PersonalState extends State<Personal> {
                       'Marital status', 'Marital status', _con.maritalStatus),
                   TitleEnterField('Height', 'Height', _con.height),
                   TitleEnterField('Weight', 'Weight', _con.weight),
-                  TitleEnterField('Emergency contact', 'Emergency contact',
-                      _con.emergencycontact),
+                  TitleEnterField(
+                    'Emergency contact',
+                    'Emergency contact',
+                    _con.emergencycontact,
+                    textInputType: TextInputType.number,
+                  ),
                   TitleEnterField(
                     'Address',
                     'Address',

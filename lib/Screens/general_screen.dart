@@ -1,17 +1,20 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/bottombar.dart';
-
 import 'DoctorScreens/doctor_profile.dart';
 import 'LabProfile.dart';
 import 'MedicineProfile.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({Key? key}) : super(key: key);
@@ -21,6 +24,8 @@ class GeneralScreen extends StatefulWidget {
 }
 
 class _GeneralScreenState extends State<GeneralScreen> {
+  PersistentTabController _controller =
+      PersistentTabController(initialIndex: 0);
   @override
   void initState() {
     FirebaseNotificationHandling().setupFirebase(context);
@@ -33,123 +38,260 @@ class _GeneralScreenState extends State<GeneralScreen> {
       HomeScreen(),
       DoctorProfile(fromhome: false),
       // HomeScreen(),
+      SearchScreen(),
       MedicineProfile(),
       LabProfile()
     ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        opacity: 0.8,
+        icon: BackdropFilter(
+            filter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
+            child: Icon(CupertinoIcons.home)),
+        title: ("Home"),
+        activeColorPrimary: appblueColor,
+        inactiveColorPrimary: Colors.black,
+      ),
+      PersistentBottomNavBarItem(
+        opacity: 0.8,
+        icon: Icon(Icons.person),
+        title: ("Doctor"),
+        activeColorPrimary: appblueColor,
+        inactiveColorPrimary: Colors.black,
+      ),
+      PersistentBottomNavBarItem(
+          opacity: 0.8,
+          icon: FittedBox(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              clipBehavior: Clip.antiAlias,
+              // clipBehavior: Clip.hardEdge,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200.withOpacity(0.5),
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: FloatingActionButton(
+                    //isExtended: true,
+                    backgroundColor: Colors.transparent,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchScreen()));
+                      // Push(context, SearchScreen());
+                    },
+                    child: Icon(
+                      Icons.search,
+                      size: 40,
+                      color: appblueColor,
+                    ),
+                    elevation: 0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          title: ("Search"),
+          textStyle: TextStyle(color: Colors.white),
+          inactiveColorPrimary: Colors.black,
+          activeColorPrimary: Colors.transparent),
+      PersistentBottomNavBarItem(
+        opacity: 0.8,
+        icon: Icon(Icons.medical_services_outlined),
+        title: ("Medicine"),
+        activeColorPrimary: appblueColor,
+        inactiveColorPrimary: Colors.black,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.biotech_outlined),
+        opacity: 0.8,
+        title: ("Lab"),
+        activeColorPrimary: appblueColor,
+        inactiveColorPrimary: Colors.black,
+      ),
+    ];
+  }
+
+  Future<bool> setpage(BuildContext) async {
+    if (_controller.index == 0) {
+      return true;
+    } else {
+      setState(() {
+        _controller.index = 0;
+      });
+      return false;
+    }
   }
 
   int _selected_index = 0;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      extendBody: true,
-      //resizeToAvoidBottomInset: false,
-      //backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          _buildScreens().elementAt(_selected_index),
-        ],
-      ),
-      bottomNavigationBar: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-          child: Container(
-            height: 70,
-            decoration:
-                BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
-            width: MediaQuery.of(context).size.width,
-            child: FABBottomAppBar(
-              centerItemText: 'Search',
-              selectedColor: appblueColor,
-              notchedShape: CircularNotchedRectangle(),
-              onTabSelected: (int index) {
-                setState(() {
-                  _selected_index = index;
-                });
-              },
-              items: [
-                FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-                FABBottomAppBarItem(iconData: Icons.person, text: 'Doctor'),
-                FABBottomAppBarItem(
-                    iconData: Icons.account_circle, text: 'Medicine'),
-                FABBottomAppBarItem(iconData: Icons.more_horiz, text: 'Lab'),
-              ],
-              color: Colors.black,
-              // backgroundColor: Colors.purple,
+    return
+        // PersistentTabView(
+        //   context,
+        //
+        //   // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        //   controller: _controller,
+        //   screens: _buildScreens(),
+        //   navBarHeight: 70,
+        //   items: _navBarsItems(),
+        //   confineInSafeArea: true,
+        //   backgroundColor: Colors.grey, // Default is Colors.white.
+        //   handleAndroidBackButtonPress: true, // Default is true.
+        //   resizeToAvoidBottomInset:
+        //       true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+        //   stateManagement: true, // Default is true.
+        //   hideNavigationBarWhenKeyboardShows:
+        //       true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+        //   decoration: NavBarDecoration(
+        //       border: Border.all(color: Colors.white, width: 2),
+        //       borderRadius: BorderRadius.circular(0.0),
+        //       colorBehindNavBar: Colors.grey.shade400),
+        //   popAllScreensOnTapOfSelectedTab: true,
+        //   popActionScreens: PopActionScreensType.all,
+        //   itemAnimationProperties: ItemAnimationProperties(
+        //     // Navigation Bar's items animation properties.
+        //     duration: Duration(milliseconds: 200),
+        //     curve: Curves.ease,
+        //   ),
+        //   screenTransitionAnimation: ScreenTransitionAnimation(
+        //     // Screen transition animation on change of selected tab.
+        //     animateTabTransition: true,
+        //     curve: Curves.ease,
+        //     duration: Duration(milliseconds: 200),
+        //   ),
+        //   navBarStyle: NavBarStyle.style15,
+        //   onWillPop: setpage,
+        //   // Choose the nav bar style with this property.
+        // );
+        WillPopScope(
+      onWillPop: () async {
+        if (_selected_index == 0) {
+          return true;
+        } else {
+          setState(() {
+            _selected_index = 0;
+          });
+        }
+        return false;
+      },
+      child: Scaffold(
+        extendBody: true,
+        //resizeToAvoidBottomInset: false,
+        //backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            _buildScreens().elementAt(_selected_index),
+          ],
+        ),
+        bottomNavigationBar: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+            child: Container(
+              height: 70,
+              decoration:
+                  BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+              width: MediaQuery.of(context).size.width,
+              child: FABBottomAppBar(
+                centerItemText: 'Search',
+                selectedColor: appblueColor,
+                notchedShape: CircularNotchedRectangle(),
+                onTabSelected: (int index) {
+                  setState(() {
+                    _selected_index = index;
+                  });
+                },
+                items: [
+                  FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+                  FABBottomAppBarItem(iconData: Icons.person, text: 'Doctor'),
+                  FABBottomAppBarItem(
+                      iconData: Icons.account_circle, text: 'Medicine'),
+                  FABBottomAppBarItem(iconData: Icons.more_horiz, text: 'Lab'),
+                ],
+                color: Colors.black,
+                // backgroundColor: Colors.purple,
+              ),
             ),
           ),
         ),
-      ),
-      // bottomNavigationBar: ClipRRect(
-      //   child: BackdropFilter(
-      //     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-      //     child: Container(
-      //       height: 64,
-      //       width: MediaQuery.of(context).size.width,
-      //       child: FABBottomAppBar(
-      //         centerItemText: 'Search',
-      //         backgroundColor: Colors.transparent,
-      //         selectedColor: appblueColor,
-      //         notchedShape: CircularNotchedRectangle(),
-      //         onTabSelected: (int index) {
-      //           setState(() {
-      //             _selected_index = index;
-      //           });
-      //         },
-      //         items: [
-      //           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
-      //           FABBottomAppBarItem(iconData: Icons.search, text: 'Doctor'),
-      //           FABBottomAppBarItem(
-      //               iconData: Icons.account_circle, text: 'Medicine'),
-      //           FABBottomAppBarItem(iconData: Icons.more_horiz, text: 'Lab'),
-      //         ],
-      //         color: Colors.black,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      floatingActionButton: Container(
-        height: 60,
-        width: 60,
-        child: FittedBox(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            clipBehavior: Clip.antiAlias,
-            // clipBehavior: Clip.hardEdge,
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200.withOpacity(0.5),
-                  border: Border.all(color: Colors.white, width: 2),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: FloatingActionButton(
-                  //isExtended: true,
-                  backgroundColor: Colors.transparent,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SearchScreen()));
-                    // Push(context, SearchScreen());
-                  },
-                  child: Icon(
-                    Icons.search,
-                    size: 40,
-                    color: appblueColor,
+        // bottomNavigationBar: ClipRRect(
+        //   child: BackdropFilter(
+        //     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        //     child: Container(
+        //       height: 64,
+        //       width: MediaQuery.of(context).size.width,
+        //       child: FABBottomAppBar(
+        //         centerItemText: 'Search',
+        //         backgroundColor: Colors.transparent,
+        //         selectedColor: appblueColor,
+        //         notchedShape: CircularNotchedRectangle(),
+        //         onTabSelected: (int index) {
+        //           setState(() {
+        //             _selected_index = index;
+        //           });
+        //         },
+        //         items: [
+        //           FABBottomAppBarItem(iconData: Icons.home, text: 'Home'),
+        //           FABBottomAppBarItem(iconData: Icons.search, text: 'Doctor'),
+        //           FABBottomAppBarItem(
+        //               iconData: Icons.account_circle, text: 'Medicine'),
+        //           FABBottomAppBarItem(iconData: Icons.more_horiz, text: 'Lab'),
+        //         ],
+        //         color: Colors.black,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        floatingActionButton: Container(
+          height: 60,
+          width: 60,
+          child: FittedBox(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              clipBehavior: Clip.antiAlias,
+              // clipBehavior: Clip.hardEdge,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200.withOpacity(0.5),
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  elevation: 0,
+                  child: FloatingActionButton(
+                    //isExtended: true,
+                    backgroundColor: Colors.transparent,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchScreen()));
+                      // Push(context, SearchScreen());
+                    },
+                    child: Icon(
+                      Icons.search,
+                      size: 40,
+                      color: appblueColor,
+                    ),
+                    elevation: 0,
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      // bottomNavigationBar:
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // bottomNavigationBar:
+      ),
     );
   }
 }

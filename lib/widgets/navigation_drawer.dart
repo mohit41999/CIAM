@@ -85,20 +85,31 @@ class _commonDrawerState extends State<commonDrawer> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 15.0, horizontal: 20),
-                          child: GestureDetector(
-                            child: Text(
-                              drawerList[index]['label'],
-                              style: GoogleFonts.montserrat(
-                                  color: apptealColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              (drawerList[index]['label'].toString() ==
-                                      'Logout')
-                                  ? _ackAlert(context)
-                                  : Push(context, drawerList[index]['Screen']);
-                            },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                child: Text(
+                                  drawerList[index]['label'],
+                                  style: GoogleFonts.montserrat(
+                                      color: apptealColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  (drawerList[index]['label'].toString() ==
+                                          'Logout')
+                                      ? _ackAlert(context)
+                                      : Push(
+                                          context, drawerList[index]['Screen']);
+                                },
+                              ),
+                              (index == drawerList.length - 1)
+                                  ? SizedBox(
+                                      height: 100,
+                                    )
+                                  : Container()
+                            ],
                           ),
                         );
                       }),

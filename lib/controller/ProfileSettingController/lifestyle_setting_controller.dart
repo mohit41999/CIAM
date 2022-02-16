@@ -10,8 +10,8 @@ class LifestyleSettingController {
   var WorkOutLevelList = ['LOW', 'MEDIUM', 'HIGH'];
   var SportsInvolvementList = ['LOW', 'MEDIUM', 'HIGH'];
 
-  late String SmokingdropdownValue;
-  late String AlcoholdropdownValue;
+  late String SmokingdropdownValue = 'NO';
+  late String AlcoholdropdownValue = 'NO';
   late String WorkOutLeveldropdownValue;
   late String SportsInvolvementdropdownValue;
   bool loading = true;
@@ -44,12 +44,20 @@ class LifestyleSettingController {
 
   Future initialize(BuildContext context) async {
     await getdata(context).then((Profile) {
-      SmokingdropdownValue = Profile.data.smoking.toString().toUpperCase();
-      AlcoholdropdownValue = Profile.data.alchol.toString().toUpperCase();
+      SmokingdropdownValue = Profile.data.smoking.toString().toUpperCase() == ''
+          ? 'NO'
+          : Profile.data.smoking.toString().toUpperCase();
+      AlcoholdropdownValue = Profile.data.alchol.toString().toUpperCase() == ''
+          ? 'NO'
+          : Profile.data.alchol.toString();
       WorkOutLeveldropdownValue =
-          Profile.data.workoutLevel.toString().toUpperCase();
+          Profile.data.workoutLevel.toString().toUpperCase() == ''
+              ? 'LOW'
+              : Profile.data.workoutLevel.toString().toUpperCase();
       SportsInvolvementdropdownValue =
-          Profile.data.sportsInvolvement.toString().toUpperCase();
+          Profile.data.sportsInvolvement.toString().toUpperCase() == ''
+              ? 'LOW'
+              : Profile.data.sportsInvolvement.toString();
     });
   }
 

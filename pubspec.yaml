@@ -67,6 +67,7 @@ dev_dependencies:
   permission_handler: ^8.3.0
   agora_uikit: ^0.0.4
   file_picker: ^4.3.1
+  persistent_bottom_nav_bar: ^4.0.2
   flutter_downloader: ^1.7.1
   geolocator: ^8.2.0
 

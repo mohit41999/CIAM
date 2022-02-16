@@ -118,8 +118,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: 10,
                   ),
                   Expanded(
-                      child: EnterField('Mobile Number', 'Mobile Number',
-                          _con.mobile_number)),
+                      child: EnterField(
+                    'Mobile Number',
+                    'Mobile Number',
+                    _con.mobile_number,
+                    textInputType: TextInputType.number,
+                  )),
                 ],
               ),
               SizedBox(

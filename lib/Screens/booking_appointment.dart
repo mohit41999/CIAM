@@ -16,6 +16,7 @@ import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
 import 'package:patient/Screens/pdf.dart';
+import 'package:patient/Utils/APIIDS.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
@@ -54,7 +55,19 @@ class _BookingAppointmentState extends State<BookingAppointment> {
   var path = "No Data";
   var platformVersion = "Unknown";
   var _onPressed;
+  List patientReports = [];
   late Directory externalDir;
+  Future getPatientReports() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var response = await PostData(PARAM_URL: 'get_doctor_reports.php', params: {
+      'token': Token,
+      'user_id': prefs.getString('user_id'),
+      'booking_id': widget.booking_id
+    });
+
+    return response;
+  }
+
   Future<void> _showNotification(Map<String, dynamic> downloadStatus) async {
     final android = AndroidNotificationDetails('channel id', 'channel name',
         channelDescription: 'channel description',
@@ -133,21 +146,34 @@ class _BookingAppointmentState extends State<BookingAppointment> {
           builder: (context) => AlertDialog(
                 title: Text('Download Complete'),
                 actions: [
-                  commonBtn(
-                      s: 'Close',
-                      bgcolor: apptealColor,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Pop(context);
-                      }),
-                  commonBtn(
-                      s: 'Open',
-                      bgcolor: apptealColor,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Push(context, OpenPdf(url: path));
-                      })
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      commonBtn(
+                          height: 40,
+                          borderRadius: 5,
+                          width: 90,
+                          textSize: 12,
+                          s: 'Close',
+                          bgcolor: apptealColor,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Pop(context);
+                          }),
+                      commonBtn(
+                          height: 40,
+                          textSize: 12,
+                          borderRadius: 5,
+                          width: 90,
+                          s: 'Open',
+                          bgcolor: appblueColor,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Push(context, OpenPdf(url: path));
+                          })
+                    ],
+                  ),
                 ],
               ));
       print('here give alert-->completed');
@@ -162,6 +188,13 @@ class _BookingAppointmentState extends State<BookingAppointment> {
   }
 
   void initialize() {
+    getPatientReports().then((value) {
+      setState(() {
+        (value['data'] == null)
+            ? patientReports = []
+            : patientReports = value['data'];
+      });
+    });
     _con
         .getconfirmBooking(context, widget.doctor_id, widget.booking_id)
         .then((value) {
@@ -203,7 +236,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
 
     if (obj['isSuccess']) {
       print(obj['filePath'] + 'lllll');
-      OpenFile.open('/sdcard/download/');
+      OpenFile.open(obj['filePath']);
     } else {
       showDialog(
         context: context,
@@ -778,32 +811,87 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                               SizedBox(
                                                 width: 10,
                                               ),
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.65,
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10.0),
-                                                      child: Text(
-                                                        'Report',
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                                fontSize: 12,
-                                                                color:
-                                                                    apptealColor,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  (patientReports.length == 0)
+                                                      ? ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                          content: Text(
+                                                              'No reports available'),
+                                                          backgroundColor:
+                                                              appblueColor,
+                                                        ))
+                                                      : showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (context) =>
+                                                                  AlertDialog(
+                                                                    content:
+                                                                        Container(
+                                                                      height:
+                                                                          250.0, // Change as per your requirement
+                                                                      width:
+                                                                          300.0,
+                                                                      child: ListView.builder(
+                                                                          itemCount: patientReports.length,
+                                                                          shrinkWrap: true,
+                                                                          itemBuilder: (context, index) {
+                                                                            return (patientReports[index]['reportfile'].toString() == '')
+                                                                                ? Container()
+                                                                                : Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: Row(
+                                                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                      children: [
+                                                                                        Expanded(
+                                                                                          child: Text(
+                                                                                            'Report' + index.toString(),
+                                                                                            style: GoogleFonts.montserrat(fontSize: 10),
+                                                                                          ),
+                                                                                        ),
+                                                                                        GestureDetector(
+                                                                                            onTap: () {
+                                                                                              Pop(context);
+                                                                                              downloadFile(patientReports[index]['reportfile']);
+                                                                                            },
+                                                                                            child: Image.asset('assets/pngs/Icon feather-download.png'))
+                                                                                      ],
+                                                                                    ),
+                                                                                  );
+                                                                          }),
+                                                                    ),
+                                                                  ));
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1.65,
+                                                  child: Row(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 10.0),
+                                                        child: Text(
+                                                          'Report',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  fontSize: 12,
+                                                                  color:
+                                                                      apptealColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Image.asset(
-                                                        'assets/pngs/Icon feather-download.png')
-                                                  ],
+                                                      Image.asset(
+                                                          'assets/pngs/Icon feather-download.png')
+                                                    ],
+                                                  ),
                                                 ),
                                               )
                                             ],
@@ -818,7 +906,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           onPressed: () {
                                             pickFile();
                                           },
-                                          textSize: 12,
                                           borderRadius: 10,
                                         ),
                                         (reportList.length == 0)
@@ -947,38 +1034,55 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                 confirmData.data.bookingDate)
                                             ? (differenceInDays >= -5 &&
                                                     differenceInDays <= 20)
-                                                ? commonBtn(
-                                                    s: 'Start Video',
-                                                    bgcolor: appblueColor,
-                                                    textColor: Colors.white,
-                                                    onPressed: () {
-                                                      FirebaseNotificationHandling()
-                                                          .sendNotification(
-                                                              user_id:
-                                                                  confirmData
-                                                                      .data
-                                                                      .doctorid)
-                                                          .then((value) {
-                                                        if (!value['status']) {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: value[
-                                                                      'message']));
-                                                        } else {
+                                                ? (channelName.isEmpty)
+                                                    ? commonBtn(
+                                                        s: 'Start Video',
+                                                        bgcolor: appblueColor,
+                                                        textColor: Colors.white,
+                                                        onPressed: () {
+                                                          FirebaseNotificationHandling()
+                                                              .sendNotification(
+                                                                  user_id:
+                                                                      confirmData
+                                                                          .data
+                                                                          .doctorid)
+                                                              .then((value) {
+                                                            if (!value[
+                                                                'status']) {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              value['message']));
+                                                            } else {
+                                                              Push(
+                                                                  context,
+                                                                  VideoCallPage(
+                                                                    channelName:
+                                                                        value['data']
+                                                                            [
+                                                                            'Channel Name'],
+                                                                  ));
+                                                            }
+                                                          });
+                                                        },
+                                                        height: 45,
+                                                        borderRadius: 8,
+                                                      )
+                                                    : commonBtn(
+                                                        s: 'Join Call',
+                                                        bgcolor: appblueColor,
+                                                        textColor: Colors.white,
+                                                        onPressed: () {
                                                           Push(
                                                               context,
                                                               VideoCallPage(
-                                                                channelName: value[
-                                                                        'data'][
-                                                                    'Channel Name'],
+                                                                channelName:
+                                                                    channelName,
                                                               ));
-                                                        }
-                                                      });
-                                                    },
-                                                    height: 45,
-                                                    borderRadius: 8,
-                                                  )
+                                                        })
                                                 : SizedBox()
                                             : SizedBox()
                                         // : SizedBox(),
@@ -1300,7 +1404,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
               backgroundColor: apptealColor,
             ))
           : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Document wan not uploaded, try again later'),
+              content: Text('Document was not uploaded, try again later'),
               backgroundColor: Colors.red,
             ));
     });
