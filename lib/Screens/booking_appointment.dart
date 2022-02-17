@@ -22,6 +22,10 @@ import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
+import 'package:patient/helper/constants.dart';
+import 'package:patient/helper/helperfunctions.dart';
+import 'package:patient/services/database.dart';
+import 'package:patient/views/chat.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/title_enter_field.dart';
@@ -66,6 +70,37 @@ class _BookingAppointmentState extends State<BookingAppointment> {
     });
 
     return response;
+  }
+
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "$b\_$a";
+    } else {
+      return "$a\_$b";
+    }
+  }
+
+  DatabaseMethods databaseMethods = DatabaseMethods();
+
+  sendMessage(String userName) async {
+    Constants.myName = (await HelperFunctions.getUserNameSharedPreference())!;
+    List<String> users = [Constants.myName, userName];
+
+    String chatRoomId = getChatRoomId(Constants.myName, userName);
+
+    Map<String, dynamic> chatRoom = {
+      "users": users,
+      "chatRoomId": chatRoomId,
+    };
+
+    databaseMethods.addChatRoom(chatRoom, chatRoomId);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Chat(
+                  chatRoomId: chatRoomId,
+                )));
   }
 
   Future<void> _showNotification(Map<String, dynamic> downloadStatus) async {
@@ -959,7 +994,10 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           s: 'Chat',
                                           bgcolor: Colors.white,
                                           textColor: apptealColor,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            sendMessage(
+                                                confirmData.data.doctorName);
+                                          },
                                           height: 45,
                                           borderRadius: 8,
                                           borderColor: apptealColor,

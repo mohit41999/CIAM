@@ -53,6 +53,13 @@
             {
               "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "920660726894-4kmiek8ttno4ita5gtfi1kg9l5toaksp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ciamdoc.doctor"
+              }
             }
           ]
         }
@@ -106,6 +113,13 @@
             {
               "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "920660726894-4kmiek8ttno4ita5gtfi1kg9l5toaksp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ciamdoc.doctor"
+              }
             }
           ]
         }
@@ -159,6 +173,13 @@
             {
               "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "920660726894-4kmiek8ttno4ita5gtfi1kg9l5toaksp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ciamdoc.doctor"
+              }
             }
           ]
         }
@@ -212,6 +233,13 @@
             {
               "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "920660726894-4kmiek8ttno4ita5gtfi1kg9l5toaksp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ciamdoc.doctor"
+              }
             }
           ]
         }

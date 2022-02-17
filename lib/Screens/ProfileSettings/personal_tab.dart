@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Personal extends StatefulWidget {
   const Personal({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class _PersonalState extends State<Personal> {
   Future initialize(BuildContext context) async {
     _con.getdata(context).then((Profile) {
       setState(() {
+        _con.oldname = Profile.data.firstName + Profile.data.lastName;
+        _con.oldemail = Profile.data.email;
         _con.firstname.text = Profile.data.firstName;
         _con.lastname.text = Profile.data.lastName;
         _con.email.text = Profile.data.email;

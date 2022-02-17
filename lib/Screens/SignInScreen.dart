@@ -9,6 +9,7 @@ import 'package:patient/Screens/Signup.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/sign_in_controller.dart';
+import 'package:patient/firebase/AuthenticatioHelper.dart';
 import 'package:patient/firebase/notification_handling.dart';
 
 import 'package:patient/widgets/bottombar.dart';
@@ -139,7 +140,23 @@ class _SignInScreenState extends State<SignInScreen> {
                   bgcolor: appblueColor,
                   textColor: Colors.white,
                   onPressed: () {
-                    _controller.SignIn(context);
+                    AuthenticationHelper()
+                        .signIn(
+                            email: _controller.email.text,
+                            password: _controller.password.text)
+                        .then((result) {
+                      if (result == null) {
+                        _controller.SignIn(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            result,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ));
+                      }
+                    });
+
                     //Push(context, GeneralScreen2());
                     // Push(context, GeneralScreen());
                   }),

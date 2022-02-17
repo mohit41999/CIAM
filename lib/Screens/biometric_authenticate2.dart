@@ -14,14 +14,14 @@ import 'DoctorScreens/doctor_profile.dart';
 import 'general_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-class BiometricAuthenticate extends StatefulWidget {
-  const BiometricAuthenticate({Key? key}) : super(key: key);
+class BiometricAuthenticate2 extends StatefulWidget {
+  const BiometricAuthenticate2({Key? key}) : super(key: key);
 
   @override
-  _BiometricAuthenticateState createState() => _BiometricAuthenticateState();
+  _BiometricAuthenticate2State createState() => _BiometricAuthenticate2State();
 }
 
-class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
+class _BiometricAuthenticate2State extends State<BiometricAuthenticate2> {
   @override
   void initState() {
     // FirebaseNotificationHandling().setupFirebase(context);
@@ -44,9 +44,12 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             final isAuthenticated = await LocalAuthApi.authenticate(context);
             if (isAuthenticated) {
-              prefs.setString('isbiometric', 'yes');
+              // prefs.setString('isbiometric', 'yes');
               Push(context, GeneralScreen());
-            } else {}
+            } else {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Try Again')));
+            }
           },
           child: (Platform.isAndroid)
               ? Stack(
@@ -71,33 +74,6 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: TextButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(005.0),
-                                    side: BorderSide(color: apptealColor))),
-                            // backgroundColor: MaterialStateProperty.all(
-                            //     apptealColor.withOpacity(0.2))
-                          ),
-                          onPressed: () async {
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setString('isbiometric', 'no');
-                            Push(context, GeneralScreen());
-                          },
-                          child: Text(
-                            'Skip',
-                            style: GoogleFonts.montserrat(
-                                color: appblueColor, fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 )
               : Stack(
@@ -121,33 +97,6 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: TextButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(005.0),
-                                    side: BorderSide(color: apptealColor))),
-                            // backgroundColor: MaterialStateProperty.all(
-                            //     apptealColor.withOpacity(0.2))
-                          ),
-                          onPressed: () async {
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setString('isbiometric', 'no');
-                            Push(context, GeneralScreen());
-                          },
-                          child: Text(
-                            'Skip',
-                            style: GoogleFonts.montserrat(
-                                color: appblueColor, fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 )),
     );

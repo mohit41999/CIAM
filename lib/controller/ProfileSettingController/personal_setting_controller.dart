@@ -4,11 +4,18 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
+import 'package:patient/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../NavigationController.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PersonalSettingController {
   XFile? mediaFile = null;
+  var oldemail = '';
+  var oldname = '';
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -52,6 +59,16 @@ class PersonalSettingController {
       'emergency_contact': emergencycontact.text,
       'address': address.text,
     };
+    // databaseMethods.updateChatroomId(oldname, firstname.text + lastname.text);
+
+    // DatabaseMethods().getUserChats(oldname).then((snapshots) {
+    //   Stream<QuerySnapshot> chatRooms = snapshots;
+    //   print(
+    //       "we got the data + ${chatRooms.toString()} this is name  ${oldname}");
+    //   chatRooms;
+    //
+    // });
+    // databaseMethods.updateusername(oldemail, firstname.text + lastname.text);
 
     var response = (mediaFile == null)
         ? await PostData(

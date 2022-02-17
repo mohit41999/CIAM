@@ -13,6 +13,7 @@ import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Screens/account_settings.dart';
 import 'package:patient/Utils/drawerList.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/firebase/AuthenticatioHelper.dart';
 
 import '../Utils/colorsandstyles.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,6 +43,7 @@ class _commonDrawerState extends State<commonDrawer> {
             FlatButton(
               child: Text('Cancel'),
               onPressed: () {
+                AuthenticationHelper().signOut();
                 Navigator.of(context).pop();
               },
             ),

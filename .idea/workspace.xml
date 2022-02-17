@@ -9,24 +9,39 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="upload download">
-      <change afterPath="$PROJECT_DIR$/lib/Screens/accept_reject_call.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="upload">
+      <change afterPath="$PROJECT_DIR$/lib/Models/user.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate2.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Screens/new.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/authenticate.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/helperfunctions.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/helper/theme.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/auth.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/chat.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/chatrooms.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/forgot_password.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/search.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/signin.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/views/signup.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widget/widget.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/Signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Signup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/confirm_booking_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProdileController/confirm_booking_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/lifestyle_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/lifestyle_setting_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Utils/drawerList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/drawerList.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
@@ -35,7 +50,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[11c46a5c]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[192.168.1.11:5555]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -60,16 +75,20 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorWFH" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens" />
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app\src" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\controller" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app" />
-      <recent name="C:\Users\Sachin\Desktop\mohit-github\patient\lib\Screens" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app" />
     </key>
   </component>
   <component name="RunManager">
@@ -188,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644934728619</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="upload">
+      <created>1645019484182</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1645019484182</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,6 +237,7 @@
     <MESSAGE value="38 points" />
     <MESSAGE value="Relative Changes" />
     <MESSAGE value="upload download" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload download" />
+    <MESSAGE value="upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload" />
   </component>
 </project>

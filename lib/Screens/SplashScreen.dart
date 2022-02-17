@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/SignInScreen.dart';
+import 'package:patient/Screens/biometric_authenticate2.dart';
 import 'package:patient/Screens/general_screen.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/firebase/fcm.dart';
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ? Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BiometricAuthenticate()))
+                        builder: (context) => BiometricAuthenticate2()))
                 : Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => GeneralScreen())));
   }
