@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/helper/constants.dart';
-import 'package:patient/services/database.dart';
-import 'package:patient/widget/widget.dart';
+import 'package:patient/firebase/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';

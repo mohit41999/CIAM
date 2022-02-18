@@ -36,36 +36,36 @@ final List<Map<dynamic, dynamic>> hometile = [
     'Screen': AboutConsultation(),
     'profile': 'Rectangle 69.png'
   },
-  {
-    'label': 'Health care & Other product',
-    // 'Screen': 'null',
-    'Screen': ProductPage(),
-    'profile': 'Rectangle -7.png'
-  },
+  // {
+  //   'label': 'Health care & Other product',
+  //   // 'Screen': 'null',
+  //   'Screen': ProductPage(),
+  //   'profile': 'Rectangle -7.png'
+  // },
   {
     'label': 'Home Care Servicies',
     // 'Screen': 'null',
     'Screen': PatientHomePage4(),
     'profile': 'Rectangle -1.png'
   },
-  {
-    'label': 'Stress buster zone',
-    'Screen': 'null',
-    'profile': 'Rectangle -6.png'
-  },
-  {
-    'label': 'Lab Tests',
-    // 'Screen': 'null',
-    'Screen': LabProfile(),
-    'profile': 'Rectangle -2.png'
-  },
+  // {
+  //   'label': 'Stress buster zone',
+  //   'Screen': 'null',
+  //   'profile': 'Rectangle -6.png'
+  // },
+  // {
+  //   'label': 'Lab Tests',
+  //   // 'Screen': 'null',
+  //   'Screen': LabProfile(),
+  //   'profile': 'Rectangle -2.png'
+  // },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
-  {
-    'label': 'Medicine',
-    // 'Screen': 'null',
-    'Screen': MedicineProfile(),
-    'profile': 'Rectangle 69.png'
-  },
+  // {
+  //   'label': 'Medicine',
+  //   // 'Screen': 'null',
+  //   'Screen': MedicineProfile(),
+  //   'profile': 'Rectangle 69.png'
+  // },
   {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle -4.png'},
 ];
 
@@ -199,21 +199,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          title: commonAppBarTitle(),
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: Builder(
-            builder: (context) => commonAppBarLeading(
-                iconData: Icons.menu,
-                onPressed: () {
-                  setState(() {
-                    Scaffold.of(context).openDrawer();
-                  });
-                }),
-          )),
-      drawer: commonDrawer(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -340,7 +325,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
                           childAspectRatio: 1.45 / 1,

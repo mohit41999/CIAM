@@ -23,7 +23,7 @@ class FirebaseNotificationHandling {
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     FirebaseMessaging.onMessage.listen((event) {
       print('onMessage ' + event.toString());
-      channelName = event.data['chanel_name'];
+
       print(event.data);
       Navigator.push(
           context,
@@ -33,7 +33,7 @@ class FirebaseNotificationHandling {
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       // String? channel_name = event.notification!.title.toString();
-      channelName = event.data['chanel_name'];
+
       print('onMessageOpenedApp');
       Navigator.push(
           context,
@@ -46,7 +46,6 @@ class FirebaseNotificationHandling {
       // Push(context, );
     });
     FirebaseMessaging.onBackgroundMessage((message) async {
-      channelName = message.data['chanel_name'];
       print(message.data);
       Navigator.push(
           context,

@@ -2,14 +2,66 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/Utils/progress_view.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/alertTextField.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/title_enter_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void patientpg4alertbox(
-    BuildContext context, TextEditingController _controller) {
+Future addCare(
+  BuildContext context,
+  String name,
+  String email,
+  String phone,
+  String care_requirement,
+  String address,
+) async {
+  var loader = ProgressView(context);
+  loader.show();
+  late Map<String, dynamic> data;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await PostData(PARAM_URL: 'add_home_care_requirements.php', params: {
+    'token': Token,
+    'user_id': prefs.getString('user_id'),
+    'name': name,
+    'email': email,
+    'phone': phone,
+    'care_requirement': care_requirement,
+    'address': address
+  }).then((value) {
+    loader.dismiss();
+    (value['status'])
+        ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(value['message']),
+            backgroundColor: apptealColor,
+          ))
+        : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(value['message']),
+            backgroundColor: Colors.red,
+          ));
+    data = value;
+    print(name +
+        '\n' +
+        email +
+        '\n' +
+        phone +
+        '\n' +
+        care_requirement +
+        '\n' +
+        address);
+  });
+}
+
+void patientpg4alertbox(BuildContext context,
+    {required TextEditingController careController,
+    required TextEditingController nameController,
+    required TextEditingController emailController,
+    required TextEditingController phonenumberController,
+    required TextEditingController addressController}) {
   showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -41,45 +93,86 @@ void patientpg4alertbox(
             ],
           ),
           content: Container(
-            height: 400,
+            height: MediaQuery.of(context).size.height * 0.7,
             color: Color(0xffF1F1F1),
             //padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                alertTextField(
-                    controller: _controller,
-                    label: 'Where is care needed?',
-                    textFieldtext: 'Enter Postal Code'),
-                alertTextField(
-                    controller: _controller,
-                    label: 'Name',
-                    textFieldtext: 'Enter Full Name'),
-                alertTextField(
-                    controller: _controller,
-                    label: 'Email',
-                    textFieldtext: 'Enter Email Id'),
-                alertTextField(
-                    controller: _controller,
-                    label: 'Phone Number',
-                    textFieldtext: 'Enter Phone Number'),
-                Center(
-                  child: commonBtn(
-                    s: 'Find Care',
-                    bgcolor: Color(0xff161616).withOpacity(0.6),
-                    textColor: Colors.white,
-                    onPressed: () {},
-                    height: 30,
-                    width: 115,
-                    borderRadius: 4,
-                    textSize: 12,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
+                  alertTextField(
+                      controller: careController,
+                      label: 'What is the care requirement?',
+                      textFieldtext: 'Enter Care required'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  alertTextField(
+                      controller: nameController,
+                      label: 'Name',
+                      textFieldtext: 'Enter Full Name'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  alertTextField(
+                      controller: emailController,
+                      label: 'Email',
+                      textFieldtext: 'Enter Email Id'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  alertTextField(
+                      controller: phonenumberController,
+                      label: 'Phone Number',
+                      textFieldtext: 'Enter Phone Number'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  alertTextField(
+                      controller: addressController,
+                      label: 'Address',
+                      textFieldtext: 'Address'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: commonBtn(
+                      s: 'Submit Care',
+                      bgcolor: Color(0xff161616).withOpacity(0.6),
+                      textColor: Colors.white,
+                      onPressed: () {
+                        print(careController.text);
+                        addCare(
+                                context,
+                                nameController.text,
+                                emailController.text,
+                                phonenumberController.text,
+                                careController.text,
+                                addressController.text)
+                            .then((value) {
+                          nameController.clear();
+                          emailController.clear();
+                          phonenumberController.clear();
+                          careController.clear();
+                          addressController.clear();
+                          Pop(context);
+                        });
+                      },
+                      height: 40,
+                      width: 115,
+                      borderRadius: 4,
+                      textSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
           )));
 }

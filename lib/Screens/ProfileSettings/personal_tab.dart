@@ -24,8 +24,7 @@ class _PersonalState extends State<Personal> {
   Future initialize(BuildContext context) async {
     _con.getdata(context).then((Profile) {
       setState(() {
-        _con.oldname = Profile.data.firstName + Profile.data.lastName;
-        _con.oldemail = Profile.data.email;
+        _con.oldname = Profile.data.firstName + ' ' + Profile.data.lastName;
         _con.firstname.text = Profile.data.firstName;
         _con.lastname.text = Profile.data.lastName;
         _con.email.text = Profile.data.email;
@@ -39,6 +38,7 @@ class _PersonalState extends State<Personal> {
         _con.address.text = Profile.data.address;
         _con.age.text = Profile.data.age;
         _con.profileImage = Profile.data.profile;
+        _con.gender.text = Profile.data.gender;
         Profile.data.gender == 'Male'
             ? _con.dropDownvalue = 'm'
             : _con.dropDownvalue = 'f';

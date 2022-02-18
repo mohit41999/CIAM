@@ -54,6 +54,15 @@ class DatabaseMethods {
         .snapshots();
   }
 
+  getChatstoupdate(String chatRoomId) async {
+    return FirebaseFirestore.instance
+        .collection("chatRoom")
+        .doc(chatRoomId)
+        .collection("chats")
+        .orderBy('time')
+        .get();
+  }
+
   Future<void> addMessage(String chatRoomId, chatMessageData) async {
     FirebaseFirestore.instance
         .collection("chatRoom")
@@ -74,6 +83,38 @@ class DatabaseMethods {
   //     'chatRoomId': data.docs[0].id.toString().replaceAll(oldName, newName)
   //   });
   // }
+  getUserChatsforUpdate(String itIsMyName) async {
+    return await FirebaseFirestore.instance
+        .collection("chatRoom")
+        .where('users', arrayContains: itIsMyName)
+        .get();
+  }
+
+  updatechatroomId(String oldname, String newname) async {
+    QuerySnapshot userInfoSnapshot =
+        await DatabaseMethods().getUserChatsforUpdate(oldname);
+    for (int i = 0; i < userInfoSnapshot.docs.length; i++) {
+      var chatRoomId = userInfoSnapshot.docs[i]['chatRoomId'];
+      var newchatRoomId = chatRoomId.toString().replaceAll(oldname, newname);
+      print(newchatRoomId);
+      List oldUsers = userInfoSnapshot.docs[i]['users'];
+
+      print(oldUsers);
+      for (int j = 0; j < oldUsers.length; j++) {
+        if (oldUsers[j] == oldname) {
+          oldUsers[j] = newname;
+        }
+      }
+      QuerySnapshot chatsnapshot =
+          await DatabaseMethods().getChatstoupdate(chatRoomId);
+
+      print(oldUsers);
+      await FirebaseFirestore.instance
+          .collection("chatRoom")
+          .doc(userInfoSnapshot.docs[i].id)
+          .update({'chatRoomId': newchatRoomId, 'users': oldUsers});
+    }
+  }
 
   getUserChats(String itIsMyName) async {
     return await FirebaseFirestore.instance

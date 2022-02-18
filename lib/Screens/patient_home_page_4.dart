@@ -26,7 +26,11 @@ class PatientHomePage4 extends StatefulWidget {
 }
 
 class _PatientHomePage4State extends State<PatientHomePage4> {
-  TextEditingController _search = TextEditingController();
+  TextEditingController care = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController phonenumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,7 +175,12 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                     textColor: Colors.white,
                                     onPressed: () {
                                       // Push(context, DoctorProfile1());
-                                      patientpg4alertbox(context, _search);
+                                      patientpg4alertbox(context,
+                                          careController: care,
+                                          addressController: address,
+                                          emailController: email,
+                                          nameController: name,
+                                          phonenumberController: phonenumber);
                                     },
                                     width: 120,
                                     height: 30,

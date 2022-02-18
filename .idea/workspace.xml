@@ -9,41 +9,76 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="upload">
-      <change afterPath="$PROJECT_DIR$/lib/Models/user.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate2.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/new.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/helper/authenticate.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/helper/constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/helper/helperfunctions.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/helper/theme.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/auth.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/services/database.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/chat.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/chatrooms.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/forgot_password.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/search.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/signin.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/views/signup.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widget/widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="chat">
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/1024.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/114.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/120.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/128.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/167.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/172.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/196.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/216.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/256.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/55.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/57.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/58.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/64.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/72.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/76.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/80.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/87.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/88.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/app_review.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/controller/app_review_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_4.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Signup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/accept_reject_call.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/accept_reject_call.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/account_settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/account_settings.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Utils/drawerList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/drawerList.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helper/authenticate.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helper/theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/services/auth.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/services/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/chat.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/chat.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/chatrooms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/chatrooms.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/forgot_password.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/search.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/signin.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/signup.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widget/widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/patient_home_page_4_alert_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/patient_home_page_4_alert_box.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,19 +110,21 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorWFH" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app\src\main\res" />
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\ios\Runner" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app\src" />
-      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\controller" />
-      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\firebase" />
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\android\app" />
     </key>
   </component>
@@ -214,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645019484182</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="chat">
+      <created>1645106481067</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1645106481068</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,6 +282,7 @@
     <MESSAGE value="Relative Changes" />
     <MESSAGE value="upload download" />
     <MESSAGE value="upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload" />
+    <MESSAGE value="chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat" />
   </component>
 </project>

@@ -24,8 +24,8 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/helper/constants.dart';
 import 'package:patient/helper/helperfunctions.dart';
-import 'package:patient/services/database.dart';
-import 'package:patient/views/chat.dart';
+import 'package:patient/firebase/database.dart';
+import 'package:patient/Screens/chat.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/title_enter_field.dart';
@@ -1072,55 +1072,50 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                 confirmData.data.bookingDate)
                                             ? (differenceInDays >= -5 &&
                                                     differenceInDays <= 20)
-                                                ? (channelName.isEmpty)
-                                                    ? commonBtn(
-                                                        s: 'Start Video',
-                                                        bgcolor: appblueColor,
-                                                        textColor: Colors.white,
-                                                        onPressed: () {
-                                                          FirebaseNotificationHandling()
-                                                              .sendNotification(
-                                                                  user_id:
-                                                                      confirmData
-                                                                          .data
-                                                                          .doctorid)
-                                                              .then((value) {
-                                                            if (!value[
-                                                                'status']) {
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              value['message']));
-                                                            } else {
-                                                              Push(
-                                                                  context,
-                                                                  VideoCallPage(
-                                                                    channelName:
-                                                                        value['data']
-                                                                            [
-                                                                            'Channel Name'],
-                                                                  ));
-                                                            }
-                                                          });
-                                                        },
-                                                        height: 45,
-                                                        borderRadius: 8,
-                                                      )
-                                                    : commonBtn(
-                                                        s: 'Join Call',
-                                                        bgcolor: appblueColor,
-                                                        textColor: Colors.white,
-                                                        onPressed: () {
+                                                ? commonBtn(
+                                                    s: 'Start Video',
+                                                    bgcolor: appblueColor,
+                                                    textColor: Colors.white,
+                                                    onPressed: () {
+                                                      FirebaseNotificationHandling()
+                                                          .sendNotification(
+                                                              user_id:
+                                                                  confirmData
+                                                                      .data
+                                                                      .doctorid)
+                                                          .then((value) {
+                                                        if (!value['status']) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(SnackBar(
+                                                                  content: value[
+                                                                      'message']));
+                                                        } else {
                                                           Push(
                                                               context,
                                                               VideoCallPage(
-                                                                channelName:
-                                                                    channelName,
+                                                                channelName: value[
+                                                                        'data'][
+                                                                    'Channel Name'],
                                                               ));
-                                                        })
+                                                        }
+                                                      });
+                                                    },
+                                                    height: 45,
+                                                    borderRadius: 8,
+                                                  )
+                                                // commonBtn(
+                                                //    s: 'Join Call',
+                                                //    bgcolor: appblueColor,
+                                                //    textColor: Colors.white,
+                                                //    onPressed: () {
+                                                //      Push(
+                                                //          context,
+                                                //          VideoCallPage(
+                                                //            channelName:
+                                                //                channelName,
+                                                //          ));
+                                                //    })
                                                 : SizedBox()
                                             : SizedBox()
                                         // : SizedBox(),

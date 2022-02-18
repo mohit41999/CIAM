@@ -13,7 +13,7 @@ import 'package:patient/Screens/account_settings.dart';
 import 'package:patient/Screens/chats_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
-import 'package:patient/views/chatrooms.dart';
+import 'package:patient/Screens/chatrooms.dart';
 import 'package:patient/widgets/alert_box_widgets.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';

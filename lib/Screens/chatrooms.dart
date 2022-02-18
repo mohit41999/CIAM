@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/helper/authenticate.dart';
 import 'package:patient/helper/constants.dart';
 import 'package:patient/helper/helperfunctions.dart';
-import 'package:patient/helper/theme.dart';
-import 'package:patient/services/auth.dart';
-import 'package:patient/services/database.dart';
-import 'package:patient/views/chat.dart';
+import 'package:patient/firebase/database.dart';
+import 'package:patient/Screens/chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:patient/views/search.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';

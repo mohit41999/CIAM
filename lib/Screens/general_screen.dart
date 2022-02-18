@@ -7,8 +7,12 @@ import 'package:patient/Screens/Home.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/Screens/search_screen.dart';
+import 'package:patient/controller/ProfileSettingController/personal_setting_controller.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/bottombar.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
+import 'package:patient/widgets/common_app_bar_title.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 import 'DoctorScreens/doctor_profile.dart';
 import 'LabProfile.dart';
 import 'MedicineProfile.dart';
@@ -185,8 +189,24 @@ class _GeneralScreenState extends State<GeneralScreen> {
       },
       child: Scaffold(
         extendBody: true,
-        //resizeToAvoidBottomInset: false,
-        //backgroundColor: Colors.white,
+        appBar: (_selected_index == 0)
+            ? AppBar(
+                centerTitle: true,
+                title: commonAppBarTitle(),
+                backgroundColor: Colors.white,
+                elevation: 0,
+                leading: Builder(
+                  builder: (context) => commonAppBarLeading(
+                      iconData: Icons.menu,
+                      onPressed: () {
+                        setState(() {
+                          Scaffold.of(context).openDrawer();
+                        });
+                      }),
+                ))
+            : null,
+        drawer: commonDrawer(),
+
         body: Stack(
           children: [
             _buildScreens().elementAt(_selected_index),

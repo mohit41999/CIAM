@@ -4,7 +4,9 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
-import 'package:patient/services/database.dart';
+import 'package:patient/firebase/database.dart';
+import 'package:patient/helper/helperfunctions.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import '../NavigationController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,8 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class PersonalSettingController {
   XFile? mediaFile = null;
-  var oldemail = '';
-  var oldname = '';
+  String oldname = '';
   DatabaseMethods databaseMethods = new DatabaseMethods();
 
   TextEditingController firstname = TextEditingController();
@@ -42,7 +43,8 @@ class PersonalSettingController {
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? user_id = prefs.getString('user_id');
-    print(user_id);
+    print(user_id.toString());
+
     Map<String, String> bodyParam = {
       'token': Token,
       'user_id': user_id.toString(),
@@ -59,16 +61,16 @@ class PersonalSettingController {
       'emergency_contact': emergencycontact.text,
       'address': address.text,
     };
-    // databaseMethods.updateChatroomId(oldname, firstname.text + lastname.text);
-
-    // DatabaseMethods().getUserChats(oldname).then((snapshots) {
-    //   Stream<QuerySnapshot> chatRooms = snapshots;
-    //   print(
-    //       "we got the data + ${chatRooms.toString()} this is name  ${oldname}");
-    //   chatRooms;
+    HelperFunctions.saveUserNameSharedPreference(
+        firstname.text + ' ' + lastname.text);
+    // await DatabaseMethods()
+    //     .updatechatroomId(oldname, firstname.text + ' ' + lastname.text);
     //
-    // });
-    // databaseMethods.updateusername(oldemail, firstname.text + lastname.text);
+    // // QuerySnapshot userInfoSnapshot = await DatabaseMethods()
+    // //     .getUserChatsforUpdate(firstname.text + ' ' + lastname.text);
+    //
+    // databaseMethods.updateusername(
+    //     email.text, firstname.text + ' ' + lastname.text);
 
     var response = (mediaFile == null)
         ? await PostData(

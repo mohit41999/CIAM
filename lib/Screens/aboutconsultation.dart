@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
+import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/LabProfile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
@@ -13,6 +15,7 @@ import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProdileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/about_consultation_controller.dart';
+import 'package:patient/controller/app_review_controller.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -27,55 +30,6 @@ import 'package:geolocator_platform_interface/geolocator_platform_interface.dart
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-];
-final List<Map<dynamic, dynamic>> hometile = [
-  {
-    'label': 'Doctor Consultation',
-    'Screen': DoctorProfile(
-      fromhome: true,
-    ),
-    'profile': 'Rectangle 69.png'
-  },
-  {
-    'label': 'Health care & Other product',
-    // 'Screen': 'null',
-    'Screen': ProductPage(),
-    'profile': 'Rectangle -7.png'
-  },
-  {
-    'label': 'Home Care Servicies',
-    // 'Screen': 'null',
-    'Screen': PatientHomePage4(),
-    'profile': 'Rectangle -1.png'
-  },
-  {
-    'label': 'Stress buster zone',
-    'Screen': 'null',
-    'profile': 'Rectangle -6.png'
-  },
-  {
-    'label': 'Lab Tests',
-    // 'Screen': 'null',
-    'Screen': LabProfile(),
-    'profile': 'Rectangle -2.png'
-  },
-  {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
-  {
-    'label': 'Medicine',
-    // 'Screen': 'null',
-    'Screen': MedicineProfile(),
-    'profile': 'Rectangle 69.png'
-  },
-  {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle -4.png'},
-];
-
 class AboutConsultation extends StatefulWidget {
   const AboutConsultation({Key? key}) : super(key: key);
 
@@ -86,6 +40,7 @@ class AboutConsultation extends StatefulWidget {
 class _AboutConsultationState extends State<AboutConsultation> {
   AboutConsultationController _con = AboutConsultationController();
   DoctorController _doctorControllercon = DoctorController();
+  AppReviewController _appReviewController = AppReviewController();
   late HomeDoctorSpecialityModel specialities;
   int _current = 0;
   late Position position;
@@ -93,12 +48,20 @@ class _AboutConsultationState extends State<AboutConsultation> {
   final CarouselController _reviewcontroller = CarouselController();
 
   late DoctorProfileModel _doctordata;
+  late AppReviewModel appReviewdata;
   bool loading = true;
+  bool reviewloading = true;
   @override
   void initState() {
     // TODO: implement initState
     _doctorControllercon.getDoctor(context).then((value) {
       setState(() {
+        _appReviewController.getappReview(context).then((value) {
+          setState(() {
+            appReviewdata = value;
+            reviewloading = false;
+          });
+        });
         _doctordata = value;
         loading = false;
       });
@@ -602,68 +565,73 @@ class _AboutConsultationState extends State<AboutConsultation> {
             SizedBox(
               height: 15,
             ),
-            Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'See our User Experiences',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 20,
-                          color: appblueColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    width: double.infinity,
-                    child: Column(children: [
-                      Expanded(
-                        child: Container(
-                          color: Colors.white,
-                          child: CarouselSlider(
-                            items: Review(context),
-                            carouselController: _reviewcontroller,
-                            options: CarouselOptions(
-                                autoPlay: true,
-                                enlargeCenterPage: true,
-                                aspectRatio: 2.5,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    _current = index;
-                                  });
-                                }),
+            (reviewloading)
+                ? Center(child: CircularProgressIndicator())
+                : Container(
+                    color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'See our User Experiences',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                color: appblueColor,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: hometile.asMap().entries.map((entry) {
-                          return GestureDetector(
-                              onTap: () =>
-                                  _reviewcontroller.animateToPage(entry.key),
+                        Container(
+                          height: 200,
+                          width: double.infinity,
+                          child: Column(children: [
+                            Expanded(
                               child: Container(
-                                width: 8.0,
-                                height: 8.0,
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 8.0, horizontal: 4.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == entry.key
-                                      ? appblueColor.withOpacity(0.9)
-                                      : appblueColor.withOpacity(0.4),
+                                color: Colors.white,
+                                child: CarouselSlider(
+                                  items: Review(context),
+                                  carouselController: _reviewcontroller,
+                                  options: CarouselOptions(
+                                      autoPlay: true,
+                                      enlargeCenterPage: true,
+                                      aspectRatio: 2.5,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _current = index;
+                                        });
+                                      }),
                                 ),
-                              ));
-                        }).toList(),
-                      ),
-                    ]),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: appReviewdata.data
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                return GestureDetector(
+                                    onTap: () => _reviewcontroller
+                                        .animateToPage(entry.key),
+                                    child: Container(
+                                      width: 8.0,
+                                      height: 8.0,
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 8.0, horizontal: 4.0),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: _current == entry.key
+                                            ? appblueColor.withOpacity(0.9)
+                                            : appblueColor.withOpacity(0.4),
+                                      ),
+                                    ));
+                              }).toList(),
+                            ),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
-              ),
-            ),
             SizedBox(
               height: 10,
             ),
@@ -784,7 +752,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
           )))
       .toList();
 
-  List<Widget> Review(BuildContext context) => hometile
+  List<Widget> Review(BuildContext context) => appReviewdata.data
       .map((item) => Container(
           color: Colors.white,
           child: Padding(
@@ -811,9 +779,9 @@ class _AboutConsultationState extends State<AboutConsultation> {
                       backgroundImage:
                           AssetImage('assets/pngs/Rectangle 69.png'),
                     ),
-                    title: Text(''),
+                    title: Text(item.userName),
                     subtitle: RatingBarIndicator(
-                      rating: 4.0,
+                      rating: double.parse(item.rating),
                       itemBuilder: (context, index) => Icon(
                         Icons.star,
                         color: apptealColor,
@@ -823,56 +791,8 @@ class _AboutConsultationState extends State<AboutConsultation> {
                       unratedColor: Colors.grey.withOpacity(0.5),
                       direction: Axis.horizontal,
                     ),
-                    //     RatingBar.builder(
-                    //   maxRating: 5,
-                    //   itemSize: 20,
-                    //   minRating: 1,
-                    //   unratedColor:
-                    //       apptealColor,
-                    //   direction:
-                    //       Axis.horizontal,
-                    //   allowHalfRating: true,
-                    //   itemCount: int.parse(
-                    //       reviews.data[index]
-                    //           .rating),
-                    //   itemBuilder:
-                    //       (context, _) =>
-                    //           Icon(
-                    //     Icons.star,
-                    //     color: apptealColor,
-                    //   ),
-                    //   onRatingUpdate:
-                    //       (rating) {
-                    //     print(rating);
-                    //   },
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Icon(Icons.star,
-                    //         size: 14,
-                    //         color:
-                    //             apptealColor),
-                    //     Icon(
-                    //       Icons.star,
-                    //       size: 14,
-                    //       color: apptealColor,
-                    //     ),
-                    //     Icon(Icons.star,
-                    //         size: 14,
-                    //         color:
-                    //             apptealColor),
-                    //     Icon(Icons.star,
-                    //         size: 14,
-                    //         color:
-                    //             apptealColor),
-                    //     Icon(Icons.star,
-                    //         size: 14,
-                    //         color:
-                    //             apptealColor),
-                    //   ],
-                    // ),
                     trailing: Text(
-                      '15-02-2022',
+                      item.date,
                       style: GoogleFonts.lato(
                           color: apptealColor,
                           fontSize: 12,
@@ -885,7 +805,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Text(
-                      'Excellent Treatments and Consultation',
+                      item.review,
                       style: GoogleFonts.lato(fontSize: 12),
                     ),
                   ),

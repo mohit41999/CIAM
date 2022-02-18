@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Screens/MYScreens/MyAppointments.dart';
@@ -19,7 +21,11 @@ class DoctorProfile4 extends StatefulWidget {
 }
 
 class _DoctorProfile4State extends State<DoctorProfile4> {
-  TextEditingController _controller = TextEditingController();
+  TextEditingController care = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController adddress = TextEditingController();
+  TextEditingController phonenumber = TextEditingController();
+  TextEditingController email = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -249,7 +255,12 @@ class _DoctorProfile4State extends State<DoctorProfile4> {
                                         bottomRight: Radius.circular(15)),
                                   ))),
                               onPressed: () {
-                                patientpg4alertbox(context, _controller);
+                                patientpg4alertbox(context,
+                                    careController: care,
+                                    phonenumberController: phonenumber,
+                                    nameController: name,
+                                    emailController: email,
+                                    addressController: adddress);
                               },
                               child: Text(
                                 'Book An Appointment',

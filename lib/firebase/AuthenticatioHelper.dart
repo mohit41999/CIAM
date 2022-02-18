@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:patient/firebase/database.dart';
 import 'package:patient/helper/helperfunctions.dart';
-import 'package:patient/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationHelper {

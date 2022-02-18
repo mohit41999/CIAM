@@ -14,22 +14,24 @@ class commonAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ShaderMask(
-        blendMode: BlendMode.srcIn,
-        shaderCallback: (bounds) => LinearGradient(colors: [
-          Color(0xff233E8B),
-          Color(0xff1EAE98),
-        ]).createShader(
-          Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-        ),
-        child: Text(
-          'DCP',
-          style: GoogleFonts.montserrat(
-            fontSize: 30.0,
-          ),
-        ),
-      ),
-    );
+        height: MediaQuery.of(context).size.height * 0.1,
+        child: Image(image: AssetImage('assets/pngs/logo.png')));
+
+    // ShaderMask(
+    //   blendMode: BlendMode.srcIn,
+    //   shaderCallback: (bounds) => LinearGradient(colors: [
+    //     Color(0xff233E8B),
+    //     Color(0xff1EAE98),
+    //   ]).createShader(
+    //     Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+    //   ),
+    //   child: Text(
+    //     'DCP',
+    //     style: GoogleFonts.montserrat(
+    //       fontSize: 30.0,
+    //     ),
+    //   ),
+    // ),
   }
 }
 
