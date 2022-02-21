@@ -23,7 +23,7 @@ class SignInController {
     FireBaseSetup().storefcmToken();
     print(prefs.getString('user_id'));
 
-    Push(context, BiometricAuthenticate());
+    PushReplacement(context, BiometricAuthenticate());
   }
 
   Future<void> SignIn(BuildContext context) async {

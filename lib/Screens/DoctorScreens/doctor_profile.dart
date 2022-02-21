@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Screens/filter_screen.dart';
@@ -32,6 +33,10 @@ class DoctorProfile extends StatefulWidget {
 
 class _DoctorProfileState extends State<DoctorProfile> {
   DoctorController _con = DoctorController();
+  TextStyle titleStyle =
+      GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.bold);
+  double _value = 0;
+  RangeValues currentRangeValues = const RangeValues(18, 40);
 
   late DoctorProfileModel _doctordata;
 
@@ -47,6 +52,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
     super.initState();
   }
 
+  ScrollController _controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +64,201 @@ class _DoctorProfileState extends State<DoctorProfile> {
             : EdgeInsets.only(bottom: 80.0),
         child: FloatingActionButton(
           onPressed: () {
-            Push(context, FilterScreen());
+            showModalBottomSheet(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10),
+                  topLeft: Radius.circular(10),
+                )),
+                isScrollControlled: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) {
+                  return GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Pop(context),
+                    child: GestureDetector(
+                      child: DraggableScrollableSheet(
+                        initialChildSize: 0.7,
+                        minChildSize: 0.5,
+                        maxChildSize: 0.9,
+                        builder: (_, _controller) => Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10))),
+                          child: ListView(
+                            controller: _controller,
+                            // mainAxisSize: MainAxisSize.min,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Category',
+                                  style: titleStyle,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Gender',
+                                  style: titleStyle,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Radio(
+                                      value: 1,
+                                      groupValue: 1,
+                                      onChanged: (d) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Radio(
+                                      value: 1,
+                                      groupValue: 1,
+                                      onChanged: (d) {}),
+                                  Text('CategroyName')
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Day', style: titleStyle),
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('Any Day')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('Today')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (s) {}),
+                                  Text('Next 3 days')
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child:
+                                    Text('Consultancy Fees', style: titleStyle),
+                              ),
+                              RangeSlider(
+                                activeColor: apptealColor,
+                                values: currentRangeValues,
+                                min: 0,
+                                max: 100,
+                                //divisions: 5,
+                                labels: RangeLabels(
+                                  currentRangeValues.start.round().toString(),
+                                  currentRangeValues.end.round().toString(),
+                                ),
+                                onChanged: (RangeValues values) {
+                                  setState(() {
+                                    currentRangeValues = values;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Years Of Experience',
+                                    style: titleStyle),
+                              ),
+                              Slider(
+                                activeColor: apptealColor,
+                                inactiveColor: apptealColor,
+                                thumbColor: Colors.white,
+                                onChanged: (double value) {
+                                  setState(() {
+                                    _value = value;
+                                  });
+                                },
+                                value: _value,
+                                //
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('Video Consult', style: titleStyle),
+                              ),
+                              Row(
+                                children: [
+                                  Radio(
+                                      value: 1,
+                                      groupValue: 1,
+                                      onChanged: (d) {}),
+                                  Text('Yes')
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Radio(
+                                      value: 1,
+                                      groupValue: 1,
+                                      onChanged: (d) {}),
+                                  Text('No')
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                });
           },
           backgroundColor: apptealColor,
           child: Icon(

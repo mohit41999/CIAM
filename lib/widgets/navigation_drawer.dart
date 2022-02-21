@@ -21,6 +21,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'commonAppBarLeading.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class commonDrawer extends StatefulWidget {
   const commonDrawer({
@@ -128,7 +129,15 @@ class _commonDrawerState extends State<commonDrawer> {
                                     _ackAlert(context);
                                   } else {
                                     Navigator.pop(context);
-                                    Push(context, drawerList[index]['Screen']);
+                                    pushNewScreen(
+                                      context,
+                                      screen: drawerList[index]['Screen'],
+                                      withNavBar:
+                                          false, // OPTIONAL VALUE. True by default.
+                                      pageTransitionAnimation:
+                                          PageTransitionAnimation.cupertino,
+                                    );
+                                    // Push(context, drawerList[index]['Screen']);
                                   }
                                 },
                               ),

@@ -88,7 +88,10 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setString('isbiometric', 'no');
-                            Push(context, GeneralScreen());
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => GeneralScreen()));
                           },
                           child: Text(
                             'Skip',
@@ -138,7 +141,11 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setString('isbiometric', 'no');
-                            Push(context, GeneralScreen());
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => GeneralScreen()));
+                            // PushReplacement(context, GeneralScreen());
                           },
                           child: Text(
                             'Skip',
