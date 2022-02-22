@@ -10,128 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/Models/chatMessages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/chatRooms.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/API repo/api_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/API repo/api_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/API repo/local_auth_api.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/API repo/local_auth_api.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/app_review.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/app_review.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/doc_review_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/doc_review_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/doctor_profile_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/doctor_profile_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/doctor_profile_one_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/doctor_profile_one_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/home_doctor_speciality_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/home_doctor_speciality_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/medicine_profile_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/medicine_profile_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/patient_lifeStyle_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/patient_lifeStyle_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/patient_medical_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/patient_medical_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/patient_profile_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/patient_profile_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/products_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/products_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/relative_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/relative_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/search_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/search_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/slot_time_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/slot_time_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/user.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/user.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/view_booking_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/view_booking_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/AGORA/video_call.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/AGORA/video_call.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/AGORA/voice_call.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/AGORA/voice_call.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_4.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LabProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LabProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyMedicineOrders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyMedicineOrders.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyOrderPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyOrderPage.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyPrescriprions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyPrescriprions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyQuestionsScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyQuestionsScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyReviewRating.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyReviewRating.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/request_for_redemption.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/request_for_redemption.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/wallet_transaction_history.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/wallet_transaction_history.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProductDetails.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProductDetails.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Products.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Products.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/lifestyle_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/lifestyle_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/medical_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/medical_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/profile_setting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/profile_setting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Signup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Signup.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/accept_reject_call.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/accept_reject_call.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/account_settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/account_settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/biometric_authenticate2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/biometric_authenticate2.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/chat.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/chat.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/chatrooms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/chatrooms.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/chats_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/chats_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/filter_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/filter_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/new.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/new.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/order_medicine.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/order_medicine.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/order_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/order_product.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/pdf.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/pdf.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/search_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/text_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/text_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/view_booking_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/view_booking_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/APIIDS.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/colorsandstyles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/colorsandstyles.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/drawerList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/drawerList.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/progress_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/progress_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/add_review.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/add_review.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/confirm_booking_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProdileController/confirm_booking_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_profile_one_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_profile_one_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/NavigationController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/NavigationController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/lifestyle_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/lifestyle_setting_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/medical_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/medical_setting_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/personal_setting_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/ProfileSettingController/relatice_setting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/ProfileSettingController/relatice_setting_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/about_consultation_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/about_consultation_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/account_setting.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/account_setting.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/app_review_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/app_review_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/home_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/lab_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/lab_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/medicine_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/medicine_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/product_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/product_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/sign_in_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/sign_in_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/sign_up_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/sign_up_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/view_booking_details_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/view_booking_details_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/AuthenticatioHelper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/fcm.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/fcm.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/firebase/notification_handling.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helper/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/helper/helperfunctions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper/helperfunctions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/alert_box_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/alert_box_widgets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/bottombar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/bottombar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/commonAppBarLeading.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/commonAppBarLeading.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/common_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/common_row.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_row.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/details_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/details_tile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/doctor_profile_row.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/doctor_profile_row.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/enter_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/enter_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/patient_home_page_4_alert_box.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/patient_home_page_4_alert_box.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/row_text_icon.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/row_text_icon.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/title_column.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/title_column.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/title_enter_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/title_enter_field.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +46,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorWFH" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -262,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644330844809</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chat">
+      <created>1645536413334</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1645536413334</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,32 +175,41 @@
     <MESSAGE value="38 points" />
     <MESSAGE value="Relative Changes" />
     <MESSAGE value="upload download" />
-    <option name="LAST_COMMIT_MESSAGE" value="upload download" />
+    <MESSAGE value="chat" />
+    <option name="LAST_COMMIT_MESSAGE" value="chat" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="245" y="0" key="CommitChangelistDialog2" timestamp="1645536411454">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="245" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1645536411454" />
     <state x="496" y="108" key="FileChooserDialogImpl" timestamp="1645535389084">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="496" y="108" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1645535389084" />
-    <state width="1466" height="139" key="GridCell.Tab.0.bottom" timestamp="1645532915096">
+    <state width="1466" height="261" key="GridCell.Tab.0.bottom" timestamp="1645548045497">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1466" height="139" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1645532915096" />
-    <state width="1466" height="139" key="GridCell.Tab.0.center" timestamp="1645532915096">
+    <state width="1466" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1645548045497" />
+    <state width="1466" height="261" key="GridCell.Tab.0.center" timestamp="1645548045496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1466" height="139" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1645532915096" />
-    <state width="1466" height="139" key="GridCell.Tab.0.left" timestamp="1645532915095">
+    <state width="1466" height="261" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1645548045496" />
+    <state width="1466" height="261" key="GridCell.Tab.0.left" timestamp="1645548045496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1466" height="139" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1645532915095" />
-    <state width="1466" height="139" key="GridCell.Tab.0.right" timestamp="1645532915096">
+    <state width="1466" height="261" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1645548045496" />
+    <state width="1466" height="261" key="GridCell.Tab.0.right" timestamp="1645548045496">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1466" height="139" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1645532915096" />
+    <state width="1466" height="261" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1645548045496" />
     <state x="153" y="0" key="SettingsEditor" timestamp="1645510339382">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="153" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1645510339382" />
+    <state x="261" y="80" key="Vcs.Push.Dialog.v2" timestamp="1645536425145">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="261" y="80" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1645536425145" />
   </component>
 </project>
