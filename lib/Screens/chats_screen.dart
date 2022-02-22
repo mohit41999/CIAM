@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 
-class ChatsScrren extends StatelessWidget {
-  const ChatsScrren({Key? key}) : super(key: key);
+class ChatsScreen extends StatefulWidget {
+  const ChatsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
+
+class _ChatsScreenState extends State<ChatsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +44,13 @@ Widget Messsages(BuildContext context) {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TextPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TextPage(
+                                doctorid: '',
+                                doctorName: '',
+                              )));
                 },
                 child: ListTile(
                   leading: CircleAvatar(

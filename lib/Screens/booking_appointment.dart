@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_utils/file_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
@@ -16,16 +17,12 @@ import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
 import 'package:patient/Screens/pdf.dart';
-import 'package:patient/Utils/APIIDS.dart';
+import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
-import 'package:patient/helper/constants.dart';
-import 'package:patient/helper/helperfunctions.dart';
-import 'package:patient/firebase/database.dart';
-import 'package:patient/Screens/chat.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/title_enter_field.dart';
@@ -70,37 +67,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
     });
 
     return response;
-  }
-
-  getChatRoomId(String a, String b) {
-    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
-      return "$b\_$a";
-    } else {
-      return "$a\_$b";
-    }
-  }
-
-  DatabaseMethods databaseMethods = DatabaseMethods();
-
-  sendMessage(String userName) async {
-    Constants.myName = (await HelperFunctions.getUserNameSharedPreference())!;
-    List<String> users = [Constants.myName, userName];
-
-    String chatRoomId = getChatRoomId(Constants.myName, userName);
-
-    Map<String, dynamic> chatRoom = {
-      "users": users,
-      "chatRoomId": chatRoomId,
-    };
-
-    databaseMethods.addChatRoom(chatRoom, chatRoomId);
-
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Chat(
-                  chatRoomId: chatRoomId,
-                )));
   }
 
   Future<void> _showNotification(Map<String, dynamic> downloadStatus) async {
@@ -995,8 +961,14 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           bgcolor: Colors.white,
                                           textColor: apptealColor,
                                           onPressed: () {
-                                            sendMessage(
-                                                confirmData.data.doctorName);
+                                            print(widget.doctor_id);
+                                            Push(
+                                                context,
+                                                TextPage(
+                                                  doctorName: confirmData
+                                                      .data.doctorName,
+                                                  doctorid: widget.doctor_id,
+                                                ));
                                           },
                                           height: 45,
                                           borderRadius: 8,

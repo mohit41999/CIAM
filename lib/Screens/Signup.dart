@@ -1,19 +1,15 @@
-import 'package:patient/controller/NavigationController.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/sign_up_controller.dart';
-import 'package:patient/firebase/AuthenticatioHelper.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/enter_field.dart';
-import 'package:country_code_picker/country_code_picker.dart';
-
-import 'SignInScreen.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -173,23 +169,24 @@ class _SignUpPageState extends State<SignUpPage> {
                   bgcolor: appblueColor,
                   textColor: Colors.white,
                   onPressed: () {
-                    AuthenticationHelper()
-                        .signUp(
-                            email: _con.email_Id.text,
-                            password: _con.password.text,
-                            username: _con.firstname.text + _con.lastname.text)
-                        .then((result) {
-                      if (result == null) {
-                        _con.Signup(context);
-                      } else {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                            result,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ));
-                      }
-                    });
+                    _con.Signup(context);
+                    // AuthenticationHelper()
+                    //     .signUp(
+                    //         email: _con.email_Id.text,
+                    //         password: _con.password.text,
+                    //         username: _con.firstname.text + _con.lastname.text)
+                    //     .then((result) {
+                    //   if (result == null) {
+                    //     _con.Signup(context);
+                    //   } else {
+                    //     Scaffold.of(context).showSnackBar(SnackBar(
+                    //       content: Text(
+                    //         result,
+                    //         style: TextStyle(fontSize: 16),
+                    //       ),
+                    //     ));
+                    //   }
+                    // });
 
                     // Push(context, SignInScreen());
                   })

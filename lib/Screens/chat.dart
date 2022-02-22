@@ -1,16 +1,15 @@
-import 'dart:io';
-import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/helper/constants.dart';
-import 'package:patient/firebase/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/firebase/database.dart';
+import 'package:patient/helper/constants.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 
 class Chat extends StatefulWidget {
-  final String chatRoomId;
+  final String doctorID;
 
-  Chat({required this.chatRoomId});
+  Chat({required this.doctorID});
 
   @override
   _ChatState createState() => _ChatState();
@@ -61,7 +60,7 @@ class _ChatState extends State<Chat> {
         'time': DateTime.now().millisecondsSinceEpoch,
       };
 
-      DatabaseMethods().addMessage(widget.chatRoomId, chatMessageMap);
+      DatabaseMethods().addMessage(widget.doctorID, chatMessageMap);
 
       setState(() {
         messageEditingController.text = "";
@@ -71,7 +70,7 @@ class _ChatState extends State<Chat> {
 
   @override
   void initState() {
-    DatabaseMethods().getChats(widget.chatRoomId).then((val) {
+    DatabaseMethods().getChats(widget.doctorID).then((val) {
       setState(() {
         chats = val;
       });
@@ -93,7 +92,7 @@ class _ChatState extends State<Chat> {
             ),
             preferredSize: Size.fromHeight(1.0)),
         title: commonAppBarTitleText(
-            appbarText: widget.chatRoomId
+            appbarText: widget.doctorID
                 .toString()
                 .replaceAll("_", "")
                 .replaceAll(Constants.myName, "")),
