@@ -64,6 +64,7 @@ dev_dependencies:
   dio: ^4.0.4
   path_provider: ^2.0.8
   cloud_firestore: ^3.1.8
+  video_player: ^2.2.18
 
 
   agora_rtc_engine: ^4.0.7
