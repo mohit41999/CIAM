@@ -30,7 +30,9 @@ class _OpenPdfState extends State<OpenPdf> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SfPdfViewer.file(File('${widget.url}')),
+      body: (widget.url.contains('.jpg'))
+          ? Image.file(File(widget.url))
+          : SfPdfViewer.file(File('${widget.url}')),
     );
   }
 }

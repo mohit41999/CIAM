@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/view_booking_details.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -6,14 +7,10 @@ import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/view_booking_details_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
-import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
-import 'package:patient/widgets/details_tile.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
-import 'package:patient/widgets/title_column.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ViewBookingDetails extends StatefulWidget {
   final String booking_id;

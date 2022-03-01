@@ -1,25 +1,17 @@
-import 'dart:io';
-
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/Models/doc_review_model.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:patient/Models/doc_review_model.dart';
 import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
-import 'package:patient/Screens/booking_appointment.dart';
-
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/controller/DoctorProdileController/doctor_profile_one_controller.dart';
-import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
-import 'package:patient/widgets/enter_field.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DoctorProfile1 extends StatefulWidget {
   final String doc_id;
@@ -846,11 +838,50 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Slots(
-                                      text: 'Evening',
-                                      startTime: 17,
-                                      endTime: 24,
-                                      time: ' pm'),
+                                  (date.day == DateTime.now().day &&
+                                          date.month == DateTime.now().month &&
+                                          date.year == DateTime.now().year)
+                                      ? (DateTime.now().hour >=
+                                              int.parse(slot_time
+                                                  .data
+                                                  .timeSlot[slot_time.data.timeSlot.length -
+                                                      1]
+                                                  .slotTime
+                                                  .toString()
+                                                  .substring(0, 2)))
+                                          ? Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 50,
+                                                ),
+                                                Text(
+                                                  'No Slots available for Today... You Can Book For Tomorrow',
+                                                  style: GoogleFonts.montserrat(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: apptealColor),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            )
+                                          : Slots(
+                                              text: 'Evening',
+                                              startTime: 17,
+                                              endTime: int.parse(slot_time.data.timeSlot[slot_time.data.timeSlot.length - 1].slotTime.toString().substring(0, 2)) +
+                                                  1,
+                                              time: ' pm')
+                                      : Slots(
+                                          text: 'Evening',
+                                          startTime: 17,
+                                          endTime: int.parse(slot_time
+                                                  .data
+                                                  .timeSlot[slot_time.data.timeSlot.length - 1]
+                                                  .slotTime
+                                                  .toString()
+                                                  .substring(0, 2)) +
+                                              1,
+                                          time: ' pm'),
                                 ],
                               ),
                               SizedBox(

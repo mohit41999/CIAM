@@ -111,7 +111,9 @@ class _BookingAppointmentState extends State<BookingAppointment> {
       } else {
         dirloc = (await getApplicationDocumentsDirectory()).path;
       }
-      var savepath = dirloc + convertCurrentDateTimeToString() + ".pdf";
+      var savepath = (pdfUrl.contains('.jpg'))
+          ? dirloc + convertCurrentDateTimeToString() + ".jpg"
+          : dirloc + convertCurrentDateTimeToString() + ".pdf";
 
       try {
         FileUtils.mkdir([dirloc]);
@@ -848,7 +850,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                                                       children: [
                                                                                         Expanded(
                                                                                           child: Text(
-                                                                                            'Report' + index.toString(),
+                                                                                            patientReports[index]['reportfile'].toString().replaceAll('http://ciam.notionprojects.tech/assets/uploaded/doctorReport/', ''),
                                                                                             style: GoogleFonts.montserrat(fontSize: 10),
                                                                                           ),
                                                                                         ),
@@ -1035,62 +1037,71 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         //                 .toString()
                                         //                 .substring(0, 19) ==
                                         //             confirmData.data.Date)
-                                        (DateTime(
-                                                        DateTime.now().year,
-                                                        DateTime.now().month,
-                                                        DateTime.now().day)
-                                                    .toString()
-                                                    .substring(0, 10) ==
-                                                confirmData.data.bookingDate)
-                                            ? (differenceInDays >= -5 &&
-                                                    differenceInDays <= 20)
-                                                ? commonBtn(
-                                                    s: 'Start Video',
-                                                    bgcolor: appblueColor,
-                                                    textColor: Colors.white,
-                                                    onPressed: () {
-                                                      FirebaseNotificationHandling()
-                                                          .sendNotification(
-                                                              user_id:
-                                                                  confirmData
-                                                                      .data
-                                                                      .doctorid)
-                                                          .then((value) {
-                                                        if (!value['status']) {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(SnackBar(
-                                                                  content: value[
-                                                                      'message']));
-                                                        } else {
-                                                          Push(
-                                                              context,
-                                                              VideoCallPage(
-                                                                channelName: value[
-                                                                        'data'][
-                                                                    'Channel Name'],
-                                                              ));
-                                                        }
-                                                      });
-                                                    },
-                                                    height: 45,
-                                                    borderRadius: 8,
-                                                  )
-                                                // commonBtn(
-                                                //    s: 'Join Call',
-                                                //    bgcolor: appblueColor,
-                                                //    textColor: Colors.white,
-                                                //    onPressed: () {
-                                                //      Push(
-                                                //          context,
-                                                //          VideoCallPage(
-                                                //            channelName:
-                                                //                channelName,
-                                                //          ));
-                                                //    })
+                                        (confirmData.data
+                                                    .video_consultancy_complete ==
+                                                'false')
+                                            ? (DateTime(
+                                                            DateTime.now().year,
+                                                            DateTime.now()
+                                                                .month,
+                                                            DateTime.now().day)
+                                                        .toString()
+                                                        .substring(0, 10) ==
+                                                    confirmData
+                                                        .data.bookingDate)
+                                                ? (differenceInDays >= -5 &&
+                                                        differenceInDays <= 20)
+                                                    ? commonBtn(
+                                                        s: 'Start Video',
+                                                        bgcolor: appblueColor,
+                                                        textColor: Colors.white,
+                                                        onPressed: () {
+                                                          FirebaseNotificationHandling()
+                                                              .sendNotification(
+                                                                  user_id:
+                                                                      confirmData
+                                                                          .data
+                                                                          .doctorid)
+                                                              .then((value) {
+                                                            if (!value[
+                                                                'status']) {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              value['message']));
+                                                            } else {
+                                                              Push(
+                                                                  context,
+                                                                  VideoCallPage(
+                                                                    channelName:
+                                                                        value['data']
+                                                                            [
+                                                                            'Channel Name'],
+                                                                  ));
+                                                            }
+                                                          });
+                                                        },
+                                                        height: 45,
+                                                        borderRadius: 8,
+                                                      )
+                                                    // commonBtn(
+                                                    //    s: 'Join Call',
+                                                    //    bgcolor: appblueColor,
+                                                    //    textColor: Colors.white,
+                                                    //    onPressed: () {
+                                                    //      Push(
+                                                    //          context,
+                                                    //          VideoCallPage(
+                                                    //            channelName:
+                                                    //                channelName,
+                                                    //          ));
+                                                    //    })
+                                                    : SizedBox()
                                                 : SizedBox()
-                                            : SizedBox()
-                                        // : SizedBox(),
+                                            : SizedBox(),
                                       ],
                                     ),
                                   ),

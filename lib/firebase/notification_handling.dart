@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
-import 'package:patient/Screens/accept_reject_call.dart';
-import 'package:patient/Utils/APIIDS.dart';
 
 class FirebaseNotificationHandling {
   Future sendNotification({required String user_id}) async {
@@ -29,21 +27,15 @@ class FirebaseNotificationHandling {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  AcceptReject(channel_name: event.data['chanel_name'])));
+                  VideoCallPage(channelName: event.data['chanel_name'])));
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
-      // String? channel_name = event.notification!.title.toString();
-
       print('onMessageOpenedApp');
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  AcceptReject(channel_name: event.data['chanel_name'])));
-      // Navigator.of(context).push(
-      //     context,
-      //     );
-      // Push(context, );
+                  VideoCallPage(channelName: event.data['chanel_name'])));
     });
     FirebaseMessaging.onBackgroundMessage((message) async {
       print(message.data);
@@ -51,9 +43,7 @@ class FirebaseNotificationHandling {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  AcceptReject(channel_name: message.data['chanel_name'])));
+                  VideoCallPage(channelName: message.data['chanel_name'])));
     });
-
-    // notificationhandler(context);
   }
 }
