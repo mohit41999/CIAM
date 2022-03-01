@@ -2,7 +2,6 @@
 //
 //     final confirmBookingModel = confirmBookingModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ConfirmBookingModel confirmBookingModelFromJson(String str) =>
@@ -40,6 +39,7 @@ class Data {
   Data({
     required this.bookingId,
     required this.specialty,
+    required this.video_consultancy_complete,
     required this.doctorid,
     required this.doctorName,
     required this.doctorProfile,
@@ -63,6 +63,7 @@ class Data {
   PatientDetails patientDetails;
   String bookedServiceTime;
   String bookingDate;
+  String video_consultancy_complete;
   // String patient_document;
   String clinicLocation;
   String totalAmount;
@@ -74,6 +75,7 @@ class Data {
         specialty: json["Specialty"],
         doctorName: json["Doctor Name"],
         doctorid: json["doctor id"],
+        video_consultancy_complete: json["video_consultancy_complete"],
         doctorProfile: json["Doctor Profile"],
         // patient_document: json["patient_document"],
         bookingStatus: json["Booking Status"],
@@ -91,6 +93,7 @@ class Data {
         "Specialty": specialty,
         "Doctor Name": doctorName,
         "Doctor Profile": doctorProfile,
+        "video_consultancy_complete": video_consultancy_complete,
         // "patient_document": patient_document,
         "Booking Status": bookingStatus,
         "Patient Details": patientDetails.toJson(),
