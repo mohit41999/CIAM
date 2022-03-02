@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
+import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/filter_screen.dart';
 import 'package:patient/Screens/search_screen.dart';
 
@@ -10,6 +11,7 @@ import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/DoctorProdileController/doctor_controller.dart';
+import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/row_text_icon.dart';
@@ -31,6 +33,8 @@ class DoctorProfile extends StatefulWidget {
   _DoctorProfileState createState() => _DoctorProfileState();
 }
 
+enum Gender { male, female }
+
 class _DoctorProfileState extends State<DoctorProfile> {
   DoctorController _con = DoctorController();
   TextStyle titleStyle =
@@ -38,7 +42,9 @@ class _DoctorProfileState extends State<DoctorProfile> {
   double _value = 0;
   RangeValues currentRangeValues = const RangeValues(18, 40);
 
+  late HomeDoctorSpecialityModel specialities;
   late DoctorProfileModel _doctordata;
+  late List<bool> _isChecked;
 
   @override
   void initState() {
@@ -49,10 +55,18 @@ class _DoctorProfileState extends State<DoctorProfile> {
         _con.loading = false;
       });
     });
+    HomeController().getDoctorSpecilities(context).then((value) {
+      setState(() {
+        specialities = value;
+        _isChecked = List<bool>.filled(specialities.data.length, false);
+        // _con.specialitybool = false;
+      });
+    });
     super.initState();
   }
 
   ScrollController _controller = ScrollController();
+  Gender gender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
@@ -74,190 +88,193 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 context: context,
                 backgroundColor: Colors.transparent,
                 builder: (context) {
-                  return GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => Pop(context),
-                    child: GestureDetector(
-                      child: DraggableScrollableSheet(
-                        initialChildSize: 0.7,
-                        minChildSize: 0.5,
-                        maxChildSize: 0.9,
-                        builder: (_, _controller) => Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10))),
-                          child: ListView(
-                            controller: _controller,
-                            // mainAxisSize: MainAxisSize.min,
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Category',
-                                  style: titleStyle,
+                  return StatefulBuilder(builder: (BuildContext context,
+                      StateSetter setState /*You can rename this!*/) {
+                    return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () => Pop(context),
+                      child: GestureDetector(
+                        child: DraggableScrollableSheet(
+                          initialChildSize: 0.7,
+                          minChildSize: 0.5,
+                          maxChildSize: 0.9,
+                          builder: (_, _controller) => Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10))),
+                            child: ListView(
+                              controller: _controller,
+                              // mainAxisSize: MainAxisSize.min,
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Category',
+                                    style: titleStyle,
+                                  ),
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Gender',
-                                  style: titleStyle,
+                                ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    // controller: _controller,
+                                    itemCount: specialities.data.length,
+                                    itemBuilder: (context, index) {
+                                      return Row(
+                                        children: [
+                                          Checkbox(
+                                              value: _isChecked[index],
+                                              onChanged: (s) {
+                                                setState(() {
+                                                  _isChecked[index] = s!;
+                                                });
+                                              }),
+                                          Text(specialities
+                                              .data[index].specialistName)
+                                        ],
+                                      );
+                                    }),
+                                SizedBox(
+                                  height: 10,
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                      value: 1,
-                                      groupValue: 1,
-                                      onChanged: (d) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                      value: 1,
-                                      groupValue: 1,
-                                      onChanged: (d) {}),
-                                  Text('CategroyName')
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('Day', style: titleStyle),
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('Any Day')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('Today')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(value: false, onChanged: (s) {}),
-                                  Text('Next 3 days')
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child:
-                                    Text('Consultancy Fees', style: titleStyle),
-                              ),
-                              RangeSlider(
-                                activeColor: apptealColor,
-                                values: currentRangeValues,
-                                min: 0,
-                                max: 100,
-                                //divisions: 5,
-                                labels: RangeLabels(
-                                  currentRangeValues.start.round().toString(),
-                                  currentRangeValues.end.round().toString(),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Gender',
+                                    style: titleStyle,
+                                  ),
                                 ),
-                                onChanged: (RangeValues values) {
-                                  setState(() {
-                                    currentRangeValues = values;
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('Years Of Experience',
-                                    style: titleStyle),
-                              ),
-                              Slider(
-                                activeColor: apptealColor,
-                                inactiveColor: apptealColor,
-                                thumbColor: Colors.white,
-                                onChanged: (double value) {
-                                  setState(() {
-                                    _value = value;
-                                  });
-                                },
-                                value: _value,
-                                //
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('Video Consult', style: titleStyle),
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                      value: 1,
-                                      groupValue: 1,
-                                      onChanged: (d) {}),
-                                  Text('Yes')
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio(
-                                      value: 1,
-                                      groupValue: 1,
-                                      onChanged: (d) {}),
-                                  Text('No')
-                                ],
-                              ),
-                            ],
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: Gender.male,
+                                        groupValue: gender,
+                                        onChanged: (Gender? d) {
+                                          setState(() {
+                                            gender = d!;
+                                          });
+                                        }),
+                                    Text('Male')
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: Gender.female,
+                                        groupValue: gender,
+                                        onChanged: (Gender? d) {
+                                          setState(() {
+                                            gender = d!;
+                                            print(d);
+                                          });
+                                        }),
+                                    Text('Female')
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Day', style: titleStyle),
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(value: false, onChanged: (s) {}),
+                                    Text('Any Day')
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(value: false, onChanged: (s) {}),
+                                    Text('Today')
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(value: false, onChanged: (s) {}),
+                                    Text('Next 3 days')
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Consultancy Fees',
+                                      style: titleStyle),
+                                ),
+                                RangeSlider(
+                                  activeColor: apptealColor,
+                                  values: currentRangeValues,
+                                  min: 0,
+                                  max: 100,
+                                  //divisions: 5,
+                                  labels: RangeLabels(
+                                    currentRangeValues.start.round().toString(),
+                                    currentRangeValues.end.round().toString(),
+                                  ),
+                                  onChanged: (RangeValues values) {
+                                    setState(() {
+                                      currentRangeValues = values;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Years Of Experience',
+                                      style: titleStyle),
+                                ),
+                                Slider(
+                                  activeColor: apptealColor,
+                                  inactiveColor: apptealColor,
+                                  thumbColor: Colors.white,
+                                  onChanged: (double value) {
+                                    setState(() {
+                                      _value = value;
+                                    });
+                                  },
+                                  value: _value,
+                                  //
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                      Text('Video Consult', style: titleStyle),
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: 1,
+                                        groupValue: 1,
+                                        onChanged: (d) {}),
+                                    Text('Yes')
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Radio(
+                                        value: 1,
+                                        groupValue: 1,
+                                        onChanged: (d) {}),
+                                    Text('No')
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  });
                 });
           },
           backgroundColor: apptealColor,

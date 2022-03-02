@@ -16,6 +16,7 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
+import 'package:patient/Screens/TermsAndConditions.dart';
 import 'package:patient/Screens/pdf.dart';
 import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -1209,9 +1210,51 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         //   value:
                                         //       '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
                                         // ),
-
                                         commonBtn(
-                                          s: 'Pay Now',
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TermsAndConditions(
+                                                          amount: confirmData
+                                                              .data.totalAmount,
+                                                          booking_id:
+                                                              confirmData.data
+                                                                  .bookingId,
+                                                        ))).then((value) {
+                                              setState(() {
+                                                loading = true;
+                                                print(
+                                                    'thissssssssssssssss=======');
+                                                initialize();
+                                              });
+                                            });
+                                            // _con
+                                            //     .confirmBookingRequest(
+                                            //         context, widget.booking_id)
+                                            //     .then((value) {
+                                            //   _con
+                                            //       .getconfirmBooking(context,
+                                            //           widget.doctor_id, widget.booking_id)
+                                            //       .then((value) {
+                                            //     setState(() {
+                                            //       confirmData = value;
+                                            //     });
+                                            //   });
+                                            // });
+                                          },
+                                          s: 'Terms and Conditions',
+                                          textColor: appblueColor,
+                                          bgcolor: Colors.white,
+                                          borderRadius: 10,
+                                          height: 30,
+                                          textSize: 12,
+                                          borderColor: appblueColor,
+                                          borderWidth: 2,
+                                        ),
+                                        commonBtn(
+                                          s: 'Proceed',
                                           bgcolor: appblueColor,
                                           textColor: Colors.white,
                                           onPressed: () {
