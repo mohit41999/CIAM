@@ -18,9 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentConfirmationScreen extends StatefulWidget {
   const PaymentConfirmationScreen(
-      {Key? key, required this.amount, required this.booking_id})
+      {Key? key,
+      required this.amount,
+      required this.booking_id,
+      this.terms = false})
       : super(key: key);
   final String amount;
+  final bool terms;
   final String booking_id;
 
   @override
@@ -69,7 +73,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
 
     _con.confirmBookingRequest(context, widget.booking_id).then((value) {
       _con
-          .addPaymentTransaction(context, widget.booking_id, widget.amount)
+          .addPaymentTransaction(
+              context, widget.booking_id, widget.amount, widget.terms)
           .then((value) {});
     });
   }

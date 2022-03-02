@@ -64,6 +64,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                             builder: (context) => PaymentConfirmationScreen(
                                   amount: widget.amount,
                                   booking_id: widget.booking_id,
+                                  terms: true,
                                 )));
                     // _con
                     //     .confirmBookingRequest(

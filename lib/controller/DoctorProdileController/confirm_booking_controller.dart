@@ -42,8 +42,8 @@ class ConfirmBookingController {
     }
   }
 
-  Future addPaymentTransaction(
-      BuildContext context, String booking_id, String amount) async {
+  Future addPaymentTransaction(BuildContext context, String booking_id,
+      String amount, bool terms) async {
     var loader = ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -59,6 +59,7 @@ class ConfirmBookingController {
     if (response['status']) {
       Navigator.pop(context);
       Navigator.pop(context);
+      (terms) ? Navigator.pop(context) : null;
     } else {
       failure(context, response);
     }
