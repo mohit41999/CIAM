@@ -133,7 +133,7 @@ class _commonDrawerState extends State<commonDrawer> {
                                       context,
                                       screen: drawerList[index]['Screen'],
                                       withNavBar:
-                                          false, // OPTIONAL VALUE. True by default.
+                                          true, // OPTIONAL VALUE. True by default.
                                       pageTransitionAnimation:
                                           PageTransitionAnimation.cupertino,
                                     );

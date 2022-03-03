@@ -608,7 +608,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 100,
+              height: navbarht + 20,
             ),
           ],
         ),

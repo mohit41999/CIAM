@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
-import 'package:patient/Screens/filter_screen.dart';
 import 'package:patient/Screens/search_screen.dart';
 
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -14,6 +13,7 @@ import 'package:patient/controller/DoctorProdileController/doctor_controller.dar
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 
 import 'doctor_profile_1.dart';
@@ -73,9 +73,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Padding(
-        padding: (widget.fromhome)
-            ? EdgeInsets.only(bottom: 0)
-            : EdgeInsets.only(bottom: 80.0),
+        padding: EdgeInsets.only(bottom: 80.0),
         child: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
@@ -284,13 +282,22 @@ class _DoctorProfileState extends State<DoctorProfile> {
           ),
         ),
       ),
+      drawer: commonDrawer(),
       appBar: AppBar(
         title: commonAppBarTitle(),
-        leading: commonAppBarLeading(
-            iconData: Icons.arrow_back_ios_new,
-            onPressed: () {
-              Pop(context);
-            }),
+        leading: (widget.fromhome)
+            ? commonAppBarLeading(
+                iconData: Icons.arrow_back_ios_new,
+                onPressed: () {
+                  Pop(context);
+                })
+            : commonAppBarLeading(
+                iconData: Icons.menu,
+                onPressed: () {
+                  setState(() {
+                    Scaffold.of(context).openDrawer();
+                  });
+                }),
         centerTitle: true,
         backgroundColor: appAppBarColor,
         elevation: 0,
@@ -367,7 +374,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                               ? EdgeInsets.only(
                                                   left: 10,
                                                   right: 10,
-                                                  bottom: 50,
+                                                  bottom: navbarht + 20,
                                                   top: 10)
                                               : const EdgeInsets.all(5.0),
                                           child: Container(
@@ -541,7 +548,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                                                       .bold),
                                                     ),
                                                   ),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -564,7 +571,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                     ? EdgeInsets.only(
                                         left: 10,
                                         right: 10,
-                                        bottom: 50,
+                                        bottom: navbarht + 20,
                                         top: 10)
                                     : const EdgeInsets.all(5.0),
                                 child: Container(

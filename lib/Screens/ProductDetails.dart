@@ -166,7 +166,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget BottomBar(context) {
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
         child: Container(
           height: 70.0,
           width: MediaQuery.of(context).size.width,

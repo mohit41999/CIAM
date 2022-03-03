@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_utils/file_utils.dart';
@@ -174,7 +174,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                           textColor: Colors.white,
                           onPressed: () {
                             Navigator.pop(context);
-                            Push(context, OpenPdf(url: path));
+                            Push(context, OpenPdf(url: path), withnav: false);
                           })
                     ],
                   ),
@@ -215,6 +215,14 @@ class _BookingAppointmentState extends State<BookingAppointment> {
         timer = Timer.periodic(Duration(seconds: 5), (timer) {
           if (mounted) {
             setState(() {
+              _con
+                  .getconfirmBooking(
+                      context, widget.doctor_id, widget.booking_id)
+                  .then((value) {
+                setState(() {
+                  confirmData = value;
+                });
+              });
               print('5 secs');
               differenceInDays =
                   DateTime.now().difference(appointmentdate).inMinutes;
@@ -364,14 +372,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                     title: 'Specialty',
                                     value: confirmData.data.specialty,
                                   ),
-                                  // doctorProfileRow(
-                                  //   title: 'Booking for',
-                                  //   value: confirmData.data.Booking_For,
-                                  // ),
-                                  // doctorProfileRow(
-                                  //   title: 'Status of Booking',
-                                  //   value: confirmData.data.bookingStatus,
-                                  // ),
                                   (confirmData.data.amountStatus == 'Confirm')
                                       ? commonBtn(
                                           s: 'Add Review',
@@ -596,33 +596,11 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                           )
                                                         ]),
                                                   ),
-                                                  // RichText(
-                                                  //   text: TextSpan(
-                                                  //       text: 'End Time',
-                                                  //       style: GoogleFonts.montserrat(
-                                                  //           fontSize: 12,
-                                                  //           color: Color(0xff161616),
-                                                  //           fontWeight: FontWeight.bold),
-                                                  //       children: <TextSpan>[
-                                                  //         TextSpan(
-                                                  //           text: '     29 Sep. 12:00 AM',
-                                                  //           style: GoogleFonts.montserrat(
-                                                  //               color: apptealColor,
-                                                  //               fontSize: 12,
-                                                  //               fontWeight:
-                                                  //                   FontWeight.bold),
-                                                  //         )
-                                                  //       ]),
-                                                  // ),
                                                 ],
                                               ),
                                             )
                                           ],
                                         ),
-                                        // doctorProfileRow(
-                                        //   title: 'Clinic Address',
-                                        //   value: confirmData.data.clinicLocation,
-                                        // ),
                                         doctorProfileRow(
                                           title: 'Total Amount',
                                           value:
@@ -632,163 +610,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           title: 'Status',
                                           value: confirmData.data.amountStatus,
                                         ),
-                                        // doctorProfileRow(
-                                        //   title: 'Admin Fees',
-                                        //   value:
-                                        //       '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
-                                        // ),
-
-                                        // Row(
-                                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                                        //   children: [
-                                        //     Container(
-                                        //       width:
-                                        //           MediaQuery.of(context).size.width / 5,
-                                        //       child: Text(
-                                        //         'Amount Status',
-                                        //         style: GoogleFonts.montserrat(
-                                        //             fontSize: 12,
-                                        //             color: Color(0xff161616)
-                                        //                 .withOpacity(0.6)),
-                                        //       ),
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 15,
-                                        //     ),
-                                        //     Text('-'),
-                                        //     SizedBox(
-                                        //       width: 10,
-                                        //     ),
-                                        //     Container(
-                                        //       width: MediaQuery.of(context).size.width /
-                                        //           1.65,
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.spaceBetween,
-                                        //         children: [
-                                        //           Text(
-                                        //             confirmData.data.amountStatus,
-                                        //             style: GoogleFonts.montserrat(
-                                        //                 fontSize: 12,
-                                        //                 color: Color(0xff161616),
-                                        //                 fontWeight: FontWeight.bold),
-                                        //           ),
-                                        //           commonBtn(
-                                        //             s: 'Pay Now',
-                                        //             bgcolor: appblueColor,
-                                        //             textColor: Colors.white,
-                                        //             onPressed: () {
-                                        //               _con.confirmBookingRequest(
-                                        //                   context, widget.booking_id);
-                                        //             },
-                                        //             width: 153,
-                                        //             height: 30,
-                                        //             textSize: 12,
-                                        //             borderRadius: 0,
-                                        //           )
-                                        //         ],
-                                        //       ),
-                                        //     )
-                                        //   ],
-                                        // ),
-                                        // GestureDetector(
-                                        //   onTap: () {
-                                        //     downloadFile(confirmData
-                                        //         .data.patient_document);
-                                        //   },
-                                        //   child: Row(
-                                        //     crossAxisAlignment:
-                                        //         CrossAxisAlignment.start,
-                                        //     children: [
-                                        //       Container(
-                                        //         width: MediaQuery.of(context)
-                                        //                 .size
-                                        //                 .width /
-                                        //             5,
-                                        //         child: Text(
-                                        //           'Uploaded Document',
-                                        //           style: GoogleFonts.montserrat(
-                                        //               fontSize: 12,
-                                        //               color: Color(0xff161616)
-                                        //                   .withOpacity(0.6)),
-                                        //         ),
-                                        //       ),
-                                        //       SizedBox(
-                                        //         width: 15,
-                                        //       ),
-                                        //       Text('-'),
-                                        //       SizedBox(
-                                        //         width: 10,
-                                        //       ),
-                                        //       Container(
-                                        //         width: MediaQuery.of(context)
-                                        //                 .size
-                                        //                 .width /
-                                        //             1.65,
-                                        //         child: Row(
-                                        //           children: [
-                                        //             Padding(
-                                        //               padding:
-                                        //                   const EdgeInsets.only(
-                                        //                       right: 10.0),
-                                        //               child: Text(
-                                        //                 'Document',
-                                        //                 style: GoogleFonts
-                                        //                     .montserrat(
-                                        //                         fontSize: 12,
-                                        //                         color:
-                                        //                             apptealColor,
-                                        //                         fontWeight:
-                                        //                             FontWeight
-                                        //                                 .bold),
-                                        //               ),
-                                        //             ),
-                                        //             Image.asset(
-                                        //                 'assets/pngs/Icon feather-download.png')
-                                        //           ],
-                                        //         ),
-                                        //       )
-                                        //       // GestureDetector(
-                                        //       //   onTap: () {
-                                        //       //     downloadFile(
-                                        //       //         confirmData
-                                        //       //             .data.download_report,
-                                        //       //         'pdf',
-                                        //       //         'downloads');
-                                        //       //   },
-                                        //       //   child: Container(
-                                        //       //     width: MediaQuery.of(context)
-                                        //       //             .size
-                                        //       //             .width /
-                                        //       //         1.65,
-                                        //       //     child: Row(
-                                        //       //       children: [
-                                        //       //         Padding(
-                                        //       //           padding:
-                                        //       //               const EdgeInsets
-                                        //       //                       .only(
-                                        //       //                   right: 10.0),
-                                        //       //           child: Text(
-                                        //       //             'Document',
-                                        //       //             style: GoogleFonts
-                                        //       //                 .montserrat(
-                                        //       //                     fontSize: 12,
-                                        //       //                     color:
-                                        //       //                         apptealColor,
-                                        //       //                     fontWeight:
-                                        //       //                         FontWeight
-                                        //       //                             .bold),
-                                        //       //           ),
-                                        //       //         ),
-                                        //       //         Image.asset(
-                                        //       //             'assets/pngs/Icon feather-download.png')
-                                        //       //       ],
-                                        //       //     ),
-                                        //       //   ),
-                                        //       // )
-                                        //     ],
-                                        //   ),
-                                        // ),
                                         GestureDetector(
                                           onTap: () {},
                                           child: Row(
@@ -958,7 +779,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           },
                                           borderRadius: 10,
                                         ),
-
                                         commonBtn(
                                           s: 'Chat',
                                           bgcolor: Colors.white,
@@ -971,73 +791,14 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                   doctorName: confirmData
                                                       .data.doctorName,
                                                   doctorid: widget.doctor_id,
-                                                ));
+                                                ),
+                                                withnav: false);
                                           },
                                           height: 45,
                                           borderRadius: 8,
                                           borderColor: apptealColor,
                                           borderWidth: 2,
                                         ),
-                                        // (DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute + 5,
-                                        //               00,
-                                        //             ) ==
-                                        //             confirmData.data.Date ||
-                                        //         DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute + 4,
-                                        //               00,
-                                        //             ) ==
-                                        //             confirmData.data.Date ||
-                                        //         DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute + 3,
-                                        //               00,
-                                        //             ) ==
-                                        //             confirmData.data.Date ||
-                                        //         DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute + 2,
-                                        //               00,
-                                        //             )
-                                        //                 .toString()
-                                        //                 .substring(0, 19) ==
-                                        //             confirmData.data.Date ||
-                                        //         DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute + 1,
-                                        //               00,
-                                        //             )
-                                        //                 .toString()
-                                        //                 .substring(0, 19) ==
-                                        //             confirmData.data.Date ||
-                                        //         DateTime(
-                                        //               DateTime.now().year,
-                                        //               DateTime.now().month,
-                                        //               DateTime.now().day,
-                                        //               DateTime.now().hour,
-                                        //               DateTime.now().minute,
-                                        //               00,
-                                        //             )
-                                        //                 .toString()
-                                        //                 .substring(0, 19) ==
-                                        //             confirmData.data.Date)
                                         (confirmData.data
                                                     .video_consultancy_complete ==
                                                 'false')
@@ -1081,25 +842,15 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                                         value['data']
                                                                             [
                                                                             'Channel Name'],
-                                                                  ));
+                                                                  ),
+                                                                  withnav:
+                                                                      false);
                                                             }
                                                           });
                                                         },
                                                         height: 45,
                                                         borderRadius: 8,
                                                       )
-                                                    // commonBtn(
-                                                    //    s: 'Join Call',
-                                                    //    bgcolor: appblueColor,
-                                                    //    textColor: Colors.white,
-                                                    //    onPressed: () {
-                                                    //      Push(
-                                                    //          context,
-                                                    //          VideoCallPage(
-                                                    //            channelName:
-                                                    //                channelName,
-                                                    //          ));
-                                                    //    })
                                                     : SizedBox()
                                                 : SizedBox()
                                             : SizedBox(),
@@ -1196,20 +947,11 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             )
                                           ],
                                         ),
-                                        // doctorProfileRow(
-                                        //   title: 'Clinic Address',
-                                        //   value: confirmData.data.clinicLocation,
-                                        // ),
                                         doctorProfileRow(
                                           title: 'Total Amount',
                                           value:
                                               '\₹${confirmData.data.totalAmount}',
                                         ),
-                                        // doctorProfileRow(
-                                        //   title: 'Admin Fees',
-                                        //   value:
-                                        //       '\₹${double.parse(confirmData.data.totalAmount) * 1 / 10}',
-                                        // ),
                                         commonBtn(
                                           onPressed: () {
                                             Navigator.push(
@@ -1230,19 +972,6 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                 initialize();
                                               });
                                             });
-                                            // _con
-                                            //     .confirmBookingRequest(
-                                            //         context, widget.booking_id)
-                                            //     .then((value) {
-                                            //   _con
-                                            //       .getconfirmBooking(context,
-                                            //           widget.doctor_id, widget.booking_id)
-                                            //       .then((value) {
-                                            //     setState(() {
-                                            //       confirmData = value;
-                                            //     });
-                                            //   });
-                                            // });
                                           },
                                           s: 'Terms and Conditions',
                                           textColor: appblueColor,
@@ -1258,17 +987,21 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           bgcolor: appblueColor,
                                           textColor: Colors.white,
                                           onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        PaymentConfirmationScreen(
-                                                          amount: confirmData
-                                                              .data.totalAmount,
-                                                          booking_id:
-                                                              confirmData.data
-                                                                  .bookingId,
-                                                        ))).then((value) {
+                                            pushNewScreen(
+                                              context,
+                                              screen: PaymentConfirmationScreen(
+                                                amount: confirmData
+                                                    .data.totalAmount,
+                                                booking_id:
+                                                    confirmData.data.bookingId,
+                                                terms: true,
+                                              ),
+                                              withNavBar:
+                                                  false, // OPTIONAL VALUE. True by default.
+                                              pageTransitionAnimation:
+                                                  PageTransitionAnimation
+                                                      .cupertino,
+                                            ).then((value) {
                                               setState(() {
                                                 loading = true;
                                                 print(
@@ -1276,123 +1009,18 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                 initialize();
                                               });
                                             });
-                                            // _con
-                                            //     .confirmBookingRequest(
-                                            //         context, widget.booking_id)
-                                            //     .then((value) {
-                                            //   _con
-                                            //       .getconfirmBooking(context,
-                                            //           widget.doctor_id, widget.booking_id)
-                                            //       .then((value) {
-                                            //     setState(() {
-                                            //       confirmData = value;
-                                            //     });
-                                            //   });
-                                            // });
                                           },
                                           // width: 153,
                                           // height: 30,
                                           textSize: 12,
                                           borderRadius: 0,
                                         ),
-                                        // Row(
-                                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                                        //   children: [
-                                        //     Container(
-                                        //       width:
-                                        //           MediaQuery.of(context).size.width / 5,
-                                        //       child: Text(
-                                        //         'Amount Status',
-                                        //         style: GoogleFonts.montserrat(
-                                        //             fontSize: 12,
-                                        //             color: Color(0xff161616)
-                                        //                 .withOpacity(0.6)),
-                                        //       ),
-                                        //     ),
-                                        //     SizedBox(
-                                        //       width: 15,
-                                        //     ),
-                                        //     Text('-'),
-                                        //     SizedBox(
-                                        //       width: 10,
-                                        //     ),
-                                        //     Container(
-                                        //       width: MediaQuery.of(context).size.width /
-                                        //           1.65,
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.spaceBetween,
-                                        //         children: [
-                                        //           Text(
-                                        //             confirmData.data.amountStatus,
-                                        //             style: GoogleFonts.montserrat(
-                                        //                 fontSize: 12,
-                                        //                 color: Color(0xff161616),
-                                        //                 fontWeight: FontWeight.bold),
-                                        //           ),
-                                        //           commonBtn(
-                                        //             s: 'Pay Now',
-                                        //             bgcolor: appblueColor,
-                                        //             textColor: Colors.white,
-                                        //             onPressed: () {
-                                        //               _con.confirmBookingRequest(
-                                        //                   context, widget.booking_id);
-                                        //             },
-                                        //             width: 153,
-                                        //             height: 30,
-                                        //             textSize: 12,
-                                        //             borderRadius: 0,
-                                        //           )
-                                        //         ],
-                                        //       ),
-                                        //     )
-                                        //   ],
-                                        // ),
-
-                                        // GestureDetector(
-                                        //   onTap: () {
-                                        //     downloadFile(
-                                        //         confirmData
-                                        //             .data.download_report,
-                                        //         'pdf',
-                                        //         'downloads');
-                                        //   },
-                                        //   child: Container(
-                                        //     width: MediaQuery.of(context)
-                                        //             .size
-                                        //             .width /
-                                        //         1.65,
-                                        //     child: Row(
-                                        //       children: [
-                                        //         Padding(
-                                        //           padding:
-                                        //               const EdgeInsets
-                                        //                       .only(
-                                        //                   right: 10.0),
-                                        //           child: Text(
-                                        //             'Document',
-                                        //             style: GoogleFonts
-                                        //                 .montserrat(
-                                        //                     fontSize: 12,
-                                        //                     color:
-                                        //                         apptealColor,
-                                        //                     fontWeight:
-                                        //                         FontWeight
-                                        //                             .bold),
-                                        //           ),
-                                        //         ),
-                                        //         Image.asset(
-                                        //             'assets/pngs/Icon feather-download.png')
-                                        //       ],
-                                        //     ),
-                                        //   ),
-                                        // )
                                       ],
                                     ),
                                   ),
                                 ),
                           SizedBox(
-                            height: 12,
+                            height: navbarht + 20,
                           ),
                         ],
                       ),

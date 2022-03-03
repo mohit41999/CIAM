@@ -221,7 +221,10 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                     ),
                   );
                 }),
-          )
+          ),
+          SizedBox(
+            height: navbarht + 20,
+          ),
         ],
       ),
     );

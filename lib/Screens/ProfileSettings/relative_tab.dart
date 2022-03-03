@@ -26,27 +26,7 @@ class _RelativeState extends State<Relative> {
   RelativeSettingController _con = RelativeSettingController();
   bool loading = true;
   late RelativeModel relativeData;
-  // Future initialize(BuildContext context) async {
-  //   _con.getrelativedata(context)data(context).then((Profile) {
-  //     setState(() {
-  //       _con.firstname.text = Profile.data.firstName;
-  //       _con.lastname.text = Profile.data.lastName;
-  //       _con.email.text = Profile.data.email;
-  //       _con.contactno.text = Profile.data.mobileNumber;
-  //       _con.gender.text = Profile.data.gender;
-  //       _con.DOB.text = Profile.data.dob.toString();
-  //       _con.bloodGroup.text = Profile.data.bloodGroup;
-  //       _con.maritalStatus.text = Profile.data.maritalStatus;
-  //       _con.height.text = Profile.data.height;
-  //       _con.weight.text = Profile.data.weight;
-  //       _con.emergencycontact.text = Profile.data.emergencyContact;
-  //       _con.address.text = Profile.data.address;
-  //       _con.age.text = Profile.data.age;
-  //       _con.profileImage = Profile.data.profile;
-  //       loading = false;
-  //     });
-  //   });
-  // }
+
   void initialize() {
     _con.getrelativedata(context).then((value) {
       setState(() {
@@ -319,7 +299,10 @@ class _RelativeState extends State<Relative> {
                                   });
                                 });
                               }),
-                        )
+                        ),
+                  SizedBox(
+                    height: navbarht + 20,
+                  ),
                 ],
               ),
             ),

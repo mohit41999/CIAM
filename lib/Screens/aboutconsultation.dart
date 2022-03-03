@@ -670,7 +670,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
               ),
             ),
             SizedBox(
-              height: 70,
+              height: navbarht + 20,
             ),
           ],
         ),

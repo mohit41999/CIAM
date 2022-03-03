@@ -71,7 +71,10 @@ class _MedicalState extends State<Medical> {
               borderRadius: 8,
               textSize: 20,
             ),
-          )
+          ),
+          SizedBox(
+            height: navbarht + 20,
+          ),
         ],
       ),
     );

@@ -80,7 +80,13 @@ class _MyAppointmentsState extends State<MyAppointments> {
                       itemCount: Details.length,
                       itemBuilder: (context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.only(
+                              left: 8.0,
+                              right: 8.0,
+                              top: 8.0,
+                              bottom: (index + 1 == Details.length)
+                                  ? navbarht + 20
+                                  : 8.0),
                           child: Container(
                             height: 170,
                             decoration: BoxDecoration(
@@ -214,7 +220,8 @@ class _MyAppointmentsState extends State<MyAppointments> {
                                                       .booingId,
                                               doctor_id:
                                                   Details.elementAt(index)
-                                                      .doctorId)
+                                                      .doctorId),
+                                          withnav: false
                                           // ViewBookingDetails(
                                           //   booking_id: Details.elementAt(index)
                                           //       .booingId,
@@ -236,7 +243,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                           ),
                         );
                       }),
-                )
+                ),
               ],
             ),
     );

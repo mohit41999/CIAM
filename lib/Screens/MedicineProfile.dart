@@ -9,8 +9,10 @@ import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/medicine_controller.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 
 class MedicineProfile extends StatefulWidget {
   const MedicineProfile({Key? key}) : super(key: key);
@@ -38,11 +40,20 @@ class _MedicineProfileState extends State<MedicineProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: commonAppBarTitleText(appbarText: 'Medicine Profile'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: appAppBarColor,
-      ),
+          centerTitle: true,
+          title: commonAppBarTitle(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => commonAppBarLeading(
+                iconData: Icons.menu,
+                onPressed: () {
+                  setState(() {
+                    Scaffold.of(context).openDrawer();
+                  });
+                }),
+          )),
+      drawer: commonDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -94,9 +105,9 @@ class _MedicineProfileState extends State<MedicineProfile> {
                 itemCount: medicinedata.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: (index + 1 == 10)
+                    padding: (index + 1 == medicinedata.data.length)
                         ? EdgeInsets.only(
-                            left: 10, right: 10, bottom: 50, top: 10)
+                            left: 10, right: 10, bottom: navbarht + 20, top: 10)
                         : const EdgeInsets.all(10.0),
                     child: Container(
                       height: 170,
@@ -171,7 +182,8 @@ class _MedicineProfileState extends State<MedicineProfile> {
                                     bgcolor: Colors.white,
                                     textColor: appblueColor,
                                     onPressed: () {
-                                      Push(context, OrderMedicine());
+                                      Push(context, OrderMedicine(),
+                                          withnav: false);
                                     },
                                     height: 30,
                                     textSize: 12,

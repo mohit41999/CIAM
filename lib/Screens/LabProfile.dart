@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 
 class LabProfile extends StatefulWidget {
@@ -22,17 +23,20 @@ class _LabProfileState extends State<LabProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: commonAppBarTitleText(appbarText: 'Lab Profile'),
-        elevation: 0,
-        backgroundColor: appAppBarColor,
-        centerTitle: true,
-        leading: Builder(
+          centerTitle: true,
+          title: commonAppBarTitle(),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Builder(
             builder: (context) => commonAppBarLeading(
-                iconData: Icons.arrow_back_ios_new,
+                iconData: Icons.menu,
                 onPressed: () {
-                  Navigator.pop(context);
-                })),
-      ),
+                  setState(() {
+                    Scaffold.of(context).openDrawer();
+                  });
+                }),
+          )),
+      drawer: commonDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -86,7 +90,7 @@ class _LabProfileState extends State<LabProfile> {
                   return Padding(
                     padding: (index + 1 == 10)
                         ? EdgeInsets.only(
-                            left: 10, right: 10, bottom: 50, top: 10)
+                            left: 10, right: 10, bottom: navbarht + 20, top: 10)
                         : const EdgeInsets.all(10.0),
                     child: Container(
                       height: 170,

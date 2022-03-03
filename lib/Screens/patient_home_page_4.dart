@@ -288,14 +288,18 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
               height: 15,
             ),
             Container(
-              height: 600,
+              height: 580,
               color: Colors.white,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: 3,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          top: 10.0,
+                          bottom: (index + 1 == 3) ? navbarht + 20 : 10),
                       child: Container(
                         height: 200,
                         decoration: BoxDecoration(

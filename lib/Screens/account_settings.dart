@@ -95,13 +95,17 @@ class _AccountSettingState extends State<AccountSetting> {
                         })
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: navbarht + 20,
+              ),
             ],
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  EdgeInsets.only(bottom: navbarht + 20, left: 10, right: 10),
               child: commonBtn(
                 s: 'Submit  ',
                 bgcolor: appblueColor,

@@ -526,135 +526,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               SizedBox(
                                 height: 10,
                               ),
-                              // Divider(
-                              //   color: textColor.withOpacity(0.4),
-                              //   thickness: 1,
-                              // ),
-                              // doctorProfileRow(
-                              //   title: 'Doctor\'s Availability Status',
-                              //   value: 'Available',
-                              //   yellow: true,
-                              // ),
-                              // Row(
-                              //   crossAxisAlignment: CrossAxisAlignment.start,
-                              //   children: [
-                              //     Container(
-                              //       width:
-                              //           MediaQuery.of(context).size.width / 5,
-                              //       child: Text(
-                              //         'Price per slot',
-                              //         style: GoogleFonts.montserrat(
-                              //             fontSize: 12,
-                              //             color: Color(0xff161616)
-                              //                 .withOpacity(0.6)),
-                              //       ),
-                              //     ),
-                              //     SizedBox(
-                              //       width: 15,
-                              //     ),
-                              //     Text('-'),
-                              //     SizedBox(
-                              //       width: 10,
-                              //     ),
-                              //     Container(
-                              //         height: 70,
-                              //         width: MediaQuery.of(context).size.width /
-                              //             1.65,
-                              //         child: ListView.builder(
-                              //             itemCount:
-                              //                 slot_time.data.timeSlot.length,
-                              //             scrollDirection: Axis.horizontal,
-                              //             itemBuilder: (context, index) {
-                              //               return Padding(
-                              //                 padding:
-                              //                     const EdgeInsets.symmetric(
-                              //                         horizontal: 5.0),
-                              //                 child: Container(
-                              //                   width: 92,
-                              //                   decoration: BoxDecoration(
-                              //                     color: Color(0xffF6F6F6),
-                              //                     borderRadius:
-                              //                         BorderRadius.circular(5),
-                              //                   ),
-                              //                   child: Padding(
-                              //                     padding:
-                              //                         const EdgeInsets.all(5.0),
-                              //                     child: Column(
-                              //                       mainAxisAlignment:
-                              //                           MainAxisAlignment
-                              //                               .spaceEvenly,
-                              //                       children: [
-                              //                         (index ==
-                              //                                 slot_time
-                              //                                         .data
-                              //                                         .timeSlot
-                              //                                         .length -
-                              //                                     1)
-                              //                             ? Text(slot_time
-                              //                                 .data
-                              //                                 .timeSlot[index]
-                              //                                 .slotTime
-                              //                                 .toString()
-                              //                                 .substring(0, 5))
-                              //                             : Text(
-                              //                                 slot_time
-                              //                                         .data
-                              //                                         .timeSlot[
-                              //                                             index]
-                              //                                         .slotTime
-                              //                                         .toString()
-                              //                                         .substring(
-                              //                                             0,
-                              //                                             5) +
-                              //                                     '-' +
-                              //                                     slot_time
-                              //                                         .data
-                              //                                         .timeSlot[
-                              //                                             index +
-                              //                                                 1]
-                              //                                         .slotTime
-                              //                                         .toString()
-                              //                                         .substring(
-                              //                                             0, 5),
-                              //                                 textAlign:
-                              //                                     TextAlign
-                              //                                         .center,
-                              //                                 style: GoogleFonts.montserrat(
-                              //                                     color: Colors
-                              //                                         .black,
-                              //                                     fontSize: 12,
-                              //                                     fontWeight:
-                              //                                         FontWeight
-                              //                                             .bold),
-                              //                               ),
-                              //                         Divider(
-                              //                           height: 5,
-                              //                           thickness: 1,
-                              //                           color: Color(0xff161616)
-                              //                               .withOpacity(0.2),
-                              //                         ),
-                              //                         Text(
-                              //                             "\₹ " +
-                              //                                 doctordetails
-                              //                                     .data
-                              //                                     .clinicDetails
-                              //                                     .oflineConsultancyFees,
-                              //                             style: GoogleFonts
-                              //                                 .montserrat(
-                              //                                     color:
-                              //                                         apptealColor,
-                              //                                     fontSize: 14,
-                              //                                     fontWeight:
-                              //                                         FontWeight
-                              //                                             .bold))
-                              //                       ],
-                              //                     ),
-                              //                   ),
-                              //                 ),
-                              //               );
-                              //             }))
-                              //   ],
-                              // ),
+
                               Container(
                                 height: 44,
                                 child: Row(
@@ -993,6 +865,9 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                 slot_time: selectedTime,
                               );
                             }),
+                      ),
+                      SizedBox(
+                        height: navbarht + 20,
                       ),
                     ],
                   ),

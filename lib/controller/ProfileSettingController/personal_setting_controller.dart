@@ -5,7 +5,6 @@ import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/firebase/database.dart';
-import 'package:patient/helper/helperfunctions.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../NavigationController.dart';
@@ -61,16 +60,6 @@ class PersonalSettingController {
       'emergency_contact': emergencycontact.text,
       'address': address.text,
     };
-    HelperFunctions.saveUserNameSharedPreference(
-        firstname.text + ' ' + lastname.text);
-    // await DatabaseMethods()
-    //     .updatechatroomId(oldname, firstname.text + ' ' + lastname.text);
-    //
-    // // QuerySnapshot userInfoSnapshot = await DatabaseMethods()
-    // //     .getUserChatsforUpdate(firstname.text + ' ' + lastname.text);
-    //
-    // databaseMethods.updateusername(
-    //     email.text, firstname.text + ' ' + lastname.text);
 
     var response = (mediaFile == null)
         ? await PostData(

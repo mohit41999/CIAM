@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -58,14 +59,15 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   bgcolor: appblueColor,
                   textColor: Colors.white,
                   onPressed: () {
-                    Navigator.push(
+                    Push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => PaymentConfirmationScreen(
-                                  amount: widget.amount,
-                                  booking_id: widget.booking_id,
-                                  terms: true,
-                                )));
+                        PaymentConfirmationScreen(
+                          amount: widget.amount,
+                          booking_id: widget.booking_id,
+                          terms: true,
+                        ),
+                        withnav: false);
+
                     // _con
                     //     .confirmBookingRequest(
                     //         context, widget.booking_id)
@@ -82,7 +84,10 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   },
                   borderRadius: 10,
                 ),
-              )
+              ),
+              SizedBox(
+                height: navbarht + 20,
+              ),
             ],
           ),
         ),

@@ -139,21 +139,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
         '======================================');
 
     String order_id = jsonDecode(res.body)['id'].toString();
-    // final request =
-    //     await client.postUrl(Uri.parse('https://api.razorpay.com/v1/orders'));
-    // request.headers
-    //     .set(HttpHeaders.contentTypeHeader, "application/json; charset=UTF-8");
-    // String basicAuth =
-    //     'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
-    // request.headers.set(HttpHeaders.authorizationHeader, basicAuth);
-    //
-    // request.add(utf8.encode(json.encode(orderOptions)));
-    // final response = await request.close();
-    // response.transform(utf8.decoder).listen((contents) {
-    //   String orderId = contents;
-    //
-    //
-    // });
+
     Map<String, dynamic> checkoutOptions = {
       'key': username,
       'amount': amount,
@@ -446,6 +432,9 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                         width: double.infinity,
                         color: Color(0xffEFEFEF),
                         height: 20,
+                      ),
+                      SizedBox(
+                        height: navbarht + 20,
                       ),
                     ],
                   ),

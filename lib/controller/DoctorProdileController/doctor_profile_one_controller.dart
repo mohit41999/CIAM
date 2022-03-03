@@ -89,10 +89,11 @@ class DoctorProfileOneController {
           BookingAppointment(
             booking_id: response['data']['bookingID'],
             doctor_id: response['data']['doctor_id'],
-          ));
+          ),
+          withnav: false);
     } else {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(response['message'] + 'llll')));
+          .showSnackBar(SnackBar(content: Text(response['message'])));
     }
 
     return response;

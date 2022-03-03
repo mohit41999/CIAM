@@ -31,7 +31,8 @@ class _RequestForRedemptionState extends State<RequestForRedemption> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(
+                  left: 8.0, right: 8.0, top: 8.0, bottom: navbarht + 20),
               child: commonBtn(
                 s: 'Submit  ',
                 bgcolor: appblueColor,

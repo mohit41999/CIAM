@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Screens/MYScreens/MyAppointments.dart';
-import 'package:patient/Screens/filter_screen.dart';
 
 import 'package:patient/Utils/colorsandstyles.dart';
 
@@ -30,9 +29,7 @@ class _DoctorProfile4State extends State<DoctorProfile4> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Push(context, FilterScreen());
-        },
+        onPressed: () {},
         child: const Icon(FontAwesomeIcons.filter),
         backgroundColor: apptealColor,
         elevation: 20,
@@ -277,7 +274,10 @@ class _DoctorProfile4State extends State<DoctorProfile4> {
                     ),
                   );
                 }),
-          )
+          ),
+          SizedBox(
+            height: navbarht + 20,
+          ),
         ],
       ),
     );
