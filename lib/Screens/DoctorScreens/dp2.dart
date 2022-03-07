@@ -8,7 +8,7 @@ import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/controller/DoctorProdileController/doctor_profile_one_controller.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_profile_one_controller.dart';
 import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';

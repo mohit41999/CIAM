@@ -9,7 +9,7 @@ import 'package:patient/Utils/colorsandstyles.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/NavigationController.dart';
-import 'package:patient/controller/DoctorProdileController/doctor_controller.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "920660726894",
+    "firebase_url": "https://ciam-9186c-default-rtdb.firebaseio.com",
     "project_id": "ciam-9186c",
     "storage_bucket": "ciam-9186c.appspot.com"
   },
@@ -34,6 +35,66 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.ciamdoc.doctor",
+            "certificate_hash": "39a6b6592ff0218e2282d6e96727942718e46dee"
+          }
+        },
+        {
+          "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpZ88gU4PJ-xQfI4-S1I32heUxQyDFC-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920660726894-vcnek5jt86950ot9qkrrn612taspco6b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "920660726894-4kmiek8ttno4ita5gtfi1kg9l5toaksp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ciamdoc.doctor"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920660726894:android:20cc729250f25541f2827f",
+        "android_client_info": {
+          "package_name": "com.ciamlb.ciam_lab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920660726894-2op0ckljjsd0ar8ilcqu15m7a52pql5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamlb.ciam_lab",
+            "certificate_hash": "9c67d724755d1deeb89f1a3375d65f6a39ae4d0c"
+          }
+        },
+        {
+          "client_id": "920660726894-5scarfm256m0ltt2ebspcadbh8g9lg5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamlb.ciam_lab",
+            "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
+          }
+        },
+        {
+          "client_id": "920660726894-pv604i5egfth2if5h7cu456hf53n8a8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamlb.ciam_lab",
             "certificate_hash": "39a6b6592ff0218e2282d6e96727942718e46dee"
           }
         },

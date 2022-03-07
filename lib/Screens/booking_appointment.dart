@@ -21,7 +21,7 @@ import 'package:patient/Screens/pdf.dart';
 import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
-import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
+import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -994,7 +994,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                     .data.totalAmount,
                                                 booking_id:
                                                     confirmData.data.bookingId,
-                                                terms: true,
+                                                terms: false,
                                               ),
                                               withNavBar:
                                                   false, // OPTIONAL VALUE. True by default.

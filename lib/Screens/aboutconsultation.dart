@@ -12,7 +12,7 @@ import 'package:patient/Screens/Products.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/controller/DoctorProdileController/doctor_controller.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/about_consultation_controller.dart';
 import 'package:patient/controller/app_review_controller.dart';

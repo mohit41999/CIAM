@@ -6,7 +6,7 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
-import 'package:patient/controller/DoctorProdileController/confirm_booking_controller.dart';
+import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -74,7 +74,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     _con.confirmBookingRequest(context, widget.booking_id).then((value) {
       _con
           .addPaymentTransaction(
-              context, widget.booking_id, widget.amount, widget.terms)
+              context, widget.booking_id, amount, widget.terms)
           .then((value) {});
     });
   }
