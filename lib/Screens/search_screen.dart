@@ -50,11 +50,19 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: commonAppBarTitle(),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+          centerTitle: true,
+          title: commonAppBarTitle(),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => commonAppBarLeading(
+                iconData: Icons.arrow_back_ios_new,
+                onPressed: () {
+                  setState(() {
+                    Pop(context);
+                  });
+                }),
+          )),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
         child: Column(

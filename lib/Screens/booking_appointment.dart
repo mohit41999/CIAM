@@ -205,11 +205,11 @@ class _BookingAppointmentState extends State<BookingAppointment> {
       setState(() {
         confirmData = value;
         appointmentdate = DateTime(
-            int.parse(confirmData.data.Date.substring(0, 4)),
-            int.parse(confirmData.data.Date.substring(5, 7)),
-            int.parse(confirmData.data.Date.substring(8, 10)),
-            int.parse(confirmData.data.Date.substring(11, 13)),
-            int.parse(confirmData.data.Date.substring(14, 16)),
+            int.parse(confirmData.data.date.substring(0, 4)),
+            int.parse(confirmData.data.date.substring(5, 7)),
+            int.parse(confirmData.data.date.substring(8, 10)),
+            int.parse(confirmData.data.date.substring(11, 13)),
+            int.parse(confirmData.data.date.substring(14, 16)),
             00);
         differenceInDays = DateTime.now().difference(appointmentdate).inMinutes;
         timer = Timer.periodic(Duration(seconds: 5), (timer) {
@@ -604,7 +604,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         doctorProfileRow(
                                           title: 'Total Amount',
                                           value:
-                                              '\₹${confirmData.data.totalAmount}',
+                                              '\₹${confirmData.data.toBePaid}',
                                         ),
                                         doctorProfileRow(
                                           title: 'Status',
@@ -800,7 +800,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                           borderWidth: 2,
                                         ),
                                         (confirmData.data
-                                                    .video_consultancy_complete ==
+                                                    .videoConsultancyComplete ==
                                                 'false')
                                             ? (DateTime(
                                                             DateTime.now().year,
@@ -823,7 +823,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                                   user_id:
                                                                       confirmData
                                                                           .data
-                                                                          .doctorid)
+                                                                          .doctorId)
                                                               .then((value) {
                                                             if (!value[
                                                                 'status']) {
@@ -949,8 +949,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         ),
                                         doctorProfileRow(
                                           title: 'Total Amount',
-                                          value:
-                                              '\₹${confirmData.data.totalAmount}',
+                                          value: '\₹${confirmData.data.fees}',
                                         ),
                                         commonBtn(
                                           onPressed: () {
@@ -960,7 +959,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                     builder: (context) =>
                                                         TermsAndConditions(
                                                           amount: confirmData
-                                                              .data.totalAmount,
+                                                              .data.fees,
                                                           booking_id:
                                                               confirmData.data
                                                                   .bookingId,
@@ -990,8 +989,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             pushNewScreen(
                                               context,
                                               screen: PaymentConfirmationScreen(
-                                                amount: confirmData
-                                                    .data.totalAmount,
+                                                amount: confirmData.data.fees,
                                                 booking_id:
                                                     confirmData.data.bookingId,
                                                 terms: false,
@@ -1128,7 +1126,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
       PostData(PARAM_URL: 'add_review.php', params: {
         'token': Token,
         'user_id': prefs.getString('user_id'),
-        'doctor_id': confirmData.data.doctorid,
+        'doctor_id': confirmData.data.doctorId,
         'message': reviewController.text,
         'rating': reviewrating.toString()
       }).then((value) {

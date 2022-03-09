@@ -281,7 +281,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                 height: 30,
                 child: Center(
                   child: Icon(
-                    Icons.menu,
+                    Icons.arrow_back_ios_new,
                     color: appblueColor,
                     size: 20,
                   ),
@@ -300,7 +300,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
               ),
               onTap: () {
                 setState(() {
-                  Scaffold.of(context).openDrawer();
+                  Pop(context);
                 });
               },
             ),
@@ -313,45 +313,45 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 10,
-                            offset: const Offset(2, 5),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: Color(0xff161616).withOpacity(0.6),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Search',
-                            style: GoogleFonts.montserrat(
-                                fontSize: 16,
-                                color: Color(0xff161616).withOpacity(0.6)),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(10.0),
+                //   child: GestureDetector(
+                //     onTap: () {},
+                //     child: Container(
+                //       height: 40,
+                //       width: double.infinity,
+                //       decoration: BoxDecoration(
+                //         color: Colors.white,
+                //         borderRadius: BorderRadius.circular(5),
+                //         boxShadow: [
+                //           BoxShadow(
+                //             color: Colors.grey.withOpacity(0.5),
+                //             blurRadius: 10,
+                //             offset: const Offset(2, 5),
+                //           ),
+                //         ],
+                //       ),
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.center,
+                //         children: [
+                //           Icon(
+                //             Icons.search,
+                //             color: Color(0xff161616).withOpacity(0.6),
+                //           ),
+                //           SizedBox(
+                //             width: 5,
+                //           ),
+                //           Text(
+                //             'Search',
+                //             style: GoogleFonts.montserrat(
+                //                 fontSize: 16,
+                //                 color: Color(0xff161616).withOpacity(0.6)),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 // SizedBox(
                 //   height: 10,
                 // ),

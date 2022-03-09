@@ -5,14 +5,14 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-HomeCareCategoriesModel homeCareCategoriesModelFromJson(String str) =>
-    HomeCareCategoriesModel.fromJson(json.decode(str));
+HealthCareCategoriesModel homeCareCategoriesModelFromJson(String str) =>
+    HealthCareCategoriesModel.fromJson(json.decode(str));
 
-String homeCareCategoriesModelToJson(HomeCareCategoriesModel data) =>
+String homeCareCategoriesModelToJson(HealthCareCategoriesModel data) =>
     json.encode(data.toJson());
 
-class HomeCareCategoriesModel {
-  HomeCareCategoriesModel({
+class HealthCareCategoriesModel {
+  HealthCareCategoriesModel({
     required this.status,
     required this.message,
     required this.data,
@@ -22,8 +22,8 @@ class HomeCareCategoriesModel {
   String message;
   List<HomeCareCategoriesData> data;
 
-  factory HomeCareCategoriesModel.fromJson(Map<String, dynamic> json) =>
-      HomeCareCategoriesModel(
+  factory HealthCareCategoriesModel.fromJson(Map<String, dynamic> json) =>
+      HealthCareCategoriesModel(
         status: json["status"],
         message: json["message"],
         data: List<HomeCareCategoriesData>.from(

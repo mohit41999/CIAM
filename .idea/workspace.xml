@@ -9,30 +9,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="bottom nav bar">
-      <change afterPath="$PROJECT_DIR$/lib/Models/home_care_categories_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/home_care_sub_category_model.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="home care services">
+      <change afterPath="$PROJECT_DIR$/lib/Screens/HomeCareCategories.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/google-services.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/home_care_categories_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/home_care_categories_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp2.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp2.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LabProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LabProfile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/TermsAndConditions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/TermsAndConditions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/confirm_booking_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProfileController/confirm_booking_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProfileController/doctor_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/DoctorProdileController/doctor_profile_one_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/DoctorProfileController/doctor_profile_one_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navigation_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/search_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +53,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorWFH" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -247,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646315581889</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="home care services">
+      <created>1646661604196</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1646661604196</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,6 +271,7 @@
     <MESSAGE value="ios" />
     <MESSAGE value="slot changes" />
     <MESSAGE value="bottom nav bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="bottom nav bar" />
+    <MESSAGE value="home care services" />
+    <option name="LAST_COMMIT_MESSAGE" value="home care services" />
   </component>
 </project>

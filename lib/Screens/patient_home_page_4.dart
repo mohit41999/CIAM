@@ -4,6 +4,7 @@ import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
+import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/LabProfile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
@@ -30,14 +31,14 @@ class PatientHomePage4 extends StatefulWidget {
 }
 
 class _PatientHomePage4State extends State<PatientHomePage4> {
-  Future<HomeCareCategoriesModel> gethomecareServices() async {
+  Future<HealthCareCategoriesModel> gethomecareServices() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     var response = await PostData(
         PARAM_URL: 'get_home_care_services.php',
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
 
-    return HomeCareCategoriesModel.fromJson(response);
+    return HealthCareCategoriesModel.fromJson(response);
   }
 
   TextEditingController care = TextEditingController();
@@ -45,7 +46,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
   TextEditingController email = TextEditingController();
   TextEditingController address = TextEditingController();
   TextEditingController phonenumber = TextEditingController();
-  late HomeCareCategoriesModel homeCareCategories;
+  late HealthCareCategoriesModel homeCareCategories;
   bool loading = true;
 
   @override
@@ -112,48 +113,48 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        height: 40,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              blurRadius: 10,
-                              offset: const Offset(2, 5),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search,
-                              color: Color(0xff161616).withOpacity(0.6),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              'Search',
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 16,
-                                  color: Color(0xff161616).withOpacity(0.6)),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {},
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(15.0),
+                  //     child: Container(
+                  //       height: 40,
+                  //       width: double.infinity,
+                  //       decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(5),
+                  //         boxShadow: [
+                  //           BoxShadow(
+                  //             color: Colors.grey.withOpacity(0.5),
+                  //             blurRadius: 10,
+                  //             offset: const Offset(2, 5),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Icon(
+                  //             Icons.search,
+                  //             color: Color(0xff161616).withOpacity(0.6),
+                  //           ),
+                  //           SizedBox(
+                  //             width: 15,
+                  //           ),
+                  //           Text(
+                  //             'Search',
+                  //             style: GoogleFonts.montserrat(
+                  //                 fontSize: 16,
+                  //                 color: Color(0xff161616).withOpacity(0.6)),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   Container(
                     height: 200,
                     color: Colors.white,
@@ -246,7 +247,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                           child: commonRow(
                             Title: 'Health Care Services',
                             subTitle: 'View all',
-                            value: DoctorProfile(fromhome: true),
+                            value: HomeCareCategories(),
                           ),
                         ),
                         SizedBox(
@@ -330,84 +331,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: 580,
-                    color: Colors.white,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: 10.0,
-                                right: 10.0,
-                                top: 10.0,
-                                bottom: (index + 1 == 3) ? navbarht + 20 : 10),
-                            child: Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                color: Color(0xffF6F6F6),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    blurRadius: 10,
-                                    offset: const Offset(2, 5),
-                                  ),
-                                ],
-                              ),
-                              // height: 100,
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Heal At Home',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 20,
-                                              color: appblueColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Container(
-                                          width: 160,
-                                          child: Text(
-                                            'India\'s largest home health care company',
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: 12,
-                                              color: Color(0xff161616),
-                                            ),
-                                          ),
-                                        ),
-                                        commonBtn(
-                                          s: 'Know More',
-                                          bgcolor: Color(0xff161616)
-                                              .withOpacity(0.6),
-                                          textColor: Colors.white,
-                                          onPressed: () {
-                                            // Push(context, DoctorProfile1());
-                                          },
-                                          width: 120,
-                                          height: 30,
-                                          textSize: 12,
-                                          borderRadius: 5,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Image.asset('assets/pngs/nursedoctor.png')
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
+                    height: navbarht + 20,
                   ),
                 ],
               ),
