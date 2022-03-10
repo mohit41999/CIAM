@@ -118,6 +118,17 @@ class _commonDrawerState extends State<commonDrawer> {
                                   if (drawerList[index]['label'].toString() ==
                                       'Logout') {
                                     _ackAlert(context);
+                                  } else if (drawerList[index]['label']
+                                          .toString() ==
+                                      'Profile') {
+                                    pushNewScreen(
+                                      context,
+                                      screen: drawerList[index]['Screen'],
+                                      withNavBar:
+                                          false, // OPTIONAL VALUE. True by default.
+                                      pageTransitionAnimation:
+                                          PageTransitionAnimation.cupertino,
+                                    );
                                   } else {
                                     Navigator.pop(context);
                                     pushNewScreen(

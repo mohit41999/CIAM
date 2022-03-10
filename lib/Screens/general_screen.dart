@@ -13,7 +13,7 @@ import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'DoctorScreens/doctor_profile.dart';
-import 'LabProfile.dart';
+import 'LAB/LabProfile.dart';
 import 'MedicineProfile.dart';
 
 class GeneralScreen extends StatefulWidget {

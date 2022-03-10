@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/medicine_profile_model.dart';
 
-import 'package:patient/Screens/LabProfile.dart';
+import 'package:patient/Screens/LAB/LabProfile.dart';
 import 'package:patient/Screens/order_medicine.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 

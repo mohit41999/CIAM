@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -184,11 +185,79 @@ class _RelativeState extends State<Relative> {
                                 'Relation', 'Relation', _con.relation),
                             TitleEnterField('Relative Name', 'Relative Name',
                                 _con.relative_name),
-                            TitleEnterField(
-                              'Age',
-                              'Age',
-                              _con.age,
-                              textInputType: TextInputType.number,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Age',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color:
+                                              Colors.black.withOpacity(0.6))),
+                                  SizedBox(height: 7),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: ConstrainedBox(
+                                      constraints: const BoxConstraints(
+                                          minHeight: 10, maxHeight: 150),
+                                      child: Material(
+                                        elevation: 5,
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: TextFormField(
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(2)
+                                          ],
+                                          // autovalidateMode: AutovalidateMode.onUserInteraction,
+                                          // validator: validator,
+                                          // maxLength: maxLength,
+                                          // maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+                                          enableSuggestions: true,
+
+                                          keyboardType: TextInputType.number,
+                                          controller: _con.age,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                          decoration: InputDecoration(
+                                            enabled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                borderSide: new BorderSide(
+                                                    color: Colors.transparent)),
+                                            border: new OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                borderSide: new BorderSide(
+                                                    color: Colors.transparent)),
+                                            // enabledBorder: InputBorder.none,
+                                            // errorBorder: InputBorder.none,
+                                            // disabledBorder: InputBorder.none,
+                                            filled: true,
+                                            //labelText: labelText,
+
+                                            labelStyle: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black
+                                                    .withOpacity(0.6)),
+                                            hintText: 'Age',
+                                            hintStyle: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                            fillColor: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15)
+                                ],
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
