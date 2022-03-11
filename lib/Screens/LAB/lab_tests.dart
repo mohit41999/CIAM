@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 
-class PackagesLabScreen extends StatefulWidget {
-  const PackagesLabScreen({Key? key}) : super(key: key);
+class TestsLabScreen extends StatefulWidget {
+  const TestsLabScreen({Key? key}) : super(key: key);
 
   @override
-  _PackagesLabScreenState createState() => _PackagesLabScreenState();
+  _TestsLabScreenState createState() => _TestsLabScreenState();
 }
 
-class _PackagesLabScreenState extends State<PackagesLabScreen> {
+class _TestsLabScreenState extends State<TestsLabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

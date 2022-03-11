@@ -4,7 +4,7 @@ import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
-import 'package:patient/Screens/LAB/LabProfile.dart';
+import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
 import 'package:patient/Screens/Signup.dart';

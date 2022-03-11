@@ -7,7 +7,7 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
-import 'package:patient/Screens/LAB/LabProfile.dart';
+import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,12 +58,12 @@ final List<Map<dynamic, dynamic>> hometile = [
   //   'Screen': 'null',
   //   'profile': 'Rectangle -6.png'
   // },
-  // {
-  //   'label': 'Lab Tests',
-  //   // 'Screen': 'null',
-  //   'Screen': LabProfile(),
-  //   'profile': 'Rectangle -2.png'
-  // },
+  {
+    'label': 'Lab Tests',
+    // 'Screen': 'null',
+    'Screen': LabProfile(),
+    'profile': 'Rectangle -2.png'
+  },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
   // {
   //   'label': 'Medicine',
@@ -363,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: GridView.builder(
-                      scrollDirection: Axis.vertical,
+                      scrollDirection: Axis.horizontal,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
