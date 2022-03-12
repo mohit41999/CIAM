@@ -33,55 +33,63 @@ class _MyQuestionsScreenState extends State<MyQuestionsScreen> {
         body: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Card(
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Lorem ipsum dolor sit amet, consetetur. ?',
-                                  style: GoogleFonts.lato(
-                                      color: Color(0xff252525),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  '  27/09/2021',
-                                  style: GoogleFonts.lato(
-                                      color: apptealColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.',
-                              style: GoogleFonts.lato(fontSize: 12),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                          ],
+              return Padding(
+                padding: EdgeInsets.only(
+                    left: 4.0,
+                    right: 4.0,
+                    top: 4.0,
+                    bottom: (index + 1 == 10) ? navbarht + 20 : 4),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Card(
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Lorem ipsum dolor sit amet, consetetur. ?',
+                                    style: GoogleFonts.lato(
+                                        color: Color(0xff252525),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '  27/09/2021',
+                                    style: GoogleFonts.lato(
+                                        color: apptealColor,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.',
+                                style: GoogleFonts.lato(fontSize: 12),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  )
-                ],
+                    SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
               );
             }));
   }

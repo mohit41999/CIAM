@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
+import 'package:patient/controller/NavigationController.dart';
 
 class FirebaseNotificationHandling {
   Future sendNotification({required String user_id}) async {
@@ -23,27 +24,30 @@ class FirebaseNotificationHandling {
       print('onMessage ' + event.toString());
 
       print(event.data);
-      Navigator.push(
+      Push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  VideoCallPage(channelName: event.data['chanel_name'])));
+          VideoCallPage(
+            channelName: event.data['chanel_name'],
+          ),
+          withnav: false);
     });
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       print('onMessageOpenedApp');
-      Navigator.push(
+      Push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  VideoCallPage(channelName: event.data['chanel_name'])));
+          VideoCallPage(
+            channelName: event.data['chanel_name'],
+          ),
+          withnav: false);
     });
     FirebaseMessaging.onBackgroundMessage((message) async {
       print(message.data);
-      Navigator.push(
+      Push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  VideoCallPage(channelName: message.data['chanel_name'])));
+          VideoCallPage(
+            channelName: message.data['chanel_name'],
+          ),
+          withnav: false);
     });
   }
 }

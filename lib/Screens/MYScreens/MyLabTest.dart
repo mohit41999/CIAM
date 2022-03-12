@@ -38,7 +38,11 @@ class _MyLabTestState extends State<MyLabTest> {
                 itemCount: 10,
                 itemBuilder: (context, int) {
                   return Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.only(
+                        left: 10.0,
+                        right: 10.0,
+                        top: 10.0,
+                        bottom: (int + 1 == 10) ? navbarht + 20 : 10),
                     child: Container(
                       height: 180,
                       decoration: BoxDecoration(

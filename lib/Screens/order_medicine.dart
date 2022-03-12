@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 
@@ -23,6 +25,11 @@ class _OrderMedicineState extends State<OrderMedicine> {
     return Scaffold(
       appBar: AppBar(
         title: commonAppBarTitle(),
+        leading: commonAppBarLeading(
+            iconData: Icons.arrow_back_ios_new,
+            onPressed: () {
+              Pop(context);
+            }),
         centerTitle: true,
         backgroundColor: appAppBarColor,
         elevation: 0,
@@ -42,7 +49,7 @@ class _OrderMedicineState extends State<OrderMedicine> {
               onPressed: () {},
               borderRadius: 8,
             ),
-          )
+          ),
         ],
       ),
     );

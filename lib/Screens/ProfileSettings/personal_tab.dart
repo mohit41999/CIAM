@@ -54,9 +54,7 @@ class _PersonalState extends State<Personal> {
       firstDate: DateTime(
         DateTime.now().year - 100,
       ),
-      lastDate: DateTime(
-        DateTime.now().year + 100,
-      ),
+      lastDate: DateTime.now(),
       builder: (context, child) => Theme(
           data: ThemeData().copyWith(
             dialogBackgroundColor: appblueColor,
@@ -72,6 +70,7 @@ class _PersonalState extends State<Personal> {
       setState(() {
         // date = pickedDate;
         _con.DOB.text = pickedDate.toString();
+        _con.age.text = (DateTime.now().year - pickedDate.year).toString();
         //
         print(pickedDate);
       });
@@ -329,7 +328,10 @@ class _PersonalState extends State<Personal> {
                       borderRadius: 8,
                       textSize: 20,
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: navbarht + 20,
+                  ),
                 ],
               ),
             ),

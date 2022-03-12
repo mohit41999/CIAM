@@ -2,6 +2,7 @@
 //
 //     final confirmBookingModel = confirmBookingModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 ConfirmBookingModel confirmBookingModelFromJson(String str) =>
@@ -38,9 +39,8 @@ class ConfirmBookingModel {
 class Data {
   Data({
     required this.bookingId,
+    required this.doctorId,
     required this.specialty,
-    required this.video_consultancy_complete,
-    required this.doctorid,
     required this.doctorName,
     required this.doctorProfile,
     required this.bookingStatus,
@@ -48,62 +48,71 @@ class Data {
     required this.bookedServiceTime,
     required this.bookingDate,
     required this.clinicLocation,
-    required this.totalAmount,
+    required this.fees,
+    required this.couponDiscount,
+    required this.toBePaid,
     required this.amountStatus,
-    required this.Date,
-    // required this.patient_document,
+    required this.date,
+    required this.doctorReports,
+    required this.videoConsultancyComplete,
   });
 
   String bookingId;
+  String doctorId;
   String specialty;
   String doctorName;
-  String doctorid;
   String doctorProfile;
   String bookingStatus;
   PatientDetails patientDetails;
   String bookedServiceTime;
   String bookingDate;
-  String video_consultancy_complete;
-  // String patient_document;
   String clinicLocation;
-  String totalAmount;
-  String Date;
+  String fees;
+  String couponDiscount;
+  String toBePaid;
   String amountStatus;
+  String date;
+  List<dynamic> doctorReports;
+  String videoConsultancyComplete;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
+        doctorId: json["doctor id"],
         specialty: json["Specialty"],
         doctorName: json["Doctor Name"],
-        doctorid: json["doctor id"],
-        video_consultancy_complete: json["video_consultancy_complete"],
         doctorProfile: json["Doctor Profile"],
-        // patient_document: json["patient_document"],
         bookingStatus: json["Booking Status"],
         patientDetails: PatientDetails.fromJson(json["Patient Details"]),
         bookedServiceTime: json["Booked Service Time"],
         bookingDate: json["Booking Date"],
         clinicLocation: json["Clinic Location"],
-        totalAmount: json["Total Amount"],
-        Date: json["Date"],
+        fees: json["Fees"],
+        couponDiscount: json["coupon_discount"],
+        toBePaid: json["to_be_paid"],
         amountStatus: json["Amount Status"],
+        date: json["Date"],
+        doctorReports: List<dynamic>.from(json["doctor_reports"].map((x) => x)),
+        videoConsultancyComplete: json["video_consultancy_complete"],
       );
 
   Map<String, dynamic> toJson() => {
         "Booking Id": bookingId,
+        "doctor id": doctorId,
         "Specialty": specialty,
         "Doctor Name": doctorName,
         "Doctor Profile": doctorProfile,
-        "video_consultancy_complete": video_consultancy_complete,
-        // "patient_document": patient_document,
         "Booking Status": bookingStatus,
         "Patient Details": patientDetails.toJson(),
         "Booked Service Time": bookedServiceTime,
         "Booking Date": bookingDate,
-        "doctor id": doctorid,
         "Clinic Location": clinicLocation,
-        "Total Amount": totalAmount,
-        "Date": Date,
+        "Fees": fees,
+        "coupon_discount": couponDiscount,
+        "to_be_paid": toBePaid,
         "Amount Status": amountStatus,
+        "Date": date,
+        "doctor_reports": List<dynamic>.from(doctorReports.map((x) => x)),
+        "video_consultancy_complete": videoConsultancyComplete,
       };
 }
 

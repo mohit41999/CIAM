@@ -13,15 +13,15 @@ import 'package:patient/controller/ProfileSettingController/relatice_setting_con
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 
-class DoctorProfile1 extends StatefulWidget {
+class DoctorProfile1bckup extends StatefulWidget {
   final String doc_id;
-  const DoctorProfile1({Key? key, required this.doc_id}) : super(key: key);
+  const DoctorProfile1bckup({Key? key, required this.doc_id}) : super(key: key);
 
   @override
-  _DoctorProfile1State createState() => _DoctorProfile1State();
+  _DoctorProfile1bckupState createState() => _DoctorProfile1bckupState();
 }
 
-class _DoctorProfile1State extends State<DoctorProfile1> {
+class _DoctorProfile1bckupState extends State<DoctorProfile1bckup> {
   DoctorProfileOneController _con = DoctorProfileOneController();
   late DoctorProfileOneModel doctordetails;
   TextStyle selectedDayStyle(int index) => TextStyle(
@@ -498,7 +498,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         height: 12,
                       ),
                       Container(
-
+                        // height: 400,
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -526,7 +526,135 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               SizedBox(
                                 height: 10,
                               ),
-
+                              // Divider(
+                              //   color: textColor.withOpacity(0.4),
+                              //   thickness: 1,
+                              // ),
+                              // doctorProfileRow(
+                              //   title: 'Doctor\'s Availability Status',
+                              //   value: 'Available',
+                              //   yellow: true,
+                              // ),
+                              // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Container(
+                              //       width:
+                              //           MediaQuery.of(context).size.width / 5,
+                              //       child: Text(
+                              //         'Price per slot',
+                              //         style: GoogleFonts.montserrat(
+                              //             fontSize: 12,
+                              //             color: Color(0xff161616)
+                              //                 .withOpacity(0.6)),
+                              //       ),
+                              //     ),
+                              //     SizedBox(
+                              //       width: 15,
+                              //     ),
+                              //     Text('-'),
+                              //     SizedBox(
+                              //       width: 10,
+                              //     ),
+                              //     Container(
+                              //         height: 70,
+                              //         width: MediaQuery.of(context).size.width /
+                              //             1.65,
+                              //         child: ListView.builder(
+                              //             itemCount:
+                              //                 slot_time.data.timeSlot.length,
+                              //             scrollDirection: Axis.horizontal,
+                              //             itemBuilder: (context, index) {
+                              //               return Padding(
+                              //                 padding:
+                              //                     const EdgeInsets.symmetric(
+                              //                         horizontal: 5.0),
+                              //                 child: Container(
+                              //                   width: 92,
+                              //                   decoration: BoxDecoration(
+                              //                     color: Color(0xffF6F6F6),
+                              //                     borderRadius:
+                              //                         BorderRadius.circular(5),
+                              //                   ),
+                              //                   child: Padding(
+                              //                     padding:
+                              //                         const EdgeInsets.all(5.0),
+                              //                     child: Column(
+                              //                       mainAxisAlignment:
+                              //                           MainAxisAlignment
+                              //                               .spaceEvenly,
+                              //                       children: [
+                              //                         (index ==
+                              //                                 slot_time
+                              //                                         .data
+                              //                                         .timeSlot
+                              //                                         .length -
+                              //                                     1)
+                              //                             ? Text(slot_time
+                              //                                 .data
+                              //                                 .timeSlot[index]
+                              //                                 .slotTime
+                              //                                 .toString()
+                              //                                 .substring(0, 5))
+                              //                             : Text(
+                              //                                 slot_time
+                              //                                         .data
+                              //                                         .timeSlot[
+                              //                                             index]
+                              //                                         .slotTime
+                              //                                         .toString()
+                              //                                         .substring(
+                              //                                             0,
+                              //                                             5) +
+                              //                                     '-' +
+                              //                                     slot_time
+                              //                                         .data
+                              //                                         .timeSlot[
+                              //                                             index +
+                              //                                                 1]
+                              //                                         .slotTime
+                              //                                         .toString()
+                              //                                         .substring(
+                              //                                             0, 5),
+                              //                                 textAlign:
+                              //                                     TextAlign
+                              //                                         .center,
+                              //                                 style: GoogleFonts.montserrat(
+                              //                                     color: Colors
+                              //                                         .black,
+                              //                                     fontSize: 12,
+                              //                                     fontWeight:
+                              //                                         FontWeight
+                              //                                             .bold),
+                              //                               ),
+                              //                         Divider(
+                              //                           height: 5,
+                              //                           thickness: 1,
+                              //                           color: Color(0xff161616)
+                              //                               .withOpacity(0.2),
+                              //                         ),
+                              //                         Text(
+                              //                             "\₹ " +
+                              //                                 doctordetails
+                              //                                     .data
+                              //                                     .clinicDetails
+                              //                                     .oflineConsultancyFees,
+                              //                             style: GoogleFonts
+                              //                                 .montserrat(
+                              //                                     color:
+                              //                                         apptealColor,
+                              //                                     fontSize: 14,
+                              //                                     fontWeight:
+                              //                                         FontWeight
+                              //                                             .bold))
+                              //                       ],
+                              //                     ),
+                              //                   ),
+                              //                 ),
+                              //               );
+                              //             }))
+                              //   ],
+                              // ),
                               Container(
                                 height: 44,
                                 child: Row(
@@ -671,82 +799,89 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  (date.day == DateTime.now().day &&
-                                          date.month == DateTime.now().month &&
-                                          date.year == DateTime.now().year)
-                                      ? (DateTime.now().hour >= 12)
-                                          ? SizedBox()
-                                          : Slots(
-                                              text: 'Morning',
-                                              startTime: 0,
-                                              endTime: 12,
-                                              time: ' am')
-                                      : Slots(
-                                          text: 'Morning',
-                                          startTime: 0,
-                                          endTime: 12,
-                                          time: ' am'),
+                                  // (date.day == DateTime.now().day &&
+                                  //         date.month == DateTime.now().month &&
+                                  //         date.year == DateTime.now().year)
+                                  //     ? (DateTime.now().hour >= 12)
+                                  //         ? SizedBox()
+                                  //         : Slots(
+                                  //             text: 'Morning',
+                                  //             startTime: 0,
+                                  //             endTime: 24,
+                                  //             time: ' am')
+                                  //     :
+                                  Slots(
+                                      text: 'Morning',
+                                      startTime: 0,
+                                      endTime: 24,
+                                      time: ' am'),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  (date.day == DateTime.now().day &&
-                                          date.month == DateTime.now().month &&
-                                          date.year == DateTime.now().year)
-                                      ? (DateTime.now().hour >= 17)
-                                          ? SizedBox()
-                                          : Slots(
-                                              text: 'Afternoon',
-                                              startTime: 12,
-                                              endTime: 17,
-                                              time: ' pm')
-                                      : Slots(
-                                          text: 'Afternoon',
-                                          startTime: 12,
-                                          endTime: 17,
-                                          time: ' pm'),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  (date.day == DateTime.now().day &&
-                                          date.month == DateTime.now().month &&
-                                          date.year == DateTime.now().year)
-                                      ? (DateTime.now().hour >=
-                                              int.parse(slot_time
-                                                  .data
-                                                  .timeSlot[slot_time.data.timeSlot.length -
-                                                      1]
-                                                  .slotTime
-                                                  .toString()
-                                                  .substring(0, 2)))
-                                          ? Text(
-                                            'No Slots available for Today... You Can Book For Tomorrow',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 20,
-                                                fontWeight:
-                                                    FontWeight.bold,
-                                                color: apptealColor),
-                                            textAlign: TextAlign.center,
-                                          )
-                                          : Slots(
-                                              text: 'Evening',
-                                              startTime: 17,
-                                              endTime: int.parse(slot_time.data.timeSlot[slot_time.data.timeSlot.length - 1].slotTime.toString().substring(0, 2)) +
-                                                  1,
-                                              time: ' pm')
-                                      : Slots(
-                                          text: 'Evening',
-                                          startTime: 17,
-                                          endTime: int.parse(slot_time
-                                                  .data
-                                                  .timeSlot[slot_time.data.timeSlot.length - 1]
-                                                  .slotTime
-                                                  .toString()
-                                                  .substring(0, 2)) +
-                                              1,
-                                          time: ' pm'),
+                                  // (date.day == DateTime.now().day &&
+                                  //         date.month == DateTime.now().month &&
+                                  //         date.year == DateTime.now().year)
+                                  //     ? (DateTime.now().hour >= 17)
+                                  //         ? SizedBox()
+                                  //         : Slots(
+                                  //             text: 'Afternoon',
+                                  //             startTime: 12,
+                                  //             endTime: 17,
+                                  //             time: ' pm')
+                                  //     : Slots(
+                                  //         text: 'Afternoon',
+                                  //         startTime: 12,
+                                  //         endTime: 17,
+                                  //         time: ' pm'),
+                                  // SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  // (date.day == DateTime.now().day &&
+                                  //         date.month == DateTime.now().month &&
+                                  //         date.year == DateTime.now().year)
+                                  //     ? (DateTime.now().hour >=
+                                  //             int.parse(slot_time
+                                  //                 .data
+                                  //                 .timeSlot[slot_time.data.timeSlot.length -
+                                  //                     1]
+                                  //                 .slotTime
+                                  //                 .toString()
+                                  //                 .substring(0, 2)))
+                                  //         ? Column(
+                                  //             children: [
+                                  //               SizedBox(
+                                  //                 height: 50,
+                                  //               ),
+                                  //               Text(
+                                  //                 'No Slots available for Today... You Can Book For Tomorrow',
+                                  //                 style: GoogleFonts.montserrat(
+                                  //                     fontSize: 20,
+                                  //                     fontWeight:
+                                  //                         FontWeight.bold,
+                                  //                     color: apptealColor),
+                                  //                 textAlign: TextAlign.center,
+                                  //               ),
+                                  //             ],
+                                  //           )
+                                  //         : Slots(
+                                  //             text: 'Evening',
+                                  //             startTime: 17,
+                                  //             endTime: int.parse(slot_time.data.timeSlot[slot_time.data.timeSlot.length - 1].slotTime.toString().substring(0, 2)) +
+                                  //                 1,
+                                  //             time: ' pm')
+                                  //     : Slots(
+                                  //         text: 'Evening',
+                                  //         startTime: 17,
+                                  //         endTime: int.parse(slot_time
+                                  //                 .data
+                                  //                 .timeSlot[slot_time.data.timeSlot.length - 1]
+                                  //                 .slotTime
+                                  //                 .toString()
+                                  //                 .substring(0, 2)) +
+                                  //             1,
+                                  //         time: ' pm'),
                                 ],
                               ),
                               SizedBox(
@@ -866,9 +1001,6 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               );
                             }),
                       ),
-                      SizedBox(
-                        height: navbarht + 20,
-                      ),
                     ],
                   ),
                 ),
@@ -925,211 +1057,338 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
     }); // if user don't pick any thing then do nothing just return.
   }
 
-  Column Slots(
+  // GridView Slots(
+  //     {required String text,
+  //     required int startTime,
+  //     required int endTime,
+  //     required String time}) {
+  //   return GridView.builder(
+  //     shrinkWrap: true,
+  //     physics: NeverScrollableScrollPhysics(),
+  //     itemBuilder: (context, index) {
+  //       return (date.day == DateTime.now().day &&
+  //               date.month == DateTime.now().month &&
+  //               date.year == DateTime.now().year)
+  //           ? (DateTime.now().hour >
+  //                   int.parse(slot_time.data.timeSlot[index].slotTime
+  //                       .substring(0, 2)))
+  //               ? Container(
+  //                   color: Colors.red,
+  //                 )
+  //               : (DateTime.now().hour ==
+  //                       int.parse(slot_time.data.timeSlot[index].slotTime
+  //                           .substring(0, 2)))
+  //                   ? ((DateTime.now().minute <
+  //                           int.parse(slot_time.data.timeSlot[index].slotTime
+  //                               .substring(3, 5))))
+  //                       ? Padding(
+  //                           padding:
+  //                               const EdgeInsets.symmetric(horizontal: 8.0),
+  //                           child: commonBtn(
+  //                             s: slot_time.data.timeSlot[index].slotTime
+  //                                     .substring(0, 5)
+  //                                     .toString() +
+  //                                 time,
+  //                             bgcolor: slot_time.data.timeSlot[index].status ==
+  //                                     'availiable'
+  //                                 ? (_selectedindex == index)
+  //                                     ? apptealColor
+  //                                     : Colors.white
+  //                                 : Colors.white,
+  //                             textColor:
+  //                                 slot_time.data.timeSlot[index].status ==
+  //                                         'availiable'
+  //                                     ? (_selectedindex == index)
+  //                                         ? Colors.white
+  //                                         : apptealColor
+  //                                     : Colors.grey,
+  //                             onPressed: () {
+  //                               setState(() {
+  //                                 _selectedindex = index;
+  //                                 selectedTime = slot_time
+  //                                             .data.timeSlot[index].status ==
+  //                                         'availiable'
+  //                                     ? slot_time.data.timeSlot[index].slotTime
+  //                                     : '';
+  //                                 print(selectedTime + '${_selectedindex}');
+  //                               });
+  //                             },
+  //                             textSize: 12,
+  //                             width: 90,
+  //                             borderRadius: 0,
+  //                             borderWidth: 1,
+  //                             borderColor:
+  //                                 slot_time.data.timeSlot[index].status ==
+  //                                         'availiable'
+  //                                     ? apptealColor
+  //                                     : Colors.grey,
+  //                           ),
+  //                         )
+  //                       : Container(
+  //                           color: Colors.blue,
+  //                         )
+  //                   : Padding(
+  //                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  //                       child: commonBtn(
+  //                         s: slot_time.data.timeSlot[index].slotTime
+  //                                 .substring(0, 5)
+  //                                 .toString() +
+  //                             time,
+  //                         bgcolor: slot_time.data.timeSlot[index].status ==
+  //                                 'availiable'
+  //                             ? (_selectedindex == index)
+  //                                 ? apptealColor
+  //                                 : Colors.white
+  //                             : Colors.white,
+  //                         textColor: slot_time.data.timeSlot[index].status ==
+  //                                 'availiable'
+  //                             ? (_selectedindex == index)
+  //                                 ? Colors.white
+  //                                 : apptealColor
+  //                             : Colors.grey,
+  //                         onPressed: () {
+  //                           setState(() {
+  //                             _selectedindex = index;
+  //                             selectedTime =
+  //                                 slot_time.data.timeSlot[index].status ==
+  //                                         'availiable'
+  //                                     ? slot_time.data.timeSlot[index].slotTime
+  //                                     : '';
+  //                             print(selectedTime + '${_selectedindex}');
+  //                           });
+  //                         },
+  //                         textSize: 12,
+  //                         width: 90,
+  //                         borderRadius: 0,
+  //                         borderWidth: 1,
+  //                         borderColor: slot_time.data.timeSlot[index].status ==
+  //                                 'availiable'
+  //                             ? apptealColor
+  //                             : Colors.grey,
+  //                       ),
+  //                     )
+  //           : Padding(
+  //               padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  //               child: commonBtn(
+  //                 s: slot_time.data.timeSlot[index].slotTime
+  //                         .substring(0, 5)
+  //                         .toString() +
+  //                     time,
+  //                 bgcolor: slot_time.data.timeSlot[index].status == 'availiable'
+  //                     ? (_selectedindex == index)
+  //                         ? apptealColor
+  //                         : Colors.white
+  //                     : Colors.white,
+  //                 textColor:
+  //                     slot_time.data.timeSlot[index].status == 'availiable'
+  //                         ? (_selectedindex == index)
+  //                             ? Colors.white
+  //                             : apptealColor
+  //                         : Colors.grey,
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     _selectedindex = index;
+  //                     selectedTime =
+  //                         slot_time.data.timeSlot[index].status == 'availiable'
+  //                             ? slot_time.data.timeSlot[index].slotTime
+  //                             : '';
+  //                     print(selectedTime + '${_selectedindex}');
+  //                   });
+  //                 },
+  //                 textSize: 12,
+  //                 width: 90,
+  //                 borderRadius: 0,
+  //                 borderWidth: 1,
+  //                 borderColor:
+  //                     slot_time.data.timeSlot[index].status == 'availiable'
+  //                         ? apptealColor
+  //                         : Colors.grey,
+  //               ),
+  //             );
+  //     },
+  //     itemCount: slot_time.data.timeSlot.length,
+  //     scrollDirection: Axis.vertical,
+  //     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+  //         maxCrossAxisExtent: 100,
+  //         childAspectRatio: 5 / 2,
+  //         crossAxisSpacing: 20,
+  //         mainAxisSpacing: 20),
+  //   );
+  // }
+  GridView Slots(
       {required String text,
       required int startTime,
       required int endTime,
       required String time}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              text,
-              style: GoogleFonts.montserrat(
-                  fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Wrap(
-          direction: Axis.horizontal,
-          children: [
-            for (int i = 0; i < slot_time.data.timeSlot.length; i++)
-              (int.parse(
-                  slot_time.data.timeSlot[i].slotTime.substring(0, 2)) >= startTime && int.parse(
-                  slot_time.data.timeSlot[i].slotTime.substring(0, 2)) < endTime)?
-    (date.day == DateTime.now().day &&
-    date.month == DateTime.now().month &&
-    date.year == DateTime.now().year)
-    ? (DateTime.now().hour >
-    int.parse(slot_time
-        .data.timeSlot[i].slotTime
-        .substring(0, 2)))
-    ? SizedBox()
-        : (DateTime.now().hour ==
-    int.parse(slot_time
-        .data.timeSlot[i].slotTime
-        .substring(0, 2)))
-    ? ((DateTime.now().minute <
-    int.parse(slot_time
-        .data.timeSlot[i].slotTime
-        .substring(3, 5))))
-    ? Padding(
-    padding: const EdgeInsets.symmetric(
-    horizontal: 8.0,vertical: 5.0),
-    child: commonBtn(
-      height: 40,
-    s: slot_time.data.timeSlot[i]
-        .slotTime
-        .substring(0, 5)
-        .toString() +
-    time,
-    bgcolor: slot_time
-        .data
-        .timeSlot[i]
-        .status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? apptealColor
-        : Colors.white
-        : Colors.white,
-    textColor: slot_time
-        .data
-        .timeSlot[i]
-        .status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? Colors.white
-        : apptealColor
-        : Colors.grey,
-    onPressed: () {
-    setState(() {
-    _selectedindex = i;
-    selectedTime = slot_time
-        .data
-        .timeSlot[i]
-        .status ==
-    'availiable'
-    ? slot_time
-        .data
-        .timeSlot[i]
-        .slotTime
-        : '';
-    print(selectedTime +
-    '${_selectedindex}');
-    });
-    },
-    textSize: 12,
-    width: 90,
-    borderRadius: 0,
-    borderWidth: 1,
-    borderColor: slot_time
-        .data
-        .timeSlot[i]
-        .status ==
-    'availiable'
-    ? apptealColor
-        : Colors.grey,
-    ),
-    )
-        : SizedBox()
-        : Padding(
-    padding: const EdgeInsets.symmetric(
-    horizontal: 8.0,vertical: 5.0),
-    child: commonBtn(
-    height: 40,
-    s: slot_time
-        .data.timeSlot[i].slotTime
-        .substring(0, 5)
-        .toString() +
-    time,
-    bgcolor: slot_time.data.timeSlot[i]
-        .status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? apptealColor
-        : Colors.white
-        : Colors.white,
-    textColor: slot_time.data
-        .timeSlot[i].status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? Colors.white
-        : apptealColor
-        : Colors.grey,
-    onPressed: () {
-    setState(() {
-    _selectedindex = i;
-    selectedTime = slot_time
-        .data
-        .timeSlot[i]
-        .status ==
-    'availiable'
-    ? slot_time.data.timeSlot[i]
-        .slotTime
-        : '';
-    print(selectedTime +
-    '${_selectedindex}');
-    });
-    },
-    textSize: 12,
-    width: 90,
-    borderRadius: 0,
-    borderWidth: 1,
-    borderColor: slot_time.data
-        .timeSlot[i].status ==
-    'availiable'
-    ? apptealColor
-        : Colors.grey,
-    ),
-    )
-        : Padding(
-    padding:
-    const EdgeInsets.symmetric(horizontal: 8.0,vertical: 5.0),
-    child: commonBtn(
-    height: 40,
-    s: slot_time.data.timeSlot[i].slotTime
-        .substring(0, 5)
-        .toString() +
-    time,
-    bgcolor:
-    slot_time.data.timeSlot[i].status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? apptealColor
-        : Colors.white
-        : Colors.white,
-    textColor:
-    slot_time.data.timeSlot[i].status ==
-    'availiable'
-    ? (_selectedindex == i)
-    ? Colors.white
-        : apptealColor
-        : Colors.grey,
-    onPressed: () {
-    setState(() {
-    _selectedindex = i;
-    selectedTime =
-    slot_time.data.timeSlot[i].status ==
-    'availiable'
-    ? slot_time
-        .data.timeSlot[i].slotTime
-        : '';
-    print(selectedTime + '${_selectedindex}');
-    });
-    },
-    textSize: 12,
-    width: 90,
-    borderRadius: 0,
-    borderWidth: 1,
-    borderColor:
-    slot_time.data.timeSlot[i].status ==
-    'availiable'
-    ? apptealColor
-        : Colors.grey,
-    ),
-    )
-        : Container()
-          ],
-        ),
-
-      ],
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        print(slot_time.data.timeSlot[index].slotTime);
+        int am = (slot_time.data.timeSlot[index].slotTime.toString() ==
+                null.toString())
+            ? 0
+            : int.parse(
+                slot_time.data.timeSlot[index].slotTime.substring(0, 2));
+        return (am == 0)
+            ? Container()
+            : (am >= startTime && am < endTime)
+                ? (date.day == DateTime.now().day &&
+                        date.month == DateTime.now().month &&
+                        date.year == DateTime.now().year)
+                    ? (DateTime.now().hour >
+                            int.parse(slot_time.data.timeSlot[index].slotTime
+                                .substring(0, 2)))
+                        ? SizedBox()
+                        : (DateTime.now().hour ==
+                                int.parse(slot_time
+                                    .data.timeSlot[index].slotTime
+                                    .substring(0, 2)))
+                            ? ((DateTime.now().minute <
+                                    int.parse(slot_time
+                                        .data.timeSlot[index].slotTime
+                                        .substring(3, 5))))
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: commonBtn(
+                                      s: slot_time.data.timeSlot[index].slotTime
+                                              .substring(0, 5)
+                                              .toString() +
+                                          time,
+                                      bgcolor: slot_time.data.timeSlot[index]
+                                                  .status ==
+                                              'availiable'
+                                          ? (_selectedindex == index)
+                                              ? apptealColor
+                                              : Colors.white
+                                          : Colors.white,
+                                      textColor: slot_time.data.timeSlot[index]
+                                                  .status ==
+                                              'availiable'
+                                          ? (_selectedindex == index)
+                                              ? Colors.white
+                                              : apptealColor
+                                          : Colors.grey,
+                                      onPressed: () {
+                                        setState(() {
+                                          _selectedindex = index;
+                                          selectedTime = slot_time.data
+                                                      .timeSlot[index].status ==
+                                                  'availiable'
+                                              ? slot_time
+                                                  .data.timeSlot[index].slotTime
+                                              : '';
+                                          print(selectedTime +
+                                              '${_selectedindex}');
+                                        });
+                                      },
+                                      textSize: 12,
+                                      width: 90,
+                                      borderRadius: 0,
+                                      borderWidth: 1,
+                                      borderColor: slot_time.data
+                                                  .timeSlot[index].status ==
+                                              'availiable'
+                                          ? apptealColor
+                                          : Colors.grey,
+                                    ),
+                                  )
+                                : SizedBox()
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: commonBtn(
+                                  s: slot_time.data.timeSlot[index].slotTime
+                                          .substring(0, 5)
+                                          .toString() +
+                                      time,
+                                  bgcolor:
+                                      slot_time.data.timeSlot[index].status ==
+                                              'availiable'
+                                          ? (_selectedindex == index)
+                                              ? apptealColor
+                                              : Colors.white
+                                          : Colors.white,
+                                  textColor:
+                                      slot_time.data.timeSlot[index].status ==
+                                              'availiable'
+                                          ? (_selectedindex == index)
+                                              ? Colors.white
+                                              : apptealColor
+                                          : Colors.grey,
+                                  onPressed: () {
+                                    setState(() {
+                                      _selectedindex = index;
+                                      selectedTime = slot_time.data
+                                                  .timeSlot[index].status ==
+                                              'availiable'
+                                          ? slot_time
+                                              .data.timeSlot[index].slotTime
+                                          : '';
+                                      print(selectedTime + '${_selectedindex}');
+                                    });
+                                  },
+                                  textSize: 12,
+                                  width: 90,
+                                  borderRadius: 0,
+                                  borderWidth: 1,
+                                  borderColor:
+                                      slot_time.data.timeSlot[index].status ==
+                                              'availiable'
+                                          ? apptealColor
+                                          : Colors.grey,
+                                ),
+                              )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: commonBtn(
+                          s: slot_time.data.timeSlot[index].slotTime
+                                  .substring(0, 5)
+                                  .toString() +
+                              time,
+                          bgcolor: slot_time.data.timeSlot[index].status ==
+                                  'availiable'
+                              ? (_selectedindex == index)
+                                  ? apptealColor
+                                  : Colors.white
+                              : Colors.white,
+                          textColor: slot_time.data.timeSlot[index].status ==
+                                  'availiable'
+                              ? (_selectedindex == index)
+                                  ? Colors.white
+                                  : apptealColor
+                              : Colors.grey,
+                          onPressed: () {
+                            setState(() {
+                              _selectedindex = index;
+                              selectedTime =
+                                  slot_time.data.timeSlot[index].status ==
+                                          'availiable'
+                                      ? slot_time.data.timeSlot[index].slotTime
+                                      : '';
+                              print(selectedTime + '${_selectedindex}');
+                            });
+                          },
+                          textSize: 12,
+                          width: 90,
+                          borderRadius: 0,
+                          borderWidth: 1,
+                          borderColor: slot_time.data.timeSlot[index].status ==
+                                  'availiable'
+                              ? apptealColor
+                              : Colors.grey,
+                        ),
+                      )
+                : Container();
+      },
+      itemCount: slot_time.data.timeSlot.length,
+      scrollDirection: Axis.vertical,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 100,
+          childAspectRatio: 5 / 2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20),
     );
   }
 }

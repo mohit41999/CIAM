@@ -101,7 +101,7 @@ class _LifestyleState extends State<Lifestyle> {
                             SizedBox(
                               height: 20,
                             ),
-                            Text('Alchol'),
+                            Text('Alcohol'),
                             SizedBox(
                               height: 7,
                             ),
@@ -273,6 +273,9 @@ class _LifestyleState extends State<Lifestyle> {
                               _con.submit(context);
                             });
                           }),
+                      SizedBox(
+                        height: navbarht + 20,
+                      ),
                     ],
                   ),
                 ),

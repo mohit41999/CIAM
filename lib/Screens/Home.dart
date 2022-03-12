@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
-import 'package:patient/Screens/LabProfile.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
+import 'package:patient/Screens/HomeCareCategories.dart';
+import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
@@ -53,12 +58,12 @@ final List<Map<dynamic, dynamic>> hometile = [
   //   'Screen': 'null',
   //   'profile': 'Rectangle -6.png'
   // },
-  // {
-  //   'label': 'Lab Tests',
-  //   // 'Screen': 'null',
-  //   'Screen': LabProfile(),
-  //   'profile': 'Rectangle -2.png'
-  // },
+  {
+    'label': 'Lab Tests',
+    // 'Screen': 'null',
+    'Screen': LabProfile(),
+    'profile': 'Rectangle -2.png'
+  },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
   // {
   //   'label': 'Medicine',
@@ -77,6 +82,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool healthcareLoading = true;
+  late HealthCareCategoriesModel healthCareCategories;
+  Future<HealthCareCategoriesModel> gethomecareServices() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    var response = await PostData(
+        PARAM_URL: 'get_home_care_services.php',
+        params: {'user_id': preferences.getString('user_id'), 'token': Token});
+
+    return HealthCareCategoriesModel.fromJson(response);
+  }
+
   HomeController _con = HomeController();
   late HomeDoctorSpecialityModel specialities;
   int _current = 0;
@@ -183,6 +200,12 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         specialities = value;
         _con.specialitybool = false;
+      });
+    });
+    gethomecareServices().then((value) {
+      setState(() {
+        healthCareCategories = value;
+        healthcareLoading = false;
       });
     });
   }
@@ -340,7 +363,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: GridView.builder(
-                      scrollDirection: Axis.vertical,
+                      scrollDirection: Axis.horizontal,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
@@ -477,61 +500,78 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: commonRow(
                       Title: 'Health Care Services',
                       subTitle: 'View all',
-                      value: DoctorProfile(fromhome: true),
+                      value: HomeCareCategories(),
                     ),
                   ),
                   SizedBox(
                     height: 150,
                     //color: Colors.red,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              height: 126,
-                              width: 154,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    blurRadius: 10,
-                                    offset: const Offset(2, 5),
-                                  ),
-                                ],
-                              ),
-                              child: Stack(
-                                children: [
-                                  Image.asset(
-                                    'assets/pngs/Icon material-face.png',
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                  ),
-                                  Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
+                    child: (healthcareLoading)
+                        ? Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: healthCareCategories.data.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Push(
+                                      context,
+                                      DoctorProfile3(
+                                        cat_id: healthCareCategories
+                                            .data[index].serviceId,
+                                        cat_name: healthCareCategories
+                                            .data[index].serviceName,
+                                      ));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                    height: 126,
+                                    width: 154,
                                     decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(0.2),
+                                      color: Colors.black,
                                       borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          blurRadius: 10,
+                                          offset: const Offset(2, 5),
+                                        ),
+                                      ],
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                        'Physiotherapy',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                    child: Stack(
+                                      children: [
+                                        Image.network(
+                                          healthCareCategories
+                                              .data[index].image,
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                        ),
+                                        Container(
+                                          height: double.infinity,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              healthCareCategories
+                                                  .data[index].serviceName,
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 16,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
+                                  ),
+                                ),
+                              );
+                            }),
                   ),
                 ],
               ),
@@ -539,76 +579,76 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 15,
             ),
-            Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: commonRow(
-                      Title: 'Health Checkup at Home',
-                      subTitle: 'View all',
-                      value: DoctorProfile(fromhome: true),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 150,
-                    //color: Colors.red,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Container(
-                              height: 126,
-                              width: 154,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    blurRadius: 10,
-                                    offset: const Offset(2, 5),
-                                  ),
-                                ],
-                              ),
-                              child: Stack(
-                                children: [
-                                  Image.asset(
-                                    'assets/pngs/Icon material-face.png',
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                  ),
-                                  Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Physiotherapy',
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        }),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   color: Colors.white,
+            //   child: Column(
+            //     children: [
+            //       Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: commonRow(
+            //           Title: 'Health Checkup at Home',
+            //           subTitle: 'View all',
+            //           value: DoctorProfile(fromhome: true),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         height: 150,
+            //         //color: Colors.red,
+            //         child: ListView.builder(
+            //             scrollDirection: Axis.horizontal,
+            //             itemCount: 5,
+            //             itemBuilder: (context, index) {
+            //               return Padding(
+            //                 padding: const EdgeInsets.all(15.0),
+            //                 child: Container(
+            //                   height: 126,
+            //                   width: 154,
+            //                   decoration: BoxDecoration(
+            //                     color: Colors.black,
+            //                     borderRadius: BorderRadius.circular(10),
+            //                     boxShadow: [
+            //                       BoxShadow(
+            //                         color: Colors.grey.withOpacity(0.5),
+            //                         blurRadius: 10,
+            //                         offset: const Offset(2, 5),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                   child: Stack(
+            //                     children: [
+            //                       Image.asset(
+            //                         'assets/pngs/Icon material-face.png',
+            //                         height: double.infinity,
+            //                         width: double.infinity,
+            //                       ),
+            //                       Container(
+            //                         height: double.infinity,
+            //                         width: double.infinity,
+            //                         decoration: BoxDecoration(
+            //                           color: Colors.grey.withOpacity(0.2),
+            //                           borderRadius: BorderRadius.circular(10),
+            //                         ),
+            //                         child: Center(
+            //                           child: Text(
+            //                             'Physiotherapy',
+            //                             style: GoogleFonts.montserrat(
+            //                                 fontSize: 16,
+            //                                 color: Colors.white,
+            //                                 fontWeight: FontWeight.bold),
+            //                           ),
+            //                         ),
+            //                       )
+            //                     ],
+            //                   ),
+            //                 ),
+            //               );
+            //             }),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(
-              height: 100,
+              height: navbarht + 20,
             ),
           ],
         ),

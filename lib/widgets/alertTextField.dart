@@ -5,12 +5,14 @@ class alertTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String textFieldtext;
+  final TextInputType inputType;
 
   const alertTextField({
     Key? key,
     required this.controller,
     required this.label,
     required this.textFieldtext,
+    this.inputType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class alertTextField extends StatelessWidget {
             elevation: 5,
             borderRadius: BorderRadius.circular(10),
             child: TextFormField(
+              keyboardType: inputType,
               style: TextStyle(
                   fontSize: 12,
                   color: Colors.black,

@@ -5,6 +5,7 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
+import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/enter_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,15 +50,19 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: commonAppBarLeading(
-            iconData: Icons.arrow_back_ios_new,
-            onPressed: () {
-              Pop(context);
-            }),
-        centerTitle: true,
-        backgroundColor: appAppBarColor,
-        elevation: 0,
-      ),
+          centerTitle: true,
+          title: commonAppBarTitle(),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => commonAppBarLeading(
+                iconData: Icons.arrow_back_ios_new,
+                onPressed: () {
+                  setState(() {
+                    Pop(context);
+                  });
+                }),
+          )),
       body: Padding(
         padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
         child: Column(
@@ -120,7 +125,13 @@ class _SearchScreenState extends State<SearchScreen> {
                           index,
                         ) {
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.only(
+                                left: 10.0,
+                                right: 10.0,
+                                top: 10.0,
+                                bottom: (index + 1 == searchList.length)
+                                    ? navbarht + 20
+                                    : 10),
                             child: GestureDetector(
                               onTap: () {
                                 Push(

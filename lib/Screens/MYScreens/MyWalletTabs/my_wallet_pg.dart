@@ -1,15 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:patient/Screens/MYScreens/MyWalletTabs/request_for_redemption.dart';
+import 'package:patient/Models/wallet_history.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/wallet_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/title_column.dart';
 import 'package:patient/widgets/title_enter_field.dart';
-
-import 'wallet_transaction_history.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class MyWalletPage extends StatefulWidget {
   const MyWalletPage({Key? key}) : super(key: key);
@@ -20,13 +24,94 @@ class MyWalletPage extends StatefulWidget {
 
 class _MyWalletPageState extends State<MyWalletPage>
     with SingleTickerProviderStateMixin {
+  WalletController _controller = WalletController();
+
+  late Razorpay _razorpay;
+  String username = 'rzp_test_Wx4Pz8r5BYpqqQ';
+  String password = '30RFYcp8Uty6yxx21eBLaX1W';
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+    // depositsuccess();
+    _controller.depositWallet(context, depositamount.text).then((value) {
+      setState(() {
+        depositamount.clear();
+      });
+    });
+
+    print('order' + response.orderId.toString());
+    print('paymentId' + response.paymentId.toString());
+    print('signature' + response.signature.toString());
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
+  }
+  TextEditingController depositamount = TextEditingController();
+  TextEditingController withdrawamount = TextEditingController();
+  void payment(int amount) async {
+    var authn = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    Object? orderOptions = {
+      "amount": amount,
+      "currency": "INR",
+      "receipt": "Receipt no. 1",
+      "payment_capture": 1,
+    };
+    var headers = {
+      'content-type': 'application/json',
+      'Authorization': authn,
+    };
+    // final client = HttpClient();
+    var res = await http.post(Uri.parse('https://api.razorpay.com/v1/orders'),
+        headers: headers, body: json.encode(orderOptions));
+
+    print(jsonDecode(res.body).toString() +
+        '======================================');
+
+    String order_id = jsonDecode(res.body)['id'].toString();
+
+    Map<String, dynamic> checkoutOptions = {
+      'key': username,
+      'amount': amount,
+      "currency": "INR",
+      'name': '',
+      'description': '',
+      'order_id': order_id, // Generate order_id using Orders API
+      'timeout': 3000,
+    };
+    try {
+      _razorpay.open(checkoutOptions);
+    } catch (e) {}
+  }
+
   late TabController _tabController;
   TextEditingController oldPass = TextEditingController();
   TextEditingController newPass = TextEditingController();
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
+    _razorpay = Razorpay();
+
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    _tabController = TabController(length: 3, vsync: this);
+
+    _controller.getwallet(context).then((value) {
+      setState(() {
+        _controller.getwalletTransaction(context).then((value) {
+          setState(() {
+            print(value.toString() + 'lllllllll');
+            _controller.walletTransaction = value;
+            _controller.historyloading = false;
+          });
+        });
+      });
+    });
     super.initState();
   }
 
@@ -67,7 +152,7 @@ class _MyWalletPageState extends State<MyWalletPage>
                       style: GoogleFonts.montserrat(fontSize: 20),
                     ),
                     Text(
-                      '\$499',
+                      _controller.walletBalance,
                       style: GoogleFonts.montserrat(
                           fontSize: 20,
                           color: appblueColor,
@@ -95,10 +180,13 @@ class _MyWalletPageState extends State<MyWalletPage>
                   unselectedLabelColor: Colors.grey,
                   tabs: [
                     Tab(
-                      text: 'Wallet Transaction History',
+                      text: 'Wallet Transaction \nHistory',
                     ),
                     Tab(
-                      text: 'Request for Redemption',
+                      text: 'Deposit',
+                    ),
+                    Tab(
+                      text: 'Withdraw',
                     ),
                   ],
                 ),
@@ -115,8 +203,10 @@ class _MyWalletPageState extends State<MyWalletPage>
                 controller: _tabController,
                 children: [
                   // first tab bar view widget
-                  WalletTransactionHistory(),
-                  RequestForRedemption(),
+                  wallettransaction(),
+                  Deposit(),
+                  WithDraw()
+
                   // second tab bar view widget
                 ],
               ),
@@ -124,6 +214,167 @@ class _MyWalletPageState extends State<MyWalletPage>
           ],
         ),
       ),
+    );
+  }
+
+  Widget wallettransaction() {
+    return (_controller.historyloading)
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : (_controller.walletTransaction.toString() == 'null')
+            ? Center(child: Text('Error.. please try later'))
+            : ListView.builder(
+                itemCount: _controller.walletTransaction!.data.length,
+                itemBuilder: (context, index) {
+                  WalletTransactionData transactionHistory =
+                      _controller.walletTransaction!.data[index];
+
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        left: 8.0,
+                        right: 8.0,
+                        top: 8.0,
+                        bottom: (index + 1 ==
+                                _controller.walletTransaction!.data.length)
+                            ? navbarht + 20
+                            : 8.0),
+                    child: Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 8),
+                        child: Container(
+                          height: 86,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    titleColumn(
+                                        title: 'Transaction Id',
+                                        value: transactionHistory.txnId),
+                                    titleColumn(
+                                        title: 'Order Id / Service Id',
+                                        value: transactionHistory.id),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    titleColumn(
+                                        title: 'Transaction Date',
+                                        value: transactionHistory.txnDate),
+                                    titleColumn(
+                                        title: 'Transaction Amount',
+                                        value: transactionHistory.amount),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+  }
+
+  Widget Deposit() {
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TitleEnterField(
+              'Enter Amount',
+              'Amount',
+              depositamount,
+              textInputType: TextInputType.number,
+            ),
+          ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 8.0, right: 8.0, top: 8.0, bottom: navbarht + 20),
+            child: commonBtn(
+              s: 'Submit  ',
+              bgcolor: appblueColor,
+              textColor: Colors.white,
+              onPressed: () {
+                if (depositamount.text.isEmpty) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Enter Amount')));
+                } else if (depositamount.text.contains('.')) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text('Enter Amount Without decimal')));
+                } else {
+                  payment(int.parse(depositamount.text + '00'));
+                }
+              },
+              borderRadius: 8,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget WithDraw() {
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TitleEnterField(
+              'Enter Amount',
+              'Amount',
+              withdrawamount,
+              textInputType: TextInputType.number,
+            ),
+          ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 8.0, right: 8.0, top: 8.0, bottom: navbarht + 20),
+            child: commonBtn(
+              s: 'Submit  ',
+              bgcolor: appblueColor,
+              textColor: Colors.white,
+              onPressed: () {
+                if (withdrawamount.text.isEmpty) {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Enter Amount')));
+                } else {
+                  _controller
+                      .withDrawWallet(context, withdrawamount.text)
+                      .then((value) {
+                    setState(() {
+                      withdrawamount.clear();
+                    });
+                  });
+                }
+              },
+              borderRadius: 8,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

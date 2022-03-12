@@ -6,6 +6,7 @@ import 'package:patient/API%20repo/local_auth_api.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/firebase/notification_handling.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,6 +35,11 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: commonAppBarLeading(
+            iconData: Icons.arrow_back_ios_new,
+            onPressed: () {
+              Pop(context);
+            }),
         title: commonAppBarTitle(),
         centerTitle: true,
         backgroundColor: appAppBarColor,
@@ -74,7 +80,8 @@ class _BiometricAuthenticateState extends State<BiometricAuthenticate> {
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: EdgeInsets.only(
+                            left: 20, right: 20, bottom: navbarht + 20),
                         child: TextButton(
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all(

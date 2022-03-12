@@ -6,13 +6,13 @@ import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/Home.dart';
-import 'package:patient/Screens/LabProfile.dart';
+import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MedicineProfile.dart';
 import 'package:patient/Screens/Products.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/controller/DoctorProdileController/doctor_controller.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/about_consultation_controller.dart';
 import 'package:patient/controller/app_review_controller.dart';
@@ -670,7 +670,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
               ),
             ),
             SizedBox(
-              height: 70,
+              height: navbarht + 20,
             ),
           ],
         ),

@@ -1,95 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 
-class LabProfile extends StatefulWidget {
-  const LabProfile({Key? key}) : super(key: key);
+class PackagesLabScreen extends StatefulWidget {
+  const PackagesLabScreen({Key? key}) : super(key: key);
 
   @override
-  _LabProfileState createState() => _LabProfileState();
+  _PackagesLabScreenState createState() => _PackagesLabScreenState();
 }
 
-class _LabProfileState extends State<LabProfile> {
+class _PackagesLabScreenState extends State<PackagesLabScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: commonAppBarTitleText(appbarText: 'Lab Profile'),
         elevation: 0,
-        backgroundColor: appAppBarColor,
         centerTitle: true,
-        leading: Builder(
-            builder: (context) => commonAppBarLeading(
-                iconData: Icons.arrow_back_ios_new,
-                onPressed: () {
-                  Navigator.pop(context);
-                })),
+        title: commonAppBarTitle(),
+        backgroundColor: appAppBarColor,
+        leading: commonAppBarLeading(
+            iconData: Icons.arrow_back_ios_new,
+            onPressed: () {
+              Pop(context);
+            }),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: const Offset(2, 5),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Color(0xff161616).withOpacity(0.6),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'Search',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 16,
-                          color: Color(0xff161616).withOpacity(0.6)),
-                    ),
-                  ],
-                ),
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Container(
+              height: 40,
+              color: Colors.white,
+              width: double.infinity,
+              child: Center(
+                  child: Text(
+                'Available Labs',
+                style: GoogleFonts.montserrat(
+                    fontSize: 20,
+                    color: appblueColor,
+                    fontWeight: FontWeight.bold),
+              )),
             ),
-          ),
-          SizedBox(
-            height: 10,
           ),
           Expanded(
             child: ListView.builder(
                 shrinkWrap: true,
+                scrollDirection: Axis.vertical,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: (index + 1 == 10)
-                        ? EdgeInsets.only(
-                            left: 10, right: 10, bottom: 50, top: 10)
-                        : const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.only(
+                        top: 10.0,
+                        right: 10.0,
+                        left: 10.0,
+                        bottom: (index + 1 == 10) ? navbarht + 21 : 10.0),
                     child: Container(
-                      height: 170,
+                      width: MediaQuery.of(context).size.width / 1.2,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(15),
@@ -106,7 +77,7 @@ class _LabProfileState extends State<LabProfile> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            height: 170,
+                            height: 200,
                             child: Row(
                               children: [
                                 Expanded(
@@ -134,17 +105,31 @@ class _LabProfileState extends State<LabProfile> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('LAB name', style: KHeader),
                                         Text(
-                                            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-                                            style: KBodyText),
+                                          'LAB name',
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 12,
+                                          ),
+                                        ),
                                         rowTextIcon(
-                                          text: 'Location',
+                                          text: ' Location',
                                           asset: 'assets/pngs/Group 1182.png',
+                                        ),
+                                        Text(
+                                          '\$149',
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                         Center(
                                           child: commonBtn(
-                                            s: 'View LAB',
+                                            s: 'Book Now',
                                             bgcolor: appblueColor,
                                             textColor: Colors.white,
                                             onPressed: () {},

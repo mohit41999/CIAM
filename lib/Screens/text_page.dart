@@ -525,7 +525,8 @@ class MessageTile extends StatelessWidget {
                               video: video.toString().replaceAll(
                                   'http://ciam.notionprojects.tech/assets/uploaded/chatvideos/',
                                   ''),
-                              url: video));
+                              url: video),
+                          withnav: false);
                     },
                     child: Container(
                       height: 100,

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/firebase/database.dart';
-import 'package:patient/helper/helperfunctions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthenticationHelper {
@@ -29,10 +28,6 @@ class AuthenticationHelper {
 
           databaseMethods.addUserInfo(userDataMap);
 
-          HelperFunctions.saveUserLoggedInSharedPreference(true);
-          HelperFunctions.saveUserNameSharedPreference(username);
-          HelperFunctions.saveUserEmailSharedPreference(email);
-
           // Navigator.pushReplacement(context, MaterialPageRoute(
           //     builder: (context) => ChatRoom()
           // ));
@@ -54,12 +49,6 @@ class AuthenticationHelper {
           QuerySnapshot userInfoSnapshot =
               await DatabaseMethods().getUserInfo(email);
           print(userInfoSnapshot.docs[0].id);
-
-          HelperFunctions.saveUserLoggedInSharedPreference(true);
-          HelperFunctions.saveUserNameSharedPreference(
-              userInfoSnapshot.docs[0]["userName"]);
-          HelperFunctions.saveUserEmailSharedPreference(
-              userInfoSnapshot.docs[0]["userEmail"]);
         }
       });
       return null;

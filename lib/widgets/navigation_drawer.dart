@@ -1,14 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/Screens/MYScreens/MyAppointments.dart';
-import 'package:patient/Screens/MYScreens/MyLabTest.dart';
-import 'package:patient/Screens/MYScreens/MyMedicineOrders.dart';
-import 'package:patient/Screens/MYScreens/MyOrderPage.dart';
-import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
-import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
-import 'package:patient/Screens/MYScreens/MyReviewRating.dart';
-import 'package:patient/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart';
-import 'package:patient/Screens/ProfileSettings/profile_setting.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Screens/account_settings.dart';
 import 'package:patient/Utils/drawerList.dart';
@@ -127,13 +118,24 @@ class _commonDrawerState extends State<commonDrawer> {
                                   if (drawerList[index]['label'].toString() ==
                                       'Logout') {
                                     _ackAlert(context);
+                                  } else if (drawerList[index]['label']
+                                          .toString() ==
+                                      'Profile') {
+                                    pushNewScreen(
+                                      context,
+                                      screen: drawerList[index]['Screen'],
+                                      withNavBar:
+                                          false, // OPTIONAL VALUE. True by default.
+                                      pageTransitionAnimation:
+                                          PageTransitionAnimation.cupertino,
+                                    );
                                   } else {
                                     Navigator.pop(context);
                                     pushNewScreen(
                                       context,
                                       screen: drawerList[index]['Screen'],
                                       withNavBar:
-                                          false, // OPTIONAL VALUE. True by default.
+                                          true, // OPTIONAL VALUE. True by default.
                                       pageTransitionAnimation:
                                           PageTransitionAnimation.cupertino,
                                     );

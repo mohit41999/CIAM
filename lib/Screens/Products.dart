@@ -4,6 +4,7 @@ import 'package:patient/Models/products_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/ProductDetails.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/product_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -99,7 +100,13 @@ class _ProductPageState extends State<ProductPage> {
                 itemBuilder: (context, int index) {
                   var Product = products.data[index];
                   return Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(
+                        left: 10.0,
+                        right: 10.0,
+                        top: 10.0,
+                        bottom: (index + 1 == products.data.length)
+                            ? navbarht + 20
+                            : 10),
                     child: Container(
                       height: 150,
                       decoration: BoxDecoration(
@@ -155,11 +162,8 @@ class _ProductPageState extends State<ProductPage> {
                                         bgcolor: apptealColor,
                                         textColor: Colors.white,
                                         onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ProductDetails()));
+                                          Push(context, ProductDetails(),
+                                              withnav: false);
                                         },
                                         height: 30,
                                         width: 120,

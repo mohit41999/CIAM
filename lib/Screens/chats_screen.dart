@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:patient/Models/chatRooms.dart';
 import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -81,34 +82,40 @@ class _ChatsScreenState extends State<ChatsScreen> {
               shrinkWrap: true,
               itemCount: chatRooms.data.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TextPage(
-                                  doctorid: chatRooms.data[index].userId,
-                                  doctorName: chatRooms.data[index].userName,
-                                )));
-                  },
-                  child: ListTile(
-                    leading: CircleAvatar(
-                        radius: 24,
-                        backgroundColor: Colors.grey,
-                        backgroundImage:
-                            NetworkImage(chatRooms.data[index].profileImage)),
-                    title: Text(
-                      chatRooms.data[index].userName,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
-                    ),
-                    subtitle: Text(
-                      chatRooms.data[index].message,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    trailing: CircleAvatar(
-                      radius: 4,
-                      backgroundColor: apptealColor,
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: (index == chatRooms.data.length + 1)
+                          ? navbarht + 20
+                          : 8.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Push(
+                          context,
+                          TextPage(
+                            doctorid: chatRooms.data[index].userId,
+                            doctorName: chatRooms.data[index].userName,
+                          ),
+                          withnav: false);
+                    },
+                    child: ListTile(
+                      leading: CircleAvatar(
+                          radius: 24,
+                          backgroundColor: Colors.grey,
+                          backgroundImage:
+                              NetworkImage(chatRooms.data[index].profileImage)),
+                      title: Text(
+                        chatRooms.data[index].userName,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                      subtitle: Text(
+                        chatRooms.data[index].message,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      trailing: CircleAvatar(
+                        radius: 4,
+                        backgroundColor: apptealColor,
+                      ),
                     ),
                   ),
                 );

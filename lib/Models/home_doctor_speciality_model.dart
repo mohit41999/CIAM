@@ -5,6 +5,8 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
+import 'package:patient/widgets/title_column.dart';
+
 HomeDoctorSpecialityModel homeDoctorSpecialityModelFromJson(String str) =>
     HomeDoctorSpecialityModel.fromJson(json.decode(str));
 
@@ -42,11 +44,13 @@ class HomeDoctorSpecialityModelDatum {
     required this.specialistId,
     required this.specialistName,
     required this.specialistImg,
+
   });
 
   String specialistId;
   String specialistName;
   String specialistImg;
+
 
   factory HomeDoctorSpecialityModelDatum.fromJson(Map<String, dynamic> json) =>
       HomeDoctorSpecialityModelDatum(
