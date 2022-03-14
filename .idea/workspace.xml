@@ -9,26 +9,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="lab">
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/contact_screen.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_tests.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/prescription_screen.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="lab package test">
+      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/all_labs_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/all_packages_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/all_test_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/controller/LabController/lab_profile_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/HomeCareCategories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/HomeCareCategories.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/LabProfile.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_labs.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_package.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_package.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_packages.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_list.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_package.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MedicineProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646920201268</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="lab package test">
+      <created>1647006684585</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1647006684585</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -295,6 +293,7 @@
     <MESSAGE value="bottom nav bar" />
     <MESSAGE value="home care services" />
     <MESSAGE value="lab" />
-    <option name="LAST_COMMIT_MESSAGE" value="lab" />
+    <MESSAGE value="lab package test" />
+    <option name="LAST_COMMIT_MESSAGE" value="lab package test" />
   </component>
 </project>

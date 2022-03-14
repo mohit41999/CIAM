@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Models/LAB/all_labs_model.dart';
+import 'package:patient/Models/LAB/all_packages_model.dart';
+import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
@@ -11,6 +14,7 @@ import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -27,6 +31,27 @@ class LabProfile extends StatefulWidget {
 }
 
 class _LabProfileState extends State<LabProfile> {
+  LABProfielController _controller = LABProfielController();
+
+  Future initialize() async {
+    _controller.allLabs = await _controller.getallLabs();
+    _controller.allPackages = await _controller.getallPackages();
+    _controller.allTests = await _controller.getallTests();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initialize().then((value) {
+      setState(() {
+        _controller.labloading = false;
+        _controller.packagesLoading = false;
+        _controller.testloading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +79,9 @@ class _LabProfileState extends State<LabProfile> {
             SizedBox(
               height: 10,
             ),
-            PackagesWidget(),
+            PackagesWidget(
+              allPackagesModel: _controller.allPackages,
+            ),
             SizedBox(
               height: 10,
             ),
@@ -68,7 +95,9 @@ class _LabProfileState extends State<LabProfile> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            TestWidget(),
+            TestWidget(
+              allTestModel: _controller.allTests,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Center(
@@ -85,7 +114,9 @@ class _LabProfileState extends State<LabProfile> {
                 ),
               ),
             ),
-            LabsWidget(),
+            LabsWidget(
+              allLabsModel: _controller.allLabs,
+            ),
             SizedBox(
               height: navbarht + 20,
             ),
@@ -97,8 +128,10 @@ class _LabProfileState extends State<LabProfile> {
 }
 
 class LabsWidget extends StatelessWidget {
+  final AllLabsModel allLabsModel;
   const LabsWidget({
     Key? key,
+    required this.allLabsModel,
   }) : super(key: key);
 
   @override
@@ -126,7 +159,7 @@ class LabsWidget extends StatelessWidget {
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
+                itemCount: allLabsModel.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(10.0),
@@ -161,8 +194,8 @@ class LabsWidget extends StatelessWidget {
                                             topLeft: Radius.circular(15),
                                             bottomLeft: Radius.circular(15)),
                                         image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/pngs/Rectangle-77.png'),
+                                            image: NetworkImage(
+                                                allLabsModel.data[index].image),
                                             fit: BoxFit.cover)),
                                   ),
                                 ),
@@ -176,12 +209,14 @@ class LabsWidget extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('LAB name', style: KHeader),
+                                        Text(allLabsModel.data[index].labname,
+                                            style: KHeader),
                                         Text(
                                             'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
                                             style: KBodyText),
                                         rowTextIcon(
-                                          text: 'Location',
+                                          text:
+                                              allLabsModel.data[index].location,
                                           asset: 'assets/pngs/Group 1182.png',
                                         ),
                                         Center(
@@ -216,8 +251,10 @@ class LabsWidget extends StatelessWidget {
 }
 
 class TestWidget extends StatelessWidget {
+  final AllTestModel allTestModel;
   const TestWidget({
     Key? key,
+    required this.allTestModel,
   }) : super(key: key);
 
   @override
@@ -232,7 +269,7 @@ class TestWidget extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: 4,
+          itemCount: allTestModel.data.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.all(10.0),
@@ -267,18 +304,26 @@ class TestWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Tests',
+                                    allTestModel.data[index].testName,
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                         color: appblueColor),
                                   ),
                                   Text(
-                                      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr,',
+                                      (allTestModel.data[index].testDescription
+                                                  .length >=
+                                              150)
+                                          ? allTestModel
+                                                  .data[index].testDescription
+                                                  .substring(0, 100) +
+                                              '...'
+                                          : allTestModel
+                                              .data[index].testDescription,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
                                   Text(
-                                    '\$199',
+                                    '₹ 199',
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
@@ -332,8 +377,10 @@ class TestWidget extends StatelessWidget {
 }
 
 class PackagesWidget extends StatelessWidget {
+  final AllPackagesModel allPackagesModel;
   const PackagesWidget({
     Key? key,
+    required this.allPackagesModel,
   }) : super(key: key);
 
   @override
@@ -363,7 +410,7 @@ class PackagesWidget extends StatelessWidget {
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
+                itemCount: allPackagesModel.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(8.0),
@@ -406,17 +453,16 @@ class PackagesWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Full Body Checkup',
+                                    allPackagesModel.data[index].packgeName,
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14),
                                   ),
-                                  Text(
-                                      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr,',
+                                  Text(allPackagesModel.data[index].packgeName,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
                                   Text(
-                                    '\$199',
+                                    '₹ ' + allPackagesModel.data[index].price,
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),

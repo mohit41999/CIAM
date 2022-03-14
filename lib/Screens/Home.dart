@@ -176,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _search = TextEditingController();
   List<Placemark> address = [];
   Future getcity() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude,
@@ -184,6 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
       print(placemarks);
       setState(() {
         address = placemarks;
+        preferences.setString('city', address[0].subAdministrativeArea!);
       });
     } catch (err) {}
   }
