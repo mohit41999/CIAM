@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Screens/LAB/package_checkout.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 
 class PackagesLabScreen extends StatefulWidget {
@@ -29,27 +31,99 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
               Pop(context);
             }),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Container(
-              height: 40,
-              color: Colors.white,
-              width: double.infinity,
-              child: Center(
-                  child: Text(
-                'Available Labs',
-                style: GoogleFonts.montserrat(
-                    fontSize: 20,
-                    color: appblueColor,
-                    fontWeight: FontWeight.bold),
-              )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                height: 40,
+                color: Colors.white,
+                width: double.infinity,
+                child: Center(
+                    child: Text(
+                  'Package Details',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 20,
+                      color: appblueColor,
+                      fontWeight: FontWeight.bold),
+                )),
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                  height: MediaQuery.of(context).size.height / 3,
+                  color: Colors.white,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        doctorProfileRow(title: 'Package Name', value: 'value'),
+                        doctorProfileRow(
+                            title: 'Package Price', value: 'value'),
+                        Container(
+                          height: 40,
+                          color: Colors.grey.withOpacity(0.2),
+                          width: double.infinity,
+                          child: Center(
+                              child: Text(
+                            'Tests Included',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                color: appblueColor,
+                                fontWeight: FontWeight.bold),
+                          )),
+                        ),
+                        SizedBox(
+                          height: 70,
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Card(
+                                    elevation: 2,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: (index % 2 == 0)
+                                            ? Text('Test Name')
+                                            : Text('Test Name'),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                height: 40,
+                color: Colors.white,
+                width: double.infinity,
+                child: Center(
+                    child: Text(
+                  'Available Labs',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 20,
+                      color: appblueColor,
+                      fontWeight: FontWeight.bold),
+                )),
+              ),
+            ),
+            ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: 10,
                 itemBuilder: (context, index) {
@@ -132,7 +206,10 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                             s: 'Book Now',
                                             bgcolor: appblueColor,
                                             textColor: Colors.white,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Push(context, PackageCheckout(),
+                                                  withnav: false);
+                                            },
                                             height: 30,
                                             width: 180,
                                             textSize: 12,
@@ -151,8 +228,8 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                     ),
                   );
                 }),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
