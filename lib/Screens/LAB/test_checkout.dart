@@ -16,12 +16,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PackageCheckout extends StatefulWidget {
+class TestCheckout extends StatefulWidget {
   @override
-  _PackageCheckoutState createState() => _PackageCheckoutState();
+  _TestCheckoutState createState() => _TestCheckoutState();
 }
 
-class _PackageCheckoutState extends State<PackageCheckout> {
+class _TestCheckoutState extends State<TestCheckout> {
   @override
   void initState() {
     // TODO: implement initState
@@ -159,7 +159,7 @@ class _PackageCheckoutState extends State<PackageCheckout> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Package Details'),
+                        Text('Test Details'),
                         Divider(
                           thickness: 1,
                           color: Colors.black,
@@ -168,7 +168,47 @@ class _PackageCheckoutState extends State<PackageCheckout> {
                           children: [
                             Expanded(
                               child: Text(
-                                'Package Name',
+                                'Test Name',
+                                style: GoogleFonts.lato(
+                                    fontSize: 14,
+                                    color: Color(0xff252525).withOpacity(0.5)),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                '\$100',
+                                style: GoogleFonts.lato(
+                                    fontSize: 14,
+                                    color: Color(0xff252525).withOpacity(0.5)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Test Name',
+                                style: GoogleFonts.lato(
+                                    fontSize: 14,
+                                    color: Color(0xff252525).withOpacity(0.5)),
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                '\$100',
+                                style: GoogleFonts.lato(
+                                    fontSize: 14,
+                                    color: Color(0xff252525).withOpacity(0.5)),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Test Name',
                                 style: GoogleFonts.lato(
                                     fontSize: 14,
                                     color: Color(0xff252525).withOpacity(0.5)),

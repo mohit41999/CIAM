@@ -4,16 +4,14 @@ import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
+import 'package:patient/Screens/LAB/all_labs.dart';
+import 'package:patient/Screens/LAB/all_test.dart';
 import 'package:patient/Screens/LAB/contact_screen.dart';
-import 'package:patient/Screens/LAB/lab_package.dart';
+import 'package:patient/Screens/LAB/lab_details.dart';
+import 'package:patient/Screens/LAB/package_available_labs.dart';
 import 'package:patient/Screens/LAB/prescription_screen.dart';
-import 'package:patient/Screens/LAB/lab_tests.dart';
-import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
+import 'package:patient/Screens/LAB/test_available_labs.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
@@ -31,7 +29,7 @@ class LabProfile extends StatefulWidget {
 }
 
 class _LabProfileState extends State<LabProfile> {
-  LABProfielController _controller = LABProfielController();
+  LABProfileController _controller = LABProfileController();
 
   Future initialize() async {
     _controller.allLabs = await _controller.getallLabs();
@@ -110,7 +108,9 @@ class _LabProfileState extends State<LabProfile> {
                       textSize: 12,
                       bgcolor: appblueColor,
                       textColor: Colors.white,
-                      onPressed: () {}),
+                      onPressed: () {
+                        Push(context, AllTests());
+                      }),
                 ),
               ),
             ),
@@ -146,7 +146,7 @@ class LabsWidget extends StatelessWidget {
             child: commonRow(
               Title: 'Labs',
               subTitle: 'View all',
-              value: DoctorProfile(fromhome: true),
+              value: AllLabs(),
             ),
           ),
           SizedBox(
@@ -224,7 +224,14 @@ class LabsWidget extends StatelessWidget {
                                             s: 'View LAB',
                                             bgcolor: appblueColor,
                                             textColor: Colors.white,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Push(
+                                                  context,
+                                                  LabDetails(
+                                                    labid: allLabsModel
+                                                        .data[index].labId,
+                                                  ));
+                                            },
                                             height: 30,
                                             width: 180,
                                             textSize: 12,
@@ -259,6 +266,7 @@ class TestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    allTestModel.data = allTestModel.data.take(4).toList();
     return SizedBox(
       // decoration: BoxDecoration(
       //   borderRadius: BorderRadius.only(
@@ -340,7 +348,16 @@ class TestWidget extends StatelessWidget {
                                       bgcolor: appblueColor,
                                       textColor: Colors.white,
                                       onPressed: () {
-                                        Push(context, TestsLabScreen());
+                                        Push(
+                                            context,
+                                            TestsLabScreen(
+                                              testId:
+                                                  allTestModel.data[index].id,
+                                              testDescription: allTestModel
+                                                  .data[index].testDescription,
+                                              testName: allTestModel
+                                                  .data[index].testName,
+                                            ));
                                       },
                                       height: 30,
                                     ),

@@ -369,14 +369,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                   (_doctordata.data[index].specialistId ==
                                           widget.speciality_id)
                                       ? Padding(
-                                          padding: (index + 1 ==
-                                                  _doctordata.data.length)
-                                              ? EdgeInsets.only(
-                                                  left: 10,
-                                                  right: 10,
-                                                  bottom: navbarht + 20,
-                                                  top: 10)
-                                              : const EdgeInsets.all(5.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: Container(
                                             height: 190,
                                             decoration: BoxDecoration(
@@ -732,6 +725,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
                               );
                             }),
                       ),
+                Container(
+                  color: Colors.transparent,
+                  height: (widget.isSpecial) ? navbarht + 20 : 10,
+                ),
               ],
             ),
     );
