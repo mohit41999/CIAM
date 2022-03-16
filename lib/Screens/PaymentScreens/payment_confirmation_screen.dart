@@ -7,6 +7,8 @@ import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
+import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/controller/wallet_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -33,6 +35,7 @@ class PaymentConfirmationScreen extends StatefulWidget {
 }
 
 class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
+  WalletController _controller = WalletController();
   String couponid = '';
   late CouponsModel coupons;
   Future<CouponsModel> getCoupons(BuildContext context) async {
@@ -60,8 +63,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   }
 
   late Razorpay _razorpay;
-  String username = 'rzp_test_Wx4Pz8r5BYpqqQ';
-  String password = '30RFYcp8Uty6yxx21eBLaX1W';
+  late String username;
+  late String password;
   ConfirmBookingController _con = ConfirmBookingController();
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -93,8 +96,22 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   late String couponDiscount;
   bool loading = true;
 
+  Future getRazorpaycred() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(
+        PARAM_URL: 'get_razorpay_keys.php',
+        params: {'token': Token, 'user_id': preferences.getString('user_id')});
+    username = response['data']['razorpay_key_id'];
+    password = response['data']['razorpay_key_secret'];
+    return response;
+  }
+
   @override
   void initState() {
+    getRazorpaycred();
+    _controller.getwallet(context).then((value) {
+      setState(() {});
+    });
     _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
@@ -467,8 +484,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                               bgcolor: appblueColor,
                               textColor: Colors.white,
                               onPressed: () {
-                                payment(int.parse(
-                                    amount.toString().replaceAll(".", "")));
+                                paymentdialog();
                               },
                               borderRadius: 10,
                             ))
@@ -481,5 +497,110 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
               ),
             ),
     );
+  }
+
+  Future paywithWallet() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(PARAM_URL: 'pay_with_wallet.php', params: {
+      'token': Token,
+      'user_id': preferences.getString('user_id'),
+      'amount': amount
+    });
+    return response;
+  }
+
+  Future walletsuccess() async {
+    _con.confirmBookingRequest(context, widget.booking_id).then((value) {
+      _con
+          .addPaymentTransaction(
+              context, widget.booking_id, amount, widget.terms)
+          .then((value) {});
+    });
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Payment Successfull'),
+      backgroundColor: apptealColor,
+    ));
+  }
+
+  Future showwalletConfirmation() async {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Wallet Balance : ${_controller.walletBalance}'),
+              content: Container(
+                height: MediaQuery.of(context).size.height / 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    commonBtn(
+                        width: 70,
+                        borderRadius: 10,
+                        s: 'No',
+                        bgcolor: Colors.red,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                        }),
+                    commonBtn(
+                        width: 70,
+                        borderRadius: 10,
+                        s: 'Yes',
+                        bgcolor: apptealColor,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                          paywithWallet().then((value) {
+                            try {
+                              (value['status'])
+                                  ? walletsuccess()
+                                  : ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                      content: Text(
+                                          'Something went Wrong... try again or pay online'),
+                                    ));
+                            } catch (e) {
+                              print(e.toString() + 'll');
+                            }
+                          });
+                        }),
+                  ],
+                ),
+              ),
+            ));
+  }
+
+  Future paymentdialog() {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Wallet Balance : ${_controller.walletBalance}'),
+              content: Container(
+                height: MediaQuery.of(context).size.height / 4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    commonBtn(
+                        borderRadius: 10,
+                        s: 'Pay With Wallet',
+                        bgcolor: appblueColor,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                          showwalletConfirmation();
+                        }),
+                    commonBtn(
+                        borderRadius: 10,
+                        s: 'Pay Online',
+                        bgcolor: apptealColor,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                          payment(
+                              int.parse(amount.toString().replaceAll(".", "")));
+                        }),
+                  ],
+                ),
+              ),
+            ));
   }
 }

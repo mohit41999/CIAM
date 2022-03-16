@@ -1,14 +1,14 @@
 // To parse this JSON data, do
 //
-//     final myAppointment = myAppointmentFromJson(jsonString);
+//     final myAppointmentsModel = myAppointmentsModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-MyAppointmentsModel myAppointmentFromJson(String str) =>
+MyAppointmentsModel myAppointmentsModelFromJson(String str) =>
     MyAppointmentsModel.fromJson(json.decode(str));
 
-String myAppointmentToJson(MyAppointmentsModel data) =>
+String myAppointmentsModelToJson(MyAppointmentsModel data) =>
     json.encode(data.toJson());
 
 class MyAppointmentsModel {
@@ -39,45 +39,57 @@ class MyAppointmentsModel {
 
 class MyAppointmentsModelData {
   MyAppointmentsModelData({
-    required this.booingId,
-    required this.doctorName,
+    required this.bookingId,
+    required this.appointmentDate,
+    required this.appointmentTime,
     required this.doctorId,
+    required this.doctorName,
+    required this.profileImage,
+    required this.consultancyFees,
+    required this.couponDiscount,
+    required this.ammountPaid,
     required this.location,
     required this.status,
-    required this.profile,
-    required this.bookingDate,
-    required this.fees,
   });
 
-  String booingId;
-  String doctorName;
+  String bookingId;
+  String appointmentDate;
+  String appointmentTime;
   String doctorId;
-  dynamic location;
+  String doctorName;
+  String profileImage;
+  String consultancyFees;
+  String couponDiscount;
+  String ammountPaid;
+  String location;
   String status;
-  String profile;
-  String bookingDate;
-  String fees;
 
   factory MyAppointmentsModelData.fromJson(Map<String, dynamic> json) =>
       MyAppointmentsModelData(
-        booingId: json["booing id"],
-        doctorId: json["Doctor id"],
-        doctorName: json["Doctor Name"],
-        location: json["Location"],
+        bookingId: json["booking_id"],
+        appointmentDate: json["appointment_date"],
+        appointmentTime: json["appointment_time"],
+        doctorId: json["doctor_id"],
+        doctorName: json["doctor_name"],
+        profileImage: json["profile_image"],
+        consultancyFees: json["consultancy_fees"],
+        couponDiscount: json["coupon_discount"],
+        ammountPaid: json["ammount_paid"],
+        location: json["location"],
         status: json["Status"],
-        profile: json["Profile"],
-        bookingDate: json["Booking Date"],
-        fees: json["Fees"],
       );
 
   Map<String, dynamic> toJson() => {
-        "booing id": booingId,
-        "Doctor Name": doctorName,
-        "Doctor id": doctorId,
-        "Location": location,
+        "booking_id": bookingId,
+        "appointment_date": appointmentDate,
+        "appointment_time": appointmentTime,
+        "doctor_id": doctorId,
+        "doctor_name": doctorName,
+        "profile_image": profileImage,
+        "consultancy_fees": consultancyFees,
+        "coupon_discount": couponDiscount,
+        "ammount_paid": ammountPaid,
+        "location": location,
         "Status": status,
-        "Profile": profile,
-        "Booking Date": bookingDate,
-        "Fees": fees,
       };
 }

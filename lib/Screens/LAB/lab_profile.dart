@@ -478,12 +478,14 @@ class PackagesWidget extends StatelessWidget {
                                   Text(allPackagesModel.data[index].packgeName,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
-                                  Text(
-                                    '₹ ' + allPackagesModel.data[index].price,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  // Text(
+                                  //   '₹ ' +
+                                  //       allPackagesModel.data[index].price
+                                  //           .toString(),
+                                  //   style: GoogleFonts.montserrat(
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 16),
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 4),

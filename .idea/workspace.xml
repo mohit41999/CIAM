@@ -9,24 +9,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="kk">
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/lab_details_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/lab_test_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/test_available_lab_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_details.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_checkout.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controller/LabController/lab_details_controller.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="labs">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/API repo/api_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/API repo/api_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_labs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_package.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_available_labs.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/LAB/all_packages_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/LAB/all_packages_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_tests.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/LabController/lab_profile_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/LabController/lab_profile_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +49,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="D:/Nohung/Kitchen" />
+    <property name="last_opened_file_path" value="D:/Nohung/Kitchen_new" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -277,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647268127416</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="labs">
+      <created>1647352556177</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1647352556177</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -309,6 +307,7 @@
     <MESSAGE value="lab" />
     <MESSAGE value="lab package test" />
     <MESSAGE value="kk" />
-    <option name="LAST_COMMIT_MESSAGE" value="kk" />
+    <MESSAGE value="labs" />
+    <option name="LAST_COMMIT_MESSAGE" value="labs" />
   </component>
 </project>

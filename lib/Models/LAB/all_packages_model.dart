@@ -40,19 +40,17 @@ class Datum {
   Datum({
     required this.packgeId,
     required this.packgeName,
-    required this.price,
     required this.labTest,
   });
 
   String packgeId;
   String packgeName;
-  String price;
+
   List<LabTest> labTest;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         packgeId: json["packge_id"],
         packgeName: json["packge_name"],
-        price: json["price"],
         labTest: List<LabTest>.from(
             json["lab_test"].map((x) => LabTest.fromJson(x))),
       );
@@ -60,7 +58,6 @@ class Datum {
   Map<String, dynamic> toJson() => {
         "packge_id": packgeId,
         "packge_name": packgeName,
-        "price": price,
         "lab_test": List<dynamic>.from(labTest.map((x) => x.toJson())),
       };
 }
