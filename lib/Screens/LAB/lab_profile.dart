@@ -5,6 +5,7 @@ import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/LAB/all_labs.dart';
+import 'package:patient/Screens/LAB/all_packages.dart';
 import 'package:patient/Screens/LAB/all_test.dart';
 import 'package:patient/Screens/LAB/contact_screen.dart';
 import 'package:patient/Screens/LAB/lab_details.dart';
@@ -77,9 +78,35 @@ class _LabProfileState extends State<LabProfile> {
             SizedBox(
               height: 10,
             ),
-            PackagesWidget(
-              allPackagesModel: _controller.allPackages,
-            ),
+            (_controller.packagesLoading)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10.0),
+                          child: Text(
+                            'Health Checkups',
+                            style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: appblueColor),
+                          )),
+                      SizedBox(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 3.85,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.only(
+                        //       bottomLeft: Radius.circular(15),
+                        //       bottomRight: Radius.circular(15)),
+                        // ),
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                    ],
+                  )
+                : PackagesWidget(
+                    allPackagesModel: _controller.allPackages,
+                  ),
             SizedBox(
               height: 10,
             ),
@@ -93,30 +120,60 @@ class _LabProfileState extends State<LabProfile> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            TestWidget(
-              allTestModel: _controller.allTests,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: commonBtn(
-                      s: 'View All',
-                      borderRadius: 5,
-                      height: 40,
-                      textSize: 12,
-                      bgcolor: appblueColor,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        Push(context, AllTests());
-                      }),
-                ),
-              ),
-            ),
-            LabsWidget(
-              allLabsModel: _controller.allLabs,
-            ),
+            (_controller.testloading)
+                ? Center(child: CircularProgressIndicator())
+                : TestWidget(
+                    allTestModel: _controller.allTests,
+                  ),
+            (_controller.testloading)
+                ? Center(child: Container())
+                : Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: commonBtn(
+                            s: 'View All',
+                            borderRadius: 5,
+                            height: 40,
+                            textSize: 12,
+                            bgcolor: appblueColor,
+                            textColor: Colors.white,
+                            onPressed: () {
+                              Push(context, AllTests());
+                            }),
+                      ),
+                    ),
+                  ),
+            (_controller.labloading)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10.0),
+                          child: Text(
+                            'Labs',
+                            style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: appblueColor),
+                          )),
+                      SizedBox(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 3.85,
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.only(
+                        //       bottomLeft: Radius.circular(15),
+                        //       bottomRight: Radius.circular(15)),
+                        // ),
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+                    ],
+                  )
+                : LabsWidget(
+                    allLabsModel: _controller.allLabs,
+                  ),
             SizedBox(
               height: navbarht + 20,
             ),
@@ -330,12 +387,12 @@ class TestWidget extends StatelessWidget {
                                               .data[index].testDescription,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
-                                  Text(
-                                    '₹ 199',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  // Text(
+                                  //   '₹ 199',
+                                  //   style: GoogleFonts.montserrat(
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 16),
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 4),
@@ -414,7 +471,7 @@ class PackagesWidget extends StatelessWidget {
             child: commonRow(
               Title: 'Health Checkups',
               subTitle: 'View all',
-              value: DoctorProfile(fromhome: true),
+              value: AllPackages(),
             ),
           ),
           Container(

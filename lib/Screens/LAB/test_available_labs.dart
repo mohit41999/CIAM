@@ -45,6 +45,8 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
     return TestAvailableLabsModel.fromJson(response);
   }
 
+  bool loading = true;
+
   Future initialize() async {
     availableLabs = await getavailableLabs();
   }
@@ -54,7 +56,9 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
     // TODO: implement initState
     super.initState();
     initialize().then((value) {
-      setState(() {});
+      setState(() {
+        loading = false;
+      });
     });
   }
 
@@ -139,115 +143,122 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
                 )),
               ),
             ),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                itemCount: availableLabs.data.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        top: 10.0,
-                        right: 10.0,
-                        left: 10.0,
-                        bottom: (index + 1 == availableLabs.data.length)
-                            ? navbarht + 21
-                            : 10.0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            blurRadius: 10,
-                            offset: const Offset(2, 5),
+            (loading)
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: availableLabs.data.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            top: 10.0,
+                            right: 10.0,
+                            left: 10.0,
+                            bottom: (index + 1 == availableLabs.data.length)
+                                ? navbarht + 21
+                                : 10.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                blurRadius: 10,
+                                offset: const Offset(2, 5),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            height: 200,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    height: double.infinity,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            bottomLeft: Radius.circular(15)),
-                                        image: DecorationImage(
-                                            image: NetworkImage(availableLabs
-                                                .data[index].labImage),
-                                            fit: BoxFit.cover)),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          availableLabs.data[index].labName,
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        // Text(
-                                        //   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-                                        //   style: GoogleFonts.montserrat(
-                                        //     fontSize: 12,
-                                        //   ),
-                                        // ),
-                                        rowTextIcon(
-                                          text: ' Location',
-                                          asset: 'assets/pngs/Group 1182.png',
-                                        ),
-                                        Text(
-                                          '₹ ${availableLabs.data[index].testPrice}',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Center(
-                                          child: commonBtn(
-                                            s: 'Book Now',
-                                            bgcolor: appblueColor,
-                                            textColor: Colors.white,
-                                            onPressed: () {
-                                              Push(context, TestCheckout(),
-                                                  withnav: false);
-                                            },
-                                            height: 30,
-                                            width: 180,
-                                            textSize: 12,
-                                            borderRadius: 4,
-                                          ),
-                                        )
-                                      ],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                height: 200,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                bottomLeft:
+                                                    Radius.circular(15)),
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    availableLabs
+                                                        .data[index].labImage),
+                                                fit: BoxFit.cover)),
+                                      ),
                                     ),
-                                  ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              availableLabs.data[index].labName,
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            // Text(
+                                            //   'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
+                                            //   style: GoogleFonts.montserrat(
+                                            //     fontSize: 12,
+                                            //   ),
+                                            // ),
+                                            rowTextIcon(
+                                              text: ' Location',
+                                              asset:
+                                                  'assets/pngs/Group 1182.png',
+                                            ),
+                                            Text(
+                                              '₹ ${availableLabs.data[index].testPrice}',
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Center(
+                                              child: commonBtn(
+                                                s: 'Book Now',
+                                                bgcolor: appblueColor,
+                                                textColor: Colors.white,
+                                                onPressed: () {
+                                                  Push(context, TestCheckout(),
+                                                      withnav: false);
+                                                },
+                                                height: 30,
+                                                width: 180,
+                                                textSize: 12,
+                                                borderRadius: 4,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                }),
+                        ),
+                      );
+                    }),
           ],
         ),
       ),

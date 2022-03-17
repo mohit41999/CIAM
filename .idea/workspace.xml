@@ -9,22 +9,21 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="labs">
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="wallet pay">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/LAB/all_packages_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/LAB/all_packages_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_labs.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_packages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_packages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[11c46a5c]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\user\.android\avd\Pixel_5_API_28.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -49,7 +48,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="D:/Nohung/Kitchen_new" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -275,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647352556177</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="wallet pay">
+      <created>1647438655254</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1647438655254</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,6 +314,7 @@
     <MESSAGE value="lab package test" />
     <MESSAGE value="kk" />
     <MESSAGE value="labs" />
-    <option name="LAST_COMMIT_MESSAGE" value="labs" />
+    <MESSAGE value="wallet pay" />
+    <option name="LAST_COMMIT_MESSAGE" value="wallet pay" />
   </component>
 </project>
