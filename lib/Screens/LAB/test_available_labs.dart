@@ -238,7 +238,15 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
                                                 bgcolor: appblueColor,
                                                 textColor: Colors.white,
                                                 onPressed: () {
-                                                  Push(context, TestCheckout(),
+                                                  Push(
+                                                      context,
+                                                      TestCheckout(
+                                                        labid: availableLabs
+                                                            .data[index].labId,
+                                                        testids: [
+                                                          widget.testId
+                                                        ],
+                                                      ),
                                                       withnav: false);
                                                 },
                                                 height: 30,

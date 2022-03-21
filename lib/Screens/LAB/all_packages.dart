@@ -151,7 +151,14 @@ class _AllPackagesState extends State<AllPackages> {
                                           bgcolor: apptealColor,
                                           textColor: Colors.white,
                                           onPressed: () {
-                                            Push(context, PackagesLabScreen());
+                                            Push(
+                                                context,
+                                                PackagesLabScreen(
+                                                  packageId: _controller
+                                                      .allPackages
+                                                      .data[index]
+                                                      .packgeId,
+                                                ));
                                           },
                                           height: 30,
                                         ),

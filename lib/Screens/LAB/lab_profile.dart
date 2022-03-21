@@ -555,7 +555,12 @@ class PackagesWidget extends StatelessWidget {
                                       bgcolor: apptealColor,
                                       textColor: Colors.white,
                                       onPressed: () {
-                                        Push(context, PackagesLabScreen());
+                                        Push(
+                                            context,
+                                            PackagesLabScreen(
+                                              packageId: allPackagesModel
+                                                  .data[index].packgeId,
+                                            ));
                                       },
                                       height: 30,
                                     ),

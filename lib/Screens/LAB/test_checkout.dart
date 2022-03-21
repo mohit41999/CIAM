@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/LAB/test_checkout_model.dart';
 import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
+import 'package:patient/controller/LabController/test_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -17,15 +19,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestCheckout extends StatefulWidget {
+  final String labid;
+  final List<String> testids;
+
+  const TestCheckout({Key? key, required this.labid, required this.testids})
+      : super(key: key);
+
   @override
   _TestCheckoutState createState() => _TestCheckoutState();
 }
 
 class _TestCheckoutState extends State<TestCheckout> {
+  TestController controller = TestController();
+  late TestCheckoutModel checkoutsummary;
   @override
   void initState() {
     // TODO: implement initState
-
+    controller.getTestCheckout('labid', ['1', '2', '3']);
     super.initState();
   }
 

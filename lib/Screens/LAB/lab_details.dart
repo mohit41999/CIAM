@@ -171,7 +171,13 @@ class _LabDetailsState extends State<LabDetails> {
                       bgcolor: appblueColor,
                       textColor: Colors.white,
                       onPressed: () {
-                        Push(context, TestCheckout(), withnav: false);
+                        Push(
+                            context,
+                            TestCheckout(
+                              labid: widget.labid,
+                              testids: [],
+                            ),
+                            withnav: false);
                       }),
                 ),
                 SizedBox(
