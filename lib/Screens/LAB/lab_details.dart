@@ -24,6 +24,8 @@ class _LabDetailsState extends State<LabDetails> {
     _controller.labTests = await _controller.getLabtests(widget.labid);
   }
 
+  List<String> testids = [];
+
   @override
   void initState() {
     // TODO: implement initState
@@ -100,7 +102,7 @@ class _LabDetailsState extends State<LabDetails> {
                           value: _controller.labDetails.data.address,
                         ),
                         doctorProfileRow(
-                          title: 'Citu',
+                          title: 'City',
                           value: _controller.labDetails.data.city,
                         ),
                       ],
@@ -155,6 +157,11 @@ class _LabDetailsState extends State<LabDetails> {
                                     setState(() {
                                       _controller
                                           .labTests.data[index].isChecked = v!;
+                                      (v)
+                                          ? testids.add(_controller
+                                              .labTests.data[index].testId)
+                                          : testids.remove(_controller
+                                              .labTests.data[index].testId);
                                     });
                                   }),
                               Text(_controller.labTests.data[index].testName)
@@ -175,7 +182,7 @@ class _LabDetailsState extends State<LabDetails> {
                             context,
                             TestCheckout(
                               labid: widget.labid,
-                              testids: [],
+                              testids: testids,
                             ),
                             withnav: false);
                       }),

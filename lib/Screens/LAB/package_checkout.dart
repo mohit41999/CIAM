@@ -7,6 +7,7 @@ import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
+import 'package:patient/controller/wallet_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -22,6 +23,19 @@ class PackageCheckout extends StatefulWidget {
 }
 
 class _PackageCheckoutState extends State<PackageCheckout> {
+  WalletController _controller = WalletController();
+  String couponid = '';
+  late CouponsModel coupons;
+  Future<CouponsModel> getCoupons(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var response = await PostData(PARAM_URL: 'get_coupon_list.php', params: {
+      'token': Token,
+      'user_id': prefs.getString('user_id'),
+    });
+    return CouponsModel.fromJson(response);
+  }
+
   @override
   void initState() {
     // TODO: implement initState

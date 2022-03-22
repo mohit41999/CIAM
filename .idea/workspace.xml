@@ -9,20 +9,27 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="wallet pay">
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/package_available_lab_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/test_checkout_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controller/LabController/package_controller.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controller/LabController/test_controller.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="package">
+      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/package_details_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/MyModels/my_lab_test_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/all_packages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/all_packages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/LAB/test_checkout_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/LAB/test_checkout_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/my_appointment_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/MyModels/my_appointment_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/my_review_ratings_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/MyModels/my_review_ratings_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_available_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_available_labs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_checkout.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/lab_controller.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyReviewRating.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyReviewRating.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/PaymentScreens/payment_confirmation_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/LabController/package_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/LabController/package_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/LabController/test_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/LabController/test_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/My Screens Controller/my_appointments_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/helper/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/helper/constants.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +61,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="D:/Resources/survey-app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -67,6 +74,7 @@
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\ios\Runner" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Models\MyModels" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens\LAB" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\firebase" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens" />
@@ -294,7 +302,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647523945790</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="package">
+      <created>1647871169949</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1647871169949</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,6 +343,7 @@
     <MESSAGE value="kk" />
     <MESSAGE value="labs" />
     <MESSAGE value="wallet pay" />
-    <option name="LAST_COMMIT_MESSAGE" value="wallet pay" />
+    <MESSAGE value="package" />
+    <option name="LAST_COMMIT_MESSAGE" value="package" />
   </component>
 </project>

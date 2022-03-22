@@ -9,6 +9,8 @@ import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/controller/LabController/test_controller.dart';
+import 'package:patient/controller/wallet_controller.dart';
+import 'package:patient/helper/constants.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -30,13 +32,87 @@ class TestCheckout extends StatefulWidget {
 }
 
 class _TestCheckoutState extends State<TestCheckout> {
+  WalletController _controller = WalletController();
+  String couponid = '';
+  int couponindex = -1;
+  late CouponsModel coupons;
+  late Razorpay _razorpay;
+
   TestController controller = TestController();
   late TestCheckoutModel checkoutsummary;
+  Future initialize() async {
+    await getRazorpaycred();
+    print(password + 'usssss');
+    print(username + 'paasss');
+    checkoutsummary =
+        await controller.getTestCheckout(widget.labid, widget.testids, '');
+    setState(() {});
+    coupons = await controller.getCoupons(context);
+    setState(() {});
+  }
+
+  void payment(int amount) async {
+    var authn = 'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
+    Object? orderOptions = {
+      "amount": amount,
+      "currency": "INR",
+      "receipt": "Receipt no. 1",
+      "payment_capture": 1,
+    };
+    var headers = {
+      'content-type': 'application/json',
+      'Authorization': authn,
+    };
+    // final client = HttpClient();
+    var res = await http.post(Uri.parse('https://api.razorpay.com/v1/orders'),
+        headers: headers, body: json.encode(orderOptions));
+
+    print(jsonDecode(res.body).toString() +
+        '======================================');
+
+    String order_id = jsonDecode(res.body)['id'].toString();
+
+    Map<String, dynamic> checkoutOptions = {
+      'key': username,
+      'amount': amount,
+      "currency": "INR",
+      'name': '',
+      'description': '',
+      'order_id': order_id, // Generate order_id using Orders API
+      'timeout': 3000,
+    };
+    try {
+      _razorpay.open(checkoutOptions);
+    } catch (e) {}
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    // Do something when payment succeeds
+    // depositsuccess();
+    print('order' + response.orderId.toString());
+    print('paymentId' + response.paymentId.toString());
+    print('signature' + response.signature.toString());
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    // Do something when payment fails
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    // Do something when an external wallet is selected
+  }
+
   @override
   void initState() {
     // TODO: implement initState
-    controller.getTestCheckout('labid', ['1', '2', '3']);
+
     super.initState();
+    initialize();
+
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
   @override
@@ -76,7 +152,7 @@ class _TestCheckoutState extends State<TestCheckout> {
                             color: Color(0xff252525).withOpacity(0.5)),
                       ),
                       Text(
-                        'patientName',
+                        checkoutsummary.data.patientDetails.patientName,
                         style: GoogleFonts.lato(
                             fontSize: 18,
                             color: Color(0xff252525),
@@ -99,7 +175,7 @@ class _TestCheckoutState extends State<TestCheckout> {
                             color: Color(0xff252525).withOpacity(0.5)),
                       ),
                       Text(
-                        'patientPhone',
+                        checkoutsummary.data.patientDetails.patientNo,
                         style: GoogleFonts.lato(
                             fontSize: 18,
                             color: Color(0xff252525),
@@ -135,7 +211,7 @@ class _TestCheckoutState extends State<TestCheckout> {
                               color: Color(0xff252525).withOpacity(0.5)),
                         ),
                         Text(
-                          'Lab Name',
+                          checkoutsummary.data.labDetails.labName,
                           style: GoogleFonts.lato(
                               fontSize: 18,
                               color: Color(0xff252525),
@@ -147,7 +223,7 @@ class _TestCheckoutState extends State<TestCheckout> {
                               Icons.location_on_outlined,
                               color: apptealColor,
                             ),
-                            Text(' Location')
+                            Text(' ' + checkoutsummary.data.labDetails.location)
                           ],
                         ),
                       ],
@@ -161,7 +237,6 @@ class _TestCheckoutState extends State<TestCheckout> {
                 ),
                 Container(
                   color: Colors.white,
-                  height: MediaQuery.of(context).size.height / 4.5,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 8.0),
@@ -170,70 +245,54 @@ class _TestCheckoutState extends State<TestCheckout> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Test Details'),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Divider(
                           thickness: 1,
                           color: Colors.black,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Test Name',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                '\$100',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                          height: 10,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Test Name',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                '\$100',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Test Name',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                '\$100',
-                                style: GoogleFonts.lato(
-                                    fontSize: 14,
-                                    color: Color(0xff252525).withOpacity(0.5)),
-                              ),
-                            ),
-                          ],
-                        ),
+                        ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: checkoutsummary.data.testDtails.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        checkoutsummary
+                                            .data.testDtails[index].testName,
+                                        style: GoogleFonts.lato(
+                                            fontSize: 14,
+                                            color: Color(0xff252525)
+                                                .withOpacity(0.5)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        '₹ ' +
+                                            checkoutsummary
+                                                .data.testDtails[index].price,
+                                        style: GoogleFonts.lato(
+                                            fontSize: 14,
+                                            color: Color(0xff252525)
+                                                .withOpacity(0.5)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                       ],
                     ),
                   ),
@@ -273,12 +332,28 @@ class _TestCheckoutState extends State<TestCheckout> {
                                       height: 250,
                                       width: 300,
                                       child: ListView.builder(
-                                          itemCount: 5,
+                                          itemCount: coupons.data.length,
                                           itemBuilder: (context, index) {
                                             return GestureDetector(
-                                              onTap: () {},
+                                              onTap: () async {
+                                                couponindex = index;
+                                                couponid =
+                                                    coupons.data[index].id;
+                                                checkoutsummary =
+                                                    await controller
+                                                        .getTestCheckout(
+                                                            widget.labid,
+                                                            widget.testids,
+                                                            couponid);
+                                                setState(() {});
+
+                                                Navigator.pop(context);
+                                              },
                                               child: ListTile(
-                                                trailing: Text('Coupon $index',
+                                                trailing: Text(
+                                                    coupons
+                                                        .data[index].couponCode
+                                                        .toString(),
                                                     style:
                                                         GoogleFonts.montserrat(
                                                             color: apptealColor,
@@ -286,7 +361,7 @@ class _TestCheckoutState extends State<TestCheckout> {
                                                                 FontWeight
                                                                     .bold)),
                                                 leading: Text(
-                                                  'Coupon $index',
+                                                  coupons.data[index].title,
                                                   style: GoogleFonts.montserrat(
                                                       color: appblueColor,
                                                       fontWeight:
@@ -307,7 +382,6 @@ class _TestCheckoutState extends State<TestCheckout> {
                         ),
                       ),
                       Text('Coupon'),
-                      GestureDetector(onTap: () {}, child: SizedBox())
                     ],
                   ),
                 ),
@@ -334,7 +408,9 @@ class _TestCheckoutState extends State<TestCheckout> {
                           children: [
                             Text('Consultation Fee',
                                 style: GoogleFonts.montserrat(fontSize: 15)),
-                            Text('₹ ' + 'consultancy_fees',
+                            Text(
+                                '₹ ' +
+                                    checkoutsummary.data.billSummary.totalFees,
                                 style: GoogleFonts.montserrat(fontSize: 15))
                           ],
                         ),
@@ -344,7 +420,10 @@ class _TestCheckoutState extends State<TestCheckout> {
                             Text('Coupon Discount',
                                 style: GoogleFonts.montserrat(
                                     fontSize: 15, color: apptealColor)),
-                            Text('-₹ ' + 'couponDiscount',
+                            Text(
+                                '-₹ ' +
+                                    checkoutsummary
+                                        .data.billSummary.couponDiscount,
                                 style: GoogleFonts.montserrat(
                                     fontSize: 15, color: apptealColor))
                           ],
@@ -358,7 +437,9 @@ class _TestCheckoutState extends State<TestCheckout> {
                             Text('To Be Paid',
                                 style: GoogleFonts.montserrat(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
-                            Text('₹ ' + 'amount',
+                            Text(
+                                '₹ ' +
+                                    checkoutsummary.data.billSummary.amountPaid,
                                 style: GoogleFonts.montserrat(
                                     fontSize: 18, fontWeight: FontWeight.bold))
                           ],
@@ -397,7 +478,9 @@ class _TestCheckoutState extends State<TestCheckout> {
                               'Total Amount\n',
                               style: GoogleFonts.montserrat(fontSize: 15),
                             ),
-                            Text('₹ ' + 'amount',
+                            Text(
+                                '₹ ' +
+                                    checkoutsummary.data.billSummary.amountPaid,
                                 style: GoogleFonts.montserrat(
                                     fontSize: 18, fontWeight: FontWeight.bold))
                           ],
@@ -407,7 +490,11 @@ class _TestCheckoutState extends State<TestCheckout> {
                           s: 'Proceed to Pay  ',
                           bgcolor: appblueColor,
                           textColor: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            payment(int.parse(checkoutsummary
+                                .data.billSummary.amountPaid
+                                .replaceAll('.', '')));
+                          },
                           borderRadius: 10,
                         ))
                       ],

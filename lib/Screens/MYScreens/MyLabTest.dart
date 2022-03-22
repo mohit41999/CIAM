@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/MyModels/my_lab_test_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/title_column.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyLabTest extends StatefulWidget {
   const MyLabTest({Key? key}) : super(key: key);
@@ -14,6 +17,32 @@ class MyLabTest extends StatefulWidget {
 }
 
 class _MyLabTestState extends State<MyLabTest> {
+  late MyLabTestModel myLabTests;
+
+  Future<MyLabTestModel> getMyLabTests() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(
+        PARAM_URL: 'my_lab_tests.php',
+        params: {'token': Token, 'user_id': preferences.getString('user_id')});
+
+    return MyLabTestModel.fromJson(response);
+  }
+
+  bool loading = true;
+  Future initialize() async {
+    myLabTests = await getMyLabTests();
+    setState(() {
+      loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +64,16 @@ class _MyLabTestState extends State<MyLabTest> {
           Expanded(
             child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, int) {
+                itemCount: myLabTests.data.length,
+                itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
                         left: 10.0,
                         right: 10.0,
                         top: 10.0,
-                        bottom: (int + 1 == 10) ? navbarht + 20 : 10),
+                        bottom: (index + 1 == myLabTests.data.length)
+                            ? navbarht + 20
+                            : 10),
                     child: Container(
                       height: 180,
                       decoration: BoxDecoration(
@@ -98,15 +129,19 @@ class _MyLabTestState extends State<MyLabTest> {
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
                                               titleColumn(
-                                                title: 'Booking Id',
-                                                value: '9956328',
+                                                title: 'Test Name',
+                                                value: myLabTests
+                                                    .data[index].testName,
                                               ),
                                               titleColumn(
-                                                value: '27/09/2021',
+                                                value: myLabTests
+                                                    .data[index].bookingDate,
                                                 title: 'Date of Booking',
                                               ),
                                               titleColumn(
-                                                value: '\$299',
+                                                value: '₹ ' +
+                                                    myLabTests.data[index]
+                                                        .ammountPaid,
                                                 title: 'AmountPaid',
                                               ),
                                               Row(
@@ -137,31 +172,26 @@ class _MyLabTestState extends State<MyLabTest> {
                                             ],
                                           ),
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 10.0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                titleColumn(
-                                                  title: 'Refund Status',
-                                                  value: 'Pending',
-                                                ),
-                                                SizedBox(
-                                                  height: 5,
-                                                ),
-                                                titleColumn(
-                                                  title: 'Amount',
-                                                  value: '\$199',
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        )
+                                        // Expanded(
+                                        //   child: Padding(
+                                        //     padding: const EdgeInsets.only(
+                                        //         right: 10.0),
+                                        //     child: Column(
+                                        //       mainAxisAlignment:
+                                        //           MainAxisAlignment.start,
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment.start,
+                                        //       children: [
+                                        //
+                                        //
+                                        //         titleColumn(
+                                        //           title: 'Amount',
+                                        //           value: '\$199',
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // )
                                       ],
                                     ),
                                   ),

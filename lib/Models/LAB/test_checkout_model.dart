@@ -20,13 +20,13 @@ class TestCheckoutModel {
 
   final bool status;
   final String message;
-  final Data data;
+  final TestCheckoutModelData data;
 
   factory TestCheckoutModel.fromJson(Map<String, dynamic> json) =>
       TestCheckoutModel(
         status: json["status"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: TestCheckoutModelData.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +36,8 @@ class TestCheckoutModel {
       };
 }
 
-class Data {
-  Data({
+class TestCheckoutModelData {
+  TestCheckoutModelData({
     required this.patientDetails,
     required this.labDetails,
     required this.testDtails,
@@ -49,7 +49,8 @@ class Data {
   final List<TestDtail> testDtails;
   final BillSummary billSummary;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory TestCheckoutModelData.fromJson(Map<String, dynamic> json) =>
+      TestCheckoutModelData(
         patientDetails: PatientDetails.fromJson(json["patient_details"]),
         labDetails: LabDetails.fromJson(json["lab_details"]),
         testDtails: List<TestDtail>.from(
@@ -68,20 +69,24 @@ class Data {
 class BillSummary {
   BillSummary({
     required this.totalFees,
-    required this.ammountPaid,
+    required this.couponDiscount,
+    required this.amountPaid,
   });
 
   final String totalFees;
-  final String ammountPaid;
+  final String couponDiscount;
+  final String amountPaid;
 
   factory BillSummary.fromJson(Map<String, dynamic> json) => BillSummary(
         totalFees: json["total_fees"],
-        ammountPaid: json["ammount_paid"],
+        couponDiscount: json["coupon_discount"],
+        amountPaid: json["amount_paid"],
       );
 
   Map<String, dynamic> toJson() => {
         "total_fees": totalFees,
-        "ammount_paid": ammountPaid,
+        "coupon_discount": couponDiscount,
+        "amount_paid": amountPaid,
       };
 }
 

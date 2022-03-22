@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/LAB/package_available_lab_model.dart';
+import 'package:patient/Models/LAB/package_details_model.dart';
 import 'package:patient/Screens/LAB/package_checkout.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
@@ -22,12 +23,18 @@ class PackagesLabScreen extends StatefulWidget {
 
 class _PackagesLabScreenState extends State<PackagesLabScreen> {
   late PackageAvailableLabModel availableLabs;
+  late PackageDetailsModel packageDetails;
   bool labloading = true;
+  bool pdloading = true;
   PackageController _controller = PackageController();
   Future initialize() async {
     availableLabs = await _controller.getAvailableLabs(widget.packageId);
     setState(() {
       labloading = false;
+    });
+    packageDetails = await _controller.getpackagedetails(widget.packageId);
+    setState(() {
+      pdloading = false;
     });
   }
 
@@ -84,9 +91,9 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        doctorProfileRow(title: 'Package Name', value: 'value'),
                         doctorProfileRow(
-                            title: 'Package Price', value: 'value'),
+                            title: 'Package Name',
+                            value: packageDetails.data.packgeName),
                         Container(
                           height: 40,
                           color: Colors.grey.withOpacity(0.2),
@@ -105,7 +112,7 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                           child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              itemCount: 10,
+                              itemCount: packageDetails.data.labTest.length,
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -114,9 +121,13 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                     child: Center(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: (index % 2 == 0)
-                                            ? Text('Test Name')
-                                            : Text('Test Name'),
+                                        child: Text(
+                                          packageDetails
+                                              .data.labTest[index].testName,
+                                          style: GoogleFonts.montserrat(
+                                              color: apptealColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                   ),

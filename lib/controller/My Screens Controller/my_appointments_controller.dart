@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
-import 'package:patient/Models/my_appointment_model.dart';
+import 'package:patient/Models/MyModels/my_appointment_model.dart';
 import 'package:patient/Screens/MYScreens/MyAppointments.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -9,6 +9,7 @@ import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/wallet_controller.dart';
+import 'package:patient/helper/constants.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -63,8 +64,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   }
 
   late Razorpay _razorpay;
-  late String username;
-  late String password;
+
   ConfirmBookingController _con = ConfirmBookingController();
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
@@ -96,19 +96,20 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   late String couponDiscount;
   bool loading = true;
 
-  Future getRazorpaycred() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await PostData(
-        PARAM_URL: 'get_razorpay_keys.php',
-        params: {'token': Token, 'user_id': preferences.getString('user_id')});
-    username = response['data']['razorpay_key_id'];
-    password = response['data']['razorpay_key_secret'];
-    return response;
-  }
+  // Future getRazorpaycred() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   var response = await PostData(
+  //       PARAM_URL: 'get_razorpay_keys.php',
+  //       params: {'token': Token, 'user_id': preferences.getString('user_id')});
+  //   username = response['data']['razorpay_key_id'];
+  //   password = response['data']['razorpay_key_secret'];
+  //   return response;
+  // }
 
   @override
   void initState() {
     getRazorpaycred();
+
     _controller.getwallet(context).then((value) {
       setState(() {});
     });
@@ -137,7 +138,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   }
 
   void payment(int amount) async {
-    var authn = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    var authn = 'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
     Object? orderOptions = {
       "amount": amount,
       "currency": "INR",
@@ -499,16 +500,6 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     );
   }
 
-  Future paywithWallet() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await PostData(PARAM_URL: 'pay_with_wallet.php', params: {
-      'token': Token,
-      'user_id': preferences.getString('user_id'),
-      'amount': amount
-    });
-    return response;
-  }
-
   Future walletsuccess() async {
     _con.confirmBookingRequest(context, widget.booking_id).then((value) {
       _con
@@ -549,7 +540,7 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                         textColor: Colors.white,
                         onPressed: () {
                           Pop(context);
-                          paywithWallet().then((value) {
+                          paywithWallet(amount).then((value) {
                             try {
                               (value['status'])
                                   ? walletsuccess()

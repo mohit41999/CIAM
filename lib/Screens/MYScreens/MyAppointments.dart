@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Models/my_appointment_model.dart';
+import 'package:patient/Models/MyModels/my_appointment_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/My%20Screens%20Controller/my_appointments_controller.dart';
