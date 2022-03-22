@@ -32,7 +32,7 @@ class TestCheckout extends StatefulWidget {
 }
 
 class _TestCheckoutState extends State<TestCheckout> {
-  WalletController _controller = WalletController();
+  WalletController walletController = WalletController();
   String couponid = '';
   int couponindex = -1;
   late CouponsModel coupons;
@@ -42,6 +42,7 @@ class _TestCheckoutState extends State<TestCheckout> {
   late TestCheckoutModel checkoutsummary;
   Future initialize() async {
     await getRazorpaycred();
+    walletController.getwallet(context);
     print(password + 'usssss');
     print(username + 'paasss');
     checkoutsummary =
