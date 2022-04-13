@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
-import 'package:patient/Models/my_review_ratings_model.dart';
+import 'package:patient/Models/MyModels/my_review_ratings_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';

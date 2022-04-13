@@ -5,7 +5,7 @@ import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LABProfielController {
+class LABProfileController {
   late AllPackagesModel allPackages;
   late AllTestModel allTests;
   late AllLabsModel allLabs;

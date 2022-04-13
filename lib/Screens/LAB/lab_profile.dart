@@ -4,16 +4,15 @@ import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
+import 'package:patient/Screens/LAB/all_labs.dart';
+import 'package:patient/Screens/LAB/all_packages.dart';
+import 'package:patient/Screens/LAB/all_test.dart';
 import 'package:patient/Screens/LAB/contact_screen.dart';
-import 'package:patient/Screens/LAB/lab_package.dart';
+import 'package:patient/Screens/LAB/lab_details.dart';
+import 'package:patient/Screens/LAB/package_available_labs.dart';
 import 'package:patient/Screens/LAB/prescription_screen.dart';
-import 'package:patient/Screens/LAB/lab_tests.dart';
-import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
+import 'package:patient/Screens/LAB/test_available_labs.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
@@ -31,99 +30,174 @@ class LabProfile extends StatefulWidget {
 }
 
 class _LabProfileState extends State<LabProfile> {
-  LABProfielController _controller = LABProfielController();
+  LABProfileController _controller = LABProfileController();
 
   Future initialize() async {
-    _controller.allLabs = await _controller.getallLabs();
-    _controller.allPackages = await _controller.getallPackages();
-    _controller.allTests = await _controller.getallTests();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    initialize().then((value) {
+    await _controller.getallLabs().then((value) {
       setState(() {
+        _controller.allLabs = value;
         _controller.labloading = false;
+      });
+    });
+    await _controller.getallPackages().then((value) {
+      setState(() {
+        _controller.allPackages = value;
         _controller.packagesLoading = false;
+      });
+    });
+    await _controller.getallTests().then((value) {
+      setState(() {
+        _controller.allTests = value;
         _controller.testloading = false;
       });
     });
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initialize();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          centerTitle: true,
-          title: commonAppBarTitle(),
-          backgroundColor: Color(0xffEFEFEF),
-          elevation: 0,
-          leading: Builder(
-            builder: (context) => commonAppBarLeading(
-                iconData: Icons.menu,
-                onPressed: () {
-                  setState(() {
-                    Scaffold.of(context).openDrawer();
-                  });
-                }),
-          )),
-      drawer: commonDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PrescriptionWidget(),
-            PhoneCallWidget(),
-            SizedBox(
-              height: 10,
-            ),
-            PackagesWidget(
-              allPackagesModel: _controller.allPackages,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Tests',
-                style: GoogleFonts.montserrat(
-                    color: appblueColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            TestWidget(
-              allTestModel: _controller.allTests,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  child: commonBtn(
-                      s: 'View All',
-                      borderRadius: 5,
-                      height: 40,
-                      textSize: 12,
-                      bgcolor: appblueColor,
-                      textColor: Colors.white,
-                      onPressed: () {}),
-                ),
-              ),
-            ),
-            LabsWidget(
-              allLabsModel: _controller.allLabs,
-            ),
-            SizedBox(
-              height: navbarht + 20,
-            ),
-          ],
-        ),
-      ),
-    );
+        appBar: AppBar(
+            centerTitle: true,
+            title: commonAppBarTitle(),
+            backgroundColor: Color(0xffEFEFEF),
+            elevation: 0,
+            leading: Builder(
+              builder: (context) => commonAppBarLeading(
+                  iconData: Icons.menu,
+                  onPressed: () {
+                    setState(() {
+                      Scaffold.of(context).openDrawer();
+                    });
+                  }),
+            )),
+        drawer: commonDrawer(),
+        body: Container()
+        // RefreshIndicator(
+        //   onRefresh: () {
+        //     initialize();
+        //
+        //     return _controller.getallPackages();
+        //   },
+        //   child: SingleChildScrollView(
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         PrescriptionWidget(),
+        //         PhoneCallWidget(),
+        //         SizedBox(
+        //           height: 10,
+        //         ),
+        //         (_controller.packagesLoading)
+        //             ? Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Padding(
+        //                       padding: const EdgeInsets.symmetric(
+        //                           horizontal: 10.0, vertical: 10.0),
+        //                       child: Text(
+        //                         'Health Checkups',
+        //                         style: GoogleFonts.montserrat(
+        //                             fontWeight: FontWeight.bold,
+        //                             fontSize: 20,
+        //                             color: appblueColor),
+        //                       )),
+        //                   SizedBox(
+        //                     width: double.infinity,
+        //                     height: MediaQuery.of(context).size.height / 3.85,
+        //                     // decoration: BoxDecoration(
+        //                     //   borderRadius: BorderRadius.only(
+        //                     //       bottomLeft: Radius.circular(15),
+        //                     //       bottomRight: Radius.circular(15)),
+        //                     // ),
+        //                     child: Center(child: CircularProgressIndicator()),
+        //                   ),
+        //                 ],
+        //               )
+        //             : PackagesWidget(
+        //                 allPackagesModel: _controller.allPackages,
+        //               ),
+        //         SizedBox(
+        //           height: 10,
+        //         ),
+        //         Padding(
+        //           padding: const EdgeInsets.all(16.0),
+        //           child: Text(
+        //             'Tests',
+        //             style: GoogleFonts.montserrat(
+        //                 color: appblueColor,
+        //                 fontSize: 25,
+        //                 fontWeight: FontWeight.bold),
+        //           ),
+        //         ),
+        //         (_controller.testloading)
+        //             ? Center(child: CircularProgressIndicator())
+        //             : TestWidget(
+        //                 allTestModel: _controller.allTests,
+        //               ),
+        //         (_controller.testloading)
+        //             ? Center(child: Container())
+        //             : Padding(
+        //                 padding: const EdgeInsets.symmetric(vertical: 16.0),
+        //                 child: Center(
+        //                   child: Container(
+        //                     width: MediaQuery.of(context).size.width / 3,
+        //                     child: commonBtn(
+        //                         s: 'View All',
+        //                         borderRadius: 5,
+        //                         height: 40,
+        //                         textSize: 12,
+        //                         bgcolor: appblueColor,
+        //                         textColor: Colors.white,
+        //                         onPressed: () {
+        //                           Push(context, AllTests());
+        //                         }),
+        //                   ),
+        //                 ),
+        //               ),
+        //         (_controller.labloading)
+        //             ? Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Padding(
+        //                       padding: const EdgeInsets.symmetric(
+        //                           horizontal: 10.0, vertical: 10.0),
+        //                       child: Text(
+        //                         'Labs',
+        //                         style: GoogleFonts.montserrat(
+        //                             fontWeight: FontWeight.bold,
+        //                             fontSize: 20,
+        //                             color: appblueColor),
+        //                       )),
+        //                   SizedBox(
+        //                     width: double.infinity,
+        //                     height: MediaQuery.of(context).size.height / 3.85,
+        //                     // decoration: BoxDecoration(
+        //                     //   borderRadius: BorderRadius.only(
+        //                     //       bottomLeft: Radius.circular(15),
+        //                     //       bottomRight: Radius.circular(15)),
+        //                     // ),
+        //                     child: Center(child: CircularProgressIndicator()),
+        //                   ),
+        //                 ],
+        //               )
+        //             : LabsWidget(
+        //                 allLabsModel: _controller.allLabs,
+        //               ),
+        //         SizedBox(
+        //           height: navbarht + 20,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        );
   }
 }
 
@@ -146,7 +220,7 @@ class LabsWidget extends StatelessWidget {
             child: commonRow(
               Title: 'Labs',
               subTitle: 'View all',
-              value: DoctorProfile(fromhome: true),
+              value: AllLabs(),
             ),
           ),
           SizedBox(
@@ -224,7 +298,14 @@ class LabsWidget extends StatelessWidget {
                                             s: 'View LAB',
                                             bgcolor: appblueColor,
                                             textColor: Colors.white,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Push(
+                                                  context,
+                                                  LabDetails(
+                                                    labid: allLabsModel
+                                                        .data[index].labId,
+                                                  ));
+                                            },
                                             height: 30,
                                             width: 180,
                                             textSize: 12,
@@ -259,6 +340,7 @@ class TestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    allTestModel.data = allTestModel.data.take(4).toList();
     return SizedBox(
       // decoration: BoxDecoration(
       //   borderRadius: BorderRadius.only(
@@ -322,12 +404,12 @@ class TestWidget extends StatelessWidget {
                                               .data[index].testDescription,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
-                                  Text(
-                                    '₹ 199',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  // Text(
+                                  //   '₹ 199',
+                                  //   style: GoogleFonts.montserrat(
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 16),
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 4),
@@ -340,7 +422,16 @@ class TestWidget extends StatelessWidget {
                                       bgcolor: appblueColor,
                                       textColor: Colors.white,
                                       onPressed: () {
-                                        Push(context, TestsLabScreen());
+                                        Push(
+                                            context,
+                                            TestsLabScreen(
+                                              testId:
+                                                  allTestModel.data[index].id,
+                                              testDescription: allTestModel
+                                                  .data[index].testDescription,
+                                              testName: allTestModel
+                                                  .data[index].testName,
+                                            ));
                                       },
                                       height: 30,
                                     ),
@@ -397,7 +488,7 @@ class PackagesWidget extends StatelessWidget {
             child: commonRow(
               Title: 'Health Checkups',
               subTitle: 'View all',
-              value: DoctorProfile(fromhome: true),
+              value: AllPackages(),
             ),
           ),
           Container(
@@ -461,12 +552,14 @@ class PackagesWidget extends StatelessWidget {
                                   Text(allPackagesModel.data[index].packgeName,
                                       style:
                                           GoogleFonts.montserrat(fontSize: 10)),
-                                  Text(
-                                    '₹ ' + allPackagesModel.data[index].price,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16),
-                                  ),
+                                  // Text(
+                                  //   '₹ ' +
+                                  //       allPackagesModel.data[index].price
+                                  //           .toString(),
+                                  //   style: GoogleFonts.montserrat(
+                                  //       fontWeight: FontWeight.bold,
+                                  //       fontSize: 16),
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16.0, vertical: 4),
@@ -479,7 +572,12 @@ class PackagesWidget extends StatelessWidget {
                                       bgcolor: apptealColor,
                                       textColor: Colors.white,
                                       onPressed: () {
-                                        Push(context, PackagesLabScreen());
+                                        Push(
+                                            context,
+                                            PackagesLabScreen(
+                                              packageId: allPackagesModel
+                                                  .data[index].packgeId,
+                                            ));
                                       },
                                       height: 30,
                                     ),

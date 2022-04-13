@@ -93,14 +93,10 @@ Future PostDataWithImage(
   var pic = await http.MultipartFile.fromPath(imageparamName, imagePath);
   request.files.add(pic);
   var responseData = await request.send();
-  // post(Uri.parse(BASE_URL + PARAM_URL), body: params);
   var response = await responseData.stream.toBytes();
   var responseString = String.fromCharCodes(response);
-  // print(response.body);
-  // var Response = jsonDecode(response.body);
   print('----------->' + responseString.toString());
   var finalresponse = jsonDecode(responseString);
-
   return finalresponse;
 }
 

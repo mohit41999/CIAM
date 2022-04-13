@@ -1,18 +1,18 @@
 // To parse this JSON data, do
 //
-//     final allPackagesModel = allPackagesModelFromJson(jsonString);
+//     final packageDetailsModel = packageDetailsModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-AllPackagesModel allPackagesModelFromJson(String str) =>
-    AllPackagesModel.fromJson(json.decode(str));
+PackageDetailsModel packageDetailsModelFromJson(String str) =>
+    PackageDetailsModel.fromJson(json.decode(str));
 
-String allPackagesModelToJson(AllPackagesModel data) =>
+String packageDetailsModelToJson(PackageDetailsModel data) =>
     json.encode(data.toJson());
 
-class AllPackagesModel {
-  AllPackagesModel({
+class PackageDetailsModel {
+  PackageDetailsModel({
     required this.status,
     required this.message,
     required this.data,
@@ -20,24 +20,24 @@ class AllPackagesModel {
 
   final bool status;
   final String message;
-  final List<Datum> data;
+  final Data data;
 
-  factory AllPackagesModel.fromJson(Map<String, dynamic> json) =>
-      AllPackagesModel(
+  factory PackageDetailsModel.fromJson(Map<String, dynamic> json) =>
+      PackageDetailsModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": data.toJson(),
       };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
     required this.packgeId,
     required this.packgeName,
     required this.labTest,
@@ -47,7 +47,7 @@ class Datum {
   final String packgeName;
   final List<LabTest> labTest;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         packgeId: json["packge_id"],
         packgeName: json["packge_name"],
         labTest: List<LabTest>.from(

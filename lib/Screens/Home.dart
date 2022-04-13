@@ -58,12 +58,12 @@ final List<Map<dynamic, dynamic>> hometile = [
   //   'Screen': 'null',
   //   'profile': 'Rectangle -6.png'
   // },
-  {
-    'label': 'Lab Tests',
-    // 'Screen': 'null',
-    'Screen': LabProfile(),
-    'profile': 'Rectangle -2.png'
-  },
+  // {
+  //   'label': 'Lab Tests',
+  //   // 'Screen': 'null',
+  //   'Screen': LabProfile(),
+  //   'profile': 'Rectangle -2.png'
+  // },
   {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
   // {
   //   'label': 'Medicine',
@@ -365,14 +365,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                     child: GridView.builder(
-                      scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.vertical,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
-                          childAspectRatio: 1.45 / 1,
+                          // childAspectRatio: 1.45 / 1,
                           // crossAxisSpacing: 10,
                           // mainAxisSpacing: 10,
-                          crossAxisCount: 2),
+                          crossAxisCount: 3),
                       itemCount: hometile.length,
                       itemBuilder: (context, index) {
                         return Padding(

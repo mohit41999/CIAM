@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart';
 import 'package:patient/Models/wallet_history.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/wallet_controller.dart';
+import 'package:patient/helper/constants.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,8 +28,6 @@ class _MyWalletPageState extends State<MyWalletPage>
   WalletController _controller = WalletController();
 
   late Razorpay _razorpay;
-  String username = 'rzp_test_Wx4Pz8r5BYpqqQ';
-  String password = '30RFYcp8Uty6yxx21eBLaX1W';
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
@@ -95,7 +94,9 @@ class _MyWalletPageState extends State<MyWalletPage>
   @override
   void initState() {
     _razorpay = Razorpay();
-
+    getRazorpaycred();
+    print(username + 'ussss');
+    print(password + 'ussss');
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
