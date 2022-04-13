@@ -18,9 +18,9 @@ class AllPackagesModel {
     required this.data,
   });
 
-  bool status;
-  String message;
-  List<Datum> data;
+  final bool status;
+  final String message;
+  final List<Datum> data;
 
   factory AllPackagesModel.fromJson(Map<String, dynamic> json) =>
       AllPackagesModel(
@@ -43,10 +43,9 @@ class Datum {
     required this.labTest,
   });
 
-  String packgeId;
-  String packgeName;
-
-  List<LabTest> labTest;
+  final String packgeId;
+  final String packgeName;
+  final List<LabTest> labTest;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         packgeId: json["packge_id"],
@@ -64,20 +63,20 @@ class Datum {
 
 class LabTest {
   LabTest({
-    required this.test,
+    required this.testId,
     required this.testName,
   });
 
-  String test;
-  String testName;
+  final String testId;
+  final String testName;
 
   factory LabTest.fromJson(Map<String, dynamic> json) => LabTest(
-        test: json["test"],
+        testId: json["test_id"],
         testName: json["test_name"],
       );
 
   Map<String, dynamic> toJson() => {
-        "test": test,
+        "test_id": testId,
         "test_name": testName,
       };
 }
