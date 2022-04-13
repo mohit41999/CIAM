@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/coupons_model.dart';
@@ -13,10 +14,7 @@ import 'package:patient/helper/constants.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
-import 'package:patient/widgets/title_column.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentConfirmationScreen extends StatefulWidget {
@@ -485,7 +483,9 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                               bgcolor: appblueColor,
                               textColor: Colors.white,
                               onPressed: () {
-                                paymentdialog();
+                                payment(int.parse(
+                                    amount.toString().replaceAll(".", "")));
+                                // paymentdialog();
                               },
                               borderRadius: 10,
                             ))

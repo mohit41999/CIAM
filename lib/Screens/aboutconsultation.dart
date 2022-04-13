@@ -1,4 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
@@ -6,29 +10,18 @@ import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/Home.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
-import 'package:patient/Screens/MedicineProfile.dart';
-import 'package:patient/Screens/Products.dart';
-import 'package:patient/Screens/patient_home_page_4.dart';
-import 'package:patient/Screens/search_screen.dart';
+import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/about_consultation_controller.dart';
 import 'package:patient/controller/app_review_controller.dart';
-import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 import 'package:patient/widgets/row_text_icon.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AboutConsultation extends StatefulWidget {
   const AboutConsultation({Key? key}) : super(key: key);
@@ -215,155 +208,6 @@ class _AboutConsultationState extends State<AboutConsultation> {
                     ],
                   ),
                 )),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Why Consult on our App?',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 20,
-                          color: appblueColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.contain,
-                                  image: AssetImage(
-                                      'assets/pngs/Rectangle 69.png'))),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '250+',
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text('Quality Doctors',
-                                style: GoogleFonts.montserrat()),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.contain,
-                                  image: AssetImage(
-                                      'assets/pngs/Rectangle 69.png'))),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '500+',
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text('Satisfied Customer',
-                                style: GoogleFonts.montserrat()),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.contain,
-                                  image: AssetImage(
-                                      'assets/pngs/Rectangle 69.png'))),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '200+',
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text('Super Specialists',
-                                style: GoogleFonts.montserrat()),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.contain,
-                                  image: AssetImage(
-                                      'assets/pngs/Rectangle 69.png'))),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '250+',
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text('Secure and Private',
-                                style: GoogleFonts.montserrat()),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
             SizedBox(
               height: 20,
             ),
@@ -563,7 +407,266 @@ class _AboutConsultationState extends State<AboutConsultation> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 20,
+            ),
+            Container(
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Why Consult on our App?',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20,
+                          color: appblueColor,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: AssetImage(
+                                      'assets/pngs/Rectangle 69.png'))),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '250+',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Quality Doctors',
+                                style: GoogleFonts.montserrat()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: AssetImage(
+                                      'assets/pngs/Rectangle 69.png'))),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '500+',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Satisfied Customer',
+                                style: GoogleFonts.montserrat()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: AssetImage(
+                                      'assets/pngs/Rectangle 69.png'))),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '200+',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Super Specialists',
+                                style: GoogleFonts.montserrat()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.contain,
+                                  image: AssetImage(
+                                      'assets/pngs/Rectangle 69.png'))),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '250+',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text('Secure and Private',
+                                style: GoogleFonts.montserrat()),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () {
+                Push(context, ContactUsForm());
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: appblueColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        offset: const Offset(2, 5),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/pngs/customer_support.jpg'),
+                                fit: BoxFit.contain,
+                              )),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Contact Us',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                        Icon(
+                                          Icons.phone,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'If you have any query ... you can Contact Us here',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 14,
+                                          color: Colors.white.withOpacity(1)),
+                                    )
+                                  ],
+                                )),
+                            // SizedBox(
+                            //   height: 40,
+                            //   width: double.infinity,
+                            //   child: TextButton(
+                            //     style: ButtonStyle(
+                            //         backgroundColor:
+                            //             MaterialStateProperty.all<Color>(appblueColor),
+                            //         shape:
+                            //             MaterialStateProperty.all<RoundedRectangleBorder>(
+                            //                 RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.only(
+                            //               bottomLeft: Radius.circular(15),
+                            //               bottomRight: Radius.circular(15)),
+                            //         ))),
+                            //     onPressed: () {},
+                            //     child: Text(
+                            //       'Contact Us',
+                            //       style: GoogleFonts.montserrat(
+                            //           fontSize: 12,
+                            //           color: Colors.white,
+                            //           letterSpacing: 1,
+                            //           fontWeight: FontWeight.bold),
+                            //     ),
+                            //   ),
+                            // )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             (reviewloading)
                 ? Center(child: CircularProgressIndicator())

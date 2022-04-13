@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
-import 'package:patient/Screens/MedicineProfile.dart';
-import 'package:patient/Screens/Products.dart';
-import 'package:patient/Screens/Signup.dart';
-import 'package:patient/Screens/patient_home_page_4.dart';
+import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/widgets/navigation_drawer.dart';
-
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/patient_home_page_4_alert_box.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientHomePage4 extends StatefulWidget {
@@ -254,13 +245,13 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                           height: 20,
                         ),
                         Container(
-                          height: 300,
+                          height: 250,
                           child: GridView.builder(
                             scrollDirection: Axis.horizontal,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     // maxCrossAxisExtent: 100,
-                                    childAspectRatio: 0.77 / 1,
+                                    childAspectRatio: 3 / 4,
                                     // crossAxisSpacing: 10,
                                     // mainAxisSpacing: 10,
                                     crossAxisCount: 2),
@@ -280,10 +271,8 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                         ));
                                   },
                                   child: Container(
-                                    height: 126,
-                                    width: 154,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
@@ -293,29 +282,34 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                         ),
                                       ],
                                     ),
-                                    child: Stack(
+                                    child: Row(
                                       children: [
-                                        Image.network(
-                                          homeCareCategories.data[index].image,
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                        ),
-                                        Container(
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Center(
-                                            child: Text(
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(
                                               homeCareCategories
-                                                  .data[index].serviceName,
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: 16,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
+                                                  .data[index].image,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                homeCareCategories
+                                                    .data[index].serviceName,
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 10,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ),
                                         )
@@ -328,6 +322,116 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      Push(context, ContactUsForm());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                          color: appblueColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              blurRadius: 10,
+                              offset: const Offset(2, 5),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/pngs/customer_support.jpg'),
+                                      fit: BoxFit.contain,
+                                    )),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Contact Us',
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white),
+                                              ),
+                                              Icon(
+                                                Icons.phone,
+                                                color: Colors.white,
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            'If you have any query ... you can Contact Us here',
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.montserrat(
+                                                fontSize: 14,
+                                                color: Colors.white
+                                                    .withOpacity(1)),
+                                          )
+                                        ],
+                                      )),
+                                  // SizedBox(
+                                  //   height: 40,
+                                  //   width: double.infinity,
+                                  //   child: TextButton(
+                                  //     style: ButtonStyle(
+                                  //         backgroundColor:
+                                  //             MaterialStateProperty.all<Color>(appblueColor),
+                                  //         shape:
+                                  //             MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  //                 RoundedRectangleBorder(
+                                  //           borderRadius: BorderRadius.only(
+                                  //               bottomLeft: Radius.circular(15),
+                                  //               bottomRight: Radius.circular(15)),
+                                  //         ))),
+                                  //     onPressed: () {},
+                                  //     child: Text(
+                                  //       'Contact Us',
+                                  //       style: GoogleFonts.montserrat(
+                                  //           fontSize: 12,
+                                  //           color: Colors.white,
+                                  //           letterSpacing: 1,
+                                  //           fontWeight: FontWeight.bold),
+                                  //     ),
+                                  //   ),
+                                  // )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(

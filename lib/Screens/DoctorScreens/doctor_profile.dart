@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/search_screen.dart';
-
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -291,13 +289,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 onPressed: () {
                   Pop(context);
                 })
-            : commonAppBarLeading(
-                iconData: Icons.menu,
-                onPressed: () {
-                  setState(() {
-                    Scaffold.of(context).openDrawer();
-                  });
-                }),
+            : Builder(
+                builder: (context) => commonAppBarLeading(
+                    iconData: Icons.menu,
+                    onPressed: () {
+                      setState(() {
+                        Scaffold.of(context).openDrawer();
+                      });
+                    }),
+              ),
         centerTitle: true,
         backgroundColor: appAppBarColor,
         elevation: 0,

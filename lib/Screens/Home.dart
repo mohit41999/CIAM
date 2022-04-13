@@ -1,16 +1,15 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
-import 'package:patient/Screens/MedicineProfile.dart';
-import 'package:patient/Screens/Products.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
@@ -22,10 +21,7 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -510,28 +506,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     //color: Colors.red,
                     child: (healthcareLoading)
                         ? Center(child: CircularProgressIndicator())
-                        : ListView.builder(
+                        : GridView.builder(
                             scrollDirection: Axis.horizontal,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    // maxCrossAxisExtent: 100,
+                                    childAspectRatio: 3 / 4,
+                                    // crossAxisSpacing: 10,
+                                    // mainAxisSpacing: 10,
+                                    crossAxisCount: 1),
                             itemCount: healthCareCategories.data.length,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Push(
-                                      context,
-                                      DoctorProfile3(
-                                        cat_id: healthCareCategories
-                                            .data[index].serviceId,
-                                        cat_name: healthCareCategories
-                                            .data[index].serviceName,
-                                      ));
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
+                              return Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Push(
+                                        context,
+                                        DoctorProfile3(
+                                          cat_id: healthCareCategories
+                                              .data[index].serviceId,
+                                          cat_name: healthCareCategories
+                                              .data[index].serviceName,
+                                        ));
+                                  },
                                   child: Container(
-                                    height: 126,
-                                    width: 154,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       borderRadius: BorderRadius.circular(10),
                                       boxShadow: [
                                         BoxShadow(
@@ -541,30 +542,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ],
                                     ),
-                                    child: Stack(
+                                    child: Row(
                                       children: [
-                                        Image.network(
-                                          healthCareCategories
-                                              .data[index].image,
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                        ),
-                                        Container(
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.withOpacity(0.2),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Center(
-                                            child: Text(
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircleAvatar(
+                                            radius: 30,
+                                            backgroundImage: NetworkImage(
                                               healthCareCategories
-                                                  .data[index].serviceName,
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: 16,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
+                                                  .data[index].image,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                healthCareCategories
+                                                    .data[index].serviceName,
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 12,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
                                             ),
                                           ),
                                         )
@@ -573,7 +578,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               );
-                            }),
+                            },
+                          ),
                   ),
                 ],
               ),

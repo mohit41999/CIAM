@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/home_care_sub_category_model.dart';
-
-import 'package:patient/Screens/DoctorScreens/doctor_profile_4.dart';
-
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/alertTextField.dart';
@@ -15,7 +10,6 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
-import 'package:patient/widgets/title_enter_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorProfile3 extends StatefulWidget {
@@ -50,7 +44,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
   }
 
   bool loading = true;
-  Future addCareServices(
+  Future<bool> addCareServices(
     BuildContext context, {
     required String subcareid,
     required String careid,
@@ -59,34 +53,82 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
     required String phone,
     required String care_requirement,
   }) async {
-    var loader = ProgressView(context);
-    loader.show();
-    late Map<String, dynamic> data;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await PostData(PARAM_URL: 'add_homecare_sub_requirement.php', params: {
-      'token': Token,
-      'user_id': prefs.getString('user_id'),
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'service_category_id': careid,
-      'service_subcategory_id': subcareid,
-      'postal_code': care_requirement,
-    }).then((value) {
-      loader.dismiss();
-      (value['status'])
-          ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    if (care_requirement.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Enter care requirement'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Enter name'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Enter email'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else if (phone.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Enter phone number'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else if (care_requirement.length != 6) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Postal Code must be 6 characters only'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else {
+      var loader = ProgressView(context);
+      try {
+        loader.show();
+        late Map<String, dynamic> data;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await PostData(PARAM_URL: 'add_homecare_sub_requirement.php', params: {
+          'token': Token,
+          'user_id': prefs.getString('user_id'),
+          'name': name,
+          'email': email,
+          'phone': phone,
+          'service_category_id': careid,
+          'service_subcategory_id': subcareid,
+          'postal_code': care_requirement,
+        }).then((value) {
+          loader.dismiss();
+          if (value['status']) {
+            loader.dismiss();
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(value['message']),
               backgroundColor: apptealColor,
-            ))
-          : ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ));
+
+            Pop(context);
+            return true;
+          } else {
+            loader.dismiss();
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(value['message']),
               backgroundColor: Colors.red,
             ));
-      data = value;
-      print(
-          name + '\n' + email + '\n' + phone + '\n' + care_requirement + '\n');
-    });
+            return false;
+          }
+        });
+        loader.dismiss();
+        return true;
+      } catch (e) {
+        loader.dismiss();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Something went wrong... try again later'),
+          backgroundColor: Colors.red,
+        ));
+        return false;
+      }
+    }
   }
 
   void homecarealert(
@@ -100,6 +142,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
   }) {
     showDialog(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext context) => AlertDialog(
             backgroundColor: Color(0xffF1F1F1),
             elevation: 0,
@@ -129,7 +172,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
               ],
             ),
             content: Container(
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height / 1.8,
               color: Color(0xffF1F1F1),
               //padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
               child: SingleChildScrollView(
@@ -182,9 +225,9 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                       height: 15,
                     ),
                     alertTextField(
-                        inputType: TextInputType.number,
                         controller: careController,
-                        label: 'What is the care needed?',
+                        inputType: TextInputType.number,
+                        label: 'Where is the care needed?',
                         textFieldtext: 'Enter Postal Code'),
                     SizedBox(
                       height: 10,
@@ -229,12 +272,12 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                                   phone: phonenumberController.text,
                                   care_requirement: careController.text)
                               .then((value) {
-                            nameController.clear();
-                            emailController.clear();
-                            phonenumberController.clear();
-                            careController.clear();
-
-                            Pop(context);
+                            if (value) {
+                              nameController.clear();
+                              emailController.clear();
+                              phonenumberController.clear();
+                              careController.clear();
+                            }
                           });
                         },
                         height: 40,
@@ -385,18 +428,11 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Container(
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                              ),
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      homeCareSubCategories
-                                                          .data[index].image),
-                                                  fit: BoxFit.cover)),
+                                        child: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              homeCareSubCategories
+                                                  .data[index].image),
+                                          radius: 50,
                                         ),
                                       ),
                                       Expanded(
