@@ -5,15 +5,19 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geolocator_platform_interface/geolocator_platform_interface.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
+import 'package:patient/Screens/doctor_categories.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
@@ -21,6 +25,7 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
+import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> imgList = [
@@ -80,6 +85,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool healthcareLoading = true;
   late HealthCareCategoriesModel healthCareCategories;
+
+  bool doctorloading = true;
   Future<HealthCareCategoriesModel> gethomecareServices() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
@@ -94,6 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late HomeDoctorSpecialityModel specialities;
   int _current = 0;
   late Position position;
+  DoctorController _doctorControllercon = DoctorController();
+  late DoctorProfileModel _doctordata;
   final CarouselController _controller = CarouselController();
 
   List<Widget> widgetSliders(BuildContext context) => hometile
@@ -204,6 +213,12 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         healthCareCategories = value;
         healthcareLoading = false;
+      });
+    });
+    _doctorControllercon.getDoctor(context).then((value) {
+      setState(() {
+        doctorloading = false;
+        _doctordata = value;
       });
     });
   }
@@ -418,6 +433,204 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Colors.white,
               child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: commonRow(
+                      Title: 'Meet our Doctors',
+                      subTitle: 'View all',
+                      value: DoctorProfile(fromhome: true),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 220,
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.only(
+                    //       bottomLeft: Radius.circular(15),
+                    //       bottomRight: Radius.circular(15)),
+                    // ),
+                    child: (doctorloading)
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 7,
+                            itemBuilder: (context, index) {
+                              var Docs = _doctordata.data[index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5.0, vertical: 15),
+                                child: Container(
+                                  height: 190,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.1,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(15),
+                                        bottomRight: Radius.circular(15)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        blurRadius: 10,
+                                        offset: const Offset(2, 5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Container(
+                                        height: 150,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                    Docs.profileImage),
+                                                radius: 50,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                        Docs.firstName
+                                                                .toString() +
+                                                            ' ' +
+                                                            Docs.lastName
+                                                                .toString(),
+                                                        style: KHeader),
+                                                    Text(
+                                                        Docs.specialist
+                                                            .toString(),
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                                color:
+                                                                    Colors
+                                                                        .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 12)),
+                                                    rowTextIcon(
+                                                      text: Docs.experience +
+                                                          ' yrs of exp. overall',
+                                                      asset:
+                                                          'assets/pngs/Group.png',
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: rowTextIcon(
+                                                            text: Docs.location,
+                                                            asset:
+                                                                'assets/pngs/Group 1182.png',
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: rowTextIcon(
+                                                            text: '',
+                                                            asset:
+                                                                'assets/pngs/Icon awesome-thumbs-up.png',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: rowTextIcon(
+                                                            text:
+                                                                Docs.available,
+                                                            asset:
+                                                                'assets/pngs/Path 2062.png',
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: rowTextIcon(
+                                                            text: '',
+                                                            asset:
+                                                                'assets/pngs/Icon awesome-star.png',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child: TextButton(
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(appblueColor),
+                                              shape: MaterialStateProperty.all<
+                                                      RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(15),
+                                                    bottomRight:
+                                                        Radius.circular(15)),
+                                              ))),
+                                          onPressed: () {
+                                            Push(
+                                                context,
+                                                DoctorProfile1(
+                                                  doc_id: Docs.userId,
+                                                ));
+                                          },
+                                          child: Text(
+                                            'View Details',
+                                            style: GoogleFonts.montserrat(
+                                                fontSize: 12,
+                                                color: Colors.white,
+                                                letterSpacing: 1,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              color: Colors.white,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -425,9 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: commonRow(
                       subTitle: 'View all',
                       Title: 'Find Your Doctors',
-                      value: DoctorProfile(
-                        fromhome: true,
-                      ),
+                      value: DoctorCategories(),
                     ),
                   ),
                   Padding(

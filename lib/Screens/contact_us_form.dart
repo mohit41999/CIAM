@@ -174,10 +174,8 @@ class _ContactUsFormState extends State<ContactUsForm> {
                                 fontSize: 14,
                                 color: Colors.black.withOpacity(0.6)),
                             hintText: 'Contact Number',
-                            hintStyle: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                            hintStyle:
+                                TextStyle(fontSize: 12, color: Colors.grey),
                             fillColor: Colors.white,
                           ),
                         ),
