@@ -11,85 +11,18 @@ import 'package:patient/widgets/tag_line.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ContactUsForm extends StatefulWidget {
-  const ContactUsForm({Key? key}) : super(key: key);
+class AskQuestionsScreen extends StatefulWidget {
+  const AskQuestionsScreen({Key? key}) : super(key: key);
 
   @override
-  State<ContactUsForm> createState() => _ContactUsFormState();
+  State<AskQuestionsScreen> createState() => _AskQuestionsScreenState();
 }
 
-class _ContactUsFormState extends State<ContactUsForm> {
-  void clearControllers() {
-    emailId.clear();
-    firstname.clear();
-    lastname.clear();
-    description.clear();
-    contactNo.clear();
-  }
-
-  Future submit() async {
-    var loader = ProgressView(context);
-    var response;
-    if (firstname.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('First Name Required'),
-        backgroundColor: Colors.red,
-      ));
-    } else if (lastname.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Last Name Required'), backgroundColor: Colors.red));
-    } else if (contactNo.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Contact Number Required'),
-          backgroundColor: Colors.red));
-    } else if (emailId.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Email Id Required'), backgroundColor: Colors.red));
-    } else if (description.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Enter Description'), backgroundColor: Colors.red));
-    } else {
-      try {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        loader.show();
-        response = await PostData(PARAM_URL: 'contact_us.php', params: {
-          'token': '123456789',
-          'user_id': preferences.getString('user_id'),
-          'first_name': firstname.text,
-          'last_name': lastname.text,
-          'contact_number': contactNo.text,
-          'email': emailId.text,
-          'description': description.text
-        });
-        loader.dismiss();
-        if (response['status']) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('request submitted successfully'),
-            backgroundColor: apptealColor,
-          ));
-          clearControllers();
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(response['message']),
-            backgroundColor: Colors.red,
-          ));
-        }
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error try again later'),
-          backgroundColor: Colors.red,
-        ));
-        loader.dismiss();
-        print(e);
-      }
-    }
-  }
-
-  TextEditingController firstname = TextEditingController();
-  TextEditingController lastname = TextEditingController();
+class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
   TextEditingController contactNo = TextEditingController();
-  TextEditingController emailId = TextEditingController();
-  TextEditingController description = TextEditingController();
+  TextEditingController query = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -111,16 +44,15 @@ class _ContactUsFormState extends State<ContactUsForm> {
           children: [
             Center(
               child: Text(
-                'Contact Us',
+                'Queries',
                 style: GoogleFonts.montserrat(
                     color: apptealColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
               ),
             ),
-            TitleEnterField('Firstname', 'Firstname', firstname),
-            TitleEnterField('Lastname', 'Lastname', lastname),
-            TitleEnterField('Email id', 'Email id', emailId),
+            TitleEnterField('Name', 'Name', name),
+            TitleEnterField('Email id', 'Email id', email),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -188,9 +120,9 @@ class _ContactUsFormState extends State<ContactUsForm> {
               ),
             ),
             TitleEnterField(
-              'Description',
-              'Description',
-              description,
+              'What is your query?',
+              'Query',
+              query,
               maxLines: 10,
             ),
             const SizedBox(
@@ -203,9 +135,7 @@ class _ContactUsFormState extends State<ContactUsForm> {
                 bgcolor: appblueColor,
                 textColor: Colors.white,
                 onPressed: () {
-                  setState(() {
-                    submit();
-                  });
+                  setState(() {});
                 },
                 borderRadius: 8,
                 textSize: 20,

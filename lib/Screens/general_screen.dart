@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/Home.dart';
+import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/LAB/lab_profile.dart';
+import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/firebase/notification_handling.dart';
@@ -11,6 +13,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'DoctorScreens/doctor_profile.dart';
 import 'MedicineProfile.dart';
+import 'patient_home_page_4.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({Key? key}) : super(key: key);
@@ -35,8 +38,8 @@ class _GeneralScreenState extends State<GeneralScreen> {
       DoctorProfile(fromhome: false),
       // HomeScreen(),
       SearchScreen(),
-      MedicineProfile(),
-      LabProfile()
+      PatientHomePage4(),
+      ContactUsForm()
     ];
   }
 
@@ -123,14 +126,14 @@ class _GeneralScreenState extends State<GeneralScreen> {
       PersistentBottomNavBarItem(
         opacity: 0.8,
         icon: Icon(Icons.medical_services_outlined),
-        title: ("Medicine"),
+        title: ("Home Care"),
         activeColorPrimary: appblueColor,
         inactiveColorPrimary: Colors.black,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.biotech_outlined),
+        icon: Icon(Icons.question_mark),
         opacity: 0.8,
-        title: ("Lab"),
+        title: ("Need Help"),
         activeColorPrimary: appblueColor,
         inactiveColorPrimary: Colors.black,
       ),

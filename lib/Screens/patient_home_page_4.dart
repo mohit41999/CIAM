@@ -12,6 +12,7 @@ import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/patient_home_page_4_alert_box.dart';
+import 'package:patient/widgets/tag_line.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientHomePage4 extends StatefulWidget {
@@ -230,7 +231,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                   Container(
                     color: Colors.white,
                     width: double.infinity,
-                    height: 370,
+                    height: 320,
                     child: Column(
                       children: [
                         Padding(
@@ -434,6 +435,10 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TagLine(),
                   SizedBox(
                     height: navbarht + 20,
                   ),

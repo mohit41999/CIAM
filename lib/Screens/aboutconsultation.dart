@@ -22,6 +22,7 @@ import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
+import 'package:patient/widgets/tag_line.dart';
 
 class AboutConsultation extends StatefulWidget {
   const AboutConsultation({Key? key}) : super(key: key);
@@ -772,6 +773,10 @@ class _AboutConsultationState extends State<AboutConsultation> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            TagLine(),
             SizedBox(
               height: navbarht + 20,
             ),

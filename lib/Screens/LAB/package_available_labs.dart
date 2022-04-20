@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/LAB/package_available_lab_model.dart';
 import 'package:patient/Models/LAB/package_details_model.dart';
+import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Screens/LAB/package_checkout.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/DoctorProfileController/doctor_profile_one_controller.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -22,6 +25,8 @@ class PackagesLabScreen extends StatefulWidget {
 }
 
 class _PackagesLabScreenState extends State<PackagesLabScreen> {
+  DoctorProfileOneController _con = DoctorProfileOneController();
+  late RelativeModel relativeData;
   late PackageAvailableLabModel availableLabs;
   late PackageDetailsModel packageDetails;
   bool labloading = true;
@@ -35,6 +40,24 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
     packageDetails = await _controller.getpackagedetails(widget.packageId);
     setState(() {
       pdloading = false;
+    });
+    setState(() {
+      RelativeSettingController().getrelativedata(context).then((value) {
+        setState(() {
+          relativeData = value;
+          relativeData.data.insert(
+              0,
+              RelativeModelData(
+                  relative_id: '0',
+                  relation: '',
+                  relativeName: 'ME',
+                  bloodGroup: '',
+                  gender: '',
+                  age: '',
+                  maritalStatus: ''));
+          _con.loading = false;
+        });
+      });
     });
   }
 
@@ -167,7 +190,9 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                             top: 10.0,
                             right: 10.0,
                             left: 10.0,
-                            bottom: (index + 1 == 10) ? navbarht + 21 : 10.0),
+                            bottom: (index + 1 == availableLabs.data.length)
+                                ? navbarht + 21
+                                : 10.0),
                         child: Container(
                           width: MediaQuery.of(context).size.width / 1.2,
                           decoration: BoxDecoration(
@@ -246,9 +271,7 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                                 bgcolor: appblueColor,
                                                 textColor: Colors.white,
                                                 onPressed: () {
-                                                  Push(context,
-                                                      PackageCheckout(),
-                                                      withnav: false);
+                                                  bookingForDialog(context);
                                                 },
                                                 height: 30,
                                                 width: 180,
@@ -272,5 +295,87 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
         ),
       ),
     );
+  }
+
+  Future bookingForDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) =>
+                  AlertDialog(
+                    content: Container(
+                      height: 150,
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Select Test For',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Divider(
+                            color: Colors.black.withOpacity(0.4),
+                            thickness: 1,
+                          ),
+                          Material(
+                            elevation: 5.0,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: appblueColor)),
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownButton(
+                                  value: _con.bookingFor,
+                                  underline: Container(),
+                                  style: TextStyle(
+                                      color: apptealColor,
+                                      fontWeight: FontWeight.bold),
+                                  isExpanded: true,
+                                  hint: Text('Me'),
+                                  items: relativeData.data.map((e) {
+                                    return DropdownMenuItem(
+                                        value: e.relative_id,
+                                        child:
+                                            Text(e.relativeName.toUpperCase()));
+                                  }).toList(),
+                                  onChanged: (dynamic v) {
+                                    setState(() {
+                                      print(v);
+                                      _con.bookingFor = v;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          commonBtn(
+                              s: 'Continue',
+                              height: 30,
+                              textSize: 14,
+                              borderRadius: 5,
+                              bgcolor: appblueColor,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                Pop(context);
+                                Push(context, PackageCheckout());
+                              })
+                        ],
+                      ),
+                    ),
+                  ));
+        });
   }
 }

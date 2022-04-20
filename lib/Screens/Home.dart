@@ -12,8 +12,12 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
+import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
+import 'package:patient/Screens/ask_questions_screen.dart';
+import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/doctor_categories.dart';
+import 'package:patient/Screens/knowledge_forum_screen.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -26,6 +30,7 @@ import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
+import 'package:patient/widgets/tag_line.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final List<String> imgList = [
@@ -54,7 +59,7 @@ final List<Map<dynamic, dynamic>> hometile = [
     'Screen': PatientHomePage4(),
     'profile': 'Rectangle -1.png'
   },
-  // {
+  // {s
   //   'label': 'Stress buster zone',
   //   'Screen': 'null',
   //   'profile': 'Rectangle -6.png'
@@ -65,14 +70,22 @@ final List<Map<dynamic, dynamic>> hometile = [
   //   'Screen': LabProfile(),
   //   'profile': 'Rectangle -2.png'
   // },
-  {'label': 'Ask Questions', 'Screen': 'null', 'profile': 'Rectangle 69.png'},
+  {
+    'label': 'Ask Questions',
+    'Screen': AskQuestionsScreen(),
+    'profile': 'Rectangle 69.png'
+  },
   // {
   //   'label': 'Medicine',
   //   // 'Screen': 'null',
   //   'Screen': MedicineProfile(),
   //   'profile': 'Rectangle 69.png'
   // },
-  {'label': 'Knowledge Forum', 'Screen': 'null', 'profile': 'Rectangle -4.png'},
+  {
+    'label': 'Knowledge Forum',
+    'Screen': KnowledgeForumScreen(),
+    'profile': 'Rectangle -4.png'
+  },
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -795,9 +808,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+
             SizedBox(
               height: 15,
             ),
+
             // Container(
             //   color: Colors.white,
             //   child: Column(
@@ -866,6 +881,118 @@ class _HomeScreenState extends State<HomeScreen> {
             //     ],
             //   ),
             // ),
+            GestureDetector(
+              onTap: () {
+                Push(context, ContactUsForm());
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: appblueColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        offset: const Offset(2, 5),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/pngs/customer_support.jpg'),
+                                fit: BoxFit.contain,
+                              )),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Contact Us',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                        Icon(
+                                          Icons.phone,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'If you have any query ... you can Contact Us here',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 14,
+                                          color: Colors.white.withOpacity(1)),
+                                    )
+                                  ],
+                                )),
+                            // SizedBox(
+                            //   height: 40,
+                            //   width: double.infinity,
+                            //   child: TextButton(
+                            //     style: ButtonStyle(
+                            //         backgroundColor:
+                            //             MaterialStateProperty.all<Color>(appblueColor),
+                            //         shape:
+                            //             MaterialStateProperty.all<RoundedRectangleBorder>(
+                            //                 RoundedRectangleBorder(
+                            //           borderRadius: BorderRadius.only(
+                            //               bottomLeft: Radius.circular(15),
+                            //               bottomRight: Radius.circular(15)),
+                            //         ))),
+                            //     onPressed: () {},
+                            //     child: Text(
+                            //       'Contact Us',
+                            //       style: GoogleFonts.montserrat(
+                            //           fontSize: 12,
+                            //           color: Colors.white,
+                            //           letterSpacing: 1,
+                            //           fontWeight: FontWeight.bold),
+                            //     ),
+                            //   ),
+                            // )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TagLine(),
+
             SizedBox(
               height: navbarht + 20,
             ),

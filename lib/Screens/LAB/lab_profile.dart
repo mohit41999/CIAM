@@ -126,41 +126,79 @@ class _LabProfileState extends State<LabProfile> {
         //         SizedBox(
         //           height: 10,
         //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.all(16.0),
-        //           child: Text(
-        //             'Tests',
-        //             style: GoogleFonts.montserrat(
-        //                 color: appblueColor,
-        //                 fontSize: 25,
-        //                 fontWeight: FontWeight.bold),
-        //           ),
-        //         ),
-        //         (_controller.testloading)
-        //             ? Center(child: CircularProgressIndicator())
-        //             : TestWidget(
-        //                 allTestModel: _controller.allTests,
-        //               ),
-        //         (_controller.testloading)
-        //             ? Center(child: Container())
-        //             : Padding(
-        //                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-        //                 child: Center(
-        //                   child: Container(
-        //                     width: MediaQuery.of(context).size.width / 3,
-        //                     child: commonBtn(
-        //                         s: 'View All',
-        //                         borderRadius: 5,
-        //                         height: 40,
-        //                         textSize: 12,
-        //                         bgcolor: appblueColor,
-        //                         textColor: Colors.white,
-        //                         onPressed: () {
-        //                           Push(context, AllTests());
-        //                         }),
-        //                   ),
+        //         Container(
+        //           color: Colors.white,
+        //           child: Column(
+        //             children: [
+        //               // Padding(
+        //               //   padding: const EdgeInsets.all(16.0),
+        //               //   child: Text(
+        //               //     'Tests',
+        //               //     style: GoogleFonts.montserrat(
+        //               //         color: appblueColor,
+        //               //         fontSize: 25,
+        //               //         fontWeight: FontWeight.bold),
+        //               //   ),
+        //               // ),
+        //               Padding(
+        //                 padding: const EdgeInsets.symmetric(
+        //                     horizontal: 10.0, vertical: 10.0),
+        //                 child: commonRow(
+        //                   Title: 'Tests',
+        //                   subTitle: 'View all',
+        //                   value: AllTests(),
         //                 ),
         //               ),
+        //               (_controller.testloading)
+        //                   ? Center(child: CircularProgressIndicator())
+        //                   : TestWidget(
+        //                       allTestModel: _controller.allTests,
+        //                     ),
+        //             ],
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 10,
+        //         ),
+        //         Container(
+        //           height: MediaQuery.of(context).size.height / 3,
+        //           child: GridView.builder(
+        //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //                 crossAxisCount: 2, childAspectRatio: 2 / 2),
+        //             scrollDirection: Axis.horizontal,
+        //             itemBuilder: (context, index) {
+        //               return Padding(
+        //                 padding: const EdgeInsets.all(8.0),
+        //                 child: Container(
+        //                   color: Colors.white,
+        //                   child: Column(
+        //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                     crossAxisAlignment: CrossAxisAlignment.center,
+        //                     children: [
+        //                       Expanded(
+        //                           child: Icon(
+        //                         Icons.add,
+        //                         size: 40,
+        //                         color: apptealColor,
+        //                       )),
+        //                       Expanded(
+        //                           child: Center(
+        //                               child: Text(
+        //                         'Lorem Ipsum',
+        //                         textAlign: TextAlign.center,
+        //                         style: TextStyle(
+        //                             color: Colors.black,
+        //                             fontWeight: FontWeight.bold,
+        //                             fontSize: 14),
+        //                       )))
+        //                     ],
+        //                   ),
+        //                 ),
+        //               );
+        //             },
+        //             itemCount: 10,
+        //           ),
+        //         ),
         //         (_controller.labloading)
         //             ? Column(
         //                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -342,6 +380,7 @@ class TestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     allTestModel.data = allTestModel.data.take(4).toList();
     return SizedBox(
+      height: 190,
       // decoration: BoxDecoration(
       //   borderRadius: BorderRadius.only(
       //       bottomLeft: Radius.circular(15),
@@ -349,8 +388,7 @@ class TestWidget extends StatelessWidget {
       // ),
       child: ListView.builder(
           shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          physics: NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.horizontal,
           itemCount: allTestModel.data.length,
           itemBuilder: (context, index) {
             return Padding(
