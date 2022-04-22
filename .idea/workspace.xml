@@ -9,30 +9,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="changes">
-      <change afterPath="$PROJECT_DIR$/lib/Models/knowledge_description_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/knowledge_forum_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/knowledge_description_screen.dart" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="knowledge">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13-04-2022_14_05_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_13-04-2022_14_05__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14-04-2022_11_02_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14-04-2022_11_02__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/dp2.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ask_questions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ask_questions_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/contact_us_form.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/contact_us_form.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/alertTextField.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/title_enter_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/title_enter_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/knowledge_description_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/knowledge_description_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,7 +320,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650463310784</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="knowledge">
+      <created>1650636960173</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1650636960173</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,6 +364,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="lab package test" />
     <MESSAGE value="changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
+    <MESSAGE value="knowledge" />
+    <option name="LAST_COMMIT_MESSAGE" value="knowledge" />
   </component>
 </project>

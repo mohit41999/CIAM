@@ -133,13 +133,10 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Expanded(
-                                child: Text(
-                                  data.data.knowledgeDescription,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                              child: Text(
+                                data.data.knowledgeDescription,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
