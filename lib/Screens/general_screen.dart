@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/LAB/lab_profile.dart';
+import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -35,7 +36,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
   List<Widget> _buildScreens() {
     return [
       HomeScreen(),
-      DoctorProfile(fromhome: false),
+      AboutConsultation(),
       // HomeScreen(),
       SearchScreen(),
       PatientHomePage4(),

@@ -22,6 +22,9 @@ class alertTextField extends StatelessWidget {
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(label),
+        SizedBox(
+          height: 5,
+        ),
         ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 55),
           child: Material(
@@ -55,11 +58,13 @@ class alertTextField extends StatelessWidget {
                 // errorBorder: InputBorder.none,
                 // disabledBorder: InputBorder.none,
                 filled: true,
-                //labelText: labelText,
+                labelText: textFieldtext,
+                alignLabelWithHint: false,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
 
                 labelStyle: TextStyle(
                     fontSize: 12, color: Colors.black.withOpacity(0.6)),
-                hintText: textFieldtext,
+                // hintText: textFieldtext,
                 hintStyle: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,

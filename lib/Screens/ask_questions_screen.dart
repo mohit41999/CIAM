@@ -19,10 +19,8 @@ class AskQuestionsScreen extends StatefulWidget {
 }
 
 class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController contactNo = TextEditingController();
   TextEditingController query = TextEditingController();
+  TextEditingController querydescription = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,77 +49,10 @@ class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
                     fontSize: 20),
               ),
             ),
-            TitleEnterField('Name', 'Name', name),
-            TitleEnterField('Email id', 'Email id', email),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Contact Number',
-                      style: TextStyle(
-                          fontSize: 14, color: Colors.black.withOpacity(0.6))),
-                  SizedBox(height: 7),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: ConstrainedBox(
-                      constraints:
-                          const BoxConstraints(minHeight: 10, maxHeight: 150),
-                      child: Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.circular(10),
-                        child: TextFormField(
-                          maxLines: 1,
-                          maxLength: 10,
-
-                          // autovalidateMode: AutovalidateMode.onUserInteraction,
-                          // validator: validator,
-                          // maxLength: maxLength,
-                          // maxLengthEnforcement: MaxLengthEnforcement.enforced,
-
-                          keyboardType: TextInputType.number,
-                          controller: contactNo,
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                          decoration: InputDecoration(
-                            enabled: true,
-                            counterText: '',
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    new BorderSide(color: Colors.transparent)),
-                            border: new OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    new BorderSide(color: Colors.transparent)),
-                            // enabledBorder: InputBorder.none,
-                            // errorBorder: InputBorder.none,
-                            // disabledBorder: InputBorder.none,
-                            filled: true,
-
-                            //labelText: labelText,
-                            suffixIcon: const SizedBox(),
-                            labelStyle: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black.withOpacity(0.6)),
-                            hintText: 'Contact Number',
-                            hintStyle:
-                                TextStyle(fontSize: 12, color: Colors.grey),
-                            fillColor: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15)
-                ],
-              ),
-            ),
+            TitleEnterField('Query', 'Query', query),
             TitleEnterField(
-              'What is your query?',
-              'Query',
+              'Query Description',
+              'Query Description',
               query,
               maxLines: 10,
             ),

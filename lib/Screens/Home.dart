@@ -17,6 +17,7 @@ import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/ask_questions_screen.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/doctor_categories.dart';
+import 'package:patient/Screens/hospital_packages.dart';
 import 'package:patient/Screens/knowledge_forum_screen.dart';
 import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
@@ -84,6 +85,11 @@ final List<Map<dynamic, dynamic>> hometile = [
   {
     'label': 'Knowledge Forum',
     'Screen': KnowledgeForumScreen(),
+    'profile': 'Rectangle -4.png'
+  },
+  {
+    'label': 'Hospital Packages',
+    'Screen': HospitalPackages(),
     'profile': 'Rectangle -4.png'
   },
 ];

@@ -63,179 +63,178 @@ class _LabProfileState extends State<LabProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            centerTitle: true,
-            title: commonAppBarTitle(),
-            backgroundColor: Color(0xffEFEFEF),
-            elevation: 0,
-            leading: Builder(
-              builder: (context) => commonAppBarLeading(
-                  iconData: Icons.menu,
-                  onPressed: () {
-                    setState(() {
-                      Scaffold.of(context).openDrawer();
-                    });
-                  }),
-            )),
-        drawer: commonDrawer(),
-        body: Container()
-        // RefreshIndicator(
-        //   onRefresh: () {
-        //     initialize();
-        //
-        //     return _controller.getallPackages();
-        //   },
-        //   child: SingleChildScrollView(
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         PrescriptionWidget(),
-        //         PhoneCallWidget(),
-        //         SizedBox(
-        //           height: 10,
-        //         ),
-        //         (_controller.packagesLoading)
-        //             ? Column(
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 children: [
-        //                   Padding(
-        //                       padding: const EdgeInsets.symmetric(
-        //                           horizontal: 10.0, vertical: 10.0),
-        //                       child: Text(
-        //                         'Health Checkups',
-        //                         style: GoogleFonts.montserrat(
-        //                             fontWeight: FontWeight.bold,
-        //                             fontSize: 20,
-        //                             color: appblueColor),
-        //                       )),
-        //                   SizedBox(
-        //                     width: double.infinity,
-        //                     height: MediaQuery.of(context).size.height / 3.85,
-        //                     // decoration: BoxDecoration(
-        //                     //   borderRadius: BorderRadius.only(
-        //                     //       bottomLeft: Radius.circular(15),
-        //                     //       bottomRight: Radius.circular(15)),
-        //                     // ),
-        //                     child: Center(child: CircularProgressIndicator()),
-        //                   ),
-        //                 ],
-        //               )
-        //             : PackagesWidget(
-        //                 allPackagesModel: _controller.allPackages,
-        //               ),
-        //         SizedBox(
-        //           height: 10,
-        //         ),
-        //         Container(
-        //           color: Colors.white,
-        //           child: Column(
-        //             children: [
-        //               // Padding(
-        //               //   padding: const EdgeInsets.all(16.0),
-        //               //   child: Text(
-        //               //     'Tests',
-        //               //     style: GoogleFonts.montserrat(
-        //               //         color: appblueColor,
-        //               //         fontSize: 25,
-        //               //         fontWeight: FontWeight.bold),
-        //               //   ),
-        //               // ),
-        //               Padding(
-        //                 padding: const EdgeInsets.symmetric(
-        //                     horizontal: 10.0, vertical: 10.0),
-        //                 child: commonRow(
-        //                   Title: 'Tests',
-        //                   subTitle: 'View all',
-        //                   value: AllTests(),
-        //                 ),
-        //               ),
-        //               (_controller.testloading)
-        //                   ? Center(child: CircularProgressIndicator())
-        //                   : TestWidget(
-        //                       allTestModel: _controller.allTests,
-        //                     ),
-        //             ],
-        //           ),
-        //         ),
-        //         SizedBox(
-        //           height: 10,
-        //         ),
-        //         Container(
-        //           height: MediaQuery.of(context).size.height / 3,
-        //           child: GridView.builder(
-        //             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //                 crossAxisCount: 2, childAspectRatio: 2 / 2),
-        //             scrollDirection: Axis.horizontal,
-        //             itemBuilder: (context, index) {
-        //               return Padding(
-        //                 padding: const EdgeInsets.all(8.0),
-        //                 child: Container(
-        //                   color: Colors.white,
-        //                   child: Column(
-        //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //                     crossAxisAlignment: CrossAxisAlignment.center,
-        //                     children: [
-        //                       Expanded(
-        //                           child: Icon(
-        //                         Icons.add,
-        //                         size: 40,
-        //                         color: apptealColor,
-        //                       )),
-        //                       Expanded(
-        //                           child: Center(
-        //                               child: Text(
-        //                         'Lorem Ipsum',
-        //                         textAlign: TextAlign.center,
-        //                         style: TextStyle(
-        //                             color: Colors.black,
-        //                             fontWeight: FontWeight.bold,
-        //                             fontSize: 14),
-        //                       )))
-        //                     ],
-        //                   ),
-        //                 ),
-        //               );
-        //             },
-        //             itemCount: 10,
-        //           ),
-        //         ),
-        //         (_controller.labloading)
-        //             ? Column(
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 children: [
-        //                   Padding(
-        //                       padding: const EdgeInsets.symmetric(
-        //                           horizontal: 10.0, vertical: 10.0),
-        //                       child: Text(
-        //                         'Labs',
-        //                         style: GoogleFonts.montserrat(
-        //                             fontWeight: FontWeight.bold,
-        //                             fontSize: 20,
-        //                             color: appblueColor),
-        //                       )),
-        //                   SizedBox(
-        //                     width: double.infinity,
-        //                     height: MediaQuery.of(context).size.height / 3.85,
-        //                     // decoration: BoxDecoration(
-        //                     //   borderRadius: BorderRadius.only(
-        //                     //       bottomLeft: Radius.circular(15),
-        //                     //       bottomRight: Radius.circular(15)),
-        //                     // ),
-        //                     child: Center(child: CircularProgressIndicator()),
-        //                   ),
-        //                 ],
-        //               )
-        //             : LabsWidget(
-        //                 allLabsModel: _controller.allLabs,
-        //               ),
-        //         SizedBox(
-        //           height: navbarht + 20,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
-        );
+      appBar: AppBar(
+          centerTitle: true,
+          title: commonAppBarTitle(),
+          backgroundColor: Color(0xffEFEFEF),
+          elevation: 0,
+          leading: Builder(
+            builder: (context) => commonAppBarLeading(
+                iconData: Icons.menu,
+                onPressed: () {
+                  setState(() {
+                    Scaffold.of(context).openDrawer();
+                  });
+                }),
+          )),
+      drawer: commonDrawer(),
+      body: RefreshIndicator(
+        onRefresh: () {
+          initialize();
+
+          return _controller.getallPackages();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PrescriptionWidget(),
+              PhoneCallWidget(),
+              SizedBox(
+                height: 10,
+              ),
+              (_controller.packagesLoading)
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0),
+                            child: Text(
+                              'Health Checkups',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: appblueColor),
+                            )),
+                        SizedBox(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height / 3.85,
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.only(
+                          //       bottomLeft: Radius.circular(15),
+                          //       bottomRight: Radius.circular(15)),
+                          // ),
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                      ],
+                    )
+                  : PackagesWidget(
+                      allPackagesModel: _controller.allPackages,
+                    ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.all(16.0),
+                    //   child: Text(
+                    //     'Tests',
+                    //     style: GoogleFonts.montserrat(
+                    //         color: appblueColor,
+                    //         fontSize: 25,
+                    //         fontWeight: FontWeight.bold),
+                    //   ),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 10.0),
+                      child: commonRow(
+                        Title: 'Tests',
+                        subTitle: 'View all',
+                        value: AllTests(),
+                      ),
+                    ),
+                    (_controller.testloading)
+                        ? Center(child: CircularProgressIndicator())
+                        : TestWidget(
+                            allTestModel: _controller.allTests,
+                          ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 3,
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 2 / 2),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                                child: Icon(
+                              Icons.add,
+                              size: 40,
+                              color: apptealColor,
+                            )),
+                            Expanded(
+                                child: Center(
+                                    child: Text(
+                              'Lorem Ipsum',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14),
+                            )))
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: 10,
+                ),
+              ),
+              (_controller.labloading)
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0),
+                            child: Text(
+                              'Labs',
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: appblueColor),
+                            )),
+                        SizedBox(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height / 3.85,
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.only(
+                          //       bottomLeft: Radius.circular(15),
+                          //       bottomRight: Radius.circular(15)),
+                          // ),
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                      ],
+                    )
+                  : LabsWidget(
+                      allLabsModel: _controller.allLabs,
+                    ),
+              SizedBox(
+                height: navbarht + 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

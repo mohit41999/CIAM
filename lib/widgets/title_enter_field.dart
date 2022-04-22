@@ -82,9 +82,9 @@ class TitleEnterField extends StatelessWidget {
                     filled: true,
                     //labelText: labelText,
                     suffixIcon: widget,
-                    labelStyle: TextStyle(
-                        fontSize: 14, color: Colors.black.withOpacity(0.6)),
-                    hintText: hintText,
+                    labelStyle: TextStyle(fontSize: 12, color: Colors.grey),
+                    labelText: hintText,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
                     hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
                     fillColor: Colors.white,
                   ),

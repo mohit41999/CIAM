@@ -240,15 +240,13 @@ class _RelativeState extends State<Relative> {
                                             filled: true,
                                             //labelText: labelText,
 
+                                            labelText: 'Age',
+                                            floatingLabelBehavior:
+                                                FloatingLabelBehavior.never,
                                             labelStyle: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black
-                                                    .withOpacity(0.6)),
-                                            hintText: 'Age',
-                                            hintStyle: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 12,
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.black),
+                                                color: Colors.grey),
                                             fillColor: Colors.white,
                                           ),
                                         ),

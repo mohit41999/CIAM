@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Screens/MYScreens/MyReviewRating.dart';
+import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/knowledge_forum_model.dart';
+import 'package:patient/Screens/knowledge_description_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
-import 'package:patient/widgets/tag_line.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class KnowledgeForumScreen extends StatefulWidget {
   const KnowledgeForumScreen({Key? key}) : super(key: key);
@@ -15,10 +17,34 @@ class KnowledgeForumScreen extends StatefulWidget {
 }
 
 class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
+  late KnowledgeForumModel data;
+  bool loading = true;
+  Future<KnowledgeForumModel> getForums() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var response =
+        await PostData(PARAM_URL: 'get_knowledge_forum_listing.php', params: {
+      'token': Token,
+      'user_id': prefs.getString('user_id'),
+    });
+
+    return KnowledgeForumModel.fromJson(response);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getForums().then((value) {
+      setState(() {
+        data = value;
+        loading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
           title: commonAppBarTitleText(appbarText: 'Knowledge Forum'),
@@ -31,77 +57,94 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
                     Navigator.pop(context);
                   })),
         ),
-        body: ListView(
-          children: [
-            ListView.builder(
-                itemCount: 5,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        left: 4.0, right: 4.0, top: 4.0, bottom: 4),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Card(
-                            elevation: 3,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'DoctorName',
-                                        style: GoogleFonts.lato(
-                                            color: Color(0xff252525),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        '  27/09/2021',
-                                        style: GoogleFonts.lato(
-                                            color: apptealColor,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea.',
-                                    style: GoogleFonts.lato(fontSize: 12),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              (loading)
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: data.data.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => KnowledgeDescription(
+                                        forum_id: data.data[index]
+                                            .forumId))).then((value) {
+                              getForums().then((value) {
+                                setState(() {
+                                  data = value;
+                                });
+                              });
+                            });
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 8.0,
+                                left: 8,
+                                right: 8,
+                                bottom: (index + 1 == data.data.length)
+                                    ? navbarht + 20
+                                    : 8),
+                            child: Card(
+                              elevation: 5,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          data.data[index].doctorName,
+                                          style: GoogleFonts.lato(
+                                              color: Color(0xff252525),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          data.data[index].date.day.toString() +
+                                              '/' +
+                                              data.data[index].date.month
+                                                  .toString() +
+                                              '/' +
+                                              data.data[index].date.year
+                                                  .toString(),
+                                          style: GoogleFonts.lato(
+                                              color: apptealColor,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      data.data[index].knowledgeTitle,
+                                      style: GoogleFonts.lato(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ),
-                  );
-                }),
-            SizedBox(
-              height: 10,
-            ),
-            TagLine(),
-            SizedBox(
-              height: navbarht + 20,
-            ),
-          ],
+                        );
+                      }),
+            ],
+          ),
         ));
   }
 }

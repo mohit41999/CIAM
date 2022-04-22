@@ -1,12 +1,17 @@
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/controller/app_review_controller.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/common_row.dart';
@@ -41,6 +46,80 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
   late HealthCareCategoriesModel homeCareCategories;
   bool loading = true;
 
+  bool reviewloading = true;
+  int _current = 0;
+  late AppReviewModel appReviewdata;
+
+  final CarouselController _reviewcontroller = CarouselController();
+
+  AppReviewController _appReviewController = AppReviewController();
+
+  List<Widget> Review(BuildContext context) => appReviewdata.data
+      .map((item) => Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+            child: Container(
+              width: 300,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(2, 2),
+                        color: Colors.grey.withOpacity(0.6),
+                        spreadRadius: 2,
+                        blurRadius: 2)
+                  ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundImage:
+                          AssetImage('assets/pngs/Rectangle 69.png'),
+                    ),
+                    title: Text(item.userName),
+                    subtitle: RatingBarIndicator(
+                      rating: double.parse(item.rating),
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: apptealColor,
+                      ),
+                      itemCount: 5,
+                      itemSize: 20.0,
+                      unratedColor: Colors.grey.withOpacity(0.5),
+                      direction: Axis.horizontal,
+                    ),
+                    trailing: Text(
+                      item.date,
+                      style: GoogleFonts.lato(
+                          color: apptealColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: Text(
+                      item.review,
+                      style: GoogleFonts.lato(fontSize: 12),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+            ),
+          )))
+      .toList();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -49,6 +128,12 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
       setState(() {
         homeCareCategories = value;
         loading = false;
+      });
+    });
+    _appReviewController.getappReview(context).then((value) {
+      setState(() {
+        appReviewdata = value;
+        reviewloading = false;
       });
     });
   }
@@ -202,13 +287,6 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                           textColor: Colors.white,
                                           onPressed: () {
                                             // Push(context, DoctorProfile1());
-                                            patientpg4alertbox(context,
-                                                careController: care,
-                                                addressController: address,
-                                                emailController: email,
-                                                nameController: name,
-                                                phonenumberController:
-                                                    phonenumber);
                                           },
                                           width: 120,
                                           height: 30,
@@ -325,7 +403,81 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                       ],
                     ),
                   ),
-
+                  SizedBox(
+                    height: 20,
+                  ),
+                  (reviewloading)
+                      ? Center(child: CircularProgressIndicator())
+                      : Container(
+                          color: Colors.white,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'See our User Experiences',
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 20,
+                                      color: appblueColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Container(
+                                height: 200,
+                                width: double.infinity,
+                                child: Column(children: [
+                                  Expanded(
+                                    child: Container(
+                                      color: Colors.white,
+                                      child: CarouselSlider(
+                                        items: Review(context),
+                                        carouselController: _reviewcontroller,
+                                        options: CarouselOptions(
+                                            autoPlay: true,
+                                            enlargeCenterPage: true,
+                                            aspectRatio: 2.5,
+                                            onPageChanged: (index, reason) {
+                                              setState(() {
+                                                _current = index;
+                                              });
+                                            }),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: appReviewdata.data
+                                        .asMap()
+                                        .entries
+                                        .map((entry) {
+                                      return GestureDetector(
+                                          onTap: () => _reviewcontroller
+                                              .animateToPage(entry.key),
+                                          child: Container(
+                                            width: 8.0,
+                                            height: 8.0,
+                                            margin: EdgeInsets.symmetric(
+                                                vertical: 8.0, horizontal: 4.0),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: _current == entry.key
+                                                  ? appblueColor
+                                                      .withOpacity(0.9)
+                                                  : appblueColor
+                                                      .withOpacity(0.4),
+                                            ),
+                                          ));
+                                    }).toList(),
+                                  ),
+                                ]),
+                              ),
+                            ],
+                          ),
+                        ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   GestureDetector(
                     onTap: () {
                       Push(context, ContactUsForm());

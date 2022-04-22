@@ -513,7 +513,29 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                           (confirmData.data.amountStatus.toString() ==
                                   'Confirm')
                               ? Container(
-                                  height: 549,
+                                  height: (DateTime(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day - 3)
+                                                  .toString()
+                                                  .substring(0, 10) ==
+                                              confirmData.data.bookingDate ||
+                                          DateTime(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day - 2)
+                                                  .toString()
+                                                  .substring(0, 10) ==
+                                              confirmData.data.bookingDate ||
+                                          DateTime(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day - 1)
+                                                  .toString()
+                                                  .substring(0, 10) ==
+                                              confirmData.data.bookingDate)
+                                      ? 549
+                                      : 300,
                                   width: double.infinity,
                                   color: Colors.white,
                                   child: Padding(
@@ -608,7 +630,7 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                         ),
                                         doctorProfileRow(
                                           title: 'Status',
-                                          value: confirmData.data.amountStatus,
+                                          value: confirmData.data.bookingStatus,
                                         ),
                                         GestureDetector(
                                           onTap: () {},
@@ -722,82 +744,142 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                             ],
                                           ),
                                         ),
-                                        commonBtn(
-                                          borderColor: apptealColor,
-                                          borderWidth: 2,
-                                          s: 'Add Report',
-                                          bgcolor: Colors.white,
-                                          textColor: apptealColor,
-                                          onPressed: () {
-                                            pickFile();
-                                          },
-                                          borderRadius: 10,
-                                        ),
-                                        (reportList.length == 0)
-                                            ? Container()
-                                            : Column(
+                                        (DateTime(
+                                                            DateTime.now().year,
+                                                            DateTime.now()
+                                                                .month,
+                                                            DateTime.now().day -
+                                                                3)
+                                                        .toString()
+                                                        .substring(0, 10) ==
+                                                    confirmData
+                                                        .data.bookingDate ||
+                                                DateTime(
+                                                            DateTime.now().year,
+                                                            DateTime.now()
+                                                                .month,
+                                                            DateTime.now().day -
+                                                                2)
+                                                        .toString()
+                                                        .substring(0, 10) ==
+                                                    confirmData
+                                                        .data.bookingDate ||
+                                                DateTime(
+                                                            DateTime.now().year,
+                                                            DateTime.now()
+                                                                .month,
+                                                            DateTime.now().day -
+                                                                1)
+                                                        .toString()
+                                                        .substring(0, 10) ==
+                                                    confirmData
+                                                        .data.bookingDate)
+                                            ? Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
-                                                  Container(
-                                                    height: 100,
-                                                    child: ListView.builder(
-                                                        itemCount:
-                                                            reportList.length,
-                                                        shrinkWrap: true,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Text(
-                                                              reportList[index]
-                                                                  .path
-                                                                  .toString());
-                                                        }),
+                                                  commonBtn(
+                                                    borderColor: apptealColor,
+                                                    borderWidth: 2,
+                                                    s: 'Add Report',
+                                                    bgcolor: Colors.white,
+                                                    textColor: apptealColor,
+                                                    onPressed: () {
+                                                      pickFile();
+                                                    },
+                                                    borderRadius: 10,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  (reportList.length == 0)
+                                                      ? Container()
+                                                      : Column(
+                                                          children: [
+                                                            Container(
+                                                              height: 100,
+                                                              child: ListView
+                                                                  .builder(
+                                                                      itemCount:
+                                                                          reportList
+                                                                              .length,
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              index) {
+                                                                        return Text(reportList[index]
+                                                                            .path
+                                                                            .toString());
+                                                                      }),
+                                                            ),
+                                                            commonBtn(
+                                                                borderColor:
+                                                                    appblueColor,
+                                                                borderWidth: 2,
+                                                                borderRadius:
+                                                                    10,
+                                                                s: 'Upload',
+                                                                bgcolor: Colors
+                                                                    .white,
+                                                                textColor:
+                                                                    appblueColor,
+                                                                onPressed: () {
+                                                                  submitmultiple()
+                                                                      .then(
+                                                                          (value) {
+                                                                    setState(
+                                                                        () {
+                                                                      reportList =
+                                                                          [];
+                                                                    });
+                                                                  });
+                                                                })
+                                                          ],
+                                                        ),
+                                                  commonBtn(
+                                                    borderColor: apptealColor,
+                                                    borderWidth: 2,
+                                                    s: 'Add Commentss',
+                                                    bgcolor: Colors.white,
+                                                    textColor: apptealColor,
+                                                    onPressed: () {
+                                                      addcomments();
+                                                    },
+                                                    borderRadius: 10,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
                                                   commonBtn(
-                                                      borderColor: appblueColor,
-                                                      borderWidth: 2,
-                                                      borderRadius: 10,
-                                                      s: 'Upload',
-                                                      bgcolor: Colors.white,
-                                                      textColor: appblueColor,
-                                                      onPressed: () {
-                                                        submitmultiple()
-                                                            .then((value) {
-                                                          setState(() {
-                                                            reportList = [];
-                                                          });
-                                                        });
-                                                      })
+                                                    s: 'Chat',
+                                                    bgcolor: Colors.white,
+                                                    textColor: apptealColor,
+                                                    onPressed: () {
+                                                      print(widget.doctor_id);
+                                                      Push(
+                                                          context,
+                                                          TextPage(
+                                                            doctorName:
+                                                                confirmData.data
+                                                                    .doctorName,
+                                                            doctorid: widget
+                                                                .doctor_id,
+                                                          ),
+                                                          withnav: false);
+                                                    },
+                                                    height: 45,
+                                                    borderRadius: 8,
+                                                    borderColor: apptealColor,
+                                                    borderWidth: 2,
+                                                  ),
                                                 ],
-                                              ),
-                                        commonBtn(
-                                          borderColor: apptealColor,
-                                          borderWidth: 2,
-                                          s: 'Add Comments',
-                                          bgcolor: Colors.white,
-                                          textColor: apptealColor,
-                                          onPressed: () {
-                                            addcomments();
-                                          },
-                                          borderRadius: 10,
-                                        ),
-                                        commonBtn(
-                                          s: 'Chat',
-                                          bgcolor: Colors.white,
-                                          textColor: apptealColor,
-                                          onPressed: () {
-                                            print(widget.doctor_id);
-                                            Push(
-                                                context,
-                                                TextPage(
-                                                  doctorName: confirmData
-                                                      .data.doctorName,
-                                                  doctorid: widget.doctor_id,
-                                                ),
-                                                withnav: false);
-                                          },
-                                          height: 45,
-                                          borderRadius: 8,
-                                          borderColor: apptealColor,
-                                          borderWidth: 2,
+                                              )
+                                            : SizedBox(),
+                                        SizedBox(
+                                          height: 20,
                                         ),
                                         (confirmData.data
                                                     .videoConsultancyComplete ==

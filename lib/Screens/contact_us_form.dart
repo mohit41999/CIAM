@@ -171,11 +171,11 @@ class _ContactUsFormState extends State<ContactUsForm> {
 
                             //labelText: labelText,
                             suffixIcon: const SizedBox(),
-                            labelStyle: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black.withOpacity(0.6)),
-                            hintText: 'Contact Number',
-                            hintStyle:
+
+                            // hintText: 'Contact Number',
+                            labelText: 'Contact Number',
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            labelStyle:
                                 TextStyle(fontSize: 12, color: Colors.grey),
                             fillColor: Colors.white,
                           ),
