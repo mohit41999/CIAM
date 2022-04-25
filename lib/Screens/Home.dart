@@ -13,6 +13,7 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
 import 'package:patient/Screens/LAB/lab_profile.dart';
+import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/ask_questions_screen.dart';
 import 'package:patient/Screens/contact_us_form.dart';
@@ -73,7 +74,7 @@ final List<Map<dynamic, dynamic>> hometile = [
   // },
   {
     'label': 'Ask Questions',
-    'Screen': AskQuestionsScreen(),
+    'Screen': MyQuestionsScreen(),
     'profile': 'Rectangle 69.png'
   },
   // {
