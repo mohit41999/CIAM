@@ -160,7 +160,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Find In-Home Care Near You',
+                      'Hospital Packages',
                       style: GoogleFonts.montserrat(
                           color: appblueColor, fontWeight: FontWeight.bold),
                     ),

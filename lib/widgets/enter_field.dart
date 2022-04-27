@@ -20,7 +20,9 @@ class EnterField extends StatelessWidget {
     this.readonly = false,
     this.showcursor = true,
     this.obscure = false,
-    this.widget = const SizedBox(),
+    this.widget = const SizedBox(
+      width: 0,
+    ),
     // this.validator = ValidateTextField.validateNull,
     //this.maxLength = 25
   });
@@ -28,7 +30,8 @@ class EnterField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 10, maxHeight: 50),
+      constraints: const BoxConstraints(
+          minHeight: 10, maxHeight: 60, maxWidth: double.maxFinite),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -63,7 +66,7 @@ class EnterField extends StatelessWidget {
             // disabledBorder: InputBorder.none,
             filled: true,
             labelText: labelText,
-            suffixIcon: widget,
+            suffix: widget,
             labelStyle: GoogleFonts.montserrat(
                 fontSize: 14, color: Colors.black.withOpacity(0.6)),
             hintText: hintText,

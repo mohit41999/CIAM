@@ -19,6 +19,8 @@ class KnowledgeForumScreen extends StatefulWidget {
 class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
   late KnowledgeForumModel data;
   bool loading = true;
+
+  TextEditingController searchController = TextEditingController();
   Future<KnowledgeForumModel> getForums() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response =
@@ -57,94 +59,277 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
                     Navigator.pop(context);
                   })),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              (loading)
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: data.data.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => KnowledgeDescription(
-                                        forum_id: data.data[index]
-                                            .forumId))).then((value) {
-                              getForums().then((value) {
-                                setState(() {
-                                  data = value;
-                                });
-                              });
-                            });
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 8.0,
-                                left: 8,
-                                right: 8,
-                                bottom: (index + 1 == data.data.length)
-                                    ? navbarht + 20
-                                    : 8),
-                            child: Card(
-                              elevation: 5,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0, vertical: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          data.data[index].doctorName,
-                                          style: GoogleFonts.lato(
-                                              color: Color(0xff252525),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                    minHeight: 10, maxHeight: 60, maxWidth: double.maxFinite),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        blurRadius: 10,
+                        offset: const Offset(2, 5),
+                      ),
+                    ],
+                  ),
+                  child: TextFormField(
+                    // autovalidateMode: AutovalidateMode.onUserInteraction,
+                    // validator: validator,
+                    // maxLength: maxLength,
+                    // maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+                    enableSuggestions: true,
+                    controller: searchController,
+                    onChanged: (v) {
+                      setState(() {});
+                    },
+
+                    decoration: InputDecoration(
+                        enabled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                new BorderSide(color: Colors.transparent)),
+                        border: new OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide:
+                                new BorderSide(color: Colors.transparent)),
+                        // enabledBorder: InputBorder.none,
+                        // errorBorder: InputBorder.none,
+                        // disabledBorder: InputBorder.none,
+                        filled: true,
+                        labelStyle: GoogleFonts.montserrat(
+                            fontSize: 14, color: Colors.black.withOpacity(0.6)),
+                        hintStyle: GoogleFonts.montserrat(
+                            fontSize: 14, color: Colors.black.withOpacity(0.6)),
+                        fillColor: Colors.white,
+                        hintText: 'Search',
+                        prefixIcon: Icon(Icons.search)),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    (loading)
+                        ? Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            itemCount: data.data.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return (searchController.text.isEmpty)
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        KnowledgeDescription(
+                                                            forum_id: data
+                                                                .data[index]
+                                                                .forumId)))
+                                            .then((value) {
+                                          getForums().then((value) {
+                                            setState(() {
+                                              data = value;
+                                            });
+                                          });
+                                        });
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 8.0,
+                                            left: 8,
+                                            right: 8,
+                                            bottom:
+                                                (index + 1 == data.data.length)
+                                                    ? navbarht + 20
+                                                    : 8),
+                                        child: Card(
+                                          elevation: 5,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8.0, vertical: 16),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      data.data[index]
+                                                          .doctorName,
+                                                      style: GoogleFonts.lato(
+                                                          color:
+                                                              Color(0xff252525),
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Text(
+                                                      data.data[index].date.day
+                                                              .toString() +
+                                                          '/' +
+                                                          data.data[index].date
+                                                              .month
+                                                              .toString() +
+                                                          '/' +
+                                                          data.data[index].date
+                                                              .year
+                                                              .toString(),
+                                                      style: GoogleFonts.lato(
+                                                          color: apptealColor,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Text(
+                                                  data.data[index]
+                                                      .knowledgeTitle,
+                                                  style: GoogleFonts.lato(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        Text(
-                                          data.data[index].date.day.toString() +
-                                              '/' +
-                                              data.data[index].date.month
-                                                  .toString() +
-                                              '/' +
-                                              data.data[index].date.year
-                                                  .toString(),
-                                          style: GoogleFonts.lato(
-                                              color: apptealColor,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      data.data[index].knowledgeTitle,
-                                      style: GoogleFonts.lato(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-            ],
-          ),
+                                      ),
+                                    )
+                                  : (data.data[index].doctorName
+                                              .toLowerCase()
+                                              .replaceAll(' ', '')
+                                              .contains(searchController.text
+                                                  .toLowerCase()
+                                                  .replaceAll(' ', '')) ||
+                                          data.data[index].knowledgeTitle
+                                              .toLowerCase()
+                                              .replaceAll(' ', '')
+                                              .contains(searchController.text
+                                                  .toLowerCase()
+                                                  .replaceAll(' ', '')))
+                                      ? GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            KnowledgeDescription(
+                                                                forum_id: data
+                                                                    .data[index]
+                                                                    .forumId)))
+                                                .then((value) {
+                                              getForums().then((value) {
+                                                setState(() {
+                                                  data = value;
+                                                });
+                                              });
+                                            });
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 8.0,
+                                                left: 8,
+                                                right: 8,
+                                                bottom: (index + 1 ==
+                                                        data.data.length)
+                                                    ? navbarht + 20
+                                                    : 8),
+                                            child: Card(
+                                              elevation: 5,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8.0,
+                                                        vertical: 16),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          data.data[index]
+                                                              .doctorName,
+                                                          style: GoogleFonts.lato(
+                                                              color: Color(
+                                                                  0xff252525),
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          data.data[index].date
+                                                                  .day
+                                                                  .toString() +
+                                                              '/' +
+                                                              data.data[index]
+                                                                  .date.month
+                                                                  .toString() +
+                                                              '/' +
+                                                              data.data[index]
+                                                                  .date.year
+                                                                  .toString(),
+                                                          style: GoogleFonts.lato(
+                                                              color:
+                                                                  apptealColor,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Text(
+                                                      data.data[index]
+                                                          .knowledgeTitle,
+                                                      style: GoogleFonts.lato(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : Container();
+                            }),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ));
   }
 }

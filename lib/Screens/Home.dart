@@ -388,7 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               color: Colors.white,
               width: double.infinity,
-              height: 300,
+              height: 302,
               child: Column(
                 children: [
                   SizedBox(
@@ -401,6 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           // maxCrossAxisExtent: 100,
                           // childAspectRatio: 1.45 / 1,
+                          childAspectRatio: 0.9,
                           // crossAxisSpacing: 10,
                           // mainAxisSpacing: 10,
                           crossAxisCount: 3),
@@ -417,7 +418,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 80,
                                   width: 80,
                                   decoration: BoxDecoration(
                                     color: appblueColor,

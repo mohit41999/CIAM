@@ -11,11 +11,13 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/contact_us_form.dart';
+import 'package:patient/Screens/doctor_categories.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/about_consultation_controller.dart';
 import 'package:patient/controller/app_review_controller.dart';
+import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -40,11 +42,13 @@ class _AboutConsultationState extends State<AboutConsultation> {
   late Position position;
   final CarouselController _controller = CarouselController();
   final CarouselController _reviewcontroller = CarouselController();
+  ScrollController _scrollController = ScrollController();
 
   late DoctorProfileModel _doctordata;
   late AppReviewModel appReviewdata;
   bool loading = true;
   bool reviewloading = true;
+  bool specialityloading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -60,6 +64,15 @@ class _AboutConsultationState extends State<AboutConsultation> {
         loading = false;
       });
     });
+    HomeController().getDoctorSpecilities(context).then((value) {
+      setState(() {
+        specialities = value;
+        specialityloading = false;
+
+        // _con.specialitybool = false;
+      });
+    });
+
     super.initState();
   }
 
@@ -135,80 +148,75 @@ class _AboutConsultationState extends State<AboutConsultation> {
               height: 20,
             ),
             Container(
-                color: Colors.white,
-                width: double.infinity,
-                height: 280,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Why to Choose',
-                        style: GoogleFonts.montserrat(
-                            fontSize: 20,
-                            color: appblueColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: MediaQuery.of(context).size.width * 0.25,
-                              ),
-                              Text(
-                                'Experienced \nDoctor',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.montserrat(),
-                              )
-                            ],
-                          )),
-                          Expanded(
-                              child: Column(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: MediaQuery.of(context).size.width * 0.25,
-                              ),
-                              Text(
-                                '3 day chat option to ask query',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.montserrat(),
-                              )
-                            ],
-                          )),
-                          Expanded(
-                              child: Column(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: MediaQuery.of(context).size.width * 0.25,
-                              ),
-                              Text(
-                                '3 day chat option to ask query',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.montserrat(),
-                              )
-                            ],
-                          )),
-                        ],
-                      ),
-                      commonBtn(
-                          s: 'Consult Now',
-                          bgcolor: appblueColor,
-                          textColor: Colors.white,
-                          borderRadius: 10,
-                          onPressed: () {
-                            Push(context, DoctorProfile(fromhome: true));
-                          })
-                    ],
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: commonRow(
+                      subTitle: 'View all',
+                      Title: 'Find Your Doctors',
+                      value: DoctorCategories(),
+                    ),
                   ),
-                )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Choose from top specialities',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                          color: apptealColor),
+                    ),
+                  ),
+                  (specialityloading)
+                      ? Center(child: CircularProgressIndicator())
+                      : Container(
+                          height: 150,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: specialities.data.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Push(
+                                          context,
+                                          DoctorProfile(
+                                            fromhome: true,
+                                            isSpecial: true,
+                                            speciality_id: specialities
+                                                .data[index].specialistId,
+                                          ));
+                                    },
+                                    child: Column(
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              specialities
+                                                  .data[index].specialistImg),
+                                          radius: 50,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          specialities
+                                              .data[index].specialistName,
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 11),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                ],
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -237,6 +245,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
                           )
                         : ListView.builder(
                             shrinkWrap: true,
+                            controller: _scrollController,
                             scrollDirection: Axis.horizontal,
                             itemCount: 7,
                             itemBuilder: (context, index) {
@@ -407,6 +416,84 @@ class _AboutConsultationState extends State<AboutConsultation> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+                color: Colors.white,
+                width: double.infinity,
+                height: 280,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Why to Choose',
+                        style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            color: appblueColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.person,
+                                size: MediaQuery.of(context).size.width * 0.25,
+                              ),
+                              Text(
+                                'Experienced \nDoctor',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.montserrat(),
+                              )
+                            ],
+                          )),
+                          Expanded(
+                              child: Column(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                size: MediaQuery.of(context).size.width * 0.25,
+                              ),
+                              Text(
+                                '3 day chat option to ask query',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.montserrat(),
+                              )
+                            ],
+                          )),
+                          Expanded(
+                              child: Column(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                size: MediaQuery.of(context).size.width * 0.25,
+                              ),
+                              Text(
+                                '3 day chat option to ask query',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.montserrat(),
+                              )
+                            ],
+                          )),
+                        ],
+                      ),
+                      commonBtn(
+                          s: 'Consult Now',
+                          bgcolor: appblueColor,
+                          textColor: Colors.white,
+                          borderRadius: 10,
+                          onPressed: () {
+                            Push(context, DoctorProfile(fromhome: true));
+                          })
+                    ],
+                  ),
+                )),
             SizedBox(
               height: 20,
             ),

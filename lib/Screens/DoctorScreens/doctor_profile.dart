@@ -46,7 +46,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
 
   late HomeDoctorSpecialityModel specialities;
   late DoctorProfileModel _doctordata;
-  late List<bool> _isChecked;
 
   @override
   void initState() {
@@ -61,7 +60,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
       setState(() {
         specialities = value;
 
-        _isChecked = List<bool>.filled(specialities.data.length, false);
         // _con.specialitybool = false;
       });
     });
@@ -360,74 +358,6 @@ class _DoctorProfileState extends State<DoctorProfile> {
                   ),
                   SizedBox(
                     height: 10,
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: commonRow(
-                            subTitle: 'View all',
-                            Title: 'Find Your Doctors',
-                            value: DoctorCategories(),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            'Choose from top specialities',
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                                color: apptealColor),
-                          ),
-                        ),
-                        Container(
-                          height: 150,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: specialities.data.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Push(
-                                          context,
-                                          DoctorProfile(
-                                            fromhome: true,
-                                            isSpecial: true,
-                                            speciality_id: specialities
-                                                .data[index].specialistId,
-                                          ));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              specialities
-                                                  .data[index].specialistImg),
-                                          radius: 50,
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          specialities
-                                              .data[index].specialistName,
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 11),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ),
-                      ],
-                    ),
                   ),
                   (widget.isSpecial)
                       ? ListView.builder(

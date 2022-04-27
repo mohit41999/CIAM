@@ -22,6 +22,51 @@ class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
   TextEditingController query = TextEditingController();
   TextEditingController querydescription = TextEditingController();
 
+  Future submitQuestion() async {
+    if (query.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Query Required'),
+        backgroundColor: Colors.red,
+      ));
+    } else if (querydescription.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Query Description Required'),
+        backgroundColor: Colors.red,
+      ));
+    } else {
+      var loader = ProgressView(context);
+      try {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        loader.show();
+
+        var response = await PostData(PARAM_URL: 'ask_question.php', params: {
+          'token': Token,
+          'user_id': preferences.getString('user_id'),
+          'question': query.text,
+          'description': querydescription.text
+        });
+        loader.dismiss();
+        if (response['status']) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Query has been submitted'),
+            backgroundColor: apptealColor,
+          ));
+          Pop(context);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Try again later'),
+            backgroundColor: Colors.red,
+          ));
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Something went wrong.... try again later'),
+          backgroundColor: Colors.red,
+        ));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +98,7 @@ class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
             TitleEnterField(
               'Query Description',
               'Query Description',
-              query,
+              querydescription,
               maxLines: 10,
             ),
             const SizedBox(
@@ -66,7 +111,9 @@ class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
                 bgcolor: appblueColor,
                 textColor: Colors.white,
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    submitQuestion();
+                  });
                 },
                 borderRadius: 8,
                 textSize: 20,

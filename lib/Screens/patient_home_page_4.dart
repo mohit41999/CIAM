@@ -307,6 +307,88 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                     height: 20,
                   ),
                   Container(
+                      color: Colors.white,
+                      width: double.infinity,
+                      height: 280,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Why to Choose',
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 20,
+                                  color: appblueColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: MediaQuery.of(context).size.width *
+                                          0.25,
+                                    ),
+                                    Text(
+                                      'Experienced \nDoctor',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(),
+                                    )
+                                  ],
+                                )),
+                                Expanded(
+                                    child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: MediaQuery.of(context).size.width *
+                                          0.25,
+                                    ),
+                                    Text(
+                                      '3 day chat option to ask query',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(),
+                                    )
+                                  ],
+                                )),
+                                Expanded(
+                                    child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: MediaQuery.of(context).size.width *
+                                          0.25,
+                                    ),
+                                    Text(
+                                      '3 day chat option to ask query',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(),
+                                    )
+                                  ],
+                                )),
+                              ],
+                            ),
+                            commonBtn(
+                                s: 'Consult Now',
+                                bgcolor: appblueColor,
+                                textColor: Colors.white,
+                                borderRadius: 10,
+                                onPressed: () {
+                                  Push(context, HomeCareCategories());
+                                })
+                          ],
+                        ),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
                     color: Colors.white,
                     width: double.infinity,
                     height: 320,
