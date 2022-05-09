@@ -12,10 +12,8 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/HomeCareCategories.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
-import 'package:patient/Screens/ask_questions_screen.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/doctor_categories.dart';
 import 'package:patient/Screens/hospital_packages.dart';
@@ -256,10 +254,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: Colors.white,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

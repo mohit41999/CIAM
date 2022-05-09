@@ -60,7 +60,8 @@ class _ViewBookingDetailsState extends State<ViewBookingDetails> {
             onPressed: () {
               Pop(context);
             }),
-        centerTitle: true,
+        centerTitle: false,
+        titleSpacing: 0,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),

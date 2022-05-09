@@ -74,8 +74,9 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitle(),
+        titleSpacing: 0,
         backgroundColor: appAppBarColor,
         leading: commonAppBarLeading(
             iconData: Icons.arrow_back_ios_new,

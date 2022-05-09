@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/LAB/all_labs.dart';
 import 'package:patient/Screens/LAB/all_packages.dart';
 import 'package:patient/Screens/LAB/all_test.dart';
@@ -64,10 +63,11 @@ class _LabProfileState extends State<LabProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: Color(0xffEFEFEF),
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

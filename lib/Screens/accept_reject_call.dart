@@ -21,7 +21,7 @@
 //     return Scaffold(
 //       appBar: AppBar(
 //         automaticallyImplyLeading: false,
-//         centerTitle: true,
+//         centerTitle: false,
 //         title: commonAppBarTitle(),
 //         backgroundColor: appAppBarColor,
 //         elevation: 0,

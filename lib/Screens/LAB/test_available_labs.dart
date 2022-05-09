@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/test_available_lab_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/LAB/test_checkout.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
-import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,7 +65,8 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
+        titleSpacing: 0,
         title: commonAppBarTitle(),
         backgroundColor: appAppBarColor,
         leading: commonAppBarLeading(

@@ -1,20 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/Utils/progress_view.dart';
-import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/controller/wallet_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
-import 'package:patient/widgets/title_column.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PackageCheckout extends StatefulWidget {
@@ -47,10 +39,11 @@ class _PackageCheckoutState extends State<PackageCheckout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitleText(appbarText: 'Payment Confirmation'),
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

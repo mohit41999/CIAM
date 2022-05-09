@@ -3,18 +3,13 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/Screens/Home.dart';
-import 'package:patient/Screens/HomeCareCategories.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/contact_us_form.dart';
+import 'package:patient/Screens/patient_home_page_4.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/firebase/notification_handling.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
-import 'DoctorScreens/doctor_profile.dart';
-import 'MedicineProfile.dart';
-import 'patient_home_page_4.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({Key? key}) : super(key: key);
@@ -40,7 +35,9 @@ class _GeneralScreenState extends State<GeneralScreen> {
       // HomeScreen(),
       SearchScreen(),
       PatientHomePage4(),
-      ContactUsForm()
+      ContactUsForm(
+        fromHome: true,
+      )
     ];
   }
 
@@ -199,7 +196,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
     //   extendBody: true,
     //   // appBar: (_selected_index == 0)
     //   //     ? AppBar(
-    //   //         centerTitle: true,
+    //   //         centerTitle: false,
     //   //         title: commonAppBarTitle(),
     //   //         backgroundColor: Colors.white,
     //   //         elevation: 0,

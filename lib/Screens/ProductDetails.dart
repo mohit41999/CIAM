@@ -1,12 +1,11 @@
 import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:patient/Screens/order_product.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -39,10 +38,11 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

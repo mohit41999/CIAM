@@ -171,9 +171,10 @@ class _TextPageState extends State<TextPage> {
             ),
             preferredSize: Size.fromHeight(1.0)),
         title: commonAppBarTitleText(appbarText: widget.doctorName),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

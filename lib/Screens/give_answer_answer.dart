@@ -1,10 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/question_description_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,10 +48,11 @@ class _GiveAnswerScreenState extends State<GiveAnswerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitleText(appbarText: 'Patient Questions'),
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/products_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
 import 'package:patient/Screens/ProductDetails.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/product_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:patient/widgets/common_button.dart';
 
 class ProductPage extends StatefulWidget {
@@ -39,8 +38,9 @@ class _ProductPageState extends State<ProductPage> {
       appBar: AppBar(
         title: commonAppBarTitleText(appbarText: 'Products'),
         elevation: 0,
+        titleSpacing: 0,
         backgroundColor: appAppBarColor,
-        centerTitle: true,
+        centerTitle: false,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

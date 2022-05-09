@@ -176,10 +176,11 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitleText(appbarText: 'Payment Confirmation'),
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

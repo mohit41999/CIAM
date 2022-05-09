@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/Utils/colorsandstyles.dart';
-
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -25,10 +24,11 @@ class _OrderProductState extends State<OrderProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

@@ -80,10 +80,11 @@ class _AboutConsultationState extends State<AboutConsultation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: Colors.white,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

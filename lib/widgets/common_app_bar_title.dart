@@ -4,8 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 
-import 'package:patient/controller/NavigationController.dart';
-
 class commonAppBarTitle extends StatelessWidget {
   const commonAppBarTitle({
     Key? key,
@@ -14,8 +12,11 @@ class commonAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: Image(image: AssetImage('assets/pngs/logo.png')));
+        height: MediaQuery.of(context).size.height * 0.05,
+        child: Image(
+          image: AssetImage('assets/pngs/logo.png'),
+          fit: BoxFit.cover,
+        ));
 
     // ShaderMask(
     //   blendMode: BlendMode.srcIn,

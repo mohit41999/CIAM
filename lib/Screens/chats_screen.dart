@@ -59,9 +59,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
           : Messsages(context),
       appBar: AppBar(
         title: commonAppBarTitleText(appbarText: 'MyChats'),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

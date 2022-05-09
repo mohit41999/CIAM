@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/title_column.dart';
-
-import 'MyOrderPage.dart';
 
 class MyMedicineOrders extends StatefulWidget {
   const MyMedicineOrders({Key? key}) : super(key: key);
@@ -21,10 +18,11 @@ class _MyMedicineOrdersState extends State<MyMedicineOrders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitleText(appbarText: 'My Medicine Orders'),
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

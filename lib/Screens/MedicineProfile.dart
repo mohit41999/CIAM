@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/medicine_profile_model.dart';
-
-import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/order_medicine.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/medicine_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
@@ -42,10 +37,11 @@ class _MedicineProfileState extends State<MedicineProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitle(),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.menu,

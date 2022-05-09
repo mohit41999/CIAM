@@ -4,11 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/ask_question_model.dart';
 import 'package:patient/Models/search_ask_question_model.dart';
-import 'package:patient/Screens/MYScreens/MyReviewRating.dart';
 import 'package:patient/Screens/ask_questions_screen.dart';
 import 'package:patient/Screens/give_answer_answer.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
-import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -61,10 +59,11 @@ class _MyQuestionsScreenState extends State<MyQuestionsScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitleText(appbarText: 'My Questions'),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
               builder: (context) => commonAppBarLeading(
                   iconData: Icons.arrow_back_ios_new,

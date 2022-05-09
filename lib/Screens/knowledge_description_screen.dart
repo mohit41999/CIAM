@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
@@ -49,10 +48,11 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitleText(appbarText: 'Knowledge Forum'),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
               builder: (context) => commonAppBarLeading(
                   iconData: Icons.arrow_back_ios_new,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -18,10 +17,11 @@ class _MyPrescriptionsScreenState extends State<MyPrescriptionsScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitleText(appbarText: 'My Prescriptions'),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
               builder: (context) => commonAppBarLeading(
                   iconData: Icons.arrow_back_ios_new,

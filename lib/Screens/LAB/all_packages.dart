@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/LAB/package_available_labs.dart';
-import 'package:patient/Screens/LAB/test_available_labs.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -39,10 +37,11 @@ class _AllPackagesState extends State<AllPackages> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitle(),
         backgroundColor: Color(0xffEFEFEF),
         elevation: 0,
+        titleSpacing: 0,
         leading: commonAppBarLeading(
             iconData: Icons.arrow_back_ios_new,
             onPressed: () {

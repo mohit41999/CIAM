@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
-import 'package:patient/Models/home_care_sub_category_model.dart';
-import 'package:patient/Models/hospital_packages_category_model.dart';
 import 'package:patient/Models/hospital_packages_sub_cat_model.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/alertTextField.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
-import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HospitalPackageSubCat extends StatefulWidget {
@@ -317,44 +315,16 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitle(),
         backgroundColor: appAppBarColor,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Builder(
-            builder: (context) => GestureDetector(
-              child: Container(
-                width: 30,
-                height: 30,
-                child: Center(
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: appblueColor,
-                    size: 20,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: const Offset(2, 5),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                setState(() {
-                  Pop(context);
-                });
-              },
-            ),
-          ),
-        ),
+        titleSpacing: 0,
+        leading: commonAppBarLeading(
+            iconData: Icons.arrow_back_ios_new,
+            onPressed: () {
+              Pop(context);
+            }),
       ),
       drawer: commonDrawer(),
       body: (loading)
@@ -489,124 +459,95 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
                   // SizedBox(
                   //   height: 10,
                   // ),
-                  ListView.builder(
+                  GridView.builder(
                       shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: hospitalPackagesSubCat.data.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 190,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  blurRadius: 10,
-                                  offset: const Offset(2, 5),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  height: 150,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              hospitalPackagesSubCat
-                                                  .data[index].image),
-                                          radius: 50,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  hospitalPackagesSubCat
-                                                      .data[index].name,
-                                                  style: KHeader),
-                                              Row(
-                                                children: [
-                                                  rowTextIcon(
-                                                      asset:
-                                                          'assets/pngs/payments_black_24dp (1).png',
-                                                      text: 'Starting at'),
-                                                  Text(
-                                                    hospitalPackagesSubCat
-                                                        .data[index].price,
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: apptealColor,
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  )
-                                                ],
-                                              ),
-                                              Text(
-                                                  hospitalPackagesSubCat
-                                                      .data[index].description,
-                                                  style: KBodyText),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                  width: double.infinity,
-                                  child: TextButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                appblueColor),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(15),
-                                              bottomRight: Radius.circular(15)),
-                                        ))),
-                                    onPressed: () {
-                                      hospitalPackageAlert(context,
-                                          subcatName: hospitalPackagesSubCat
-                                              .data[index].name,
-                                          careController: care,
-                                          subCatId: hospitalPackagesSubCat
-                                              .data[index].subPackageId,
-                                          nameController: name,
-                                          emailController: email,
-                                          phonenumberController: phonenumber);
-                                    },
-                                    child: Text(
-                                      'Book An Appointment',
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Colors.white,
-                                          letterSpacing: 1,
-                                          fontWeight: FontWeight.bold),
+                        return GestureDetector(
+                          onTap: () {
+                            hospitalPackageAlert(context,
+                                subcatName:
+                                    hospitalPackagesSubCat.data[index].name,
+                                careController: care,
+                                subCatId: hospitalPackagesSubCat
+                                    .data[index].subPackageId,
+                                nameController: name,
+                                emailController: email,
+                                phonenumberController: phonenumber);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: Container(
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    SizedBox(
+                                      height: 5,
                                     ),
-                                  ),
-                                )
-                              ],
+                                    Expanded(
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            hospitalPackagesSubCat
+                                                .data[index].image),
+                                        radius: 50,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                hospitalPackagesSubCat
+                                                    .data[index].name,
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.montserrat(
+                                                    color: Colors.black,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            // Row(
+                                            //   children: [
+                                            //     rowTextIcon(
+                                            //         asset:
+                                            //             'assets/pngs/payments_black_24dp (1).png',
+                                            //         text: 'Starting at'),
+                                            //     Text(
+                                            //       hospitalPackagesSubCat
+                                            //           .data[index].price,
+                                            //       style:
+                                            //           GoogleFonts.montserrat(
+                                            //               color: apptealColor,
+                                            //               fontSize: 13,
+                                            //               fontWeight:
+                                            //                   FontWeight
+                                            //                       .bold),
+                                            //     )
+                                            //   ],
+                                            // ),
+                                            // Text(
+                                            //     hospitalPackagesSubCat
+                                            //         .data[index].description,
+                                            //     style: KBodyText),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         );

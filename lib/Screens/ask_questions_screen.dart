@@ -72,12 +72,13 @@ class _AskQuestionsScreenState extends State<AskQuestionsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: commonAppBarTitle(),
+        titleSpacing: 0,
         leading: commonAppBarLeading(
             iconData: Icons.arrow_back_ios_new,
             onPressed: () {
               Pop(context);
             }),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),

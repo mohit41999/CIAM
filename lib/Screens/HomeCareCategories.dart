@@ -7,6 +7,7 @@ import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,43 +53,19 @@ class _HomeCareCategoriesState extends State<HomeCareCategories> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitle(),
         backgroundColor: appAppBarColor,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Builder(
-            builder: (context) => GestureDetector(
-              child: Container(
-                width: 30,
-                height: 30,
-                child: Center(
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: appblueColor,
-                    size: 20,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: const Offset(2, 5),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
+        titleSpacing: 0,
+        leading: Builder(
+          builder: (context) => commonAppBarLeading(
+              iconData: Icons.arrow_back_ios_new,
+              onPressed: () {
                 setState(() {
                   Pop(context);
                 });
-              },
-            ),
-          ),
+              }),
         ),
       ),
       body: (loading)

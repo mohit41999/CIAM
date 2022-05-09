@@ -20,7 +20,8 @@ class _UploadPrescriptionScreenState extends State<UploadPrescriptionScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
+        titleSpacing: 0,
         title: commonAppBarTitle(),
         backgroundColor: appAppBarColor,
         leading: commonAppBarLeading(

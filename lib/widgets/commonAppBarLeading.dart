@@ -19,7 +19,7 @@ class _commonAppBarLeadingState extends State<commonAppBarLeading> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: GestureDetector(
           child: Container(
             width: 40,
@@ -28,19 +28,8 @@ class _commonAppBarLeadingState extends State<commonAppBarLeading> {
               child: Icon(
                 widget.iconData,
                 color: appblueColor,
-                size: 20,
+                size: 30,
               ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  blurRadius: 10,
-                  offset: const Offset(2, 5),
-                ),
-              ],
             ),
           ),
           onTap: widget.onPressed),

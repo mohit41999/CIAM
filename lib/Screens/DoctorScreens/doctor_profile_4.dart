@@ -1,13 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Screens/MYScreens/MyAppointments.dart';
-
-import 'package:patient/Utils/colorsandstyles.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:patient/controller/NavigationController.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/patient_home_page_4_alert_box.dart';
 import 'package:patient/widgets/row_text_icon.dart';
@@ -36,43 +31,19 @@ class _DoctorProfile4State extends State<DoctorProfile4> {
         splashColor: apptealColor,
       ),
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitle(),
         backgroundColor: appAppBarColor,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Builder(
-            builder: (context) => GestureDetector(
-              child: Container(
-                width: 30,
-                height: 30,
-                child: Center(
-                  child: Icon(
-                    Icons.menu,
-                    color: appblueColor,
-                    size: 20,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: const Offset(2, 5),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
+        titleSpacing: 0,
+        leading: Builder(
+          builder: (context) => commonAppBarLeading(
+              iconData: Icons.menu,
+              onPressed: () {
                 setState(() {
                   Scaffold.of(context).openDrawer();
                 });
-              },
-            ),
-          ),
+              }),
         ),
       ),
       body: Column(

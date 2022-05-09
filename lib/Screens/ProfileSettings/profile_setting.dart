@@ -8,7 +8,6 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 
 import 'lifestyle_tab.dart';
 import 'medical_tab.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ProfileSetting extends StatefulWidget {
   @override
@@ -35,10 +34,11 @@ class _ProfileSettingState extends State<ProfileSetting>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: commonAppBarTitleText(appbarText: 'Profile Setting'),
         backgroundColor: appAppBarColor,
         elevation: 0,
+        titleSpacing: 0,
         leading: Builder(
             builder: (context) => commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,

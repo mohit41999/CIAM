@@ -7,13 +7,14 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/tag_line.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContactUsForm extends StatefulWidget {
-  const ContactUsForm({Key? key}) : super(key: key);
-
+  const ContactUsForm({Key? key, this.fromHome = false}) : super(key: key);
+  final bool fromHome;
   @override
   State<ContactUsForm> createState() => _ContactUsFormState();
 }
@@ -96,15 +97,27 @@ class _ContactUsFormState extends State<ContactUsForm> {
     return Scaffold(
       appBar: AppBar(
         title: commonAppBarTitle(),
-        leading: commonAppBarLeading(
-            iconData: Icons.arrow_back_ios_new,
-            onPressed: () {
-              Pop(context);
-            }),
-        centerTitle: true,
+        titleSpacing: 0,
+        leading: (widget.fromHome)
+            ? Builder(
+                builder: (context) => commonAppBarLeading(
+                    iconData: Icons.menu,
+                    onPressed: () {
+                      setState(() {
+                        Scaffold.of(context).openDrawer();
+                      });
+                    }),
+              )
+            : commonAppBarLeading(
+                iconData: Icons.arrow_back_ios_new,
+                onPressed: () {
+                  Pop(context);
+                }),
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),
+      drawer: (widget.fromHome) ? commonDrawer() : null,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(

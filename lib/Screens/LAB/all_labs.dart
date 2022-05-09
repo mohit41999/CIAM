@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient/Models/doctor_profile_model.dart';
-import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/LAB/lab_details.dart';
-import 'package:patient/Screens/search_screen.dart';
-
 import 'package:patient/Utils/colorsandstyles.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
-import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
-import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
-import 'package:patient/widgets/navigation_drawer.dart';
-import 'package:patient/widgets/row_text_icon.dart';
 
 class AllLabs extends StatefulWidget {
   @override
@@ -45,12 +35,13 @@ class _AllLabsState extends State<AllLabs> {
     return Scaffold(
       appBar: AppBar(
         title: commonAppBarTitle(),
+        titleSpacing: 0,
         leading: commonAppBarLeading(
             iconData: Icons.arrow_back_ios_new,
             onPressed: () {
               Pop(context);
             }),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),

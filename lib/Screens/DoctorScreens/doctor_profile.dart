@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
-import 'package:patient/Screens/doctor_categories.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
@@ -12,12 +11,9 @@ import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/home_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
-import 'package:patient/widgets/common_row.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:patient/widgets/tag_line.dart';
-
-import 'doctor_profile_1.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({
@@ -286,6 +282,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
       drawer: commonDrawer(),
       appBar: AppBar(
         title: commonAppBarTitle(),
+        titleSpacing: 0,
         leading: (widget.fromhome)
             ? commonAppBarLeading(
                 iconData: Icons.arrow_back_ios_new,
@@ -301,7 +298,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                       });
                     }),
               ),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),

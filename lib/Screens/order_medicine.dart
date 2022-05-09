@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
@@ -25,12 +25,13 @@ class _OrderMedicineState extends State<OrderMedicine> {
     return Scaffold(
       appBar: AppBar(
         title: commonAppBarTitle(),
+        titleSpacing: 0,
         leading: commonAppBarLeading(
             iconData: Icons.arrow_back_ios_new,
             onPressed: () {
               Pop(context);
             }),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: appAppBarColor,
         elevation: 0,
       ),

@@ -25,8 +25,9 @@ class _OpenPdfState extends State<OpenPdf> {
             onPressed: () {
               Pop(context);
             }),
+        titleSpacing: 0,
         title: commonAppBarTitle(),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

@@ -48,10 +48,11 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
+          centerTitle: false,
           title: commonAppBarTitleText(appbarText: 'Knowledge Forum'),
           backgroundColor: appAppBarColor,
           elevation: 0,
+          titleSpacing: 0,
           leading: Builder(
               builder: (context) => commonAppBarLeading(
                   iconData: Icons.arrow_back_ios_new,
