@@ -12,7 +12,8 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HospitalPackageCategories extends StatefulWidget {
-  const HospitalPackageCategories({Key? key}) : super(key: key);
+
+  const HospitalPackageCategories({Key? key, }) : super(key: key);
 
   @override
   _HospitalPackageCategoriesState createState() =>
@@ -268,6 +269,7 @@ class _HospitalPackageCategoriesState extends State<HospitalPackageCategories> {
                                               cat_name:
                                                   hospitalPackagesCategories
                                                       .data[index].serviceName,
+
                                             ));
                                       },
                                       child: Text(

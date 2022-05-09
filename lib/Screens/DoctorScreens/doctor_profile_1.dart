@@ -1,3 +1,4 @@
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -136,7 +137,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(doctordetails
-                                    .data.doctorDetails.profile_image),
+                                    .data.doctorDetails.profileImage),
                                 fit: BoxFit.cover)),
                       ),
                       Container(
@@ -158,7 +159,7 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                         height: 12,
                       ),
                       Container(
-                        height: 325,
+                        height: 350,
                         color: Colors.white,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -200,7 +201,24 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                               doctorProfileRow(
                                   title: 'About Me',
                                   value: doctordetails
-                                      .data.doctorDetails.about_me),
+                                      .data.doctorDetails.aboutMe),
+                              Row(
+                                children: [
+                                  Text('Disease Treated - ',
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: 12, color: Color(0xff161616).withOpacity(0.6))),
+                                  Container(
+                                    height: 40,
+                                    child: ListView.builder(shrinkWrap:true,scrollDirection:Axis.horizontal,itemCount: doctordetails.data.diseaseArray.length,itemBuilder: (context,index){
+                                      return Container(child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(child: Text(doctordetails.data.diseaseArray[index].diseaseName,style: TextStyle(fontWeight: FontWeight.bold),)),
+                                      ));
+
+                                    }),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),

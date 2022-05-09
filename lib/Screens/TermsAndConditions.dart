@@ -7,8 +7,7 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 
 class TermsAndConditions extends StatefulWidget {
-  const TermsAndConditions(
-      {Key? key, required this.amount, required this.booking_id})
+  const TermsAndConditions({Key? key, this.amount = '', this.booking_id = ''})
       : super(key: key);
   final String amount;
   final String booking_id;
@@ -55,14 +54,16 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   bgcolor: appblueColor,
                   textColor: Colors.white,
                   onPressed: () {
-                    Push(
-                        context,
-                        PaymentConfirmationScreen(
-                          amount: widget.amount,
-                          booking_id: widget.booking_id,
-                          terms: true,
-                        ),
-                        withnav: false);
+                    (widget.booking_id == '')
+                        ? Pop(context)
+                        : Push(
+                            context,
+                            PaymentConfirmationScreen(
+                              amount: widget.amount,
+                              booking_id: widget.booking_id,
+                              terms: true,
+                            ),
+                            withnav: false);
 
                     // _con
                     //     .confirmBookingRequest(

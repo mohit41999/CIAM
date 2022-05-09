@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/home_care_sub_category_model.dart';
+import 'package:patient/Screens/TermsAndConditions.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
@@ -10,6 +11,7 @@ import 'package:patient/widgets/alertTextField.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/confirmation_dialog.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,12 +106,13 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
           loader.dismiss();
           if (value['status']) {
             loader.dismiss();
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(value['message']),
-              backgroundColor: apptealColor,
-            ));
+            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //   content: Text(value['message']),
+            //   backgroundColor: apptealColor,
+            // ));
 
             Pop(context);
+            confirmDialog(context, value);
             return true;
           } else {
             loader.dismiss();
@@ -253,6 +256,25 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
                         controller: phonenumberController,
                         label: 'Phone Number',
                         textFieldtext: 'Enter Phone Number'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    commonBtn(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TermsAndConditions()));
+                      },
+                      s: 'Terms and Conditions',
+                      textColor: appblueColor,
+                      bgcolor: Colors.white,
+                      borderRadius: 10,
+                      height: 30,
+                      textSize: 12,
+                      borderColor: appblueColor,
+                      borderWidth: 2,
+                    ),
                     SizedBox(
                       height: 10,
                     ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/hospital_packages_sub_cat_model.dart';
+import 'package:patient/Screens/TermsAndConditions.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
@@ -10,21 +11,27 @@ import 'package:patient/widgets/alertTextField.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:patient/widgets/confirmation_dialog.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HospitalPackageSubCat extends StatefulWidget {
   final String cat_id;
   final String cat_name;
-  const HospitalPackageSubCat(
-      {Key? key, required this.cat_id, required this.cat_name})
-      : super(key: key);
+
+  const HospitalPackageSubCat({
+    Key? key,
+    required this.cat_id,
+    required this.cat_name,
+  }) : super(key: key);
 
   @override
   _HospitalPackageSubCatState createState() => _HospitalPackageSubCatState();
 }
 
 class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
+  late AnimationController controller;
+  late CurvedAnimation curve;
   TextEditingController care = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -106,12 +113,13 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
           loader.dismiss();
           if (value['status']) {
             loader.dismiss();
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(value['message']),
-              backgroundColor: apptealColor,
-            ));
+            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //   content: Text(value['message']),
+            //   backgroundColor: apptealColor,
+            // ));
 
             Pop(context);
+            confirmDialog(context, value);
             return true;
           } else {
             loader.dismiss();
@@ -255,6 +263,25 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
                         controller: phonenumberController,
                         label: 'Phone Number',
                         textFieldtext: 'Enter Phone Number'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    commonBtn(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TermsAndConditions()));
+                      },
+                      s: 'Terms and Conditions',
+                      textColor: appblueColor,
+                      bgcolor: Colors.white,
+                      borderRadius: 10,
+                      height: 30,
+                      textSize: 12,
+                      borderColor: appblueColor,
+                      borderWidth: 2,
+                    ),
                     SizedBox(
                       height: 10,
                     ),

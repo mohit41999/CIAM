@@ -18,15 +18,15 @@ class DoctorProfileOneModel {
     required this.data,
   });
 
-  bool status;
-  String message;
-  DoctorProfileOneModelData data;
+  final bool status;
+  final String message;
+  final Data data;
 
   factory DoctorProfileOneModel.fromJson(Map<String, dynamic> json) =>
       DoctorProfileOneModel(
         status: json["status"],
         message: json["message"],
-        data: DoctorProfileOneModelData.fromJson(json["data"]),
+        data: Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,23 +36,26 @@ class DoctorProfileOneModel {
       };
 }
 
-class DoctorProfileOneModelData {
-  DoctorProfileOneModelData({
+class Data {
+  Data({
     required this.doctorDetails,
     required this.clinicDetails,
     required this.clinicImages,
+    required this.diseaseArray,
   });
 
-  DoctorDetails doctorDetails;
-  ClinicDetails clinicDetails;
-  List<ClinicImage> clinicImages;
+  final DoctorDetails doctorDetails;
+  final ClinicDetails clinicDetails;
+  final List<ClinicImage> clinicImages;
+  final List<DiseaseArray> diseaseArray;
 
-  factory DoctorProfileOneModelData.fromJson(Map<String, dynamic> json) =>
-      DoctorProfileOneModelData(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         doctorDetails: DoctorDetails.fromJson(json["Doctor Details"]),
         clinicDetails: ClinicDetails.fromJson(json["Clinic Details"]),
         clinicImages: List<ClinicImage>.from(
             json["Clinic_images"].map((x) => ClinicImage.fromJson(x))),
+        diseaseArray: List<DiseaseArray>.from(
+            json["diseaseArray"].map((x) => DiseaseArray.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -60,6 +63,7 @@ class DoctorProfileOneModelData {
         "Clinic Details": clinicDetails.toJson(),
         "Clinic_images":
             List<dynamic>.from(clinicImages.map((x) => x.toJson())),
+        "diseaseArray": List<dynamic>.from(diseaseArray.map((x) => x.toJson())),
       };
 }
 
@@ -73,12 +77,12 @@ class ClinicDetails {
     required this.doctorAvailabilityStatus,
   });
 
-  String clinicName;
-  String location;
-  String fromToDays;
-  String openCloseTime;
-  String oflineConsultancyFees;
-  String doctorAvailabilityStatus;
+  final String clinicName;
+  final String location;
+  final String fromToDays;
+  final String openCloseTime;
+  final String oflineConsultancyFees;
+  final String doctorAvailabilityStatus;
 
   factory ClinicDetails.fromJson(Map<String, dynamic> json) => ClinicDetails(
         clinicName: json["clinic_name"],
@@ -104,7 +108,7 @@ class ClinicImage {
     required this.clinicImages,
   });
 
-  String clinicImages;
+  final String clinicImages;
 
   factory ClinicImage.fromJson(Map<String, dynamic> json) => ClinicImage(
         clinicImages: json["clinic_images"],
@@ -115,6 +119,26 @@ class ClinicImage {
       };
 }
 
+class DiseaseArray {
+  DiseaseArray({
+    required this.diseaseName,
+    required this.disease_id,
+  });
+
+  final String diseaseName;
+  final String disease_id;
+
+  factory DiseaseArray.fromJson(Map<String, dynamic> json) => DiseaseArray(
+        diseaseName: json["disease_name"] == null ? null : json["disease_name"],
+        disease_id: json["disease_id"] == null ? null : json["disease_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "disease_name": diseaseName == null ? null : diseaseName,
+        "disease_id": disease_id == null ? null : disease_id,
+      };
+}
+
 class DoctorDetails {
   DoctorDetails({
     required this.doctorName,
@@ -122,17 +146,17 @@ class DoctorDetails {
     required this.specialist,
     required this.languageSpoken,
     required this.experience,
-    required this.about_me,
-    required this.profile_image,
+    required this.aboutMe,
+    required this.profileImage,
   });
 
-  String doctorName;
-  String education;
-  String specialist;
-  String languageSpoken;
-  String experience;
-  String about_me;
-  String profile_image;
+  final String doctorName;
+  final String education;
+  final String specialist;
+  final String languageSpoken;
+  final String experience;
+  final String aboutMe;
+  final String profileImage;
 
   factory DoctorDetails.fromJson(Map<String, dynamic> json) => DoctorDetails(
         doctorName: json["doctor_name"],
@@ -140,8 +164,8 @@ class DoctorDetails {
         specialist: json["specialist"],
         languageSpoken: json["language_spoken"],
         experience: json["experience"],
-        about_me: json["about_me"],
-        profile_image: json["profile_image"],
+        aboutMe: json["about_me"],
+        profileImage: json["profile_image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -150,7 +174,7 @@ class DoctorDetails {
         "specialist": specialist,
         "language_spoken": languageSpoken,
         "experience": experience,
-        "about_me": about_me,
-        "profile_image": profile_image,
+        "about_me": aboutMe,
+        "profile_image": profileImage,
       };
 }
