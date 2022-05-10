@@ -202,22 +202,27 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                   title: 'About Me',
                                   value: doctordetails
                                       .data.doctorDetails.aboutMe),
-                              Row(
-                                children: [
-                                  Text('Disease Treated - ',
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 12, color: Color(0xff161616).withOpacity(0.6))),
-                                  Container(
-                                    height: 40,
-                                    child: ListView.builder(shrinkWrap:true,scrollDirection:Axis.horizontal,itemCount: doctordetails.data.diseaseArray.length,itemBuilder: (context,index){
-                                      return Container(child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Center(child: Text(doctordetails.data.diseaseArray[index].diseaseName,style: TextStyle(fontWeight: FontWeight.bold),)),
-                                      ));
+                              Container(
+                                height: 50,
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Disease Treated - ',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 12, color: Color(0xff161616).withOpacity(0.6))),
+                                    Expanded(
 
-                                    }),
-                                  ),
-                                ],
+                                      child: ListView.builder(scrollDirection:Axis.horizontal,itemCount: doctordetails.data.diseaseArray.length,itemBuilder: (context,index){
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                          child: Container(child: Text(doctordetails.data.diseaseArray[index].diseaseName,style: TextStyle(fontWeight: FontWeight.bold),)),
+                                        );
+
+                                      }),
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -282,10 +287,10 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       width: MediaQuery.of(context).size.width /
                                           1.65,
                                       child: ListView.builder(
-                                          itemCount: doctordetails
-                                              .data.clinicImages.length,
+                                          itemCount: 10,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
+                                            index=0;
                                             return Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
