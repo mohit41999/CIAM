@@ -405,6 +405,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                               .data[index].serviceId,
                                           cat_name: homeCareCategories
                                               .data[index].serviceName,
+                                          fromHome: true,
                                         ));
                                   },
                                   child: Container(

@@ -72,6 +72,11 @@ final List<Map<dynamic, dynamic>> hometile = [
   //   'profile': 'Rectangle -2.png'
   // },
   {
+    'label': 'Hospital Packages',
+    'Screen': HospitalPackages(),
+    'profile': 'Rectangle -4.png'
+  },
+  {
     'label': 'Ask Questions',
     'Screen': MyQuestionsScreen(),
     'profile': 'Rectangle 69.png'
@@ -85,11 +90,6 @@ final List<Map<dynamic, dynamic>> hometile = [
   {
     'label': 'Knowledge Forum',
     'Screen': KnowledgeForumScreen(),
-    'profile': 'Rectangle -4.png'
-  },
-  {
-    'label': 'Hospital Packages',
-    'Screen': HospitalPackages(),
     'profile': 'Rectangle -4.png'
   },
 ];
@@ -759,6 +759,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .data[index].serviceId,
                                           cat_name: healthCareCategories
                                               .data[index].serviceName,
+                                          fromHome: true,
                                         ));
                                   },
                                   child: Container(

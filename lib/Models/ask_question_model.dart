@@ -41,6 +41,7 @@ class AskQuestionModelData {
   AskQuestionModelData({
     required this.questionId,
     required this.question,
+    required this.category_name,
     required this.description,
     required this.createdDate,
   });
@@ -48,12 +49,14 @@ class AskQuestionModelData {
   final String questionId;
   final String question;
   final String description;
+  final String category_name;
   final DateTime createdDate;
 
   factory AskQuestionModelData.fromJson(Map<String, dynamic> json) =>
       AskQuestionModelData(
         questionId: json["question_id"],
         question: json["question"],
+        category_name: json["category_name"],
         description: json["description"],
         createdDate: DateTime.parse(json["created_date"]),
       );
@@ -61,6 +64,7 @@ class AskQuestionModelData {
   Map<String, dynamic> toJson() => {
         "question_id": questionId,
         "question": question,
+        "category_name": category_name,
         "description": description,
         "created_date": createdDate.toIso8601String(),
       };

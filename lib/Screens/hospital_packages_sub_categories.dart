@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/hospital_packages_sub_cat_model.dart';
 import 'package:patient/Screens/TermsAndConditions.dart';
+import 'package:patient/Screens/confirmScreen.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
@@ -18,11 +19,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HospitalPackageSubCat extends StatefulWidget {
   final String cat_id;
   final String cat_name;
+  final bool fromHome;
 
   const HospitalPackageSubCat({
     Key? key,
     required this.cat_id,
     required this.cat_name,
+    this.fromHome = false,
   }) : super(key: key);
 
   @override
@@ -119,7 +122,21 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
             // ));
 
             Pop(context);
-            confirmDialog(context, value);
+            if (widget.fromHome) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ConfirmScreen(text: value['message'])));
+            } else {
+              Pop(context);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ConfirmScreen(text: value['message'])));
+            }
+
             return true;
           } else {
             loader.dismiss();

@@ -289,6 +289,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
                                               .data[index].serviceId,
                                           cat_name: homeCareCategories
                                               .data[index].serviceName,
+                                          fromHome: true,
                                         ));
                                   },
                                   child: Container(
