@@ -20,14 +20,14 @@ class HealthCareCategoriesModel {
 
   bool status;
   String message;
-  List<HomeCareCategoriesData> data;
+  List<HealthCareCategoriesModelData> data;
 
   factory HealthCareCategoriesModel.fromJson(Map<String, dynamic> json) =>
       HealthCareCategoriesModel(
         status: json["status"],
         message: json["message"],
-        data: List<HomeCareCategoriesData>.from(
-            json["data"].map((x) => HomeCareCategoriesData.fromJson(x))),
+        data: List<HealthCareCategoriesModelData>.from(
+            json["data"].map((x) => HealthCareCategoriesModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,8 +37,8 @@ class HealthCareCategoriesModel {
       };
 }
 
-class HomeCareCategoriesData {
-  HomeCareCategoriesData({
+class HealthCareCategoriesModelData {
+  HealthCareCategoriesModelData({
     required this.serviceId,
     required this.serviceName,
     required this.image,
@@ -48,8 +48,8 @@ class HomeCareCategoriesData {
   String serviceName;
   String image;
 
-  factory HomeCareCategoriesData.fromJson(Map<String, dynamic> json) =>
-      HomeCareCategoriesData(
+  factory HealthCareCategoriesModelData.fromJson(Map<String, dynamic> json) =>
+      HealthCareCategoriesModelData(
         serviceId: json["Service_id"],
         serviceName: json["Service Name"],
         image: json["image"],

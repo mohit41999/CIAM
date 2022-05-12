@@ -341,10 +341,12 @@ class _PersonalState extends State<Personal> {
   Future<void> _showPicker(context) async {
     showModalBottomSheet(
         context: context,
+        useRootNavigator: false,
         builder: (BuildContext bc) {
           return SafeArea(
             child: Container(
-              child: Wrap(
+              height: double.maxFinite,
+              child: ListView(
                 children: <Widget>[
                   ListTile(
                       leading: Icon(Icons.photo_library),
@@ -367,6 +369,9 @@ class _PersonalState extends State<Personal> {
                       Navigator.of(context).pop();
                     },
                   ),
+                  SizedBox(
+                    height: navbarht + 20,
+                  )
                 ],
               ),
             ),

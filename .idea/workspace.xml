@@ -10,20 +10,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="knowledge">
-      <change afterPath="$PROJECT_DIR$/lib/Models/askQuestionCategoryModel.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/confirmScreen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/video/splash.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Models/statements_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/ask_question_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/ask_question_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/knowledge_forum_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/knowledge_forum_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyQuestionsScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyQuestionsScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ask_questions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ask_questions_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/pngs/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pngs/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/home_care_categories_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/home_care_categories_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/hospital_packages_sub_cat_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/hospital_packages_sub_cat_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/hospital_packages_sub_categories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages_sub_categories.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/text_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/text_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/common_app_bar_title.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,17 +65,17 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="D:/Nohung/Kitchen_new" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorWFH" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\assets\pngs" />
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\assets\video" />
       <recent name="D:\mohitnotionProjects\PatientWFH\ios\Runner" />
       <recent name="D:\mohitnotionProjects\PatientWFH\ios\Runner\Assets.xcassets" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Models" />
-      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens" />
-      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Screens\MYScreens\MyWalletTabs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\mohitnotionProjects\PatientWFH\assets\pngs" />
@@ -361,7 +369,21 @@
       <option name="project" value="LOCAL" />
       <updated>1652108219224</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="knowledge">
+      <created>1652189759078</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1652189759078</updated>
+    </task>
+    <task id="LOCAL-00040" summary="knowledge">
+      <created>1652191628762</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1652191628762</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

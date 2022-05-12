@@ -1,3 +1,4 @@
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
@@ -38,8 +39,11 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
   TextEditingController care = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController address = TextEditingController();
   TextEditingController phonenumber = TextEditingController();
+  String? countryValue = "";
+  String? stateValue = "";
+  String? cityValue = "";
+  String address = '';
   late HospitalPackagesSubCatModel hospitalPackagesSubCat;
 
   Future<HospitalPackagesSubCatModel> getHospitalPackagesSubCat() async {
@@ -61,11 +65,18 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
     required String subcareid,
     required String careid,
     required String name,
+    required String city,
     required String email,
     required String phone,
     required String care_requirement,
   }) async {
-    if (care_requirement.isEmpty) {
+    if (city.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Select City'),
+        backgroundColor: Colors.red,
+      ));
+      return false;
+    } else if (care_requirement.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Enter care requirement'),
         backgroundColor: Colors.red,
@@ -109,6 +120,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
               'name': name,
               'email': email,
               'phone': phone,
+              'city': city,
               'package_category_id': careid,
               'package_subcategory_id': subcareid,
               'postal_code': care_requirement,
@@ -175,7 +187,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
         builder: (BuildContext context) => AlertDialog(
             backgroundColor: Color(0xffF1F1F1),
             elevation: 0,
-            insetPadding: EdgeInsets.all(15),
+            insetPadding: EdgeInsets.all(8),
             contentPadding: EdgeInsets.symmetric(horizontal: 15),
             title: Column(
               children: [
@@ -253,13 +265,151 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
                     SizedBox(
                       height: 15,
                     ),
-                    alertTextField(
-                        controller: careController,
-                        inputType: TextInputType.number,
-                        label: 'Where is the care needed?',
-                        textFieldtext: 'Enter Postal Code'),
+                    Text('Where is the care needed?'),
                     SizedBox(
-                      height: 10,
+                      height: 5,
+                    ),
+                    CSCPicker(
+                      showCities: true,
+
+                      defaultCountry: DefaultCountry.India,
+                      disableCountry: true,
+                      showStates: true,
+                      layout: Layout.vertical,
+
+                      flagState: CountryFlag.DISABLE,
+
+                      dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                offset: Offset(0, 5),
+                                spreadRadius: 1,
+                                blurRadius: 2)
+                          ]),
+
+                      disabledDropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                offset: Offset(0, 5),
+                                spreadRadius: 1,
+                                blurRadius: 2)
+                          ],
+                          border: Border.all(color: Colors.white, width: 1)),
+
+                      ///Default Country
+
+                      ///selected item style [OPTIONAL PARAMETER]
+                      selectedItemStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+
+                      ///DropdownDialog Heading style [OPTIONAL PARAMETER]
+                      dropdownHeadingStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+
+                      ///DropdownDialog Item style [OPTIONAL PARAMETER]
+                      dropdownItemStyle: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+
+                      ///Dialog box radius [OPTIONAL PARAMETER]
+                      dropdownDialogRadius: 10.0,
+
+                      ///Search bar radius [OPTIONAL PARAMETER]
+                      searchBarRadius: 10.0,
+
+                      ///triggers once country selected in dropdown
+                      onCountryChanged: (value) {
+                        setState(() {
+                          ///store value in country variable
+                          countryValue = value;
+                          print(countryValue);
+                        });
+                      },
+
+                      ///triggers once state selected in dropdown
+                      onStateChanged: (value) {
+                        setState(() {
+                          ///store value in state variable
+                          stateValue = value;
+                        });
+                      },
+
+                      ///triggers once city selected in dropdown
+                      onCityChanged: (value) {
+                        setState(() {
+                          ///store value in city variable
+                          cityValue = value;
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: 55),
+                      child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 1,
+
+                          // autovalidateMode: AutovalidateMode.onUserInteraction,
+                          // validator: validator,
+                          // maxLength: maxLength,
+                          // maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+                          enableSuggestions: true,
+
+                          controller: care,
+                          decoration: InputDecoration(
+                            enabled: true,
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide:
+                                    new BorderSide(color: Colors.transparent)),
+                            border: new OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide:
+                                    new BorderSide(color: Colors.transparent)),
+                            // enabledBorder: InputBorder.none,
+                            // errorBorder: InputBorder.none,
+                            // disabledBorder: InputBorder.none,
+                            filled: true,
+                            labelText: 'Enter Postal Code',
+                            alignLabelWithHint: false,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+
+                            labelStyle: TextStyle(
+                                fontSize: 12,
+                                color: Colors.black.withOpacity(0.6)),
+                            // hintText: textFieldtext,
+                            hintStyle: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                     alertTextField(
                         controller: nameController,
@@ -315,6 +465,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
                           addCareServices(context,
                                   subcareid: subCatId,
                                   careid: widget.cat_id,
+                                  city: cityValue ?? '',
                                   name: nameController.text,
                                   email: emailController.text,
                                   phone: phonenumberController.text,

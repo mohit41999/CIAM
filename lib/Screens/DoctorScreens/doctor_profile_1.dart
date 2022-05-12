@@ -1,4 +1,6 @@
 
+
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -286,11 +288,19 @@ class _DoctorProfile1State extends State<DoctorProfile1> {
                                       height: 80,
                                       width: MediaQuery.of(context).size.width /
                                           1.65,
-                                      child: ListView.builder(
-                                          itemCount: 10,
+                                      color: Colors.white,
+                                      child: (doctordetails
+                                          .data
+                                          .clinicImages.length==0)?Container(
+                                        color: Colors.white,
+                                        child: Text('No Images available',style: TextStyle(fontWeight: FontWeight.bold),),
+                                      ):ListView.builder(
+                                          itemCount: doctordetails
+                                              .data
+                                              .clinicImages.length,
                                           scrollDirection: Axis.horizontal,
                                           itemBuilder: (context, index) {
-                                            index=0;
+
                                             return Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(

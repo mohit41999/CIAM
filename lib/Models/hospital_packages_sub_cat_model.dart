@@ -20,13 +20,14 @@ class HospitalPackagesSubCatModel {
 
   final bool status;
   final String message;
-  final List<Datum> data;
+  final List<HospitalPackagesSubCatModelData> data;
 
   factory HospitalPackagesSubCatModel.fromJson(Map<String, dynamic> json) =>
       HospitalPackagesSubCatModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<HospitalPackagesSubCatModelData>.from(json["data"]
+            .map((x) => HospitalPackagesSubCatModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +37,8 @@ class HospitalPackagesSubCatModel {
       };
 }
 
-class Datum {
-  Datum({
+class HospitalPackagesSubCatModelData {
+  HospitalPackagesSubCatModelData({
     required this.subPackageId,
     required this.hospitalPackageId,
     required this.name,
@@ -53,7 +54,8 @@ class Datum {
   final String description;
   final String price;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory HospitalPackagesSubCatModelData.fromJson(Map<String, dynamic> json) =>
+      HospitalPackagesSubCatModelData(
         subPackageId: json["sub_package_id"],
         hospitalPackageId: json["hospital_package_id"],
         name: json["name"],
