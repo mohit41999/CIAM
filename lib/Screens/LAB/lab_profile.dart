@@ -50,6 +50,13 @@ class _LabProfileState extends State<LabProfile> {
         _controller.testloading = false;
       });
     });
+
+    await _controller.getallOrgans().then((value) {
+      setState(() {
+        _controller.allOrgans = value;
+        _controller.organsLoading = false;
+      });
+    });
   }
 
   @override
@@ -159,45 +166,59 @@ class _LabProfileState extends State<LabProfile> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height / 3,
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, childAspectRatio: 2 / 2),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                child: Icon(
-                              Icons.add,
-                              size: 40,
-                              color: apptealColor,
-                            )),
-                            Expanded(
-                                child: Center(
-                                    child: Text(
-                              'Lorem Ipsum',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14),
-                            )))
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  itemCount: 10,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0, vertical: 10.0),
+                child: commonRow(
+                  Title: 'Tests by Organs',
+                  subTitle: 'View all',
+                  value: AllTests(),
                 ),
               ),
+              (_controller.organsLoading)
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container(
+                      height: MediaQuery.of(context).size.height / 3,
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 2 / 2),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              color: Colors.white,
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                      child: Icon(
+                                    Icons.add,
+                                    size: 40,
+                                    color: apptealColor,
+                                  )),
+                                  Expanded(
+                                      child: Center(
+                                          child: Text(
+                                    _controller.allOrgans.data[index].organName,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14),
+                                  )))
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: _controller.allOrgans.data.length,
+                      ),
+                    ),
               (_controller.labloading)
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

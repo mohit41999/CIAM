@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(prefs.get('user_id'));
     timer = Timer(
-        Duration(seconds: 3),
+        Duration(seconds: 4),
         () => (prefs.get('user_id').toString() == null.toString())
             ? Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => SignInScreen()))

@@ -51,7 +51,7 @@ class TitleEnterField extends StatelessWidget {
               child: Material(
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
-                child: TextFormField(
+                child: TextField(
                   maxLines: maxLines,
 
                   // autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -82,6 +82,7 @@ class TitleEnterField extends StatelessWidget {
                     filled: true,
                     //labelText: labelText,
                     suffixIcon: widget,
+
                     labelStyle: TextStyle(fontSize: 12, color: Colors.grey),
                     labelText: hintText,
                     floatingLabelBehavior: FloatingLabelBehavior.never,

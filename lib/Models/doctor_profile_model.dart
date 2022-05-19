@@ -20,13 +20,14 @@ class DoctorProfileModel {
 
   bool status;
   String message;
-  List<Datum> data;
+  List<DoctorProfileModelData> data;
 
   factory DoctorProfileModel.fromJson(Map<String, dynamic> json) =>
       DoctorProfileModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<DoctorProfileModelData>.from(
+            json["data"].map((x) => DoctorProfileModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +37,8 @@ class DoctorProfileModel {
       };
 }
 
-class Datum {
-  Datum({
+class DoctorProfileModelData {
+  DoctorProfileModelData({
     required this.userId,
     required this.firstName,
     required this.lastName,
@@ -63,7 +64,8 @@ class Datum {
   String fees;
   String profileImage;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory DoctorProfileModelData.fromJson(Map<String, dynamic> json) =>
+      DoctorProfileModelData(
         userId: json["user_id"],
         firstName: json["first_name"],
         lastName: json["last_name"],

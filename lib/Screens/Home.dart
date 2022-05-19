@@ -60,17 +60,17 @@ final List<Map<dynamic, dynamic>> hometile = [
     'Screen': PatientHomePage4(),
     'profile': 'Rectangle -1.png'
   },
-  // {s
+  // {
   //   'label': 'Stress buster zone',
   //   'Screen': 'null',
   //   'profile': 'Rectangle -6.png'
   // },
-  // {
-  //   'label': 'Lab Tests',
-  //   // 'Screen': 'null',
-  //   'Screen': LabProfile(),
-  //   'profile': 'Rectangle -2.png'
-  // },
+  {
+    'label': 'Lab Tests',
+    // 'Screen': 'null',
+    'Screen': LabProfile(),
+    'profile': 'Rectangle -2.png'
+  },
   {
     'label': 'Hospital Packages',
     'Screen': HospitalPackages(),

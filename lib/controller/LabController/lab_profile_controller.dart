@@ -3,15 +3,18 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
+import 'package:patient/Models/organ_categories_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LABProfileController {
   late AllPackagesModel allPackages;
   late AllTestModel allTests;
   late AllLabsModel allLabs;
+  late OrganCategroiesModel allOrgans;
   bool packagesLoading = true;
   bool testloading = true;
   bool labloading = true;
+  bool organsLoading = true;
 
   Future<AllPackagesModel> getallPackages() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -19,6 +22,14 @@ class LABProfileController {
         PARAM_URL: 'get_all_packages.php',
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
     return AllPackagesModel.fromJson(response);
+  }
+
+  Future<OrganCategroiesModel> getallOrgans() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(
+        PARAM_URL: 'get_organs_categories.php',
+        params: {'user_id': preferences.getString('user_id'), 'token': Token});
+    return OrganCategroiesModel.fromJson(response);
   }
 
   Future<AllTestModel> getallTests() async {
