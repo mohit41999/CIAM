@@ -28,6 +28,31 @@ class TestController {
     return TestCheckoutModel.fromJson(response);
   }
 
+  Future addTestOrder(String labid, List<String> testids, String couponId,
+      String totalPrice) async {
+    SharedPreferences preference = await SharedPreferences.getInstance();
+    Map<String?, String?> params = {
+      'token': Token,
+      'user_id': preference.getString('user_id'),
+      'lab_id': labid,
+      'total_price': totalPrice,
+      'coupen_id': couponId
+    };
+
+    for (int i = 0; i < testids.length; i++) {
+      print(i.toString() + '\n');
+      params.addAll({'test_id[$i]': testids[i]});
+    }
+    // testids.forEach((element) {
+    //   params.addAll({'test_id[]': element});
+    // });
+    print(params);
+
+    var response =
+        await PostData(PARAM_URL: 'add_test_order.php', params: params);
+    return response;
+  }
+
   Future<CouponsModel> getCoupons(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

@@ -272,7 +272,11 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                                 bgcolor: appblueColor,
                                                 textColor: Colors.white,
                                                 onPressed: () {
-                                                  bookingForDialog(context);
+                                                  bookingForDialog(
+                                                      context,
+                                                      widget.packageId,
+                                                      availableLabs
+                                                          .data[index].labId);
                                                 },
                                                 height: 30,
                                                 width: 180,
@@ -298,7 +302,8 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
     );
   }
 
-  Future bookingForDialog(BuildContext context) async {
+  Future bookingForDialog(
+      BuildContext context, String package_id, String lab_id) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -371,7 +376,12 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                               textColor: Colors.white,
                               onPressed: () {
                                 Pop(context);
-                                Push(context, PackageCheckout());
+                                Push(
+                                    context,
+                                    PackageCheckout(
+                                      packageId: package_id,
+                                      labId: lab_id,
+                                    ));
                               })
                         ],
                       ),

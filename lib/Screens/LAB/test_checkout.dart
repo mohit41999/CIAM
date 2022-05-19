@@ -14,6 +14,8 @@ import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
+import '../../helper/constants.dart';
+
 class TestCheckout extends StatefulWidget {
   final String labid;
   final List<String> testids;
@@ -46,47 +48,14 @@ class _TestCheckoutState extends State<TestCheckout> {
     setState(() {});
   }
 
-  void payment(int amount) async {
-    var authn = 'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
-    Object? orderOptions = {
-      "amount": amount,
-      "currency": "INR",
-      "receipt": "Receipt no. 1",
-      "payment_capture": 1,
-    };
-    var headers = {
-      'content-type': 'application/json',
-      'Authorization': authn,
-    };
-    // final client = HttpClient();
-    var res = await http.post(Uri.parse('https://api.razorpay.com/v1/orders'),
-        headers: headers, body: json.encode(orderOptions));
-
-    print(jsonDecode(res.body).toString() +
-        '======================================');
-
-    String order_id = jsonDecode(res.body)['id'].toString();
-
-    Map<String, dynamic> checkoutOptions = {
-      'key': username,
-      'amount': amount,
-      "currency": "INR",
-      'name': '',
-      'description': '',
-      'order_id': order_id, // Generate order_id using Orders API
-      'timeout': 3000,
-    };
-    try {
-      _razorpay.open(checkoutOptions);
-    } catch (e) {}
-  }
-
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     // Do something when payment succeeds
     // depositsuccess();
     print('order' + response.orderId.toString());
     print('paymentId' + response.paymentId.toString());
     print('signature' + response.signature.toString());
+    controller.addTestOrder(widget.labid, widget.testids, couponid,
+        checkoutsummary.data.billSummary.totalFees);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -483,13 +452,15 @@ class _TestCheckoutState extends State<TestCheckout> {
                         )),
                         Expanded(
                             child: commonBtn(
-                          s: 'Proceed to Pay  ',
+                          s: 'Proceed to Pay ',
                           bgcolor: appblueColor,
                           textColor: Colors.white,
                           onPressed: () {
-                            payment(int.parse(checkoutsummary
-                                .data.billSummary.amountPaid
-                                .replaceAll('.', '')));
+                            payment(
+                                int.parse(checkoutsummary
+                                    .data.billSummary.amountPaid
+                                    .replaceAll('.', '')),
+                                _razorpay);
                           },
                           borderRadius: 10,
                         ))

@@ -36,21 +36,18 @@ class MyLabTestModel {
 
 class Datum {
   Datum({
-    required this.bookingId,
     required this.testName,
     required this.price,
     required this.ammountPaid,
     required this.bookingDate,
   });
 
-  final String bookingId;
   final String testName;
   final String price;
   final String ammountPaid;
   final String bookingDate;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        bookingId: json["booking_id"],
         testName: json["test_name"],
         price: json["price"],
         ammountPaid: json["ammount_paid"],
@@ -58,7 +55,6 @@ class Datum {
       );
 
   Map<String, dynamic> toJson() => {
-        "booking_id": bookingId,
         "test_name": testName,
         "price": price,
         "ammount_paid": ammountPaid,

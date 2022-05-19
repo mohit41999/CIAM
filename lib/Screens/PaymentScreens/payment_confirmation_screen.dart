@@ -135,41 +135,6 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
     super.initState();
   }
 
-  void payment(int amount) async {
-    var authn = 'Basic ' + base64Encode(utf8.encode('${username}:${password}'));
-    Object? orderOptions = {
-      "amount": amount,
-      "currency": "INR",
-      "receipt": "Receipt no. 1",
-      "payment_capture": 1,
-    };
-    var headers = {
-      'content-type': 'application/json',
-      'Authorization': authn,
-    };
-    // final client = HttpClient();
-    var res = await http.post(Uri.parse('https://api.razorpay.com/v1/orders'),
-        headers: headers, body: json.encode(orderOptions));
-
-    print(jsonDecode(res.body).toString() +
-        '======================================');
-
-    String order_id = jsonDecode(res.body)['id'].toString();
-
-    Map<String, dynamic> checkoutOptions = {
-      'key': username,
-      'amount': amount,
-      "currency": "INR",
-      'name': '',
-      'description': '',
-      'order_id': order_id, // Generate order_id using Orders API
-      'timeout': 3000,
-    };
-    try {
-      _razorpay.open(checkoutOptions);
-    } catch (e) {}
-  }
-
   int couponindex = -1;
 
   @override
@@ -484,8 +449,10 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                               bgcolor: appblueColor,
                               textColor: Colors.white,
                               onPressed: () {
-                                payment(int.parse(
-                                    amount.toString().replaceAll(".", "")));
+                                payment(
+                                    int.parse(
+                                        amount.toString().replaceAll(".", "")),
+                                    _razorpay);
                                 // paymentdialog();
                               },
                               borderRadius: 10,
@@ -588,7 +555,8 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
                         onPressed: () {
                           Pop(context);
                           payment(
-                              int.parse(amount.toString().replaceAll(".", "")));
+                              int.parse(amount.toString().replaceAll(".", "")),
+                              _razorpay);
                         }),
                   ],
                 ),

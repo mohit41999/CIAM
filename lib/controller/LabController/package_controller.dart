@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/package_available_lab_model.dart';
+import 'package:patient/Models/LAB/package_checkout_model.dart';
 import 'package:patient/Models/LAB/package_details_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,5 +31,42 @@ class PackageController {
     });
 
     return PackageDetailsModel.fromJson(response);
+  }
+
+  Future<PackageCheckoutModel> getPackageCheckout(
+      String packageid, String labId, String coupenId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response =
+        await PostData(PARAM_URL: 'confirm_package_order.php', params: {
+      'token': Token,
+      'user_id': preferences.getString('user_id'),
+      'package_id': packageid,
+      'lab_id': labId,
+      'coupen_id': coupenId
+    });
+
+    return PackageCheckoutModel.fromJson(response);
+  }
+
+  Future addPackageOrder(
+      {required String packageid,
+      required String labId,
+      required String fees,
+      required String coupon_discount,
+      required String amountPaid,
+      required String couponCode}) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var response = await PostData(PARAM_URL: 'add_package_order.php', params: {
+      'token': Token,
+      'user_id': preferences.getString('user_id'),
+      'lab_id': labId,
+      'package_id': packageid,
+      'total_price': fees,
+      'coupon_discount': coupon_discount,
+      'ammount_paid': amountPaid,
+      'coupon_code': couponCode
+    });
+
+    return response;
   }
 }
