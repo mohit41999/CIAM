@@ -6,7 +6,7 @@ import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
 import 'package:patient/controller/wallet_controller.dart';
-import 'package:patient/helper/constants.dart';
+import 'package:patient/helper/razorpay.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';

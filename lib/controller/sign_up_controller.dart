@@ -3,6 +3,8 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/controller/NavigationController.dart';
 
+import '../API repo/api_end_points.dart';
+
 class SignUpController {
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
@@ -22,7 +24,7 @@ class SignUpController {
   }
 
   void Signup(BuildContext context) {
-    PostData(PARAM_URL: 'signup.php', params: {
+    PostData(PARAM_URL: AppEndPoints.signup, params: {
       'token': Token,
       'first_name': firstname.text,
       'last_name': lastname.text,

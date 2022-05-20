@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,7 @@ class AppReviewController {
   Future<AppReviewModel> getappReview(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await PostData(
-            PARAM_URL: 'get_app_reviews.php',
+            PARAM_URL: AppEndPoints.get_app_reviews,
             params: {'token': Token, 'user_id': prefs.getString('user_id')})
         .then((value) {
       data = value;

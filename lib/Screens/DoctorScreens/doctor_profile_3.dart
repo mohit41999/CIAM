@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/home_care_sub_category_model.dart';
 import 'package:patient/Screens/TermsAndConditions.dart';
 import 'package:patient/Screens/confirmScreen.dart';
@@ -43,7 +44,7 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
   Future<HomeCareSubCategoriesModel> getsubCate() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: 'get_home_care_sub_cat_services.php',
+        PARAM_URL: AppEndPoints.get_home_care_sub_cat_services,
         params: {
           'token': Token,
           'cat_id': widget.cat_id,
@@ -99,16 +100,18 @@ class _DoctorProfile3State extends State<DoctorProfile3> {
         loader.show();
         late Map<String, dynamic> data;
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await PostData(PARAM_URL: 'add_homecare_sub_requirement.php', params: {
-          'token': Token,
-          'user_id': prefs.getString('user_id'),
-          'name': name,
-          'email': email,
-          'phone': phone,
-          'service_category_id': careid,
-          'service_subcategory_id': subcareid,
-          'postal_code': care_requirement,
-        }).then((value) {
+        await PostData(
+            PARAM_URL: AppEndPoints.add_homecare_sub_requirement,
+            params: {
+              'token': Token,
+              'user_id': prefs.getString('user_id'),
+              'name': name,
+              'email': email,
+              'phone': phone,
+              'service_category_id': careid,
+              'service_subcategory_id': subcareid,
+              'postal_code': care_requirement,
+            }).then((value) {
           loader.dismiss();
           if (value['status']) {
             loader.dismiss();

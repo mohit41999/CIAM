@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Screens/biometric_authenticate.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/firebase/fcm.dart';
@@ -29,7 +30,7 @@ class SignInController {
   Future<void> SignIn(BuildContext context) async {
     var loader = ProgressView(context);
     loader.show();
-    var response = await PostData(PARAM_URL: 'login.php', params: {
+    var response = await PostData(PARAM_URL: AppEndPoints.login, params: {
       'token': Token,
       'email': email.text,
       'password': password.text,

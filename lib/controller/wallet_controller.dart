@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/wallet_history.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,7 @@ class WalletController {
   Future getwallet(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: 'my_wallet.php',
+        PARAM_URL: AppEndPoints.my_wallet,
         params: {'token': Token, 'user_id': preferences.getString('user_id')});
     if (response['status']) {
       walletBalance = response['data']['wallet_balance'];
@@ -24,7 +25,8 @@ class WalletController {
 
   Future depositWallet(BuildContext context, String amount) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await PostData(PARAM_URL: 'deposit_wallet.php', params: {
+    var response =
+        await PostData(PARAM_URL: AppEndPoints.deposit_wallet, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'amount': amount,
@@ -43,11 +45,13 @@ class WalletController {
     var loader = ProgressView(context);
     loader.show();
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await PostData(PARAM_URL: 'withdrawal_request.php', params: {
-      'token': Token,
-      'user_id': preferences.getString('user_id'),
-      'amount': amount
-    });
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.withdrawal_request,
+        params: {
+          'token': Token,
+          'user_id': preferences.getString('user_id'),
+          'amount': amount
+        });
     loader.dismiss();
     if (response['status']) {
       ScaffoldMessenger.of(context)
@@ -63,11 +67,12 @@ class WalletController {
   Future<WalletTransactionModel?> getwalletTransaction(
       BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response =
-        await PostData(PARAM_URL: 'wallet_transaction_history.php', params: {
-      'token': Token,
-      'user_id': preferences.getString('user_id'),
-    });
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.wallet_transaction_history,
+        params: {
+          'token': Token,
+          'user_id': preferences.getString('user_id'),
+        });
 
     if (response['status']) {
       return WalletTransactionModel.fromJson(response);

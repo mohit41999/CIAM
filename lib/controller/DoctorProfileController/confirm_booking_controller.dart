@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/confirm_booking_model.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,7 @@ class ConfirmBookingController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: 'get_confirmation_booking_details.php',
+        PARAM_URL: AppEndPoints.get_confirmation_booking_details,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
@@ -27,13 +28,14 @@ class ConfirmBookingController {
     var loader = ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response =
-        await PostData(PARAM_URL: 'add_booking_confirmation.php', params: {
-      'token': Token,
-      'user_id': prefs.getString('user_id'),
-      // 'doctor_id': doctor_id,
-      'booking_id': booking_id
-    });
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.add_booking_confirmation,
+        params: {
+          'token': Token,
+          'user_id': prefs.getString('user_id'),
+          // 'doctor_id': doctor_id,
+          'booking_id': booking_id
+        });
     loader.dismiss();
     if (response['status']) {
       // success(context, response);
@@ -47,14 +49,15 @@ class ConfirmBookingController {
     var loader = ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response =
-        await PostData(PARAM_URL: 'add_payment_transaction.php', params: {
-      'token': Token,
-      'user_id': prefs.getString('user_id'),
-      'booking_id': booking_id,
-      'amount': amount,
-      'payment_status': 'success'
-    });
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.add_payment_transaction,
+        params: {
+          'token': Token,
+          'user_id': prefs.getString('user_id'),
+          'booking_id': booking_id,
+          'amount': amount,
+          'payment_status': 'success'
+        });
     loader.dismiss();
     if (response['status']) {
       Navigator.pop(context);

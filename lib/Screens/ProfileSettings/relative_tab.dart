@@ -6,7 +6,7 @@ import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/ProfileSettingController/personal_setting_controller.dart';
-import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
+import 'package:patient/controller/ProfileSettingController/relative_setting_controller.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/widgets/title_enter_field.dart';

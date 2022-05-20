@@ -10,7 +10,7 @@ import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/DoctorProfileController/confirm_booking_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/wallet_controller.dart';
-import 'package:patient/helper/constants.dart';
+import 'package:patient/helper/razorpay.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';

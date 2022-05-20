@@ -8,7 +8,7 @@ import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_profile_one_controller.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
-import 'package:patient/controller/ProfileSettingController/relatice_setting_controller.dart';
+import 'package:patient/controller/ProfileSettingController/relative_setting_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';

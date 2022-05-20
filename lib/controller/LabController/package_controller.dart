@@ -5,18 +5,20 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/package_available_lab_model.dart';
 import 'package:patient/Models/LAB/package_checkout_model.dart';
 import 'package:patient/Models/LAB/package_details_model.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PackageController {
   Future<PackageAvailableLabModel> getAvailableLabs(String packageid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response =
-        await PostData(PARAM_URL: 'get_packages_available_labs.php', params: {
-      'token': Token,
-      'user_id': preferences.getString('user_id'),
-      'package_id': packageid,
-      'city': preferences.getString('city')
-    });
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.get_packages_available_labs,
+        params: {
+          'token': Token,
+          'user_id': preferences.getString('user_id'),
+          'package_id': packageid,
+          'city': preferences.getString('city')
+        });
 
     return PackageAvailableLabModel.fromJson(response);
   }
@@ -24,7 +26,7 @@ class PackageController {
   Future<PackageDetailsModel> getpackagedetails(String packageid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: 'get_package_details.php', params: {
+        await PostData(PARAM_URL: AppEndPoints.get_package_details, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'package_id': packageid
@@ -37,7 +39,7 @@ class PackageController {
       String packageid, String labId, String coupenId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: 'confirm_package_order.php', params: {
+        await PostData(PARAM_URL: AppEndPoints.confirm_package_order, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'package_id': packageid,
@@ -56,7 +58,8 @@ class PackageController {
       required String amountPaid,
       required String couponCode}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    var response = await PostData(PARAM_URL: 'add_package_order.php', params: {
+    var response =
+        await PostData(PARAM_URL: AppEndPoints.add_package_order, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'lab_id': labId,

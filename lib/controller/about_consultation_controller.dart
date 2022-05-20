@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
@@ -12,7 +13,7 @@ class AboutConsultationController {
       BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await PostData(
-            PARAM_URL: 'get_doctor_specialisties.php',
+            PARAM_URL: AppEndPoints.get_doctor_specialisties,
             params: {'token': Token, 'user_id': prefs.getString('user_id')})
         .then((value) {
       doctorspeciality = value;

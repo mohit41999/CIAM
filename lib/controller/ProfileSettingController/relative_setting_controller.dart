@@ -6,6 +6,7 @@ import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../API repo/api_end_points.dart';
 import '../NavigationController.dart';
 
 class RelativeSettingController {
@@ -47,8 +48,8 @@ class RelativeSettingController {
         'marital_status': maritalStatus.text,
       };
 
-      var response =
-          await PostData(PARAM_URL: 'add_relative.php', params: bodyParam);
+      var response = await PostData(
+          PARAM_URL: AppEndPoints.add_relative, params: bodyParam);
 
       loader.dismiss();
       if (response['status']) {
@@ -68,7 +69,8 @@ class RelativeSettingController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? user_id = prefs.getString('user_id');
     print(user_id);
-    var response = await PostData(PARAM_URL: 'get_relative.php', params: {
+    var response =
+        await PostData(PARAM_URL: AppEndPoints.get_relative, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });

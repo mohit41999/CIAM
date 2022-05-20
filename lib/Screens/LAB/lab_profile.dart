@@ -11,6 +11,7 @@ import 'package:patient/Screens/LAB/lab_details.dart';
 import 'package:patient/Screens/LAB/package_available_labs.dart';
 import 'package:patient/Screens/LAB/prescription_screen.dart';
 import 'package:patient/Screens/LAB/test_available_labs.dart';
+import 'package:patient/Screens/LAB/test_by_organs.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/lab_profile_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -186,32 +187,42 @@ class _LabProfileState extends State<LabProfile> {
                             crossAxisCount: 2, childAspectRatio: 2 / 2),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              color: Colors.white,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                      child: Icon(
-                                    Icons.add,
-                                    size: 40,
-                                    color: apptealColor,
-                                  )),
-                                  Expanded(
-                                      child: Center(
-                                          child: Text(
-                                    _controller.allOrgans.data[index].organName,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14),
-                                  )))
-                                ],
+                          return GestureDetector(
+                            onTap: () {
+                              Push(
+                                  context,
+                                  TestsByOrgan(
+                                      organid: _controller
+                                          .allOrgans.data[index].organId));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                color: Colors.white,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                        child: Icon(
+                                      Icons.add,
+                                      size: 40,
+                                      color: apptealColor,
+                                    )),
+                                    Expanded(
+                                        child: Center(
+                                            child: Text(
+                                      _controller
+                                          .allOrgans.data[index].organName,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    )))
+                                  ],
+                                ),
                               ),
                             ),
                           );

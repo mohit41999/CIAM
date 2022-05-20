@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../API repo/api_end_points.dart';
+
 class AccountSettingController {
   TextEditingController old_password = TextEditingController();
   TextEditingController new_password = TextEditingController();
@@ -9,7 +11,7 @@ class AccountSettingController {
   Future<void> changesPassword(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await PostData(PARAM_URL: 'account_setting.php', params: {
+    await PostData(PARAM_URL: AppEndPoints.account_setting, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
       'old_password': old_password.text,
