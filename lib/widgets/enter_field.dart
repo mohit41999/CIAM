@@ -31,16 +31,10 @@ class EnterField extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(
-          minHeight: 10, maxHeight: 60, maxWidth: double.maxFinite),
+          minHeight: 10, maxHeight: 50, maxWidth: double.maxFinite),
       child: Container(
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              blurRadius: 10,
-              offset: const Offset(2, 5),
-            ),
-          ],
+          boxShadow: [],
         ),
         child: TextFormField(
           // autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -51,13 +45,21 @@ class EnterField extends StatelessWidget {
           enableSuggestions: true,
           showCursor: showcursor,
           readOnly: readonly,
+
           keyboardType: textInputType,
           controller: controller,
           decoration: InputDecoration(
             enabled: true,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            contentPadding: EdgeInsets.all(4),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide:
+                    new BorderSide(color: Colors.black.withOpacity(0.5))),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: new BorderSide(color: Colors.transparent)),
+                borderSide:
+                    new BorderSide(color: Colors.black.withOpacity(0.5))),
             border: new OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: new BorderSide(color: Colors.transparent)),
@@ -66,7 +68,8 @@ class EnterField extends StatelessWidget {
             // disabledBorder: InputBorder.none,
             filled: true,
             labelText: labelText,
-            suffix: widget,
+            suffixIcon: widget,
+
             labelStyle: GoogleFonts.montserrat(
                 fontSize: 14, color: Colors.black.withOpacity(0.6)),
             hintText: hintText,

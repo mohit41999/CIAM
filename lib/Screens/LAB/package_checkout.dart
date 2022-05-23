@@ -16,9 +16,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PackageCheckout extends StatefulWidget {
   final String packageId;
   final String labId;
+  final String relative_id;
 
   const PackageCheckout(
-      {Key? key, required this.packageId, required this.labId})
+      {Key? key,
+      required this.packageId,
+      required this.labId,
+      required this.relative_id})
       : super(key: key);
   @override
   _PackageCheckoutState createState() => _PackageCheckoutState();
@@ -48,7 +52,8 @@ class _PackageCheckoutState extends State<PackageCheckout> {
     await getRazorpaycred();
     coupons = await getCoupons(context);
     await packageController
-        .getPackageCheckout(widget.packageId, widget.labId, '')
+        .getPackageCheckout(
+            widget.packageId, widget.labId, '', widget.relative_id)
         .then((value) {
       setState(() {
         packageCheckout = value;
@@ -315,7 +320,9 @@ class _PackageCheckoutState extends State<PackageCheckout> {
                                                                 widget
                                                                     .packageId,
                                                                 widget.labId,
-                                                                couponid)
+                                                                couponid,
+                                                                widget
+                                                                    .relative_id)
                                                             .then((value) {
                                                           setState(() {
                                                             packageCheckout =
@@ -379,8 +386,11 @@ class _PackageCheckoutState extends State<PackageCheckout> {
                                     loading = true;
                                   });
                                   packageController
-                                      .getPackageCheckout(widget.packageId,
-                                          widget.labId, couponid)
+                                      .getPackageCheckout(
+                                          widget.packageId,
+                                          widget.labId,
+                                          couponid,
+                                          widget.relative_id)
                                       .then((value) {
                                     setState(() {
                                       packageCheckout = value;

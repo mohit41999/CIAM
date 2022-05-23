@@ -27,6 +27,7 @@ class PackagesLabScreen extends StatefulWidget {
 class _PackagesLabScreenState extends State<PackagesLabScreen> {
   DoctorProfileOneController _con = DoctorProfileOneController();
   late RelativeModel relativeData;
+  String relativeid = '0';
   late PackageAvailableLabModel availableLabs;
   late PackageDetailsModel packageDetails;
   bool labloading = true;
@@ -358,6 +359,7 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                     setState(() {
                                       print(v);
                                       _con.bookingFor = v;
+                                      print(_con.bookingFor.toString());
                                     });
                                   },
                                 ),
@@ -381,6 +383,7 @@ class _PackagesLabScreenState extends State<PackagesLabScreen> {
                                     PackageCheckout(
                                       packageId: package_id,
                                       labId: lab_id,
+                                      relative_id: _con.bookingFor,
                                     ));
                               })
                         ],

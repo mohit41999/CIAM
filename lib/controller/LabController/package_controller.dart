@@ -35,8 +35,8 @@ class PackageController {
     return PackageDetailsModel.fromJson(response);
   }
 
-  Future<PackageCheckoutModel> getPackageCheckout(
-      String packageid, String labId, String coupenId) async {
+  Future<PackageCheckoutModel> getPackageCheckout(String packageid,
+      String labId, String coupenId, String relative_id) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
         await PostData(PARAM_URL: AppEndPoints.confirm_package_order, params: {
@@ -44,7 +44,8 @@ class PackageController {
       'user_id': preferences.getString('user_id'),
       'package_id': packageid,
       'lab_id': labId,
-      'coupen_id': coupenId
+      'coupen_id': coupenId,
+      'relative_id': relative_id
     });
 
     return PackageCheckoutModel.fromJson(response);
