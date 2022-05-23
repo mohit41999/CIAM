@@ -144,7 +144,28 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: MediaQuery.of(context).size.width / 3,
                   bgcolor: appblueColor,
                   textColor: Colors.white,
-                  onPressed: () {}),
+                  onPressed: () {
+                    _controller.SignIn(context);
+                    //               // AuthenticationHelper()
+                    //               //     .signIn(
+                    //               //         email: _controller.email.text,
+                    //               //         password: _controller.password.text)
+                    //               //     .then((result) {
+                    //               //   if (result == null) {
+                    //               //     _controller.SignIn(context);
+                    //               //   } else {
+                    //               //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //               //       content: Text(
+                    //               //         result,
+                    //               //         style: TextStyle(fontSize: 16),
+                    //               //       ),
+                    //               //     ));
+                    //               //   }
+                    //               // });
+                    //
+                    //               //Push(context, GeneralScreen2());
+                    //               // Push(context, GeneralScreen());
+                  }),
               SizedBox(
                 height: 20,
               ),
@@ -153,7 +174,30 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: MediaQuery.of(context).size.width / 3,
                   bgcolor: Colors.transparent,
                   textColor: appblueColor,
-                  onPressed: () {})
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                    // navigate to desired screen
+                  }),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  RichText(
+                      text: TextSpan(
+                          text: 'By continuing, you agree to our ',
+                          style: GoogleFonts.montserrat(color: Colors.black),
+                          children: [
+                        TextSpan(
+                            text: 'Privacy Policy',
+                            style: GoogleFonts.montserrat(
+                              color: Colors.blue,
+                            )),
+                      ])),
+                  Icon(Icons.question_mark),
+                ],
+              )
             ],
           ),
         ),

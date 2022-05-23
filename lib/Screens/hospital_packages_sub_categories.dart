@@ -6,6 +6,7 @@ import 'package:patient/Models/hospital_packages_sub_cat_model.dart';
 import 'package:patient/Screens/TermsAndConditions.dart';
 import 'package:patient/Screens/confirmScreen.dart';
 import 'package:patient/Screens/contact_us_form.dart';
+import 'package:patient/Screens/hospital_packages.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -36,6 +37,7 @@ class HospitalPackageSubCat extends StatefulWidget {
 class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
   late AnimationController controller;
   late CurvedAnimation curve;
+  cities city = cities.Delhi;
   TextEditingController care = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -70,13 +72,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
     required String phone,
     required String care_requirement,
   }) async {
-    if (city.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Select City'),
-        backgroundColor: Colors.red,
-      ));
-      return false;
-    } else if (care_requirement.isEmpty) {
+    if (care_requirement.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Enter care requirement'),
         backgroundColor: Colors.red,
@@ -120,7 +116,7 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
               'name': name,
               'email': email,
               'phone': phone,
-              'city': city,
+              'city': '1',
               'package_category_id': careid,
               'package_subcategory_id': subcareid,
               'postal_code': care_requirement,
@@ -184,314 +180,325 @@ class _HospitalPackageSubCatState extends State<HospitalPackageSubCat> {
     showDialog(
         context: context,
         useRootNavigator: false,
-        builder: (BuildContext context) => AlertDialog(
-            backgroundColor: Color(0xffF1F1F1),
-            elevation: 0,
-            insetPadding: EdgeInsets.all(8),
-            contentPadding: EdgeInsets.symmetric(horizontal: 15),
-            title: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Hospital Packages',
-                      style: GoogleFonts.montserrat(
-                          color: appblueColor, fontWeight: FontWeight.bold),
-                    ),
-                    // SizedBox(
-                    //   width: 15,
-                    // ),
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(Icons.close)),
-                  ],
-                ),
-                Divider(color: Colors.grey),
-              ],
-            ),
-            content: Container(
-              height: MediaQuery.of(context).size.height / 1.8,
-              color: Color(0xffF1F1F1),
-              //padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                          'Category - ',
-                          style: GoogleFonts.montserrat(
-                              color: apptealColor, fontWeight: FontWeight.bold),
-                        )),
-                        Expanded(
-                            child: Text(
-                          widget.cat_name,
-                          style: GoogleFonts.montserrat(
-                              color: appblueColor, fontWeight: FontWeight.bold),
-                        ))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Text(
-                          'Sub Category - ',
-                          style: GoogleFonts.montserrat(
-                              color: apptealColor, fontWeight: FontWeight.bold),
-                        )),
-                        Expanded(
-                            child: Text(
-                          subcatName,
-                          style: GoogleFonts.montserrat(
-                              color: appblueColor, fontWeight: FontWeight.bold),
-                        ))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text('Where is the care needed?'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    CSCPicker(
-                      showCities: true,
-
-                      defaultCountry: DefaultCountry.India,
-                      disableCountry: true,
-                      showStates: true,
-                      layout: Layout.vertical,
-
-                      flagState: CountryFlag.DISABLE,
-
-                      dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                offset: Offset(0, 5),
-                                spreadRadius: 1,
-                                blurRadius: 2)
-                          ]),
-
-                      disabledDropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                offset: Offset(0, 5),
-                                spreadRadius: 1,
-                                blurRadius: 2)
-                          ],
-                          border: Border.all(color: Colors.white, width: 1)),
-
-                      ///Default Country
-
-                      ///selected item style [OPTIONAL PARAMETER]
-                      selectedItemStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-
-                      ///DropdownDialog Heading style [OPTIONAL PARAMETER]
-                      dropdownHeadingStyle: TextStyle(
-                          color: Colors.red,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
-
-                      ///DropdownDialog Item style [OPTIONAL PARAMETER]
-                      dropdownItemStyle: GoogleFonts.poppins(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-
-                      ///Dialog box radius [OPTIONAL PARAMETER]
-                      dropdownDialogRadius: 10.0,
-
-                      ///Search bar radius [OPTIONAL PARAMETER]
-                      searchBarRadius: 10.0,
-
-                      ///triggers once country selected in dropdown
-                      onCountryChanged: (value) {
-                        setState(() {
-                          ///store value in country variable
-                          countryValue = value;
-                          print(countryValue);
-                        });
-                      },
-
-                      ///triggers once state selected in dropdown
-                      onStateChanged: (value) {
-                        setState(() {
-                          ///store value in state variable
-                          stateValue = value;
-                        });
-                      },
-
-                      ///triggers once city selected in dropdown
-                      onCityChanged: (value) {
-                        setState(() {
-                          ///store value in city variable
-                          cityValue = value;
-                        });
-                      },
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 55),
-                      child: Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.circular(10),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
-                          maxLines: 1,
-
-                          // autovalidateMode: AutovalidateMode.onUserInteraction,
-                          // validator: validator,
-                          // maxLength: maxLength,
-                          // maxLengthEnforcement: MaxLengthEnforcement.enforced,
-
-                          enableSuggestions: true,
-
-                          controller: care,
-                          decoration: InputDecoration(
-                            enabled: true,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    new BorderSide(color: Colors.transparent)),
-                            border: new OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    new BorderSide(color: Colors.transparent)),
-                            // enabledBorder: InputBorder.none,
-                            // errorBorder: InputBorder.none,
-                            // disabledBorder: InputBorder.none,
-                            filled: true,
-                            labelText: 'Enter Postal Code',
-                            alignLabelWithHint: false,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-
-                            labelStyle: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black.withOpacity(0.6)),
-                            // hintText: textFieldtext,
-                            hintStyle: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                            fillColor: Colors.white,
+        builder: (BuildContext context) =>
+            StatefulBuilder(builder: (context, setState) {
+              return AlertDialog(
+                  backgroundColor: Color(0xffF1F1F1),
+                  elevation: 0,
+                  insetPadding: EdgeInsets.all(8),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                  title: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Hospital Packages',
+                            style: GoogleFonts.montserrat(
+                                color: appblueColor,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ),
+                          // SizedBox(
+                          //   width: 15,
+                          // ),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(Icons.close)),
+                        ],
+                      ),
+                      Divider(color: Colors.grey),
+                    ],
+                  ),
+                  content: Container(
+                    height: MediaQuery.of(context).size.height / 1.8,
+                    color: Color(0xffF1F1F1),
+                    //padding: EdgeInsets.fromLTRB(20, 50, 20, 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                'Category - ',
+                                style: GoogleFonts.montserrat(
+                                    color: apptealColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                widget.cat_name,
+                                style: GoogleFonts.montserrat(
+                                    color: appblueColor,
+                                    fontWeight: FontWeight.bold),
+                              ))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: Text(
+                                'Sub Category - ',
+                                style: GoogleFonts.montserrat(
+                                    color: apptealColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                subcatName,
+                                style: GoogleFonts.montserrat(
+                                    color: appblueColor,
+                                    fontWeight: FontWeight.bold),
+                              ))
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text('Where is the care needed?'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Wrap(
+                            alignment: WrapAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Delhi,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Delhi')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Bangalore,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Bangalore')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Gurugram,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Gurugram')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Lucknow,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Lucknow')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Mumbai,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Mumbai')
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxHeight: 55),
+                            child: Material(
+                              elevation: 5,
+                              borderRadius: BorderRadius.circular(10),
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                                maxLines: 1,
+
+                                // autovalidateMode: AutovalidateMode.onUserInteraction,
+                                // validator: validator,
+                                // maxLength: maxLength,
+                                // maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+                                enableSuggestions: true,
+
+                                controller: care,
+                                decoration: InputDecoration(
+                                  enabled: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: new BorderSide(
+                                          color: Colors.transparent)),
+                                  border: new OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: new BorderSide(
+                                          color: Colors.transparent)),
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  // disabledBorder: InputBorder.none,
+                                  filled: true,
+                                  labelText: 'Enter Postal Code',
+                                  alignLabelWithHint: false,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+
+                                  labelStyle: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black.withOpacity(0.6)),
+                                  // hintText: textFieldtext,
+                                  hintStyle: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black),
+                                  fillColor: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          alertTextField(
+                              controller: nameController,
+                              label: 'Name',
+                              textFieldtext: 'Enter Full Name'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          alertTextField(
+                              controller: emailController,
+                              label: 'Email',
+                              textFieldtext: 'Enter Email Id'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          alertTextField(
+                              inputType: TextInputType.number,
+                              controller: phonenumberController,
+                              label: 'Phone Number',
+                              textFieldtext: 'Enter Phone Number'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          commonBtn(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          TermsAndConditions()));
+                            },
+                            s: 'Terms and Conditions',
+                            textColor: appblueColor,
+                            bgcolor: Colors.white,
+                            borderRadius: 10,
+                            height: 30,
+                            textSize: 12,
+                            borderColor: appblueColor,
+                            borderWidth: 2,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Center(
+                            child: commonBtn(
+                              s: 'Submit Care',
+                              bgcolor: Color(0xff161616).withOpacity(0.6),
+                              textColor: Colors.white,
+                              onPressed: () {
+                                print(careController.text);
+                                addCareServices(context,
+                                        subcareid: subCatId,
+                                        careid: widget.cat_id,
+                                        city: cityValue ?? '',
+                                        name: nameController.text,
+                                        email: emailController.text,
+                                        phone: phonenumberController.text,
+                                        care_requirement: careController.text)
+                                    .then((value) {
+                                  if (value) {
+                                    nameController.clear();
+                                    emailController.clear();
+                                    phonenumberController.clear();
+                                    careController.clear();
+                                  }
+                                });
+                              },
+                              height: 40,
+                              width: 115,
+                              borderRadius: 4,
+                              textSize: 12,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    alertTextField(
-                        controller: nameController,
-                        label: 'Name',
-                        textFieldtext: 'Enter Full Name'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    alertTextField(
-                        controller: emailController,
-                        label: 'Email',
-                        textFieldtext: 'Enter Email Id'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    alertTextField(
-                        inputType: TextInputType.number,
-                        controller: phonenumberController,
-                        label: 'Phone Number',
-                        textFieldtext: 'Enter Phone Number'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    commonBtn(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TermsAndConditions()));
-                      },
-                      s: 'Terms and Conditions',
-                      textColor: appblueColor,
-                      bgcolor: Colors.white,
-                      borderRadius: 10,
-                      height: 30,
-                      textSize: 12,
-                      borderColor: appblueColor,
-                      borderWidth: 2,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: commonBtn(
-                        s: 'Submit Care',
-                        bgcolor: Color(0xff161616).withOpacity(0.6),
-                        textColor: Colors.white,
-                        onPressed: () {
-                          print(careController.text);
-                          addCareServices(context,
-                                  subcareid: subCatId,
-                                  careid: widget.cat_id,
-                                  city: cityValue ?? '',
-                                  name: nameController.text,
-                                  email: emailController.text,
-                                  phone: phonenumberController.text,
-                                  care_requirement: careController.text)
-                              .then((value) {
-                            if (value) {
-                              nameController.clear();
-                              emailController.clear();
-                              phonenumberController.clear();
-                              careController.clear();
-                            }
-                          });
-                        },
-                        height: 40,
-                        width: 115,
-                        borderRadius: 4,
-                        textSize: 12,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-            )));
+                  ));
+            }));
   }
 
   @override

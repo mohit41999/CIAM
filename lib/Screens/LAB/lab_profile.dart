@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
+import 'package:patient/Screens/LAB/allOrgans.dart';
 import 'package:patient/Screens/LAB/all_labs.dart';
 import 'package:patient/Screens/LAB/all_packages.dart';
 import 'package:patient/Screens/LAB/all_test.dart';
@@ -173,7 +174,7 @@ class _LabProfileState extends State<LabProfile> {
                 child: commonRow(
                   Title: 'Tests by Organs',
                   subTitle: 'View all',
-                  value: AllTests(),
+                  value: AllOrgans(),
                 ),
               ),
               (_controller.organsLoading)
@@ -205,21 +206,21 @@ class _LabProfileState extends State<LabProfile> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                        child: Icon(
-                                      Icons.add,
-                                      size: 40,
-                                      color: apptealColor,
+                                        child: Image.network(
+                                      _controller.allOrgans.data[index].image,
+                                      fit: BoxFit.fitWidth,
                                     )),
                                     Expanded(
                                         child: Center(
                                             child: Text(
                                       _controller
-                                          .allOrgans.data[index].organName,
+                                          .allOrgans.data[index].organName
+                                          .toUpperCase(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 14),
+                                          fontSize: 12),
                                     )))
                                   ],
                                 ),

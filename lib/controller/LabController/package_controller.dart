@@ -55,6 +55,7 @@ class PackageController {
       {required String packageid,
       required String labId,
       required String fees,
+      required String relative_id,
       required String coupon_discount,
       required String amountPaid,
       required String couponCode}) async {
@@ -66,9 +67,10 @@ class PackageController {
       'lab_id': labId,
       'package_id': packageid,
       'total_price': fees,
+      'relative_id': relative_id,
       'coupon_discount': coupon_discount,
       'ammount_paid': amountPaid,
-      'coupon_code': couponCode
+      'coupon_code': couponCode,
     });
 
     return response;

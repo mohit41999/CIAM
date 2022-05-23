@@ -29,7 +29,9 @@ class _ConfirmScreenState extends State<ConfirmScreen>
     animation.addListener(() => this.setState(() {}));
     animationController.forward();
     setState(() {});
-    _timer = Timer(Duration(seconds: 3), () => Pop(context));
+    _timer = Timer(Duration(seconds: 3), () {
+      Pop(context);
+    });
   }
 
   @override

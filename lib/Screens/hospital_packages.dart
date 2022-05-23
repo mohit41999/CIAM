@@ -31,6 +31,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/commonAppBarLeading.dart';
 
+enum cities { Delhi, Gurugram, Lucknow, Mumbai, Bangalore }
+
 class HospitalPackages extends StatefulWidget {
   const HospitalPackages({Key? key}) : super(key: key);
 
@@ -45,6 +47,8 @@ class _HospitalPackagesState extends State<HospitalPackages> {
   List<HospitalPackagesSubCatModelData> hospitalPackagesSubCat = [];
   var selectedSubCat;
   var selectedCategroy;
+  cities city = cities.Delhi;
+
   TextEditingController phonenumber = TextEditingController();
   String? countryValue = "";
   String? stateValue = "";
@@ -336,92 +340,177 @@ class _HospitalPackagesState extends State<HospitalPackages> {
                           SizedBox(
                             height: 5,
                           ),
-                          CSCPicker(
-                            showCities: true,
-
-                            defaultCountry: DefaultCountry.India,
-                            disableCountry: true,
-                            showStates: true,
-                            layout: Layout.vertical,
-
-                            flagState: CountryFlag.DISABLE,
-
-                            dropdownDecoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      offset: Offset(0, 5),
-                                      spreadRadius: 1,
-                                      blurRadius: 2)
-                                ]),
-
-                            disabledDropdownDecoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      offset: Offset(0, 5),
-                                      spreadRadius: 1,
-                                      blurRadius: 2)
+                          // CSCPicker(
+                          //   showCities: true,
+                          //
+                          //   defaultCountry: DefaultCountry.India,
+                          //   disableCountry: true,
+                          //   showStates: true,
+                          //   layout: Layout.vertical,
+                          //
+                          //   flagState: CountryFlag.DISABLE,
+                          //
+                          //   dropdownDecoration: BoxDecoration(
+                          //       borderRadius:
+                          //           BorderRadius.all(Radius.circular(10)),
+                          //       color: Colors.white,
+                          //       boxShadow: [
+                          //         BoxShadow(
+                          //             color: Colors.grey.withOpacity(0.5),
+                          //             offset: Offset(0, 5),
+                          //             spreadRadius: 1,
+                          //             blurRadius: 2)
+                          //       ]),
+                          //
+                          //   disabledDropdownDecoration: BoxDecoration(
+                          //       borderRadius:
+                          //           BorderRadius.all(Radius.circular(10)),
+                          //       color: Colors.white,
+                          //       boxShadow: [
+                          //         BoxShadow(
+                          //             color: Colors.grey.withOpacity(0.5),
+                          //             offset: Offset(0, 5),
+                          //             spreadRadius: 1,
+                          //             blurRadius: 2)
+                          //       ],
+                          //       border:
+                          //           Border.all(color: Colors.white, width: 1)),
+                          //
+                          //   ///Default Country
+                          //
+                          //   ///selected item style [OPTIONAL PARAMETER]
+                          //   selectedItemStyle: TextStyle(
+                          //     color: Colors.black,
+                          //     fontSize: 14,
+                          //   ),
+                          //
+                          //   ///DropdownDialog Heading style [OPTIONAL PARAMETER]
+                          //   dropdownHeadingStyle: TextStyle(
+                          //       color: Colors.red,
+                          //       fontSize: 17,
+                          //       fontWeight: FontWeight.bold),
+                          //
+                          //   ///DropdownDialog Item style [OPTIONAL PARAMETER]
+                          //   dropdownItemStyle: GoogleFonts.poppins(
+                          //     color: Colors.black,
+                          //     fontSize: 14,
+                          //   ),
+                          //
+                          //   ///Dialog box radius [OPTIONAL PARAMETER]
+                          //   dropdownDialogRadius: 10.0,
+                          //
+                          //   ///Search bar radius [OPTIONAL PARAMETER]
+                          //   searchBarRadius: 10.0,
+                          //
+                          //   ///triggers once country selected in dropdown
+                          //   onCountryChanged: (value) {
+                          //     setState(() {
+                          //       ///store value in country variable
+                          //       countryValue = value;
+                          //       print(countryValue);
+                          //     });
+                          //   },
+                          //
+                          //   ///triggers once state selected in dropdown
+                          //   onStateChanged: (value) {
+                          //     setState(() {
+                          //       ///store value in state variable
+                          //       stateValue = value;
+                          //     });
+                          //   },
+                          //
+                          //   ///triggers once city selected in dropdown
+                          //   onCityChanged: (value) {
+                          //     setState(() {
+                          //       ///store value in city variable
+                          //       cityValue = value;
+                          //     });
+                          //   },
+                          // ),
+                          Wrap(
+                            alignment: WrapAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Delhi,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Delhi')
                                 ],
-                                border:
-                                    Border.all(color: Colors.white, width: 1)),
-
-                            ///Default Country
-
-                            ///selected item style [OPTIONAL PARAMETER]
-                            selectedItemStyle: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-
-                            ///DropdownDialog Heading style [OPTIONAL PARAMETER]
-                            dropdownHeadingStyle: TextStyle(
-                                color: Colors.red,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold),
-
-                            ///DropdownDialog Item style [OPTIONAL PARAMETER]
-                            dropdownItemStyle: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-
-                            ///Dialog box radius [OPTIONAL PARAMETER]
-                            dropdownDialogRadius: 10.0,
-
-                            ///Search bar radius [OPTIONAL PARAMETER]
-                            searchBarRadius: 10.0,
-
-                            ///triggers once country selected in dropdown
-                            onCountryChanged: (value) {
-                              setState(() {
-                                ///store value in country variable
-                                countryValue = value;
-                                print(countryValue);
-                              });
-                            },
-
-                            ///triggers once state selected in dropdown
-                            onStateChanged: (value) {
-                              setState(() {
-                                ///store value in state variable
-                                stateValue = value;
-                              });
-                            },
-
-                            ///triggers once city selected in dropdown
-                            onCityChanged: (value) {
-                              setState(() {
-                                ///store value in city variable
-                                cityValue = value;
-                              });
-                            },
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Bangalore,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Bangalore')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Gurugram,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Gurugram')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Lucknow,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Lucknow')
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Radio<cities>(
+                                      fillColor: MaterialStateProperty.all(
+                                          appblueColor),
+                                      value: cities.Mumbai,
+                                      groupValue: city,
+                                      onChanged: (v) {
+                                        setState(() {
+                                          city = v!;
+                                        });
+                                      }),
+                                  Text('Mumbai')
+                                ],
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 15,
@@ -1117,13 +1206,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
     required String phone,
     required String care_requirement,
   }) async {
-    if (city.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Select City'),
-        backgroundColor: Colors.red,
-      ));
-      return false;
-    } else if (care_requirement.isEmpty) {
+    if (care_requirement.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Enter care requirement'),
         backgroundColor: Colors.red,
@@ -1179,7 +1262,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
               'name': name,
               'email': email,
               'phone': phone,
-              'city': city,
+              'city': '1',
               'package_category_id': careid,
               'package_subcategory_id': subcareid,
               'postal_code': care_requirement,

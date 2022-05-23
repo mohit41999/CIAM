@@ -3,13 +3,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/package_checkout_model.dart';
 import 'package:patient/Models/coupons_model.dart';
+import 'package:patient/Screens/confirmScreen.dart';
+import 'package:patient/Screens/general_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/controller/wallet_controller.dart';
 import 'package:patient/helper/razorpay.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,10 +75,15 @@ class _PackageCheckoutState extends State<PackageCheckout> {
     packageController.addPackageOrder(
         packageid: widget.packageId,
         labId: widget.labId,
+        relative_id: widget.relative_id,
         fees: packageCheckout.data[0].billSummary.totalFees,
         coupon_discount: packageCheckout.data[0].billSummary.couponDiscount,
         amountPaid: packageCheckout.data[0].billSummary.amountPaid,
         couponCode: couponCode);
+
+    Pop(context);
+    pushNewScreen(context,
+        screen: ConfirmScreen(text: 'Success'), withNavBar: false);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {

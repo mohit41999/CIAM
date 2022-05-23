@@ -9,15 +9,26 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="knowledge">
-      <change afterPath="$PROJECT_DIR$/assets/pngs/signin.png" afterDir="false" />
+    <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="asdjksakjd">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/video/splash.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/assets/video/splash.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_details.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_details.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/lab_profile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_available_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_available_labs.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/package_checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_available_labs.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/LAB/test_checkout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/test_checkout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/adsas.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/LAB/allOrgans.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SplashScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/confirmScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/confirmScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/hospital_packages_sub_categories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages_sub_categories.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controller/LabController/package_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/LabController/package_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/enter_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/enter_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/LabController/test_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/LabController/test_controller.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +46,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="22PtjCPeyeUFHSZ0g3NwsV8p3tI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -51,14 +70,14 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tripster" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/video" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\assets\pngs" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\assets\video" />
+      <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\assets\pngs" />
       <recent name="D:\mohitnotionProjects\PatientWFH\ios\Runner" />
       <recent name="D:\mohitnotionProjects\PatientWFH\ios\Runner\Assets.xcassets" />
       <recent name="C:\Users\user\Desktop\Github Projects\PatientWFH\lib\Models" />
@@ -397,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653054726385</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="asdjksakjd">
+      <created>1653287533184</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1653287533184</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -435,6 +461,7 @@
     <MESSAGE value="lab package test" />
     <MESSAGE value="changes" />
     <MESSAGE value="knowledge" />
-    <option name="LAST_COMMIT_MESSAGE" value="knowledge" />
+    <MESSAGE value="asdjksakjd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdjksakjd" />
   </component>
 </project>

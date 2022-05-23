@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/test_available_lab_model.dart';
+import 'package:patient/Models/relative_model.dart';
 import 'package:patient/Screens/LAB/test_checkout.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
+import 'package:patient/controller/ProfileSettingController/relative_setting_controller.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
@@ -30,6 +32,8 @@ class TestsLabScreen extends StatefulWidget {
 
 class _TestsLabScreenState extends State<TestsLabScreen> {
   late TestAvailableLabsModel availableLabs;
+  String relative_id = '0';
+  late RelativeModel relativeData;
   Future<TestAvailableLabsModel> getavailableLabs() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
@@ -55,7 +59,22 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
     super.initState();
     initialize().then((value) {
       setState(() {
-        loading = false;
+        RelativeSettingController().getrelativedata(context).then((value) {
+          setState(() {
+            relativeData = value;
+            relativeData.data.insert(
+                0,
+                RelativeModelData(
+                    relative_id: '0',
+                    relation: '',
+                    relativeName: 'ME',
+                    bloodGroup: '',
+                    gender: '',
+                    age: '',
+                    maritalStatus: ''));
+            loading = false;
+          });
+        });
       });
     });
   }
@@ -237,16 +256,26 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
                                                 bgcolor: appblueColor,
                                                 textColor: Colors.white,
                                                 onPressed: () {
-                                                  Push(
+                                                  bookingForDialog(
                                                       context,
-                                                      TestCheckout(
-                                                        labid: availableLabs
-                                                            .data[index].labId,
-                                                        testids: [
-                                                          widget.testId
-                                                        ],
-                                                      ),
-                                                      withnav: false);
+                                                      [
+                                                        widget.testId,
+                                                      ],
+                                                      availableLabs
+                                                          .data[index].labId);
+                                                  // Push(
+                                                  //     context,
+                                                  //     TestCheckout(
+                                                  //       labid: availableLabs
+                                                  //           .data[index].labId,
+                                                  //       testids: [
+                                                  //         widget.testId,
+                                                  //
+                                                  //       ],
+                                                  //       relative_id: relative_id
+                                                  //       ,
+                                                  //     ),
+                                                  //     withnav: false);
                                                 },
                                                 height: 30,
                                                 width: 180,
@@ -270,5 +299,96 @@ class _TestsLabScreenState extends State<TestsLabScreen> {
         ),
       ),
     );
+  }
+
+  Future bookingForDialog(
+      BuildContext context, List<String> test_ids, String lab_id) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) =>
+                  AlertDialog(
+                    content: Container(
+                      height: 150,
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Select Test For',
+                            style: GoogleFonts.montserrat(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Divider(
+                            color: Colors.black.withOpacity(0.4),
+                            thickness: 1,
+                          ),
+                          Material(
+                            elevation: 5.0,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(color: appblueColor)),
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownButton(
+                                  value: relative_id,
+                                  underline: Container(),
+                                  style: TextStyle(
+                                      color: apptealColor,
+                                      fontWeight: FontWeight.bold),
+                                  isExpanded: true,
+                                  hint: Text('Me'),
+                                  items: relativeData.data.map((e) {
+                                    return DropdownMenuItem(
+                                        value: e.relative_id,
+                                        child:
+                                            Text(e.relativeName.toUpperCase()));
+                                  }).toList(),
+                                  onChanged: (dynamic v) {
+                                    setState(() {
+                                      print(v);
+                                      relative_id = v;
+                                      print(relative_id.toString());
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          commonBtn(
+                              s: 'Continue',
+                              height: 30,
+                              textSize: 14,
+                              borderRadius: 5,
+                              bgcolor: appblueColor,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                Pop(context);
+                                Push(
+                                    context,
+                                    TestCheckout(
+                                      testids: test_ids,
+                                      labid: lab_id,
+                                      relative_id: relative_id,
+                                    ),
+                                    withnav: false);
+                              })
+                        ],
+                      ),
+                    ),
+                  ));
+        });
   }
 }
