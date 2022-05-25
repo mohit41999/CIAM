@@ -16,15 +16,15 @@ import 'package:patient/controller/ProfileSettingController/relative_setting_con
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 
-class DoctorProfile1 extends StatefulWidget {
+class DoctorProfileDetails extends StatefulWidget {
   final String doc_id;
-  const DoctorProfile1({Key? key, required this.doc_id}) : super(key: key);
+  const DoctorProfileDetails({Key? key, required this.doc_id}) : super(key: key);
 
   @override
-  _DoctorProfile1State createState() => _DoctorProfile1State();
+  _DoctorProfileDetailsState createState() => _DoctorProfileDetailsState();
 }
 
-class _DoctorProfile1State extends State<DoctorProfile1> {
+class _DoctorProfileDetailsState extends State<DoctorProfileDetails> {
   DoctorProfileOneController _con = DoctorProfileOneController();
   late DoctorProfileOneModel doctordetails;
   TextStyle selectedDayStyle(int index) => TextStyle(

@@ -8,7 +8,7 @@ import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_details.dart';
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/doctor_categories.dart';
@@ -394,7 +394,7 @@ class _AboutConsultationState extends State<AboutConsultation> {
                                           onPressed: () {
                                             Push(
                                                 context,
-                                                DoctorProfile1(
+                                                DoctorProfileDetails(
                                                   doc_id: Docs.userId,
                                                 ));
                                           },

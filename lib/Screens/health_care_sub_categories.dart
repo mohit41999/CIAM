@@ -18,11 +18,11 @@ import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DoctorProfile3 extends StatefulWidget {
+class HealthCareSubCategories extends StatefulWidget {
   final String cat_id;
   final String cat_name;
   final bool fromHome;
-  const DoctorProfile3(
+  const HealthCareSubCategories(
       {Key? key,
       required this.cat_id,
       required this.cat_name,
@@ -30,10 +30,11 @@ class DoctorProfile3 extends StatefulWidget {
       : super(key: key);
 
   @override
-  _DoctorProfile3State createState() => _DoctorProfile3State();
+  _HealthCareSubCategoriesState createState() =>
+      _HealthCareSubCategoriesState();
 }
 
-class _DoctorProfile3State extends State<DoctorProfile3> {
+class _HealthCareSubCategoriesState extends State<HealthCareSubCategories> {
   TextEditingController care = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();

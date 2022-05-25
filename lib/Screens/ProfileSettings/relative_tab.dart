@@ -25,6 +25,7 @@ class _RelativeState extends State<Relative> {
   TextStyle contentStyle =
       TextStyle(color: appblueColor, fontSize: 14, fontWeight: FontWeight.bold);
   RelativeSettingController _con = RelativeSettingController();
+
   bool loading = true;
   late RelativeModel relativeData;
 

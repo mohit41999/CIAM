@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient/Models/LAB/my_lab_packages_model.dart';
+import 'package:patient/Models/LAB/my_lab_test_model.dart';
 import 'package:patient/Models/MyModels/my_appointment_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/controller/AppointmentController/appointmentController.dart';
 import 'package:patient/controller/My%20Screens%20Controller/my_appointments_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/title_column.dart';
 
-class MyAppointments extends StatefulWidget {
-  const MyAppointments({Key? key}) : super(key: key);
+class MyLabAppointments extends StatefulWidget {
+  const MyLabAppointments({Key? key}) : super(key: key);
 
   @override
-  _MyAppointmentsState createState() => _MyAppointmentsState();
+  _MyLabAppointmentsState createState() => _MyLabAppointmentsState();
 }
 
-class _MyAppointmentsState extends State<MyAppointments>
+class _MyLabAppointmentsState extends State<MyLabAppointments>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
 
@@ -55,8 +58,8 @@ class _MyAppointmentsState extends State<MyAppointments>
                 labelColor: appblueColor,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
-                  Text('Completed'),
-                  Text('Upcoming'),
+                  Text('Tests'),
+                  Text('Packages'),
                 ],
                 controller: _controller,
               ),
@@ -67,8 +70,8 @@ class _MyAppointmentsState extends State<MyAppointments>
                 controller: _controller,
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  CompletedAppointments(),
-                  UpcomingAppointments(),
+                  TestAppointments(),
+                  PackagesAppointments(),
                 ]),
           )
         ],
@@ -77,21 +80,21 @@ class _MyAppointmentsState extends State<MyAppointments>
   }
 }
 
-class UpcomingAppointments extends StatefulWidget {
-  const UpcomingAppointments({Key? key}) : super(key: key);
+class TestAppointments extends StatefulWidget {
+  const TestAppointments({Key? key}) : super(key: key);
 
   @override
-  _UpcomingAppointmentsState createState() => _UpcomingAppointmentsState();
+  _TestAppointmentsState createState() => _TestAppointmentsState();
 }
 
-class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
-  late MyAppointmentsModel details;
+class _TestAppointmentsState extends State<TestAppointments> {
+  late MyLabTestBooking details;
   bool loading = true;
-  Iterable<MyAppointmentsModelData> Details = [];
+  Iterable<MyLabTestBookingData> Details = [];
 
-  MyAppointmentController _con = MyAppointmentController();
+  AppointmentController _con = AppointmentController();
   Future initialize() async {
-    await _con.getUpcoming().then((value) {
+    await _con.getlabTestBooking(context).then((value) {
       setState(() {
         details = value;
         Details = value.data;
@@ -121,7 +124,7 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
         (loading)
             ? Center(child: CircularProgressIndicator())
             : (details.data.length == 0)
-                ? Center(child: Text('No Upcoming appointments'))
+                ? Center(child: Text('No tests Booked'))
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -170,7 +173,7 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                                         image: NetworkImage(
                                                           Details.elementAt(
                                                                   index)
-                                                              .profileImage,
+                                                              .labImage,
                                                         ),
                                                         fit: BoxFit.cover)),
                                               ),
@@ -198,14 +201,14 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                                           value:
                                                               Details.elementAt(
                                                                       index)
-                                                                  .bookingId,
+                                                                  .booingId,
                                                         ),
                                                         titleColumn(
                                                           value:
                                                               Details.elementAt(
                                                                       index)
-                                                                  .doctorName,
-                                                          title: 'Doctor Name',
+                                                                  .labName,
+                                                          title: 'Lab Name',
                                                         ),
                                                         titleColumn(
                                                           value:
@@ -216,38 +219,48 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                                         ),
                                                       ],
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10.0),
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Text(
-                                                            Details.elementAt(
-                                                                    index)
-                                                                .status,
-                                                            style: GoogleFonts.lato(
-                                                                color: Color(
-                                                                    0xffD68100),
-                                                                fontSize: 10,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                          Text(
-                                                            '\₹${Details.elementAt(index).consultancyFees}',
-                                                            style: GoogleFonts.poppins(
-                                                                color: Color(
-                                                                    0xff252525),
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          )
-                                                        ],
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 8.0,
+                                                                left: 8),
+                                                        child: Column(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Text(
+                                                                Details.elementAt(
+                                                                        index)
+                                                                    .tests
+                                                                    .toString()
+                                                                    .replaceAll(
+                                                                        '[', '')
+                                                                    .replaceAll(
+                                                                        ']',
+                                                                        ''),
+                                                                style: GoogleFonts.lato(
+                                                                    color: Color(
+                                                                        0xffD68100),
+                                                                    fontSize:
+                                                                        10,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              '\₹${Details.elementAt(index).ammountPaid}',
+                                                              style: GoogleFonts.poppins(
+                                                                  color: Color(
+                                                                      0xff252525),
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
                                                     )
                                                   ],
@@ -257,50 +270,36 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        width: double.infinity,
-                                        child: TextButton(
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(appblueColor),
-                                              shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15),
-                                                    bottomRight:
-                                                        Radius.circular(15)),
-                                              ))),
-                                          onPressed: () {
-                                            Push(
-                                                context,
-                                                BookingAppointment(
-                                                    booking_id:
-                                                        Details.elementAt(index)
-                                                            .bookingId,
-                                                    doctor_id:
-                                                        Details.elementAt(index)
-                                                            .doctorId),
-                                                withnav: false
-                                                // ViewBookingDetails(
-                                                //   booking_id: Details.elementAt(index)
-                                                //       .booingId,
-                                                // )
-                                                );
-                                          },
-                                          child: Text(
-                                            'View Booking Details',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                letterSpacing: 1,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      )
+                                      // SizedBox(
+                                      //   height: 40,
+                                      //   width: double.infinity,
+                                      //   child: TextButton(
+                                      //     style: ButtonStyle(
+                                      //         backgroundColor:
+                                      //             MaterialStateProperty.all<
+                                      //                 Color>(appblueColor),
+                                      //         shape: MaterialStateProperty.all<
+                                      //                 RoundedRectangleBorder>(
+                                      //             RoundedRectangleBorder(
+                                      //           borderRadius: BorderRadius.only(
+                                      //               bottomLeft:
+                                      //                   Radius.circular(15),
+                                      //               bottomRight:
+                                      //                   Radius.circular(15)),
+                                      //         ))),
+                                      //     onPressed: () {
+                                      //
+                                      //     },
+                                      //     child: Text(
+                                      //       'View Booking Details',
+                                      //       style: GoogleFonts.montserrat(
+                                      //           fontSize: 12,
+                                      //           color: Colors.white,
+                                      //           letterSpacing: 1,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     ),
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                 ),
@@ -312,21 +311,21 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
   }
 }
 
-class CompletedAppointments extends StatefulWidget {
-  const CompletedAppointments({Key? key}) : super(key: key);
+class PackagesAppointments extends StatefulWidget {
+  const PackagesAppointments({Key? key}) : super(key: key);
 
   @override
-  _CompletedAppointmentsState createState() => _CompletedAppointmentsState();
+  _PackagesAppointmentsState createState() => _PackagesAppointmentsState();
 }
 
-class _CompletedAppointmentsState extends State<CompletedAppointments> {
-  late MyAppointmentsModel details;
+class _PackagesAppointmentsState extends State<PackagesAppointments> {
+  late MyLabPackageBooking details;
   bool loading = true;
-  Iterable<MyAppointmentsModelData> Details = [];
+  Iterable<MyLabPackageBookingDatum> Details = [];
 
-  MyAppointmentController _con = MyAppointmentController();
+  AppointmentController _con = AppointmentController();
   Future initialize() async {
-    await _con.getCompleted().then((value) {
+    await _con.getlabPackageBooking(context).then((value) {
       setState(() {
         details = value;
         Details = value.data;
@@ -398,7 +397,7 @@ class _CompletedAppointmentsState extends State<CompletedAppointments> {
                                                   image: DecorationImage(
                                                       image: NetworkImage(
                                                         Details.elementAt(index)
-                                                            .profileImage,
+                                                            .labImage,
                                                       ),
                                                       fit: BoxFit.cover)),
                                             ),
@@ -426,14 +425,14 @@ class _CompletedAppointmentsState extends State<CompletedAppointments> {
                                                         value:
                                                             Details.elementAt(
                                                                     index)
-                                                                .bookingId,
+                                                                .booingId,
                                                       ),
                                                       titleColumn(
                                                         value:
                                                             Details.elementAt(
                                                                     index)
-                                                                .doctorName,
-                                                        title: 'Doctor Name',
+                                                                .labName,
+                                                        title: 'Lab Name',
                                                       ),
                                                       titleColumn(
                                                         value:
@@ -456,7 +455,7 @@ class _CompletedAppointmentsState extends State<CompletedAppointments> {
                                                         Text(
                                                           Details.elementAt(
                                                                   index)
-                                                              .status,
+                                                              .packageName,
                                                           style: GoogleFonts.lato(
                                                               color: Color(
                                                                   0xffD68100),
@@ -466,7 +465,7 @@ class _CompletedAppointmentsState extends State<CompletedAppointments> {
                                                                       .bold),
                                                         ),
                                                         Text(
-                                                          '\₹${Details.elementAt(index).consultancyFees}',
+                                                          '\₹${Details.elementAt(index).ammountPaid}',
                                                           style: GoogleFonts
                                                               .poppins(
                                                                   color: Color(
@@ -486,50 +485,50 @@ class _CompletedAppointmentsState extends State<CompletedAppointments> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 40,
-                                      width: double.infinity,
-                                      child: TextButton(
-                                        style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(appblueColor),
-                                            shape: MaterialStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(15),
-                                                  bottomRight:
-                                                      Radius.circular(15)),
-                                            ))),
-                                        onPressed: () {
-                                          Push(
-                                              context,
-                                              BookingAppointment(
-                                                  booking_id:
-                                                      Details.elementAt(index)
-                                                          .bookingId,
-                                                  doctor_id:
-                                                      Details.elementAt(index)
-                                                          .doctorId),
-                                              withnav: false
-                                              // ViewBookingDetails(
-                                              //   booking_id: Details.elementAt(index)
-                                              //       .booingId,
-                                              // )
-                                              );
-                                        },
-                                        child: Text(
-                                          'View Booking Details',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 12,
-                                              color: Colors.white,
-                                              letterSpacing: 1,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    )
+                                    // SizedBox(
+                                    //   height: 40,
+                                    //   width: double.infinity,
+                                    //   child: TextButton(
+                                    //     style: ButtonStyle(
+                                    //         backgroundColor:
+                                    //             MaterialStateProperty.all<
+                                    //                 Color>(appblueColor),
+                                    //         shape: MaterialStateProperty.all<
+                                    //                 RoundedRectangleBorder>(
+                                    //             RoundedRectangleBorder(
+                                    //           borderRadius: BorderRadius.only(
+                                    //               bottomLeft:
+                                    //                   Radius.circular(15),
+                                    //               bottomRight:
+                                    //                   Radius.circular(15)),
+                                    //         ))),
+                                    //     onPressed: () {
+                                    //       Push(
+                                    //           context,
+                                    //           BookingAppointment(
+                                    //               booking_id:
+                                    //                   Details.elementAt(index)
+                                    //                       .bookingId,
+                                    //               doctor_id:
+                                    //                   Details.elementAt(index)
+                                    //                       .doctorId),
+                                    //           withnav: false
+                                    //           // ViewBookingDetails(
+                                    //           //   booking_id: Details.elementAt(index)
+                                    //           //       .booingId,
+                                    //           // )
+                                    //           );
+                                    //     },
+                                    //     child: Text(
+                                    //       'View Booking Details',
+                                    //       style: GoogleFonts.montserrat(
+                                    //           fontSize: 12,
+                                    //           color: Colors.white,
+                                    //           letterSpacing: 1,
+                                    //           fontWeight: FontWeight.bold),
+                                    //     ),
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                               ),

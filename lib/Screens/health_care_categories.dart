@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
+import 'package:patient/Screens/health_care_sub_categories.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -265,7 +265,7 @@ class _HomeCareCategoriesState extends State<HomeCareCategories> {
                                       onPressed: () {
                                         Push(
                                             context,
-                                            DoctorProfile3(
+                                            HealthCareSubCategories(
                                               cat_id: homeCareCategories
                                                   .data[index].serviceId,
                                               cat_name: homeCareCategories

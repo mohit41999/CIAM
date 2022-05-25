@@ -9,9 +9,9 @@ import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:patient/Screens/DoctorScreens/doctor_profile.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
-import 'package:patient/Screens/HomeCareCategories.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_details.dart';
+import 'package:patient/Screens/health_care_sub_categories.dart';
+import 'package:patient/Screens/health_care_categories.dart';
 import 'package:patient/Screens/LAB/lab_profile.dart';
 import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
@@ -19,7 +19,7 @@ import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Screens/doctor_categories.dart';
 import 'package:patient/Screens/hospital_packages.dart';
 import 'package:patient/Screens/knowledge_forum_screen.dart';
-import 'package:patient/Screens/patient_home_page_4.dart';
+import 'package:patient/Screens/health_care.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
@@ -57,7 +57,7 @@ final List<Map<dynamic, dynamic>> hometile = [
   {
     'label': 'Home Care Servicies',
     // 'Screen': 'null',
-    'Screen': PatientHomePage4(),
+    'Screen': HealthCare(),
     'profile': 'Rectangle -1.png'
   },
   // {
@@ -622,7 +622,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onPressed: () {
                                             Push(
                                                 context,
-                                                DoctorProfile1(
+                                                DoctorProfileDetails(
                                                   doc_id: Docs.userId,
                                                 ));
                                           },
@@ -754,7 +754,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   onTap: () {
                                     Push(
                                         context,
-                                        DoctorProfile3(
+                                        HealthCareSubCategories(
                                           cat_id: healthCareCategories
                                               .data[index].serviceId,
                                           cat_name: healthCareCategories

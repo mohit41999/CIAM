@@ -6,6 +6,7 @@ import 'package:patient/Screens/MYScreens/MyPrescriprions.dart';
 import 'package:patient/Screens/MYScreens/MyQuestionsScreen.dart';
 import 'package:patient/Screens/MYScreens/MyReviewRating.dart';
 import 'package:patient/Screens/MYScreens/MyWalletTabs/my_wallet_pg.dart';
+import 'package:patient/Screens/MYScreens/myallappointments.dart';
 import 'package:patient/Screens/ProfileSettings/profile_setting.dart';
 import 'package:patient/Screens/account_settings.dart';
 import 'package:patient/Screens/chats_screen.dart';
@@ -17,16 +18,16 @@ List<Map<dynamic, dynamic>> drawerList = [
   },
   {
     'label': 'My Appointment',
-    'Screen': MyAppointments(),
+    'Screen': MyAllAppointments(),
   },
   {
     'label': 'My Chats',
     'Screen': ChatsScreen(),
   },
-  {
-    'label': 'My Lab Test',
-    'Screen': MyLabTest(),
-  },
+  // {
+  //   'label': 'My Lab Test',
+  //   'Screen': MyLabTest(),
+  // },
   {
     'label': 'My Medicine Orders',
     'Screen': MyMedicineOrders(),

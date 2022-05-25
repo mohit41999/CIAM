@@ -75,7 +75,7 @@ class MyAppointmentsModelData {
         consultancyFees: json["consultancy_fees"],
         couponDiscount: json["coupon_discount"],
         ammountPaid: json["ammount_paid"],
-        location: json["location"],
+        location: json["location"]??'',
         status: json["Status"],
       );
 

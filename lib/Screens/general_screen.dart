@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:patient/Screens/Home.dart';
 import 'package:patient/Screens/aboutconsultation.dart';
 import 'package:patient/Screens/contact_us_form.dart';
-import 'package:patient/Screens/patient_home_page_4.dart';
+import 'package:patient/Screens/health_care.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/firebase/notification_handling.dart';
@@ -34,7 +34,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
       AboutConsultation(),
       // HomeScreen(),
       SearchScreen(),
-      PatientHomePage4(),
+      HealthCare(),
       ContactUsForm(
         fromHome: true,
       )

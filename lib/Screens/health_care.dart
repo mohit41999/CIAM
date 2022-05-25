@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_3.dart';
-import 'package:patient/Screens/HomeCareCategories.dart';
+import 'package:patient/Screens/health_care_sub_categories.dart';
+import 'package:patient/Screens/health_care_categories.dart';
 import 'package:patient/Screens/contact_us_form.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -20,14 +20,14 @@ import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/tag_line.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PatientHomePage4 extends StatefulWidget {
-  const PatientHomePage4({Key? key}) : super(key: key);
+class HealthCare extends StatefulWidget {
+  const HealthCare({Key? key}) : super(key: key);
 
   @override
-  _PatientHomePage4State createState() => _PatientHomePage4State();
+  _HealthCareState createState() => _HealthCareState();
 }
 
-class _PatientHomePage4State extends State<PatientHomePage4> {
+class _HealthCareState extends State<HealthCare> {
   Future<HealthCareCategoriesModel> gethomecareServices() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
@@ -400,7 +400,7 @@ class _PatientHomePage4State extends State<PatientHomePage4> {
                                   onTap: () {
                                     Push(
                                         context,
-                                        DoctorProfile3(
+                                        HealthCareSubCategories(
                                           cat_id: homeCareCategories
                                               .data[index].serviceId,
                                           cat_name: homeCareCategories

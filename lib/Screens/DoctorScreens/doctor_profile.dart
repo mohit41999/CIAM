@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/home_doctor_speciality_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_details.dart';
 import 'package:patient/Screens/search_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/DoctorProfileController/doctor_controller.dart';
@@ -524,7 +524,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                                   onPressed: () {
                                                     Push(
                                                         context,
-                                                        DoctorProfile1(
+                                                        DoctorProfileDetails(
                                                           doc_id: Docs.userId,
                                                         ));
                                                   },
@@ -698,7 +698,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                                         onPressed: () {
                                           Push(
                                               context,
-                                              DoctorProfile1(
+                                              DoctorProfileDetails(
                                                 doc_id: Docs.userId,
                                               ));
                                         },

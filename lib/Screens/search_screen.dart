@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/search_model.dart';
-import 'package:patient/Screens/DoctorScreens/doctor_profile_1.dart';
+import 'package:patient/Screens/DoctorScreens/doctor_profile_details.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
@@ -136,7 +136,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               onTap: () {
                                 Push(
                                     context,
-                                    DoctorProfile1(
+                                    DoctorProfileDetails(
                                         doc_id: searchList[index].doctorId));
                               },
                               child: Material(

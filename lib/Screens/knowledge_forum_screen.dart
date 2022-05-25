@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/knowledge_forum_model.dart';
 import 'package:patient/Screens/knowledge_description_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -30,6 +33,18 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
     });
 
     return KnowledgeForumModel.fromJson(response);
+  }
+
+  Future report(String forum_id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var response = await PostData(
+        PARAM_URL: AppEndPoints.report_knowledge_forum,
+        params: {
+          'token': Token,
+          'user_id': prefs.getString('user_id'),
+          'forum_id': forum_id
+        });
+    return response;
   }
 
   @override
@@ -252,15 +267,51 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
                                                         SizedBox(
                                                           height: 8,
                                                         ),
-                                                        Text(
-                                                          data.data[index]
-                                                              .knowledgeTitle,
-                                                          style:
-                                                              GoogleFonts.lato(
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              data.data[index]
+                                                                  .knowledgeTitle,
+                                                              style: GoogleFonts.lato(
                                                                   fontSize: 20,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                report(data
+                                                                        .data[
+                                                                            index]
+                                                                        .forumId)
+                                                                    .then(
+                                                                        (value) {
+                                                                  getForums().then(
+                                                                      (value) {
+                                                                    setState(
+                                                                        () {
+                                                                      data =
+                                                                          value;
+                                                                    });
+                                                                  });
+                                                                });
+                                                              },
+                                                              child: Text(
+                                                                'Report',
+                                                                style: GoogleFonts.lato(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: Colors
+                                                                        .red,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                         SizedBox(
                                                           height: 5,
