@@ -78,7 +78,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         bookingId: json["Booking Id"],
         doctorId: json["doctor id"],
-        specialty: json["Specialty"],
+        specialty: json["Specialty"] ?? '',
         doctorName: json["Doctor Name"],
         doctorProfile: json["Doctor Profile"],
         bookingStatus: json["Booking Status"],

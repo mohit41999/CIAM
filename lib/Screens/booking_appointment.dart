@@ -533,8 +533,15 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                       DateTime.now().day - 1)
                                                   .toString()
                                                   .substring(0, 10) ==
+                                              confirmData.data.bookingDate ||
+                                          DateTime(
+                                                      DateTime.now().year,
+                                                      DateTime.now().month,
+                                                      DateTime.now().day)
+                                                  .toString()
+                                                  .substring(0, 10) ==
                                               confirmData.data.bookingDate)
-                                      ? 549
+                                      ? 560
                                       : 300,
                                   width: double.infinity,
                                   color: Colors.white,
@@ -773,6 +780,15 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                         .toString()
                                                         .substring(0, 10) ==
                                                     confirmData
+                                                        .data.bookingDate ||
+                                                DateTime(
+                                                            DateTime.now().year,
+                                                            DateTime.now()
+                                                                .month,
+                                                            DateTime.now().day)
+                                                        .toString()
+                                                        .substring(0, 10) ==
+                                                    confirmData
                                                         .data.bookingDate)
                                             ? Column(
                                                 mainAxisSize: MainAxisSize.max,
@@ -836,13 +852,16 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                                           [];
                                                                     });
                                                                   });
-                                                                })
+                                                                }),
+                                                            SizedBox(
+                                                              height: 10,
+                                                            )
                                                           ],
                                                         ),
                                                   commonBtn(
                                                     borderColor: apptealColor,
                                                     borderWidth: 2,
-                                                    s: 'Add Commentss',
+                                                    s: 'Add Comments',
                                                     bgcolor: Colors.white,
                                                     textColor: apptealColor,
                                                     onPressed: () {

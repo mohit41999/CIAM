@@ -10,35 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="asdjksakjd">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/my_lab_packages_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/LAB/my_lab_test_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/my_health_care_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Models/my_hospital_package_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/Appointments/health_care_appointments.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/Appointments/hospital_package_appointments.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/Appointments/lab_bookings.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/myallappointments.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/controller/AppointmentController/appointmentController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/API repo/api_end_points.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/API repo/api_end_points.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/MyModels/my_appointment_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/MyModels/my_appointment_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Models/MyModels/my_lab_test_model.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_details.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/DoctorScreens/doctor_profile_3.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/health_care_sub_categories.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/HomeCareCategories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/health_care_categories.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyLabTest.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/relative_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/aboutconsultation.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/general_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/general_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/confirm_booking_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/knowledge_forum_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/patient_home_page_4.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/health_care.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/search_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Utils/drawerList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Utils/drawerList.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +56,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tripster" />
+    <property name="last_opened_file_path" value="D:/New Folder/ciamLAB" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -440,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653314280574</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="asdjksakjd">
+      <created>1653487067582</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1653487067582</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

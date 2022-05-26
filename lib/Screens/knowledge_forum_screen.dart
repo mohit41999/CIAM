@@ -8,8 +8,11 @@ import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/knowledge_forum_model.dart';
 import 'package:patient/Screens/knowledge_description_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/Utils/progress_view.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
+import 'package:patient/widgets/common_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class KnowledgeForumScreen extends StatefulWidget {
@@ -36,14 +39,35 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
   }
 
   Future report(String forum_id) async {
+    var loader = ProgressView(context);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response = await PostData(
-        PARAM_URL: AppEndPoints.report_knowledge_forum,
-        params: {
-          'token': Token,
-          'user_id': prefs.getString('user_id'),
-          'forum_id': forum_id
-        });
+    loader.show();
+    var response;
+    try {
+      response = await PostData(
+          PARAM_URL: AppEndPoints.report_knowledge_forum,
+          params: {
+            'token': Token,
+            'user_id': prefs.getString('user_id'),
+            'forum_id': forum_id
+          });
+
+      loader.dismiss();
+      if (response['status']) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Reported Successfully'),
+          backgroundColor: Colors.green,
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Try again later'),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } catch (e) {
+      loader.dismiss();
+      print(e);
+    }
     return response;
   }
 
@@ -272,32 +296,23 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
                                                               MainAxisAlignment
                                                                   .spaceBetween,
                                                           children: [
-                                                            Text(
-                                                              data.data[index]
-                                                                  .knowledgeTitle,
-                                                              style: GoogleFonts.lato(
-                                                                  fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                            Expanded(
+                                                              child: Text(
+                                                                data.data[index]
+                                                                    .knowledgeTitle,
+                                                                style: GoogleFonts.lato(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
                                                             GestureDetector(
                                                               onTap: () {
-                                                                report(data
-                                                                        .data[
-                                                                            index]
-                                                                        .forumId)
-                                                                    .then(
-                                                                        (value) {
-                                                                  getForums().then(
-                                                                      (value) {
-                                                                    setState(
-                                                                        () {
-                                                                      data =
-                                                                          value;
-                                                                    });
-                                                                  });
-                                                                });
+                                                                reportDialog(data
+                                                                    .data[index]
+                                                                    .forumId);
                                                               },
                                                               child: Text(
                                                                 'Report',
@@ -466,14 +481,43 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
                                                             SizedBox(
                                                               height: 8,
                                                             ),
-                                                            Text(
-                                                              data.data[index]
-                                                                  .knowledgeTitle,
-                                                              style: GoogleFonts.lato(
-                                                                  fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    data
+                                                                        .data[
+                                                                            index]
+                                                                        .knowledgeTitle,
+                                                                    style: GoogleFonts.lato(
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                                GestureDetector(
+                                                                  onTap: () {
+                                                                    reportDialog(data
+                                                                        .data[
+                                                                            index]
+                                                                        .forumId);
+                                                                  },
+                                                                  child: Text(
+                                                                    'Report',
+                                                                    style: GoogleFonts.lato(
+                                                                        fontSize:
+                                                                            12,
+                                                                        color: Colors
+                                                                            .red,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                             SizedBox(
                                                               height: 5,
@@ -503,5 +547,41 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
             ),
           ),
         ));
+  }
+
+  Future reportDialog(String forum_id) async {
+    return showDialog(
+        useRootNavigator: false,
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Are you sure you want to report ?'),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    commonBtn(
+                        width: 100,
+                        s: 'No',
+                        bgcolor: Colors.red,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                        }),
+                    commonBtn(
+                        width: 100,
+                        s: 'Yes',
+                        bgcolor: Colors.green,
+                        textColor: Colors.white,
+                        onPressed: () async {
+                          await report(forum_id);
+                          data = await getForums();
+
+                          Pop(context);
+                          setState(() {});
+                        }),
+                  ],
+                )
+              ],
+            ));
   }
 }
