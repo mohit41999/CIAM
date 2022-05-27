@@ -40,34 +40,39 @@ class _MyHealthCareAppointmentsState extends State<MyHealthCareAppointments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: Details.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: ListTile(
-                  tileColor: Colors.white,
-                  leading: Text(
-                    'Booking Id: ${Details[index].booingId}',
-                    style: GoogleFonts.montserrat(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+      body: (Details.length == 0)
+          ? Center(
+              child: Text('No Bookings Yet'),
+            )
+          : ListView.builder(
+              itemCount: Details.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: ListTile(
+                      tileColor: Colors.white,
+                      leading: Text(
+                        'Booking Id: ${Details[index].booingId}',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      title: Text('${Details[index].homecareCategory}',
+                          style: GoogleFonts.montserrat(
+                              color: appblueColor,
+                              fontWeight: FontWeight.bold)),
+                      subtitle: Text('${Details[index].homecareSubCategory}',
+                          style: GoogleFonts.montserrat(color: apptealColor)),
+                      // children: [
+                      //   Text(Details[index].booingId),
+                      //   Text(Details[index].packageCategory),
+                      //   Text(Details[index].packageSubCategory),
+                      // ],
+                    ),
                   ),
-                  title: Text('${Details[index].homecareCategory}',
-                      style: GoogleFonts.montserrat(
-                          color: appblueColor, fontWeight: FontWeight.bold)),
-                  subtitle: Text('${Details[index].homecareSubCategory}',
-                      style: GoogleFonts.montserrat(color: apptealColor)),
-                  // children: [
-                  //   Text(Details[index].booingId),
-                  //   Text(Details[index].packageCategory),
-                  //   Text(Details[index].packageSubCategory),
-                  // ],
-                ),
-              ),
-            );
-          }),
+                );
+              }),
     );
   }
 }

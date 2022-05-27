@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/knowledge_description_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
+import 'package:patient/Utils/progress_view.dart';
+import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
+import 'package:patient/widgets/common_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class KnowledgeDescription extends StatefulWidget {
@@ -30,6 +34,39 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
         });
 
     return KnowledgeDescriptionModel.fromJson(response);
+  }
+
+  Future report(String forum_id) async {
+    var loader = ProgressView(context);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    loader.show();
+    var response;
+    try {
+      response = await PostData(
+          PARAM_URL: AppEndPoints.report_knowledge_forum,
+          params: {
+            'token': Token,
+            'user_id': prefs.getString('user_id'),
+            'forum_id': forum_id
+          });
+
+      loader.dismiss();
+      if (response['status']) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Reported Successfully'),
+          backgroundColor: Colors.green,
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Try again later'),
+          backgroundColor: Colors.red,
+        ));
+      }
+    } catch (e) {
+      loader.dismiss();
+      print(e);
+    }
+    return response;
   }
 
   @override
@@ -99,16 +136,43 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  Text(
-                                    data.data.date.day.toString() +
-                                        '/' +
-                                        data.data.date.month.toString() +
-                                        '/' +
-                                        data.data.date.year.toString(),
-                                    style: GoogleFonts.lato(
-                                        color: apptealColor,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        data.data.date.day.toString() +
+                                            '/' +
+                                            data.data.date.month.toString() +
+                                            '/' +
+                                            data.data.date.year.toString(),
+                                        style: GoogleFonts.lato(
+                                            color: apptealColor,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      GestureDetector(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.red)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Text(
+                                              'Report',
+                                              style: GoogleFonts.lato(
+                                                  fontSize: 12,
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          reportDialog(widget.forum_id);
+                                        },
+                                      )
+                                    ],
                                   ),
                                 ],
                               ),
@@ -149,5 +213,41 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
             ],
           ),
         ));
+  }
+
+  Future reportDialog(String forum_id) async {
+    return showDialog(
+        useRootNavigator: false,
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Are you sure you want to report ?'),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    commonBtn(
+                        width: 100,
+                        s: 'No',
+                        bgcolor: Colors.red,
+                        textColor: Colors.white,
+                        onPressed: () {
+                          Pop(context);
+                        }),
+                    commonBtn(
+                        width: 100,
+                        s: 'Yes',
+                        bgcolor: Colors.green,
+                        textColor: Colors.white,
+                        onPressed: () async {
+                          await report(forum_id);
+
+                          Pop(context);
+                          Pop(context);
+                          setState(() {});
+                        }),
+                  ],
+                )
+              ],
+            ));
   }
 }

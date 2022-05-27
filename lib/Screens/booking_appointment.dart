@@ -878,16 +878,16 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                     textColor: apptealColor,
                                                     onPressed: () {
                                                       print(widget.doctor_id);
-                                                      Push(
-                                                          context,
-                                                          TextPage(
-                                                            doctorName:
-                                                                confirmData.data
-                                                                    .doctorName,
-                                                            doctorid: widget
-                                                                .doctor_id,
-                                                          ),
-                                                          withnav: false);
+                                                      // Push(
+                                                      //     context,
+                                                      //     TextPage(
+                                                      //       doctorName:
+                                                      //           confirmData.data
+                                                      //               .doctorName,
+                                                      //       doctorid: widget
+                                                      //           .doctor_id,
+                                                      //     ),
+                                                      //     withnav: false);
                                                     },
                                                     height: 45,
                                                     borderRadius: 8,

@@ -322,7 +322,27 @@ class _PersonalState extends State<Personal> {
                       textColor: Colors.white,
                       onPressed: () {
                         setState(() {
-                          _con.submit(context);
+                          if (_con.age.text == '0') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Please Select Date of Birth')));
+                          } else if (_con.height.text == '0') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Please Enter Height')));
+                          } else if (_con.weight.text == '0') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Please Enter Weight')));
+                          } else if (_con.bloodGroup.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Please Enter Blood Group')));
+                          } else if (_con.maritalStatus.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Please Enter Marital Status')));
+                          } else if (_con.address.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Please Enter Address')));
+                          } else {
+                            _con.submit(context);
+                          }
                         });
                       },
                       borderRadius: 8,

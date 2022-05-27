@@ -128,4 +128,5 @@ class AppEndPoints {
       'my_hospital_package_bookings.php';
   static const String my_home_care_bookings = 'my_home_care_bookings.php';
   static const String report_knowledge_forum = 'report_knowledge_forum.php';
+  static const String report_answer = 'report_answer.php';
 }

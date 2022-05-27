@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "920660726894-gcq8s52jrkkd00cgu0u67et8b0r3809u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamdoc.doctor",
+            "certificate_hash": "5cb05cb5e78fff93b3607ddffcd984767dd082ed"
+          }
+        },
+        {
           "client_id": "920660726894-ul8tmbr9ntbrjpq96q2b4jpv82d3n2ls.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -88,6 +96,14 @@
           "android_info": {
             "package_name": "com.ciamlb.ciam_lab",
             "certificate_hash": "1e9ed880cbd27d1eb1d4c508e30e5a706703cdce"
+          }
+        },
+        {
+          "client_id": "920660726894-mpt4ra2v0k2jfo0gd0de1r5ajei6nab0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciamlb.ciam_lab",
+            "certificate_hash": "5cb05cb5e78fff93b3607ddffcd984767dd082ed"
           }
         },
         {
@@ -156,6 +172,14 @@
           "android_info": {
             "package_name": "com.ciampt.patient",
             "certificate_hash": "9c67d724755d1deeb89f1a3375d65f6a39ae4d0c"
+          }
+        },
+        {
+          "client_id": "920660726894-pikj69edksaldbkdqtskf4mcihr9jcm6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciampt.patient",
+            "certificate_hash": "5cb05cb5e78fff93b3607ddffcd984767dd082ed"
           }
         },
         {

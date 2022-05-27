@@ -62,7 +62,7 @@ class Data {
   String mobileNumber;
   String age;
   String gender;
-  DateTime dob;
+  String dob;
   String bloodGroup;
   String maritalStatus;
   String height;
@@ -79,7 +79,7 @@ class Data {
         mobileNumber: json["mobile_number"],
         age: json["age"],
         gender: json["gender"],
-        dob: DateTime.parse(json["DOB"]),
+        dob: json["DOB"],
         bloodGroup: json["blood_group"],
         maritalStatus: json["marital_status"],
         height: json["height"],
@@ -97,8 +97,7 @@ class Data {
         "mobile_number": mobileNumber,
         "age": age,
         "gender": gender,
-        "DOB":
-            "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
+        "DOB": dob,
         "blood_group": bloodGroup,
         "marital_status": maritalStatus,
         "height": height,

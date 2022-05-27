@@ -24,7 +24,7 @@ class _MyAllAppointmentsState extends State<MyAllAppointments>
   void initState() {
     // TODO: implement initState
 
-    allcontroller = TabController(length: 4, vsync: this);
+    allcontroller = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -71,7 +71,7 @@ class _MyAllAppointmentsState extends State<MyAllAppointments>
                 unselectedLabelColor: Colors.grey,
                 tabs: [
                   Text("Doctor"),
-                  Text("Lab"),
+                  // Text("Lab"),
                   Text("Hospital Package"),
                   Text("Health Care"),
                 ],
@@ -83,7 +83,7 @@ class _MyAllAppointmentsState extends State<MyAllAppointments>
             child: TabBarView(
               children: [
                 MyAppointments(),
-                MyLabAppointments(),
+                // MyLabAppointments(),
                 MyHospitalPackageAppointments(),
                 MyHealthCareAppointments(),
               ],
