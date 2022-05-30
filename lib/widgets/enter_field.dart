@@ -33,9 +33,6 @@ class EnterField extends StatelessWidget {
       constraints: const BoxConstraints(
           minHeight: 10, maxHeight: 50, maxWidth: double.maxFinite),
       child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [],
-        ),
         child: TextFormField(
           // autovalidateMode: AutovalidateMode.onUserInteraction,
           // validator: validator,

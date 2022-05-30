@@ -71,7 +71,6 @@ class _PersonalState extends State<Personal> {
         // date = pickedDate;
         _con.DOB.text = pickedDate.toString();
         _con.age.text = (DateTime.now().year - pickedDate.year).toString();
-        //
         print(pickedDate);
       });
   }
