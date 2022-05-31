@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:patient/Screens/cancel_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -878,25 +879,55 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                     textColor: apptealColor,
                                                     onPressed: () {
                                                       print(widget.doctor_id);
-                                                      // Push(
-                                                      //     context,
-                                                      //     TextPage(
-                                                      //       doctorName:
-                                                      //           confirmData.data
-                                                      //               .doctorName,
-                                                      //       doctorid: widget
-                                                      //           .doctor_id,
-                                                      //     ),
-                                                      //     withnav: false);
+                                                      Push(
+                                                          context,
+                                                          TextPage(
+                                                            doctorName:
+                                                                confirmData.data
+                                                                    .doctorName,
+                                                            doctorid: widget
+                                                                .doctor_id,
+                                                          ),
+                                                          withnav: false);
                                                     },
                                                     height: 45,
                                                     borderRadius: 8,
                                                     borderColor: apptealColor,
                                                     borderWidth: 2,
                                                   ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  commonBtn(
+                                                    s: 'Cancel',
+                                                    bgcolor: Colors.white,
+                                                    textColor: Colors.red,
+                                                    onPressed: () {
+                                                      print(widget.doctor_id);
+                                                      Push(context,
+                                                          CancelScreen());
+                                                    },
+                                                    height: 45,
+                                                    borderRadius: 8,
+                                                    borderColor: Colors.red,
+                                                    borderWidth: 2,
+                                                  ),
                                                 ],
                                               )
-                                            : SizedBox(),
+                                            : commonBtn(
+                                                s: 'Cancel',
+                                                bgcolor: Colors.white,
+                                                textColor: Colors.red,
+                                                onPressed: () {
+                                                  print(widget.doctor_id);
+
+                                                  Push(context, CancelScreen());
+                                                },
+                                                height: 45,
+                                                borderRadius: 8,
+                                                borderColor: Colors.red,
+                                                borderWidth: 2,
+                                              ),
                                         SizedBox(
                                           height: 20,
                                         ),

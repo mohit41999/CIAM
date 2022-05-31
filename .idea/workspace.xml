@@ -10,14 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="419e58b4-0345-43c9-aa90-241468436d98" name="Default Changelist" comment="asdjksakjd">
-      <change afterPath="$PROJECT_DIR$/lib/Screens/demoScreen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/Screens/cancel_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Models/hospital_packages_category_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Models/hospital_packages_category_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Screens/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/ProfileSettings/personal_tab.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/SignInScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/add_review.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/enter_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/enter_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/Appointments/lab_bookings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/Appointments/lab_bookings.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/MYScreens/MyAppointments.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/booking_appointment.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Screens/hospital_packages.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controller/home_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/home_controller.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +61,7 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="D:/Nohung/Foodie_new" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../patientnewtheme" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -96,13 +98,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1639751182609</updated>
-    </task>
-    <task id="LOCAL-00002" summary="WFH">
-      <created>1641998790157</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1641998790157</updated>
     </task>
     <task id="LOCAL-00003" summary="updates">
       <created>1642081374158</created>
@@ -440,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653657938397</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="asdjksakjd">
+      <created>1653919878606</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1653919878607</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

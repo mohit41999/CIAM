@@ -20,13 +20,14 @@ class HospitalPackagesCatModel {
 
   final bool status;
   final String message;
-  final List<Datum> data;
+  final List<HospitalPackagesCatModelData> data;
 
   factory HospitalPackagesCatModel.fromJson(Map<String, dynamic> json) =>
       HospitalPackagesCatModel(
         status: json["status"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<HospitalPackagesCatModelData>.from(
+            json["data"].map((x) => HospitalPackagesCatModelData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,8 +37,8 @@ class HospitalPackagesCatModel {
       };
 }
 
-class Datum {
-  Datum({
+class HospitalPackagesCatModelData {
+  HospitalPackagesCatModelData({
     required this.serviceId,
     required this.serviceName,
     required this.image,
@@ -47,7 +48,8 @@ class Datum {
   final String serviceName;
   final String image;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory HospitalPackagesCatModelData.fromJson(Map<String, dynamic> json) =>
+      HospitalPackagesCatModelData(
         serviceId: json["Service_id"],
         serviceName: json["Service Name"],
         image: json["image"],

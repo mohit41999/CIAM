@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/Models/MyModels/my_appointment_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
+import 'package:patient/Screens/cancel_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/My%20Screens%20Controller/my_appointments_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
+import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/title_column.dart';
 
 class MyAppointments extends StatefulWidget {
@@ -139,7 +141,7 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                         ? navbarht + 20
                                         : 8.0),
                                 child: Container(
-                                  height: 170,
+                                  height: 200,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
@@ -257,50 +259,101 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 40,
-                                        width: double.infinity,
-                                        child: TextButton(
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(appblueColor),
-                                              shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15),
-                                                    bottomRight:
-                                                        Radius.circular(15)),
-                                              ))),
-                                          onPressed: () {
-                                            Push(
-                                                context,
-                                                BookingAppointment(
-                                                    booking_id:
-                                                        Details.elementAt(index)
-                                                            .bookingId,
-                                                    doctor_id:
-                                                        Details.elementAt(index)
-                                                            .doctorId),
-                                                withnav: false
-                                                // ViewBookingDetails(
-                                                //   booking_id: Details.elementAt(index)
-                                                //       .booingId,
-                                                // )
-                                                );
-                                          },
-                                          child: Text(
-                                            'View Booking Details',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                letterSpacing: 1,
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            commonBtn(
+                                              s: 'View',
+                                              bgcolor: appblueColor,
+                                              textColor: Colors.white,
+                                              onPressed: () {
+                                                Push(
+                                                    context,
+                                                    BookingAppointment(
+                                                        booking_id:
+                                                            Details.elementAt(
+                                                                    index)
+                                                                .bookingId,
+                                                        doctor_id:
+                                                            Details.elementAt(
+                                                                    index)
+                                                                .doctorId),
+                                                    withnav: false
+                                                    // ViewBookingDetails(
+                                                    //   booking_id: Details.elementAt(index)
+                                                    //       .booingId,
+                                                    // )
+                                                    );
+                                              },
+                                              height: 30,
+                                              width: 100,
+                                              textSize: 12,
+                                            ),
+                                            commonBtn(
+                                              s: 'Cancel',
+                                              borderColor: Colors.red,
+                                              borderWidth: 2,
+                                              bgcolor: Colors.white,
+                                              textColor: Colors.red,
+                                              onPressed: () {
+                                                Push(context, CancelScreen(),
+                                                    withnav: false);
+                                              },
+                                              height: 30,
+                                              width: 100,
+                                              textSize: 12,
+                                            ),
+                                          ],
                                         ),
-                                      )
+                                      ),
+                                      // SizedBox(
+                                      //   height: 40,
+                                      //   width: double.infinity,
+                                      //   child: TextButton(
+                                      //     style: ButtonStyle(
+                                      //         backgroundColor:
+                                      //             MaterialStateProperty.all<
+                                      //                 Color>(appblueColor),
+                                      //         shape: MaterialStateProperty.all<
+                                      //                 RoundedRectangleBorder>(
+                                      //             RoundedRectangleBorder(
+                                      //           borderRadius: BorderRadius.only(
+                                      //               bottomLeft:
+                                      //                   Radius.circular(15),
+                                      //               bottomRight:
+                                      //                   Radius.circular(15)),
+                                      //         ))),
+                                      //     onPressed: () {
+                                      //       Push(
+                                      //           context,
+                                      //           BookingAppointment(
+                                      //               booking_id:
+                                      //                   Details.elementAt(index)
+                                      //                       .bookingId,
+                                      //               doctor_id:
+                                      //                   Details.elementAt(index)
+                                      //                       .doctorId),
+                                      //           withnav: false
+                                      //           // ViewBookingDetails(
+                                      //           //   booking_id: Details.elementAt(index)
+                                      //           //       .booingId,
+                                      //           // )
+                                      //           );
+                                      //     },
+                                      //     child: Text(
+                                      //       'View Booking Details',
+                                      //       style: GoogleFonts.montserrat(
+                                      //           fontSize: 12,
+                                      //           color: Colors.white,
+                                      //           letterSpacing: 1,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     ),
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                 ),

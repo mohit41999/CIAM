@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/app_review.dart';
 import 'package:patient/Models/home_care_categories_model.dart';
+import 'package:patient/Models/hospital_packages_category_model.dart';
 import 'package:patient/Models/hospital_packages_sub_cat_model.dart';
 import 'package:patient/Models/statements_model.dart';
 import 'package:patient/Screens/Home.dart';
@@ -54,7 +55,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
   String? stateValue = "";
   String? cityValue = "";
   String address = '';
-  late HealthCareCategoriesModel hospitalPackages;
+  late HospitalPackagesCatModel hospitalPackages;
   bool loading = true;
   bool reviewloading = true;
   int _current = 0;
@@ -208,7 +209,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    gethomecareServices().then((value) {
+    gethospitalPackages().then((value) {
       setState(() {
         hospitalPackages = value;
         loading = false;
@@ -626,7 +627,7 @@ class _HospitalPackagesState extends State<HospitalPackages> {
 
                                 // Array list of items
                                 items: hospitalPackages.data
-                                    .map((HealthCareCategoriesModelData items) {
+                                    .map((HospitalPackagesCatModelData items) {
                                   return DropdownMenuItem(
                                     value: items.serviceId,
                                     child: Text(items.serviceName),
@@ -1162,14 +1163,14 @@ class _HospitalPackagesState extends State<HospitalPackages> {
     );
   }
 
-  Future<HealthCareCategoriesModel> gethomecareServices() async {
+  Future<HospitalPackagesCatModel> gethospitalPackages() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
     var response = await PostData(
         PARAM_URL: 'get_hospital_packages_category.php',
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
 
-    return HealthCareCategoriesModel.fromJson(response);
+    return HospitalPackagesCatModel.fromJson(response);
   }
 
   Future<StatementsModel> getStatements() async {
