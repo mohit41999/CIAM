@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,7 +43,7 @@ class _KnowledgeForumScreenState extends State<KnowledgeForumScreen> {
     var response;
     try {
       response = await PostData(
-          PARAM_URL: AppEndPoints.report_knowledge_forum,
+          PARAM_URL: ApiEndPoints.report_knowledge_forum,
           params: {
             'token': Token,
             'user_id': prefs.getString('user_id'),

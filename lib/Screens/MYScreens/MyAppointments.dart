@@ -6,10 +6,9 @@ import 'package:patient/Screens/cancel_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/My%20Screens%20Controller/my_appointments_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
-import 'package:patient/widgets/commonAppBarLeading.dart';
-import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/title_column.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MyAppointments extends StatefulWidget {
   const MyAppointments({Key? key}) : super(key: key);
@@ -300,8 +299,22 @@ class _UpcomingAppointmentsState extends State<UpcomingAppointments> {
                                               bgcolor: Colors.white,
                                               textColor: Colors.red,
                                               onPressed: () {
-                                                Push(context, CancelScreen(),
-                                                    withnav: false);
+                                                pushNewScreen(context,
+                                                        screen: CancelScreen(
+                                                          isDoctor: true,
+                                                          booking_id:
+                                                              Details.elementAt(
+                                                                      index)
+                                                                  .bookingId,
+                                                          amount:
+                                                              Details.elementAt(
+                                                                      index)
+                                                                  .ammountPaid,
+                                                        ),
+                                                        withNavBar: false)
+                                                    .then((value) {
+                                                  initialize();
+                                                });
                                               },
                                               height: 30,
                                               width: 100,

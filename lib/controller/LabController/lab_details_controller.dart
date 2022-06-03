@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/LAB/lab_details_model.dart';
 import 'package:patient/Models/LAB/lab_test_model.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LabdetailsController {
@@ -11,7 +10,7 @@ class LabdetailsController {
   Future<LabDetailsModel> getLabDetails(String labid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_lab_details,
+        PARAM_URL: ApiEndPoints.get_lab_details,
         params: {
           'token': Token,
           'user_id': preferences.getString('user_id'),
@@ -24,7 +23,7 @@ class LabdetailsController {
   Future<LabTestsModel> getLabtests(String labid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_lab_tests,
+        PARAM_URL: ApiEndPoints.get_lab_tests,
         params: {
           'token': Token,
           'user_id': preferences.getString('user_id'),

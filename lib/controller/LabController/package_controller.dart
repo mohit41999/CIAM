@@ -1,18 +1,15 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/LAB/package_available_lab_model.dart';
 import 'package:patient/Models/LAB/package_checkout_model.dart';
 import 'package:patient/Models/LAB/package_details_model.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PackageController {
   Future<PackageAvailableLabModel> getAvailableLabs(String packageid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_packages_available_labs,
+        PARAM_URL: ApiEndPoints.get_packages_available_labs,
         params: {
           'token': Token,
           'user_id': preferences.getString('user_id'),
@@ -26,7 +23,7 @@ class PackageController {
   Future<PackageDetailsModel> getpackagedetails(String packageid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_package_details, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_package_details, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'package_id': packageid
@@ -39,7 +36,7 @@ class PackageController {
       String labId, String coupenId, String relative_id) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.confirm_package_order, params: {
+        await PostData(PARAM_URL: ApiEndPoints.confirm_package_order, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'package_id': packageid,
@@ -61,7 +58,7 @@ class PackageController {
       required String couponCode}) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.add_package_order, params: {
+        await PostData(PARAM_URL: ApiEndPoints.add_package_order, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'lab_id': labId,

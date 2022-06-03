@@ -11,7 +11,7 @@ import 'package:patient/controller/NavigationController.dart';
 class FirebaseNotificationHandling {
   Future sendNotification({required String user_id}) async {
     var response = await http.post(
-        Uri.parse(AppEndPoints.BASE_URL + AppEndPoints.send_notification),
+        Uri.parse(ApiEndPoints.BASE_URL + ApiEndPoints.send_notification),
         body: {'token': Token, 'user_id': user_id});
     print(response.body);
     var Response = jsonDecode(response.body);

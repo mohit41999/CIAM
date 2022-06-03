@@ -43,7 +43,7 @@ class _KnowledgeDescriptionState extends State<KnowledgeDescription> {
     var response;
     try {
       response = await PostData(
-          PARAM_URL: AppEndPoints.report_knowledge_forum,
+          PARAM_URL: ApiEndPoints.report_knowledge_forum,
           params: {
             'token': Token,
             'user_id': prefs.getString('user_id'),

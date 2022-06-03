@@ -11,7 +11,7 @@ class AccountSettingController {
   Future<void> changesPassword(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await PostData(PARAM_URL: AppEndPoints.account_setting, params: {
+    await PostData(PARAM_URL: ApiEndPoints.account_setting, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
       'old_password': old_password.text,

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/LAB/my_lab_packages_model.dart';
 import 'package:patient/Models/LAB/my_lab_test_model.dart';
-import 'package:patient/Models/confirm_booking_model.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/my_health_care_model.dart';
 import 'package:patient/Models/my_hospital_package_model.dart';
-import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentController {
@@ -16,7 +14,7 @@ class AppointmentController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.my_lab_test_bookings, params: {
+        await PostData(PARAM_URL: ApiEndPoints.my_lab_test_bookings, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
     });
@@ -30,7 +28,7 @@ class AppointmentController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.my_lab_package_bookings,
+        PARAM_URL: ApiEndPoints.my_lab_package_bookings,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
@@ -46,7 +44,7 @@ class AppointmentController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.my_hospital_package_bookings,
+        PARAM_URL: ApiEndPoints.my_hospital_package_bookings,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
@@ -61,7 +59,7 @@ class AppointmentController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.my_home_care_bookings, params: {
+        await PostData(PARAM_URL: ApiEndPoints.my_home_care_bookings, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
     });

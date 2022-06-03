@@ -1,19 +1,16 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/app_review.dart';
-import 'package:patient/Models/home_doctor_speciality_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:geolocator/geolocator.dart';
 
 class AppReviewController {
   late Map<String, dynamic> data;
   Future<AppReviewModel> getappReview(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await PostData(
-            PARAM_URL: AppEndPoints.get_app_reviews,
+            PARAM_URL: ApiEndPoints.get_app_reviews,
             params: {'token': Token, 'user_id': prefs.getString('user_id')})
         .then((value) {
       data = value;

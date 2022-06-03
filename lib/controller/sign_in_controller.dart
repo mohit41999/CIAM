@@ -4,7 +4,6 @@ import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Screens/biometric_authenticate.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:patient/firebase/fcm.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'NavigationController.dart';
@@ -30,7 +29,7 @@ class SignInController {
   Future<void> SignIn(BuildContext context) async {
     var loader = ProgressView(context);
     loader.show();
-    var response = await PostData(PARAM_URL: AppEndPoints.login, params: {
+    var response = await PostData(PARAM_URL: ApiEndPoints.login, params: {
       'token': Token,
       'email': email.text,
       'password': password.text,

@@ -41,7 +41,7 @@ class _GiveAnswerScreenState extends State<GiveAnswerScreen> {
     loader.show();
     var response;
     try {
-      response = await PostData(PARAM_URL: AppEndPoints.report_answer, params: {
+      response = await PostData(PARAM_URL: ApiEndPoints.report_answer, params: {
         'token': Token,
         'user_id': prefs.getString('user_id'),
         'answer_id': answer_id

@@ -1,18 +1,13 @@
-import 'dart:convert';
-
-import 'dart:io';
-
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/doc_review_model.dart';
-import 'package:patient/Models/doctor_profile_model.dart';
 import 'package:patient/Models/doctor_profile_one_model.dart';
 import 'package:patient/Models/slot_time_model.dart';
 import 'package:patient/Screens/booking_appointment.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:file_picker/file_picker.dart';
 
 import '../NavigationController.dart';
 
@@ -26,7 +21,7 @@ class DoctorProfileOneController {
   Future<DoctorProfileOneModel> getDoctorDetails(
       BuildContext context, String doctor_id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await PostData(PARAM_URL:AppEndPoints.doctor_profile_1, params: {
+    await PostData(PARAM_URL: ApiEndPoints.doctor_profile_1, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
       'doctor_id': doctor_id
@@ -39,11 +34,13 @@ class DoctorProfileOneController {
   Future<DocReviewModel> getRatingsandReview(
       BuildContext context, String doctor_id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var response = await PostData(PARAM_URL: AppEndPoints.get_doctor_review, params: {
-      'token': Token,
-      'user_id': prefs.getString('user_id'),
-      'doctor_id': doctor_id
-    });
+    var response = await PostData(
+        PARAM_URL: ApiEndPoints.get_doctor_review,
+        params: {
+          'token': Token,
+          'user_id': prefs.getString('user_id'),
+          'doctor_id': doctor_id
+        });
     return DocReviewModel.fromJson(response);
   }
 
@@ -52,7 +49,7 @@ class DoctorProfileOneController {
     var loader = ProgressView(context);
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    slot_time = await PostData(PARAM_URL:AppEndPoints.time_slot, params: {
+    slot_time = await PostData(PARAM_URL: ApiEndPoints.time_slot, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
       'doctor_id': doctor_id,
@@ -82,7 +79,7 @@ class DoctorProfileOneController {
     };
 
     var response = await PostData(
-        PARAM_URL:AppEndPoints.add_booking_appointment, params: bodyParams);
+        PARAM_URL: ApiEndPoints.add_booking_appointment, params: bodyParams);
     loader.dismiss();
     if (response['status']) {
       Push(

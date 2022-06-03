@@ -3,14 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/patient_profile_model.dart';
-import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
-import 'package:patient/firebase/database.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import '../NavigationController.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class PersonalSettingController {
   XFile? mediaFile = null;
@@ -63,9 +57,9 @@ class PersonalSettingController {
 
     var response = (mediaFile == null)
         ? await PostData(
-            PARAM_URL: AppEndPoints.update_patient_details, params: bodyParam)
+            PARAM_URL: ApiEndPoints.update_patient_details, params: bodyParam)
         : await PostDataWithImage(
-            PARAM_URL: AppEndPoints.update_patient_details,
+            PARAM_URL: ApiEndPoints.update_patient_details,
             params: bodyParam,
             imagePath: mediaFile!.path,
             imageparamName: 'image');
@@ -85,7 +79,7 @@ class PersonalSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_patient_profile, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_patient_profile, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });

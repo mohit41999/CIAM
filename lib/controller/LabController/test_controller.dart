@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/LAB/test_checkout_model.dart';
 import 'package:patient/Models/coupons_model.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestController {
@@ -26,7 +26,7 @@ class TestController {
     print(params);
 
     var response = await PostData(
-        PARAM_URL: AppEndPoints.confirm_test_order, params: params);
+        PARAM_URL: ApiEndPoints.confirm_test_order, params: params);
     return TestCheckoutModel.fromJson(response);
   }
 
@@ -52,7 +52,7 @@ class TestController {
     print(params);
 
     var response =
-        await PostData(PARAM_URL: AppEndPoints.add_test_order, params: params);
+        await PostData(PARAM_URL: ApiEndPoints.add_test_order, params: params);
     return response;
   }
 
@@ -60,7 +60,7 @@ class TestController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_coupon_list, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_coupon_list, params: {
       'token': Token,
       'user_id': prefs.getString('user_id'),
     });

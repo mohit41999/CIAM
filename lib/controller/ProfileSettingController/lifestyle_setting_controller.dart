@@ -24,7 +24,7 @@ class LifestyleSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response = await PostData(
-        PARAM_URL: AppEndPoints.update_patient_lifestyle,
+        PARAM_URL: ApiEndPoints.update_patient_lifestyle,
         params: {
           'token': Token,
           'user_id': user_id.toString(),
@@ -68,7 +68,7 @@ class LifestyleSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_patient_lifestyle, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_patient_lifestyle, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });

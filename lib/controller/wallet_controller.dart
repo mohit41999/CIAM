@@ -13,7 +13,7 @@ class WalletController {
   Future getwallet(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.my_wallet,
+        PARAM_URL: ApiEndPoints.my_wallet,
         params: {'token': Token, 'user_id': preferences.getString('user_id')});
     if (response['status']) {
       walletBalance = response['data']['wallet_balance'];
@@ -26,7 +26,7 @@ class WalletController {
   Future depositWallet(BuildContext context, String amount) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.deposit_wallet, params: {
+        await PostData(PARAM_URL: ApiEndPoints.deposit_wallet, params: {
       'token': Token,
       'user_id': preferences.getString('user_id'),
       'amount': amount,
@@ -46,7 +46,7 @@ class WalletController {
     loader.show();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.withdrawal_request,
+        PARAM_URL: ApiEndPoints.withdrawal_request,
         params: {
           'token': Token,
           'user_id': preferences.getString('user_id'),
@@ -68,7 +68,7 @@ class WalletController {
       BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.wallet_transaction_history,
+        PARAM_URL: ApiEndPoints.wallet_transaction_history,
         params: {
           'token': Token,
           'user_id': preferences.getString('user_id'),

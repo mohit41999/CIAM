@@ -4,7 +4,6 @@ import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/LAB/package_checkout_model.dart';
 import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Screens/confirmScreen.dart';
-import 'package:patient/Screens/general_screen.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
 import 'package:patient/controller/LabController/package_controller.dart';
 import 'package:patient/controller/NavigationController.dart';
@@ -262,7 +261,7 @@ class _PackageCheckoutState extends State<PackageCheckout> {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      '\$${packageCheckout.data[0].packageDetails.packagePrice}',
+                                      '₹ ${packageCheckout.data[0].packageDetails.packagePrice}',
                                       style: GoogleFonts.lato(
                                           fontSize: 14,
                                           color: Color(0xff252525)

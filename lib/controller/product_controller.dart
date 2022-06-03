@@ -10,7 +10,7 @@ class ProductController {
   Future<ProductModel> getProducts(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await PostData(
-            PARAM_URL: AppEndPoints.get_helthcare_and_product,
+            PARAM_URL: ApiEndPoints.get_helthcare_and_product,
             params: {'token': Token, 'user_id': prefs.getString('user_id')})
         .then((value) {
       products = value;

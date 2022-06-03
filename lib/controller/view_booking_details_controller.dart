@@ -10,7 +10,7 @@ class ViewBookingDetailsController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_view_booking_details,
+        PARAM_URL: ApiEndPoints.get_view_booking_details,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),

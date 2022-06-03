@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:patient/API%20repo/api_constants.dart';
-import 'package:patient/Models/patient_profile_model.dart';
 import 'package:patient/Models/relative_model.dart';
-import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../API repo/api_end_points.dart';
-import '../NavigationController.dart';
 
 class RelativeSettingController {
   bool isSelected = false;
@@ -49,7 +46,7 @@ class RelativeSettingController {
       };
 
       var response = await PostData(
-          PARAM_URL: AppEndPoints.add_relative, params: bodyParam);
+          PARAM_URL: ApiEndPoints.add_relative, params: bodyParam);
 
       loader.dismiss();
       if (response['status']) {
@@ -70,7 +67,7 @@ class RelativeSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_relative, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_relative, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });

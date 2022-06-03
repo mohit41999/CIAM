@@ -13,7 +13,6 @@ import 'package:patient/widgets/alertTextField.dart';
 import 'package:patient/widgets/commonAppBarLeading.dart';
 import 'package:patient/widgets/common_app_bar_title.dart';
 import 'package:patient/widgets/common_button.dart';
-import 'package:patient/widgets/confirmation_dialog.dart';
 import 'package:patient/widgets/navigation_drawer.dart';
 import 'package:patient/widgets/row_text_icon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,7 +44,7 @@ class _HealthCareSubCategoriesState extends State<HealthCareSubCategories> {
   Future<HomeCareSubCategoriesModel> getsubCate() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_home_care_sub_cat_services,
+        PARAM_URL: ApiEndPoints.get_home_care_sub_cat_services,
         params: {
           'token': Token,
           'cat_id': widget.cat_id,
@@ -102,7 +101,7 @@ class _HealthCareSubCategoriesState extends State<HealthCareSubCategories> {
         late Map<String, dynamic> data;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await PostData(
-            PARAM_URL: AppEndPoints.add_homecare_sub_requirement,
+            PARAM_URL: ApiEndPoints.add_homecare_sub_requirement,
             params: {
               'token': Token,
               'user_id': prefs.getString('user_id'),

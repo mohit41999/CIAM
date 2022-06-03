@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
-import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/API%20repo/api_end_points.dart';
+import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +13,7 @@ class ConfirmBookingController {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_confirmation_booking_details,
+        PARAM_URL: ApiEndPoints.get_confirmation_booking_details,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
@@ -29,7 +29,7 @@ class ConfirmBookingController {
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.add_booking_confirmation,
+        PARAM_URL: ApiEndPoints.add_booking_confirmation,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
@@ -50,7 +50,7 @@ class ConfirmBookingController {
     loader.show();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.add_payment_transaction,
+        PARAM_URL: ApiEndPoints.add_payment_transaction,
         params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),

@@ -13,7 +13,7 @@ class FireBaseSetup {
       print(fcm_token);
       if (prefs.getString('user_id') == null) {
       } else {
-        PostData(PARAM_URL: AppEndPoints.add_fcm_token, params: {
+        PostData(PARAM_URL: ApiEndPoints.add_fcm_token, params: {
           'token': Token,
           'user_id': prefs.getString('user_id'),
           'fcm_token': value

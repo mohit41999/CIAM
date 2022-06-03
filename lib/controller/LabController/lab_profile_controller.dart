@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:patient/API%20repo/api_constants.dart';
+import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/LAB/all_labs_model.dart';
 import 'package:patient/Models/LAB/all_packages_model.dart';
 import 'package:patient/Models/LAB/all_test_model.dart';
 import 'package:patient/Models/organ_categories_model.dart';
-import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/organ_test_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +21,7 @@ class LABProfileController {
   Future<AllPackagesModel> getallPackages() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_all_packages,
+        PARAM_URL: ApiEndPoints.get_all_packages,
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
     return AllPackagesModel.fromJson(response);
   }
@@ -30,7 +29,7 @@ class LABProfileController {
   Future<OrganCategroiesModel> getallOrgans() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_organs_categories,
+        PARAM_URL: ApiEndPoints.get_organs_categories,
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
     return OrganCategroiesModel.fromJson(response);
   }
@@ -38,7 +37,7 @@ class LABProfileController {
   Future<AllTestModel> getallTests() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_all_test,
+        PARAM_URL: ApiEndPoints.get_all_test,
         params: {'user_id': preferences.getString('user_id'), 'token': Token});
     return AllTestModel.fromJson(response);
   }
@@ -46,7 +45,7 @@ class LABProfileController {
   Future<AllLabsModel> getallLabs() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_all_labs, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_all_labs, params: {
       'user_id': preferences.getString('user_id'),
       'token': Token,
       'city': preferences.getString('city')
@@ -57,7 +56,7 @@ class LABProfileController {
   Future<OrganTestModel> getTestbyOrgan(String organid) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var response = await PostData(
-        PARAM_URL: AppEndPoints.get_organ_test,
+        PARAM_URL: ApiEndPoints.get_organ_test,
         params: {
           'user_id': preferences.getString('user_id'),
           'token': Token,

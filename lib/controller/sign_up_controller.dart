@@ -24,7 +24,7 @@ class SignUpController {
   }
 
   void Signup(BuildContext context) {
-    PostData(PARAM_URL: AppEndPoints.signup, params: {
+    PostData(PARAM_URL: ApiEndPoints.signup, params: {
       'token': Token,
       'first_name': firstname.text,
       'last_name': lastname.text,

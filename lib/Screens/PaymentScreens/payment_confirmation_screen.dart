@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/Models/coupons_model.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -93,16 +90,6 @@ class _PaymentConfirmationScreenState extends State<PaymentConfirmationScreen> {
   late String patientPhone;
   late String couponDiscount;
   bool loading = true;
-
-  // Future getRazorpaycred() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   var response = await PostData(
-  //       PARAM_URL: 'get_razorpay_keys.php',
-  //       params: {'token': Token, 'user_id': preferences.getString('user_id')});
-  //   username = response['data']['razorpay_key_id'];
-  //   password = response['data']['razorpay_key_secret'];
-  //   return response;
-  // }
 
   @override
   void initState() {

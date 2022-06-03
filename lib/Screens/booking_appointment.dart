@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:patient/Screens/cancel_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_utils/file_utils.dart';
@@ -18,6 +17,7 @@ import 'package:patient/Models/confirm_booking_model.dart';
 import 'package:patient/Screens/AGORA/video_call.dart';
 import 'package:patient/Screens/PaymentScreens/payment_confirmation_screen.dart';
 import 'package:patient/Screens/TermsAndConditions.dart';
+import 'package:patient/Screens/cancel_screen.dart';
 import 'package:patient/Screens/pdf.dart';
 import 'package:patient/Screens/text_page.dart';
 import 'package:patient/Utils/colorsandstyles.dart';
@@ -29,6 +29,7 @@ import 'package:patient/widgets/common_button.dart';
 import 'package:patient/widgets/doctor_profile_row.dart';
 import 'package:patient/widgets/title_enter_field.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingAppointment extends StatefulWidget {
@@ -904,8 +905,17 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                     textColor: Colors.red,
                                                     onPressed: () {
                                                       print(widget.doctor_id);
-                                                      Push(context,
-                                                          CancelScreen());
+                                                      pushNewScreen(context,
+                                                          screen: CancelScreen(
+                                                            isDoctor: true,
+                                                            booking_id:
+                                                                confirmData.data
+                                                                    .bookingId,
+                                                            amount: confirmData
+                                                                .data.toBePaid,
+                                                          )).then((value) {
+                                                        initialize();
+                                                      });
                                                     },
                                                     height: 45,
                                                     borderRadius: 8,
@@ -921,7 +931,16 @@ class _BookingAppointmentState extends State<BookingAppointment> {
                                                 onPressed: () {
                                                   print(widget.doctor_id);
 
-                                                  Push(context, CancelScreen());
+                                                  pushNewScreen(context,
+                                                      screen: CancelScreen(
+                                                        isDoctor: true,
+                                                        booking_id: confirmData
+                                                            .data.bookingId,
+                                                        amount: confirmData
+                                                            .data.toBePaid,
+                                                      )).then((value) {
+                                                    initialize();
+                                                  });
                                                 },
                                                 height: 45,
                                                 borderRadius: 8,

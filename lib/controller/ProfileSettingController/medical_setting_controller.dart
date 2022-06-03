@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:patient/API%20repo/api_constants.dart';
 import 'package:patient/API%20repo/api_end_points.dart';
 import 'package:patient/Models/patient_medical_model.dart';
-import 'package:patient/Screens/SignInScreen.dart';
 import 'package:patient/Utils/progress_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../NavigationController.dart';
 
 class MedicalSettingController {
   TextEditingController details_of_allergies = TextEditingController();
@@ -21,7 +18,7 @@ class MedicalSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response =
-        await PostData(PARAM_URL: AppEndPoints.update_patient_medical, params: {
+        await PostData(PARAM_URL: ApiEndPoints.update_patient_medical, params: {
       'token': Token,
       'user_id': user_id.toString(),
       'details_of_allergies': details_of_allergies.text,
@@ -52,7 +49,7 @@ class MedicalSettingController {
     String? user_id = prefs.getString('user_id');
     print(user_id);
     var response =
-        await PostData(PARAM_URL: AppEndPoints.get_patient_medical, params: {
+        await PostData(PARAM_URL: ApiEndPoints.get_patient_medical, params: {
       'token': Token,
       'user_id': user_id.toString(),
     });
